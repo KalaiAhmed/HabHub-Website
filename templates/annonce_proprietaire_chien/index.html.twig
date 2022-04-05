@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AnnonceProprietaireChien index{% endblock %}
+
+{% block body %}
+    <h1>AnnonceProprietaireChien index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idannonceproprietairechien</th>
+                <th>Datepublication</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Dateperte</th>
+                <th>Localisation</th>
+                <th>Messagevocal</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce_proprietaire_chien in annonce_proprietaire_chiens %}
+            <tr>
+                <td>{{ annonce_proprietaire_chien.idannonceproprietairechien }}</td>
+                <td>{{ annonce_proprietaire_chien.datepublication ? annonce_proprietaire_chien.datepublication|date('Y-m-d') : '' }}</td>
+                <td>{{ annonce_proprietaire_chien.description }}</td>
+                <td>{{ annonce_proprietaire_chien.type }}</td>
+                <td>{{ annonce_proprietaire_chien.dateperte ? annonce_proprietaire_chien.dateperte|date('Y-m-d') : '' }}</td>
+                <td>{{ annonce_proprietaire_chien.localisation }}</td>
+                <td>{{ annonce_proprietaire_chien.messagevocal }}</td>
+                <td>
+                    <a href="{{ path('app_annonce_proprietaire_chien_show', {'idannonceproprietairechien': annonce_proprietaire_chien.idannonceproprietairechien}) }}">show</a>
+                    <a href="{{ path('app_annonce_proprietaire_chien_edit', {'idannonceproprietairechien': annonce_proprietaire_chien.idannonceproprietairechien}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_annonce_proprietaire_chien_new') }}">Create new</a>
+{% endblock %}

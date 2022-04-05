@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit AnnonceProprietaireChien{% endblock %}
+
+{% block body %}
+    <h1>Edit AnnonceProprietaireChien</h1>
+
+    {{ include('annonce_proprietaire_chien/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_annonce_proprietaire_chien_index') }}">back to list</a>
+
+    {{ include('annonce_proprietaire_chien/_delete_form.html.twig') }}
+{% endblock %}

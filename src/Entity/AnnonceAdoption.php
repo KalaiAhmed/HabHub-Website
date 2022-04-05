@@ -62,5 +62,102 @@ class AnnonceAdoption
      */
     private $idchien;
 
+    /**
+     * @return int
+     */
+    public function getIdannonceadoption(): int
+    {
+        return $this->idannonceadoption;
+    }
+
+    /**
+     * @param int $idannonceadoption
+     */
+    public function setIdannonceadoption(int $idannonceadoption): void
+    {
+        $this->idannonceadoption = $idannonceadoption;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatepublication(): \DateTime
+    {
+        return $this->datepublication;
+    }
+
+    /**
+     * @param \DateTime $datepublication
+     */
+    public function setDatepublication(\DateTime $datepublication): void
+    {
+        $this->datepublication = $datepublication;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocalisation(): string
+    {
+        return $this->localisation;
+    }
+
+    /**
+     * @param string $localisation
+     */
+    public function setLocalisation(string $localisation): void
+    {
+        $this->localisation = $localisation;
+    }
+
+    /**
+     * @return \Individu
+     */
+    public function getIdindividu(): \Individu
+    {
+        return $this->idindividu;
+    }
+
+    /**
+     * @param \Individu $idindividu
+     */
+    public function setIdindividu(\Individu $idindividu): void
+    {
+        $this->idindividu = $idindividu;
+    }
+
+    /**
+     * @return \Chien
+     */
+    public function getIdchien(): \Chien
+    {
+        return $this->idchien;
+    }
+
+    /**
+     * @param \Chien $idchien
+     */
+    public function setIdchien(\Chien $idchien): void
+    {
+        $this->idchien = $idchien;
+    }
+
+
 
 }

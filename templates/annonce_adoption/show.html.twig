@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AnnonceAdoption{% endblock %}
+
+{% block body %}
+    <h1>AnnonceAdoption</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idannonceadoption</th>
+                <td>{{ annonce_adoption.idannonceadoption }}</td>
+            </tr>
+            <tr>
+                <th>Datepublication</th>
+                <td>{{ annonce_adoption.datepublication ? annonce_adoption.datepublication|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ annonce_adoption.description }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ annonce_adoption.localisation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
+
+    <a href="{{ path('app_annonce_adoption_edit', {'idannonceadoption': annonce_adoption.idannonceadoption}) }}">edit</a>
+
+    {{ include('annonce_adoption/_delete_form.html.twig') }}
+{% endblock %}

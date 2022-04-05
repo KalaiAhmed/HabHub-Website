@@ -38,5 +38,53 @@ class Commande
      */
     private $idutilisateur;
 
+    /**
+     * @return int
+     */
+    public function getIdcommande(): int
+    {
+        return $this->idcommande;
+    }
+
+    /**
+     * @param int $idcommande
+     */
+    public function setIdcommande(int $idcommande): void
+    {
+        $this->idcommande = $idcommande;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatecommande(): \DateTime
+    {
+        return $this->datecommande;
+    }
+
+    /**
+     * @param \DateTime $datecommande
+     */
+    public function setDatecommande(\DateTime $datecommande): void
+    {
+        $this->datecommande = $datecommande;
+    }
+
+    /**
+     * @return \Utilisateur
+     */
+    public function getIdutilisateur(): \Utilisateur
+    {
+        return $this->idutilisateur;
+    }
+
+    /**
+     * @param \Utilisateur $idutilisateur
+     */
+    public function setIdutilisateur(\Utilisateur $idutilisateur): void
+    {
+        $this->idutilisateur = $idutilisateur;
+    }
+
 
 }

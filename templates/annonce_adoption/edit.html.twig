@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit AnnonceAdoption{% endblock %}
+
+{% block body %}
+    <h1>Edit AnnonceAdoption</h1>
+
+    {{ include('annonce_adoption/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
+
+    {{ include('annonce_adoption/_delete_form.html.twig') }}
+{% endblock %}

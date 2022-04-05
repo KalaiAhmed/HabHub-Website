@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Individu index{% endblock %}
+
+{% block body %}
+    <h1>Individu index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idindividu</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Datenaissance</th>
+                <th>Sexe</th>
+                <th>Adresse</th>
+                <th>Facebook</th>
+                <th>Instagram</th>
+                <th>Whatsapp</th>
+                <th>Proprietairechien</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for individu in individus %}
+            <tr>
+                <td>{{ individu.idindividu }}</td>
+                <td>{{ individu.nom }}</td>
+                <td>{{ individu.prenom }}</td>
+                <td>{{ individu.datenaissance ? individu.datenaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ individu.sexe }}</td>
+                <td>{{ individu.adresse }}</td>
+                <td>{{ individu.facebook }}</td>
+                <td>{{ individu.instagram }}</td>
+                <td>{{ individu.whatsapp }}</td>
+                <td>{{ individu.proprietairechien ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_individu_show', {'idindividu': individu.idindividu}) }}">show</a>
+                    <a href="{{ path('app_individu_edit', {'idindividu': individu.idindividu}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_individu_new') }}">Create new</a>
+{% endblock %}

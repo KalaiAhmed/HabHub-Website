@@ -108,5 +108,213 @@ class Magasin
      */
     private $idutilisateur;
 
+    /**
+     * @return int
+     */
+    public function getIdmagasin(): int
+    {
+        return $this->idmagasin;
+    }
+
+    /**
+     * @param int $idmagasin
+     */
+    public function setIdmagasin(int $idmagasin): void
+    {
+        $this->idmagasin = $idmagasin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNommagasin(): string
+    {
+        return $this->nommagasin;
+    }
+
+    /**
+     * @param string $nommagasin
+     */
+    public function setNommagasin(string $nommagasin): void
+    {
+        $this->nommagasin = $nommagasin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNomgestionnairemagasin(): string
+    {
+        return $this->nomgestionnairemagasin;
+    }
+
+    /**
+     * @param string $nomgestionnairemagasin
+     */
+    public function setNomgestionnairemagasin(string $nomgestionnairemagasin): void
+    {
+        $this->nomgestionnairemagasin = $nomgestionnairemagasin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdresse(): string
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse(string $adresse): void
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodepostal(): int
+    {
+        return $this->codepostal;
+    }
+
+    /**
+     * @param int $codepostal
+     */
+    public function setCodepostal(int $codepostal): void
+    {
+        $this->codepostal = $codepostal;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVille(): string
+    {
+        return $this->ville;
+    }
+
+    /**
+     * @param string $ville
+     */
+    public function setVille(string $ville): void
+    {
+        $this->ville = $ville;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNomreplegal(): string
+    {
+        return $this->nomreplegal;
+    }
+
+    /**
+     * @param string $nomreplegal
+     */
+    public function setNomreplegal(string $nomreplegal): void
+    {
+        $this->nomreplegal = $nomreplegal;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCinreplegal(): int
+    {
+        return $this->cinreplegal;
+    }
+
+    /**
+     * @param int $cinreplegal
+     */
+    public function setCinreplegal(int $cinreplegal): void
+    {
+        $this->cinreplegal = $cinreplegal;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMatriculefiscale(): string
+    {
+        return $this->matriculefiscale;
+    }
+
+    /**
+     * @param string $matriculefiscale
+     */
+    public function setMatriculefiscale(string $matriculefiscale): void
+    {
+        $this->matriculefiscale = $matriculefiscale;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdentifiantfiscal(): string
+    {
+        return $this->identifiantfiscal;
+    }
+
+    /**
+     * @param string $identifiantfiscal
+     */
+    public function setIdentifiantfiscal(string $identifiantfiscal): void
+    {
+        $this->identifiantfiscal = $identifiantfiscal;
+    }
+
+    /**
+     * @return binary|null
+     */
+    public function getPatente()
+    {
+        return $this->patente;
+    }
+
+    /**
+     * @param binary|null $patente
+     */
+    public function setPatente($patente): void
+    {
+        $this->patente = $patente;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRib(): int
+    {
+        return $this->rib;
+    }
+
+    /**
+     * @param int $rib
+     */
+    public function setRib(int $rib): void
+    {
+        $this->rib = $rib;
+    }
+
+    /**
+     * @return \Utilisateur
+     */
+    public function getIdutilisateur(): \Utilisateur
+    {
+        return $this->idutilisateur;
+    }
+
+    /**
+     * @param \Utilisateur $idutilisateur
+     */
+    public function setIdutilisateur(\Utilisateur $idutilisateur): void
+    {
+        $this->idutilisateur = $idutilisateur;
+    }
+
 
 }

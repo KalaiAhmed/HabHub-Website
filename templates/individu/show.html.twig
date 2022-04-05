@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Individu{% endblock %}
+
+{% block body %}
+    <h1>Individu</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idindividu</th>
+                <td>{{ individu.idindividu }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ individu.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ individu.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Datenaissance</th>
+                <td>{{ individu.datenaissance ? individu.datenaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ individu.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ individu.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Facebook</th>
+                <td>{{ individu.facebook }}</td>
+            </tr>
+            <tr>
+                <th>Instagram</th>
+                <td>{{ individu.instagram }}</td>
+            </tr>
+            <tr>
+                <th>Whatsapp</th>
+                <td>{{ individu.whatsapp }}</td>
+            </tr>
+            <tr>
+                <th>Proprietairechien</th>
+                <td>{{ individu.proprietairechien ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_individu_index') }}">back to list</a>
+
+    <a href="{{ path('app_individu_edit', {'idindividu': individu.idindividu}) }}">edit</a>
+
+    {{ include('individu/_delete_form.html.twig') }}
+{% endblock %}

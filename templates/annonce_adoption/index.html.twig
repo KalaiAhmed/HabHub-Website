@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AnnonceAdoption index{% endblock %}
+
+{% block body %}
+    <h1>AnnonceAdoption index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idannonceadoption</th>
+                <th>Datepublication</th>
+                <th>Description</th>
+                <th>Localisation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce_adoption in annonce_adoptions %}
+            <tr>
+                <td>{{ annonce_adoption.idannonceadoption }}</td>
+                <td>{{ annonce_adoption.datepublication ? annonce_adoption.datepublication|date('Y-m-d') : '' }}</td>
+                <td>{{ annonce_adoption.description }}</td>
+                <td>{{ annonce_adoption.localisation }}</td>
+                <td>
+                    <a href="{{ path('app_annonce_adoption_show', {'idannonceadoption': annonce_adoption.idannonceadoption}) }}">show</a>
+                    <a href="{{ path('app_annonce_adoption_edit', {'idannonceadoption': annonce_adoption.idannonceadoption}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_annonce_adoption_new') }}">Create new</a>
+{% endblock %}
