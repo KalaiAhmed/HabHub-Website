@@ -65,5 +65,101 @@ class Image
      */
     private $idchien;
 
+    /**
+     * @return int
+     */
+    public function getIdimage(): int
+    {
+        return $this->idimage;
+    }
+
+    /**
+     * @param int $idimage
+     */
+    public function setIdimage(int $idimage): void
+    {
+        $this->idimage = $idimage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl(string $url): void
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return \Individu
+     */
+    public function getIdutilisateur(): \Individu
+    {
+        return $this->idutilisateur;
+    }
+
+    /**
+     * @param \Individu $idutilisateur
+     */
+    public function setIdutilisateur(\Individu $idutilisateur): void
+    {
+        $this->idutilisateur = $idutilisateur;
+    }
+
+    /**
+     * @return \Produit
+     */
+    public function getIdproduit(): \Produit
+    {
+        return $this->idproduit;
+    }
+
+    /**
+     * @param \Produit $idproduit
+     */
+    public function setIdproduit(\Produit $idproduit): void
+    {
+        $this->idproduit = $idproduit;
+    }
+
+    /**
+     * @return \Chien
+     */
+    public function getIdchien(): \Chien
+    {
+        return $this->idchien;
+    }
+
+    /**
+     * @param \Chien $idchien
+     */
+    public function setIdchien(\Chien $idchien): void
+    {
+        $this->idchien = $idchien;
+    }
+
 
 }

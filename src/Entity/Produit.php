@@ -66,5 +66,117 @@ class Produit
      */
     private $idcategorie;
 
+    /**
+     * @return int
+     */
+    public function getIdproduit(): int
+    {
+        return $this->idproduit;
+    }
+
+    /**
+     * @param int $idproduit
+     */
+    public function setIdproduit(int $idproduit): void
+    {
+        $this->idproduit = $idproduit;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNom(): string
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param string $nom
+     */
+    public function setNom(string $nom): void
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrix(): int
+    {
+        return $this->prix;
+    }
+
+    /**
+     * @param int $prix
+     */
+    public function setPrix(int $prix): void
+    {
+        $this->prix = $prix;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMarque(): string
+    {
+        return $this->marque;
+    }
+
+    /**
+     * @param string $marque
+     */
+    public function setMarque(string $marque): void
+    {
+        $this->marque = $marque;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbetoiles(): int
+    {
+        return $this->nbetoiles;
+    }
+
+    /**
+     * @param int $nbetoiles
+     */
+    public function setNbetoiles(int $nbetoiles): void
+    {
+        $this->nbetoiles = $nbetoiles;
+    }
+
+    /**
+     * @return \Categorie
+     */
+    public function getIdcategorie(): \Categorie
+    {
+        return $this->idcategorie;
+    }
+
+    /**
+     * @param \Categorie $idcategorie
+     */
+    public function setIdcategorie(\Categorie $idcategorie): void
+    {
+        $this->idcategorie = $idcategorie;
+    }
+
 
 }

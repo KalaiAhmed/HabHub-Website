@@ -45,5 +45,69 @@ class BusinessServices
      */
     private $idbusiness;
 
+    /**
+     * @return int
+     */
+    public function getIdbusinessservices(): int
+    {
+        return $this->idbusinessservices;
+    }
+
+    /**
+     * @param int $idbusinessservices
+     */
+    public function setIdbusinessservices(int $idbusinessservices): void
+    {
+        $this->idbusinessservices = $idbusinessservices;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNomservice(): string
+    {
+        return $this->nomservice;
+    }
+
+    /**
+     * @param string $nomservice
+     */
+    public function setNomservice(string $nomservice): void
+    {
+        $this->nomservice = $nomservice;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrix(): float
+    {
+        return $this->prix;
+    }
+
+    /**
+     * @param float $prix
+     */
+    public function setPrix(float $prix): void
+    {
+        $this->prix = $prix;
+    }
+
+    /**
+     * @return \Business
+     */
+    public function getIdbusiness(): \Business
+    {
+        return $this->idbusiness;
+    }
+
+    /**
+     * @param \Business $idbusiness
+     */
+    public function setIdbusiness(\Business $idbusiness): void
+    {
+        $this->idbusiness = $idbusiness;
+    }
+
 
 }

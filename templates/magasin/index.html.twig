@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Magasin index{% endblock %}
+
+{% block body %}
+    <h1>Magasin index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idmagasin</th>
+                <th>Nommagasin</th>
+                <th>Nomgestionnairemagasin</th>
+                <th>Adresse</th>
+                <th>Codepostal</th>
+                <th>Ville</th>
+                <th>Nomreplegal</th>
+                <th>Cinreplegal</th>
+                <th>Matriculefiscale</th>
+                <th>Identifiantfiscal</th>
+                <th>Patente</th>
+                <th>Rib</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for magasin in magasins %}
+            <tr>
+                <td>{{ magasin.idmagasin }}</td>
+                <td>{{ magasin.nommagasin }}</td>
+                <td>{{ magasin.nomgestionnairemagasin }}</td>
+                <td>{{ magasin.adresse }}</td>
+                <td>{{ magasin.codepostal }}</td>
+                <td>{{ magasin.ville }}</td>
+                <td>{{ magasin.nomreplegal }}</td>
+                <td>{{ magasin.cinreplegal }}</td>
+                <td>{{ magasin.matriculefiscale }}</td>
+                <td>{{ magasin.identifiantfiscal }}</td>
+                <td>{{ magasin.patente }}</td>
+                <td>{{ magasin.rib }}</td>
+                <td>
+                    <a href="{{ path('app_magasin_show', {'idmagasin': magasin.idmagasin}) }}">show</a>
+                    <a href="{{ path('app_magasin_edit', {'idmagasin': magasin.idmagasin}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_magasin_new') }}">Create new</a>
+{% endblock %}
