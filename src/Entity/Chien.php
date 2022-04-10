@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Chien
@@ -23,73 +24,66 @@ class Chien
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" nom doit etre non vide")
      * @ORM\Column(name="nom", type="string", length=20, nullable=false)
      */
     private $nom;
 
     /**
      * @var string|null
-     *
+     * @Assert\NotBlank(message=" sexe doit etre non vide")
      * @ORM\Column(name="sexe", type="string", length=1, nullable=true, options={"default"="NULL"})
      */
-    private $sexe = 'NULL';
+    private $sexe;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" age doit etre non vide")
      * @ORM\Column(name="age", type="string", length=50, nullable=false)
      */
     private $age;
 
     /**
      * @var bool|null
-     *
+     * @Assert\NotBlank(message=" vaccination doit etre non vide")
      * @ORM\Column(name="vaccination", type="boolean", nullable=true, options={"default"="NULL"})
      */
     private $vaccination = 'NULL';
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" description doit etre non vide")
      * @ORM\Column(name="description", type="string", length=500, nullable=false)
      */
     private $description;
 
     /**
      * @var string|null
-     *
+     *  @Assert\NotBlank(message=" image doit etre non vide")
      * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
      */
-    private $image = 'NULL';
+    private $image;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" couleur doit etre non vide")
      * @ORM\Column(name="color", type="string", length=50, nullable=false)
      */
     private $color;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" race doit etre non vide")
      * @ORM\Column(name="race", type="string", length=100, nullable=false)
      */
     private $race;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" groupe doit etre non vide")
      * @ORM\Column(name="groupe", type="string", length=100, nullable=false)
      */
     private $groupe;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="likeNumber", type="integer", nullable=false)
-     */
-    private $likenumber = '0';
 
     /**
      * @var bool
@@ -221,17 +215,6 @@ class Chien
         return $this;
     }
 
-    public function getLikenumber(): ?int
-    {
-        return $this->likenumber;
-    }
-
-    public function setLikenumber(int $likenumber): self
-    {
-        $this->likenumber = $likenumber;
-
-        return $this;
-    }
 
     public function getPlaywithme(): ?bool
     {

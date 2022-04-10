@@ -18,7 +18,6 @@
                 <th>Color</th>
                 <th>Race</th>
                 <th>Groupe</th>
-                <th>Likenumber</th>
                 <th>Playwithme</th>
                 <th>actions</th>
             </tr>
@@ -36,7 +35,6 @@
                 <td>{{ chien.color }}</td>
                 <td>{{ chien.race }}</td>
                 <td>{{ chien.groupe }}</td>
-                <td>{{ chien.likenumber }}</td>
                 <td>{{ chien.playwithme ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_chien_show', {'idchien': chien.idchien}) }}">show</a>

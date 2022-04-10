@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+    {% block stylesheets %}
+        <!--     Fonts and icons     -->
+        <link
+                href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
+                rel="stylesheet"
+        />
+        <link
+                href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+                rel="stylesheet"
+        />
+        <!-- CSS Files -->
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/paper-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
+    {% endblock %}
+
+    {% block javascripts %}
+        <!--   Core JS Files   -->
+        <script src="{{asset('assets/js/core/jquery.min.js') }}"></script>
+        <script src="{{asset('assets/js/core/popper.min.js') }}"></script>
+        <script src="{{asset('assets/js/core/bootstrap.min.js') }}"></script>
+        <script src="{{asset('assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+        <!--  Google Maps Plugin    -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+        <!-- Chart JS -->
+        <script src="{{asset('assets/js/plugins/chartjs.min.js') }}"></script>
+        <!--  Notifications Plugin    -->
+        <script src="{{asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
+        <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+        <script
+                src="{{asset('assets/js/paper-dashboard.min.js?v=2.0.1') }}"
+                type="text/javascript"
+        ></script>
+    {% endblock %}
+</head>
+<body>
+<div class="wrapper">
+{% block navbar %}
+    <div class="sidebar" data-color="white" data-active-color="danger">
+        <div class="logo">
+            <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+                <div class="logo-image-small">
+                    <img src="{{asset('assets/img/logo-small.png') }}" />
+                </div>
+                <!-- <p>CT</p> -->
+            </a>
+            <a
+                    href="https://www.creative-tim.com"
+                    class="simple-text logo-normal"
+            >
+                Creative Tim
+                <!-- <div class="logo-image-big">
+                <img src="{{asset('assets/img/logo-big.png') }}">
+              </div> -->
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="active">
+                    <a href="./home.html">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <p>Home</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="./businessList.html">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <p>Business Partners</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                            class="nav-link"
+                            data-toggle="collapse"
+                            href="#ui-basic"
+                            aria-expanded="false"
+                            aria-controls="ui-basic"
+                    >
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+
+                        <!--<i class="nc-icon nc-pin-3"></i> -->
+                        <span class="menu-title">Store</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="./ordersList.html">
+                                    <i class="fa fa-shopping-baske" aria-hidden="true"> </i>
+                                    Manage Orders</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./productsList.html"
+                                >Manage Products</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./addProduct.html">Add Product</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="./dogsList.html">
+                        <i class="fa fa-paw" aria-hidden="true"></i>
+                        <p>Dogs</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="./adoptionList.html">
+                        <i class="fa fa-gift" aria-hidden="true"></i>
+                        <p>Adoption</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="./matingList.html">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                        <p>Mating</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="./lostDogsList.html">
+                        <i class="fa fa-hourglass-start" aria-hidden="true"></i>
+                        <p>Lost Dogs</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="./user.html">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+{% endblock %}
+{% block footer %}
+    <footer class="footer footer-black footer-white">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="footer-nav">
+                    <ul>
+                        <li>
+                            <a href="https://www.creative-tim.com" target="_blank"
+                            >Creative Tim</a
+                            >
+                        </li>
+                        <li>
+                            <a href="https://www.creative-tim.com/blog" target="_blank"
+                            >Blog</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                    href="https://www.creative-tim.com/license"
+                                    target="_blank"
+                            >Licenses</a
+                            >
+                        </li>
+                    </ul>
+                </nav>
+                <div class="credits ml-auto">
+                <span class="copyright">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with <i class="fa fa-heart heart"></i> by Creative Tim
+                </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+</div>
+</div>
+
+</body>
+</html>
