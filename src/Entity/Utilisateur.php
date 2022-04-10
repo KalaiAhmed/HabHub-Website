@@ -49,84 +49,57 @@ class Utilisateur
      */
     private $type;
 
-    /**
-     * @return int
-     */
-    public function getIdutilisateur(): int
+    public function getIdutilisateur(): ?int
     {
         return $this->idutilisateur;
     }
 
-    /**
-     * @param int $idutilisateur
-     */
-    public function setIdutilisateur(int $idutilisateur): void
-    {
-        $this->idutilisateur = $idutilisateur;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    /**
-     * @param string $password
-     */
-    public function setPassword(string $password): void
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getNumtel(): int
+    public function getNumtel(): ?int
     {
         return $this->numtel;
     }
 
-    /**
-     * @param int $numtel
-     */
-    public function setNumtel(int $numtel): void
+    public function setNumtel(int $numtel): self
     {
         $this->numtel = $numtel;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
-    public function setType(string $type): void
+    public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
     }
 
 

@@ -65,100 +65,69 @@ class Image
      */
     private $idchien;
 
-    /**
-     * @return int
-     */
-    public function getIdimage(): int
+    public function getIdimage(): ?int
     {
         return $this->idimage;
     }
 
-    /**
-     * @param int $idimage
-     */
-    public function setIdimage(int $idimage): void
-    {
-        $this->idimage = $idimage;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
-    /**
-     * @param string $url
-     */
-    public function setUrl(string $url): void
+    public function setUrl(string $url): self
     {
         $this->url = $url;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
-    public function setType(string $type): void
+    public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
     }
 
-    /**
-     * @return \Individu
-     */
-    public function getIdutilisateur(): \Individu
+    public function getIdutilisateur(): ?Individu
     {
         return $this->idutilisateur;
     }
 
-    /**
-     * @param \Individu $idutilisateur
-     */
-    public function setIdutilisateur(\Individu $idutilisateur): void
+    public function setIdutilisateur(?Individu $idutilisateur): self
     {
         $this->idutilisateur = $idutilisateur;
+
+        return $this;
     }
 
-    /**
-     * @return \Produit
-     */
-    public function getIdproduit(): \Produit
+    public function getIdproduit(): ?Produit
     {
         return $this->idproduit;
     }
 
-    /**
-     * @param \Produit $idproduit
-     */
-    public function setIdproduit(\Produit $idproduit): void
+    public function setIdproduit(?Produit $idproduit): self
     {
         $this->idproduit = $idproduit;
+
+        return $this;
     }
 
-    /**
-     * @return \Chien
-     */
-    public function getIdchien(): \Chien
+    public function getIdchien(): ?Chien
     {
         return $this->idchien;
     }
 
-    /**
-     * @param \Chien $idchien
-     */
-    public function setIdchien(\Chien $idchien): void
+    public function setIdchien(?Chien $idchien): self
     {
         $this->idchien = $idchien;
+
+        return $this;
     }
 
 

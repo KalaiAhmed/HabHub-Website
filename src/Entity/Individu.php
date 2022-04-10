@@ -22,11 +22,11 @@ class Individu
     private $idindividu;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="nom", type="string", length=100, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
-    private $nom;
+    private $nom = 'NULL';
 
     /**
      * @var string|null
@@ -94,180 +94,129 @@ class Individu
      */
     private $idutilisateur;
 
-    /**
-     * @return int
-     */
-    public function getIdindividu(): int
+    public function getIdindividu(): ?int
     {
         return $this->idindividu;
     }
 
-    /**
-     * @param int $idindividu
-     */
-    public function setIdindividu(int $idindividu): void
-    {
-        $this->idindividu = $idindividu;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    /**
-     * @param string $nom
-     */
-    public function setNom(string $nom): void
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPrenom(): ?string
     {
         return $this->prenom;
     }
 
-    /**
-     * @param string|null $prenom
-     */
-    public function setPrenom(?string $prenom): void
+    public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
+
+        return $this;
     }
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getDatenaissance()
+    public function getDatenaissance(): ?\DateTimeInterface
     {
         return $this->datenaissance;
     }
 
-    /**
-     * @param \DateTime|null $datenaissance
-     */
-    public function setDatenaissance($datenaissance): void
+    public function setDatenaissance(?\DateTimeInterface $datenaissance): self
     {
         $this->datenaissance = $datenaissance;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSexe(): ?string
     {
         return $this->sexe;
     }
 
-    /**
-     * @param string|null $sexe
-     */
-    public function setSexe(?string $sexe): void
+    public function setSexe(?string $sexe): self
     {
         $this->sexe = $sexe;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAdresse(): ?string
     {
         return $this->adresse;
     }
 
-    /**
-     * @param string|null $adresse
-     */
-    public function setAdresse(?string $adresse): void
+    public function setAdresse(?string $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFacebook(): ?string
     {
         return $this->facebook;
     }
 
-    /**
-     * @param string|null $facebook
-     */
-    public function setFacebook(?string $facebook): void
+    public function setFacebook(?string $facebook): self
     {
         $this->facebook = $facebook;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getInstagram(): ?string
     {
         return $this->instagram;
     }
 
-    /**
-     * @param string|null $instagram
-     */
-    public function setInstagram(?string $instagram): void
+    public function setInstagram(?string $instagram): self
     {
         $this->instagram = $instagram;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getWhatsapp(): ?string
     {
         return $this->whatsapp;
     }
 
-    /**
-     * @param string|null $whatsapp
-     */
-    public function setWhatsapp(?string $whatsapp): void
+    public function setWhatsapp(?string $whatsapp): self
     {
         $this->whatsapp = $whatsapp;
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isProprietairechien()
+    public function getProprietairechien(): ?bool
     {
         return $this->proprietairechien;
     }
 
-    /**
-     * @param bool $proprietairechien
-     */
-    public function setProprietairechien($proprietairechien): void
+    public function setProprietairechien(bool $proprietairechien): self
     {
         $this->proprietairechien = $proprietairechien;
+
+        return $this;
     }
 
-    /**
-     * @return \Utilisateur
-     */
-    public function getIdutilisateur(): \Utilisateur
+    public function getIdutilisateur(): ?Utilisateur
     {
         return $this->idutilisateur;
     }
 
-    /**
-     * @param \Utilisateur $idutilisateur
-     */
-    public function setIdutilisateur(\Utilisateur $idutilisateur): void
+    public function setIdutilisateur(?Utilisateur $idutilisateur): self
     {
         $this->idutilisateur = $idutilisateur;
+
+        return $this;
     }
 
 

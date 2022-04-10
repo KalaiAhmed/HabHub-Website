@@ -14,14 +14,14 @@ class IndividuType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('datenaissance')
+           // ->add('datenaissance')
             ->add('sexe')
             ->add('adresse')
             ->add('facebook')
             ->add('instagram')
             ->add('whatsapp')
             ->add('proprietairechien')
-            ->add('idutilisateur')
+            //->add('idutilisateur')
         ;
     }
 

@@ -23,7 +23,7 @@ class ChienType extends AbstractType
             ->add('groupe')
             ->add('likenumber')
             ->add('playwithme')
-            ->add('idindividu')
+            //->add('idindividu')
         ;
     }
 

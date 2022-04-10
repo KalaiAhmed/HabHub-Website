@@ -48,68 +48,45 @@ class Panier
      */
     private $idproduit;
 
-    /**
-     * @return int
-     */
-    public function getIdpanier(): int
+    public function getIdpanier(): ?int
     {
         return $this->idpanier;
     }
 
-    /**
-     * @param int $idpanier
-     */
-    public function setIdpanier(int $idpanier): void
-    {
-        $this->idpanier = $idpanier;
-    }
-
-    /**
-     * @return int
-     */
-    public function getQuantite(): int
+    public function getQuantite(): ?int
     {
         return $this->quantite;
     }
 
-    /**
-     * @param int $quantite
-     */
-    public function setQuantite(int $quantite): void
+    public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
+
+        return $this;
     }
 
-    /**
-     * @return \Individu
-     */
-    public function getIdutilisateur(): \Individu
+    public function getIdutilisateur(): ?Individu
     {
         return $this->idutilisateur;
     }
 
-    /**
-     * @param \Individu $idutilisateur
-     */
-    public function setIdutilisateur(\Individu $idutilisateur): void
+    public function setIdutilisateur(?Individu $idutilisateur): self
     {
         $this->idutilisateur = $idutilisateur;
+
+        return $this;
     }
 
-    /**
-     * @return \Produit
-     */
-    public function getIdproduit(): \Produit
+    public function getIdproduit(): ?Produit
     {
         return $this->idproduit;
     }
 
-    /**
-     * @param \Produit $idproduit
-     */
-    public function setIdproduit(\Produit $idproduit): void
+    public function setIdproduit(?Produit $idproduit): self
     {
         $this->idproduit = $idproduit;
+
+        return $this;
     }
 
 

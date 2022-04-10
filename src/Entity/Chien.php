@@ -108,212 +108,153 @@ class Chien
      */
     private $idindividu;
 
-    /**
-     * @return int
-     */
-    public function getIdchien(): int
+    public function getIdchien(): ?int
     {
         return $this->idchien;
     }
 
-    /**
-     * @param int $idchien
-     */
-    public function setIdchien(int $idchien): void
-    {
-        $this->idchien = $idchien;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    /**
-     * @param string $nom
-     */
-    public function setNom(string $nom): void
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSexe(): ?string
     {
         return $this->sexe;
     }
 
-    /**
-     * @param string|null $sexe
-     */
-    public function setSexe(?string $sexe): void
+    public function setSexe(?string $sexe): self
     {
         $this->sexe = $sexe;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAge(): string
+    public function getAge(): ?string
     {
         return $this->age;
     }
 
-    /**
-     * @param string $age
-     */
-    public function setAge(string $age): void
+    public function setAge(string $age): self
     {
         $this->age = $age;
+
+        return $this;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getVaccination()
+    public function getVaccination(): ?bool
     {
         return $this->vaccination;
     }
 
-    /**
-     * @param bool|null $vaccination
-     */
-    public function setVaccination($vaccination): void
+    public function setVaccination(?bool $vaccination): self
     {
         $this->vaccination = $vaccination;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description): void
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
-    /**
-     * @param string|null $image
-     */
-    public function setImage(?string $image): void
+    public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getColor(): string
+    public function getColor(): ?string
     {
         return $this->color;
     }
 
-    /**
-     * @param string $color
-     */
-    public function setColor(string $color): void
+    public function setColor(string $color): self
     {
         $this->color = $color;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getRace(): string
+    public function getRace(): ?string
     {
         return $this->race;
     }
 
-    /**
-     * @param string $race
-     */
-    public function setRace(string $race): void
+    public function setRace(string $race): self
     {
         $this->race = $race;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getGroupe(): string
+    public function getGroupe(): ?string
     {
         return $this->groupe;
     }
 
-    /**
-     * @param string $groupe
-     */
-    public function setGroupe(string $groupe): void
+    public function setGroupe(string $groupe): self
     {
         $this->groupe = $groupe;
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getLikenumber()
+    public function getLikenumber(): ?int
     {
         return $this->likenumber;
     }
 
-    /**
-     * @param int $likenumber
-     */
-    public function setLikenumber($likenumber): void
+    public function setLikenumber(int $likenumber): self
     {
         $this->likenumber = $likenumber;
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isPlaywithme()
+    public function getPlaywithme(): ?bool
     {
         return $this->playwithme;
     }
 
-    /**
-     * @param bool $playwithme
-     */
-    public function setPlaywithme($playwithme): void
+    public function setPlaywithme(bool $playwithme): self
     {
         $this->playwithme = $playwithme;
+
+        return $this;
     }
 
-    /**
-     * @return \Individu
-     */
-    public function getIdindividu(): \Individu
+    public function getIdindividu(): ?Individu
     {
         return $this->idindividu;
     }
 
-    /**
-     * @param \Individu $idindividu
-     */
-    public function setIdindividu(\Individu $idindividu): void
+    public function setIdindividu(?Individu $idindividu): self
     {
         $this->idindividu = $idindividu;
+
+        return $this;
     }
 
 

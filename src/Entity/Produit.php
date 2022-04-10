@@ -50,11 +50,18 @@ class Produit
     private $marque;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="nbEtoiles", type="integer", nullable=false)
+     * @ORM\Column(name="nbEtoiles", type="integer", nullable=true, options={"default"="NULL"})
      */
-    private $nbetoiles;
+    private $nbetoiles = NULL;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
+     */
+    private $image = 'NULL';
 
     /**
      * @var \Categorie
@@ -66,116 +73,93 @@ class Produit
      */
     private $idcategorie;
 
-    /**
-     * @return int
-     */
-    public function getIdproduit(): int
+    public function getIdproduit(): ?int
     {
         return $this->idproduit;
     }
 
-    /**
-     * @param int $idproduit
-     */
-    public function setIdproduit(int $idproduit): void
-    {
-        $this->idproduit = $idproduit;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    /**
-     * @param string $nom
-     */
-    public function setNom(string $nom): void
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description): void
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getPrix(): int
+    public function getPrix(): ?int
     {
         return $this->prix;
     }
 
-    /**
-     * @param int $prix
-     */
-    public function setPrix(int $prix): void
+    public function setPrix(int $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getMarque(): string
+    public function getMarque(): ?string
     {
         return $this->marque;
     }
 
-    /**
-     * @param string $marque
-     */
-    public function setMarque(string $marque): void
+    public function setMarque(string $marque): self
     {
         $this->marque = $marque;
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getNbetoiles(): int
+    public function getNbetoiles(): ?int
     {
         return $this->nbetoiles;
     }
 
-    /**
-     * @param int $nbetoiles
-     */
-    public function setNbetoiles(int $nbetoiles): void
+    public function setNbetoiles(?int $nbetoiles): self
     {
         $this->nbetoiles = $nbetoiles;
+
+        return $this;
     }
 
-    /**
-     * @return \Categorie
-     */
-    public function getIdcategorie(): \Categorie
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getIdcategorie(): ?Categorie
     {
         return $this->idcategorie;
     }
 
-    /**
-     * @param \Categorie $idcategorie
-     */
-    public function setIdcategorie(\Categorie $idcategorie): void
+    public function setIdcategorie(?Categorie $idcategorie): self
     {
         $this->idcategorie = $idcategorie;
+
+        return $this;
     }
 
 

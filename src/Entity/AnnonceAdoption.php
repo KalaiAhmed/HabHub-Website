@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AnnonceAdoption
  *
  * @ORM\Table(name="annonce_adoption", indexes={@ORM\Index(name="fk_annonceAdoption_chien", columns={"idChien"}), @ORM\Index(name="idIndividu", columns={"idIndividu"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AnnonceAdoptionRepository")
  */
 class AnnonceAdoption
 {
@@ -29,18 +29,18 @@ class AnnonceAdoption
     private $datepublication;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="description", type="string", length=200, nullable=false)
+     * @ORM\Column(name="description", type="string", length=200, nullable=true, options={"default"="NULL"})
      */
-    private $description;
+    private $description = 'NULL';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="localisation", type="string", length=50, nullable=false)
+     * @ORM\Column(name="localisation", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
-    private $localisation;
+    private $localisation = 'NULL';
 
     /**
      * @var \Individu
@@ -62,102 +62,70 @@ class AnnonceAdoption
      */
     private $idchien;
 
-    /**
-     * @return int
-     */
-    public function getIdannonceadoption(): int
+    public function getIdannonceadoption(): ?int
     {
         return $this->idannonceadoption;
     }
 
-    /**
-     * @param int $idannonceadoption
-     */
-    public function setIdannonceadoption(int $idannonceadoption): void
-    {
-        $this->idannonceadoption = $idannonceadoption;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDatepublication(): \DateTime
+    public function getDatepublication(): ?\DateTimeInterface
     {
         return $this->datepublication;
     }
 
-    /**
-     * @param \DateTime $datepublication
-     */
-    public function setDatepublication(\DateTime $datepublication): void
+    public function setDatepublication(\DateTimeInterface $datepublication): self
     {
         $this->datepublication = $datepublication;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description): void
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLocalisation(): string
+    public function getLocalisation(): ?string
     {
         return $this->localisation;
     }
 
-    /**
-     * @param string $localisation
-     */
-    public function setLocalisation(string $localisation): void
+    public function setLocalisation(?string $localisation): self
     {
         $this->localisation = $localisation;
+
+        return $this;
     }
 
-    /**
-     * @return \Individu
-     */
-    public function getIdindividu(): \Individu
+    public function getIdindividu(): ?Individu
     {
         return $this->idindividu;
     }
 
-    /**
-     * @param \Individu $idindividu
-     */
-    public function setIdindividu(\Individu $idindividu): void
+    public function setIdindividu(?Individu $idindividu): self
     {
         $this->idindividu = $idindividu;
+
+        return $this;
     }
 
-    /**
-     * @return \Chien
-     */
-    public function getIdchien(): \Chien
+    public function getIdchien(): ?Chien
     {
         return $this->idchien;
     }
 
-    /**
-     * @param \Chien $idchien
-     */
-    public function setIdchien(\Chien $idchien): void
+    public function setIdchien(?Chien $idchien): self
     {
         $this->idchien = $idchien;
-    }
 
+        return $this;
+    }
 
 
 }
