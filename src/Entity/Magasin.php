@@ -108,212 +108,153 @@ class Magasin
      */
     private $idutilisateur;
 
-    /**
-     * @return int
-     */
-    public function getIdmagasin(): int
+    public function getIdmagasin(): ?int
     {
         return $this->idmagasin;
     }
 
-    /**
-     * @param int $idmagasin
-     */
-    public function setIdmagasin(int $idmagasin): void
-    {
-        $this->idmagasin = $idmagasin;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNommagasin(): string
+    public function getNommagasin(): ?string
     {
         return $this->nommagasin;
     }
 
-    /**
-     * @param string $nommagasin
-     */
-    public function setNommagasin(string $nommagasin): void
+    public function setNommagasin(string $nommagasin): self
     {
         $this->nommagasin = $nommagasin;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getNomgestionnairemagasin(): string
+    public function getNomgestionnairemagasin(): ?string
     {
         return $this->nomgestionnairemagasin;
     }
 
-    /**
-     * @param string $nomgestionnairemagasin
-     */
-    public function setNomgestionnairemagasin(string $nomgestionnairemagasin): void
+    public function setNomgestionnairemagasin(string $nomgestionnairemagasin): self
     {
         $this->nomgestionnairemagasin = $nomgestionnairemagasin;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAdresse(): string
+    public function getAdresse(): ?string
     {
         return $this->adresse;
     }
 
-    /**
-     * @param string $adresse
-     */
-    public function setAdresse(string $adresse): void
+    public function setAdresse(string $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCodepostal(): int
+    public function getCodepostal(): ?int
     {
         return $this->codepostal;
     }
 
-    /**
-     * @param int $codepostal
-     */
-    public function setCodepostal(int $codepostal): void
+    public function setCodepostal(int $codepostal): self
     {
         $this->codepostal = $codepostal;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getVille(): string
+    public function getVille(): ?string
     {
         return $this->ville;
     }
 
-    /**
-     * @param string $ville
-     */
-    public function setVille(string $ville): void
+    public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getNomreplegal(): string
+    public function getNomreplegal(): ?string
     {
         return $this->nomreplegal;
     }
 
-    /**
-     * @param string $nomreplegal
-     */
-    public function setNomreplegal(string $nomreplegal): void
+    public function setNomreplegal(string $nomreplegal): self
     {
         $this->nomreplegal = $nomreplegal;
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCinreplegal(): int
+    public function getCinreplegal(): ?int
     {
         return $this->cinreplegal;
     }
 
-    /**
-     * @param int $cinreplegal
-     */
-    public function setCinreplegal(int $cinreplegal): void
+    public function setCinreplegal(int $cinreplegal): self
     {
         $this->cinreplegal = $cinreplegal;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getMatriculefiscale(): string
+    public function getMatriculefiscale(): ?string
     {
         return $this->matriculefiscale;
     }
 
-    /**
-     * @param string $matriculefiscale
-     */
-    public function setMatriculefiscale(string $matriculefiscale): void
+    public function setMatriculefiscale(string $matriculefiscale): self
     {
         $this->matriculefiscale = $matriculefiscale;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getIdentifiantfiscal(): string
+    public function getIdentifiantfiscal(): ?string
     {
         return $this->identifiantfiscal;
     }
 
-    /**
-     * @param string $identifiantfiscal
-     */
-    public function setIdentifiantfiscal(string $identifiantfiscal): void
+    public function setIdentifiantfiscal(string $identifiantfiscal): self
     {
         $this->identifiantfiscal = $identifiantfiscal;
+
+        return $this;
     }
 
-    /**
-     * @return binary|null
-     */
     public function getPatente()
     {
         return $this->patente;
     }
 
-    /**
-     * @param binary|null $patente
-     */
-    public function setPatente($patente): void
+    public function setPatente($patente): self
     {
         $this->patente = $patente;
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getRib(): int
+    public function getRib(): ?int
     {
         return $this->rib;
     }
 
-    /**
-     * @param int $rib
-     */
-    public function setRib(int $rib): void
+    public function setRib(int $rib): self
     {
         $this->rib = $rib;
+
+        return $this;
     }
 
-    /**
-     * @return \Utilisateur
-     */
-    public function getIdutilisateur(): \Utilisateur
+    public function getIdutilisateur(): ?Utilisateur
     {
         return $this->idutilisateur;
     }
 
-    /**
-     * @param \Utilisateur $idutilisateur
-     */
-    public function setIdutilisateur(\Utilisateur $idutilisateur): void
+    public function setIdutilisateur(?Utilisateur $idutilisateur): self
     {
         $this->idutilisateur = $idutilisateur;
+
+        return $this;
     }
 
 

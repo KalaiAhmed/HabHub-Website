@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Business
  *
  * @ORM\Table(name="business", indexes={@ORM\Index(name="idUtilisateur", columns={"idUtilisateur"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\BusinessRepository")
  */
 class Business
 {
@@ -57,21 +57,28 @@ class Business
     private $localisation;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="type", type="string", length=20, nullable=false)
+     * @ORM\Column(name="type", type="string", length=20, nullable=true, options={"default"="NULL"})
      */
-    private $type;
+    private $type = 'NULL';
 
     /**
      * @var int
      *
      * @ORM\Column(name="experience", type="integer", nullable=false)
      */
-    private $experience;
+    private $experience = '0';
 
     /**
-     * @var \Utilisateur
+     * @var string|null
+     *
+     * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
+     */
+    private $image = 'NULL';
+
+    /**
+     * @var Utilisateur
      *
      * @ORM\ManyToOne(targetEntity="Utilisateur")
      * @ORM\JoinColumns({
@@ -80,148 +87,117 @@ class Business
      */
     private $idutilisateur;
 
-    /**
-     * @return int
-     */
-    public function getIdbusiness(): int
+    public function getIdbusiness(): ?int
     {
         return $this->idbusiness;
     }
 
-    /**
-     * @param int $idbusiness
-     */
-    public function setIdbusiness(int $idbusiness): void
-    {
-        $this->idbusiness = $idbusiness;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitre(): string
+    public function getTitre(): ?string
     {
         return $this->titre;
     }
 
-    /**
-     * @param string $titre
-     */
-    public function setTitre(string $titre): void
+    public function setTitre(string $titre): self
     {
         $this->titre = $titre;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description): void
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getHoraire(): string
+    public function getHoraire(): ?string
     {
         return $this->horaire;
     }
 
-    /**
-     * @param string $horaire
-     */
-    public function setHoraire(string $horaire): void
+    public function setHoraire(string $horaire): self
     {
         $this->horaire = $horaire;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getVille(): string
+    public function getVille(): ?string
     {
         return $this->ville;
     }
 
-    /**
-     * @param string $ville
-     */
-    public function setVille(string $ville): void
+    public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLocalisation(): string
+    public function getLocalisation(): ?string
     {
         return $this->localisation;
     }
 
-    /**
-     * @param string $localisation
-     */
-    public function setLocalisation(string $localisation): void
+    public function setLocalisation(string $localisation): self
     {
         $this->localisation = $localisation;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
-    public function setType(string $type): void
+    public function setType(?string $type): self
     {
         $this->type = $type;
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getExperience(): int
+    public function getExperience(): ?int
     {
         return $this->experience;
     }
 
-    /**
-     * @param int $experience
-     */
-    public function setExperience(int $experience): void
+    public function setExperience(int $experience): self
     {
         $this->experience = $experience;
+
+        return $this;
     }
 
-    /**
-     * @return \Utilisateur
-     */
-    public function getIdutilisateur(): \Utilisateur
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getIdutilisateur(): ?Utilisateur
     {
         return $this->idutilisateur;
     }
 
-    /**
-     * @param \Utilisateur $idutilisateur
-     */
-    public function setIdutilisateur(\Utilisateur $idutilisateur): void
+    public function setIdutilisateur(?Utilisateur $idutilisateur): self
     {
         $this->idutilisateur = $idutilisateur;
+
+        return $this;
     }
 
 

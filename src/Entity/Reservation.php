@@ -31,16 +31,16 @@ class Reservation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateHeureDebut", type="datetime", nullable=false)
+     * @ORM\Column(name="dateReservation", type="date", nullable=false)
      */
-    private $dateheuredebut;
+    private $datereservation;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="dateHeureFin", type="datetime", nullable=false)
+     * @ORM\Column(name="heureReservation", type="string", length=10, nullable=false)
      */
-    private $dateheurefin;
+    private $heurereservation;
 
     /**
      * @var \Individu
@@ -52,84 +52,57 @@ class Reservation
      */
     private $idindividu;
 
-    /**
-     * @return int
-     */
-    public function getIdreservation(): int
+    public function getIdreservation(): ?int
     {
         return $this->idreservation;
     }
 
-    /**
-     * @param int $idreservation
-     */
-    public function setIdreservation(int $idreservation): void
-    {
-        $this->idreservation = $idreservation;
-    }
-
-    /**
-     * @return int
-     */
-    public function getIdbusinessservices(): int
+    public function getIdbusinessservices(): ?int
     {
         return $this->idbusinessservices;
     }
 
-    /**
-     * @param int $idbusinessservices
-     */
-    public function setIdbusinessservices(int $idbusinessservices): void
+    public function setIdbusinessservices(int $idbusinessservices): self
     {
         $this->idbusinessservices = $idbusinessservices;
+
+        return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getDateheuredebut(): \DateTime
+    public function getDatereservation(): ?\DateTimeInterface
     {
-        return $this->dateheuredebut;
+        return $this->datereservation;
     }
 
-    /**
-     * @param \DateTime $dateheuredebut
-     */
-    public function setDateheuredebut(\DateTime $dateheuredebut): void
+    public function setDatereservation(\DateTimeInterface $datereservation): self
     {
-        $this->dateheuredebut = $dateheuredebut;
+        $this->datereservation = $datereservation;
+
+        return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getDateheurefin(): \DateTime
+    public function getHeurereservation(): ?string
     {
-        return $this->dateheurefin;
+        return $this->heurereservation;
     }
 
-    /**
-     * @param \DateTime $dateheurefin
-     */
-    public function setDateheurefin(\DateTime $dateheurefin): void
+    public function setHeurereservation(string $heurereservation): self
     {
-        $this->dateheurefin = $dateheurefin;
+        $this->heurereservation = $heurereservation;
+
+        return $this;
     }
 
-    /**
-     * @return \Individu
-     */
-    public function getIdindividu(): \Individu
+    public function getIdindividu(): ?Individu
     {
         return $this->idindividu;
     }
 
-    /**
-     * @param \Individu $idindividu
-     */
-    public function setIdindividu(\Individu $idindividu): void
+    public function setIdindividu(?Individu $idindividu): self
     {
         $this->idindividu = $idindividu;
+
+        return $this;
     }
 
 

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * BusinessServices
  *
  * @ORM\Table(name="business_services", indexes={@ORM\Index(name="idBusiness", columns={"idBusiness"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\MyClassRepository")
  */
 class BusinessServices
 {
@@ -45,68 +45,45 @@ class BusinessServices
      */
     private $idbusiness;
 
-    /**
-     * @return int
-     */
-    public function getIdbusinessservices(): int
+    public function getIdbusinessservices(): ?int
     {
         return $this->idbusinessservices;
     }
 
-    /**
-     * @param int $idbusinessservices
-     */
-    public function setIdbusinessservices(int $idbusinessservices): void
-    {
-        $this->idbusinessservices = $idbusinessservices;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNomservice(): string
+    public function getNomservice(): ?string
     {
         return $this->nomservice;
     }
 
-    /**
-     * @param string $nomservice
-     */
-    public function setNomservice(string $nomservice): void
+    public function setNomservice(string $nomservice): self
     {
         $this->nomservice = $nomservice;
+
+        return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getPrix(): float
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    /**
-     * @param float $prix
-     */
-    public function setPrix(float $prix): void
+    public function setPrix(float $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
     }
 
-    /**
-     * @return \Business
-     */
-    public function getIdbusiness(): \Business
+    public function getIdbusiness(): ?Business
     {
         return $this->idbusiness;
     }
 
-    /**
-     * @param \Business $idbusiness
-     */
-    public function setIdbusiness(\Business $idbusiness): void
+    public function setIdbusiness(?Business $idbusiness): self
     {
         $this->idbusiness = $idbusiness;
+
+        return $this;
     }
 
 

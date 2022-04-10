@@ -41,52 +41,33 @@ class Likes
      */
     private $idchien;
 
-    /**
-     * @return int
-     */
-    public function getIdlike(): int
+    public function getIdlike(): ?int
     {
         return $this->idlike;
     }
 
-    /**
-     * @param int $idlike
-     */
-    public function setIdlike(int $idlike): void
-    {
-        $this->idlike = $idlike;
-    }
-
-    /**
-     * @return \Individu
-     */
-    public function getIdindividu(): \Individu
+    public function getIdindividu(): ?Individu
     {
         return $this->idindividu;
     }
 
-    /**
-     * @param \Individu $idindividu
-     */
-    public function setIdindividu(\Individu $idindividu): void
+    public function setIdindividu(?Individu $idindividu): self
     {
         $this->idindividu = $idindividu;
+
+        return $this;
     }
 
-    /**
-     * @return \Chien
-     */
-    public function getIdchien(): \Chien
+    public function getIdchien(): ?Chien
     {
         return $this->idchien;
     }
 
-    /**
-     * @param \Chien $idchien
-     */
-    public function setIdchien(\Chien $idchien): void
+    public function setIdchien(?Chien $idchien): self
     {
         $this->idchien = $idchien;
+
+        return $this;
     }
 
 

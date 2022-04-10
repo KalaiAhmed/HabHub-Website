@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AnnonceProprietaireChien
  *
  * @ORM\Table(name="annonce_proprietaire_chien", indexes={@ORM\Index(name="idChien", columns={"idChien"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AnnonceProprietaireChienRepository")
  */
 class AnnonceProprietaireChien
 {
@@ -73,132 +73,93 @@ class AnnonceProprietaireChien
      */
     private $idchien;
 
-    /**
-     * @return int
-     */
-    public function getIdannonceproprietairechien(): int
+    public function getIdannonceproprietairechien(): ?int
     {
         return $this->idannonceproprietairechien;
     }
 
-    /**
-     * @param int $idannonceproprietairechien
-     */
-    public function setIdannonceproprietairechien(int $idannonceproprietairechien): void
-    {
-        $this->idannonceproprietairechien = $idannonceproprietairechien;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDatepublication(): \DateTime
+    public function getDatepublication(): ?\DateTimeInterface
     {
         return $this->datepublication;
     }
 
-    /**
-     * @param \DateTime $datepublication
-     */
-    public function setDatepublication(\DateTime $datepublication): void
+    public function setDatepublication(\DateTimeInterface $datepublication): self
     {
         $this->datepublication = $datepublication;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     */
-    public function setDescription(?string $description): void
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
-    public function setType(string $type): void
+    public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
     }
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getDateperte()
+    public function getDateperte(): ?\DateTimeInterface
     {
         return $this->dateperte;
     }
 
-    /**
-     * @param \DateTime|null $dateperte
-     */
-    public function setDateperte($dateperte): void
+    public function setDateperte(?\DateTimeInterface $dateperte): self
     {
         $this->dateperte = $dateperte;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLocalisation(): string
+    public function getLocalisation(): ?string
     {
         return $this->localisation;
     }
 
-    /**
-     * @param string $localisation
-     */
-    public function setLocalisation(string $localisation): void
+    public function setLocalisation(string $localisation): self
     {
         $this->localisation = $localisation;
+
+        return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessagevocal(): ?string
     {
         return $this->messagevocal;
     }
 
-    /**
-     * @param string|null $messagevocal
-     */
-    public function setMessagevocal(?string $messagevocal): void
+    public function setMessagevocal(?string $messagevocal): self
     {
         $this->messagevocal = $messagevocal;
+
+        return $this;
     }
 
-    /**
-     * @return \Chien
-     */
-    public function getIdchien(): \Chien
+    public function getIdchien(): ?Chien
     {
         return $this->idchien;
     }
 
-    /**
-     * @param \Chien $idchien
-     */
-    public function setIdchien(\Chien $idchien): void
+    public function setIdchien(?Chien $idchien): self
     {
         $this->idchien = $idchien;
+
+        return $this;
     }
 
 

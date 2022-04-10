@@ -72,116 +72,81 @@ class Revue
      */
     private $idbusiness;
 
-    /**
-     * @return int
-     */
-    public function getIdrevue(): int
+    public function getIdrevue(): ?int
     {
         return $this->idrevue;
     }
 
-    /**
-     * @param int $idrevue
-     */
-    public function setIdrevue(int $idrevue): void
-    {
-        $this->idrevue = $idrevue;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNbetoiles(): int
+    public function getNbetoiles(): ?int
     {
         return $this->nbetoiles;
     }
 
-    /**
-     * @param int $nbetoiles
-     */
-    public function setNbetoiles(int $nbetoiles): void
+    public function setNbetoiles(int $nbetoiles): self
     {
         $this->nbetoiles = $nbetoiles;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCommentaire(): string
+    public function getCommentaire(): ?string
     {
         return $this->commentaire;
     }
 
-    /**
-     * @param string $commentaire
-     */
-    public function setCommentaire(string $commentaire): void
+    public function setCommentaire(string $commentaire): self
     {
         $this->commentaire = $commentaire;
+
+        return $this;
     }
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getDatepublication()
+    public function getDatepublication(): ?\DateTimeInterface
     {
         return $this->datepublication;
     }
 
-    /**
-     * @param \DateTime|null $datepublication
-     */
-    public function setDatepublication($datepublication): void
+    public function setDatepublication(?\DateTimeInterface $datepublication): self
     {
         $this->datepublication = $datepublication;
+
+        return $this;
     }
 
-    /**
-     * @return \Produit
-     */
-    public function getIdproduit(): \Produit
+    public function getIdproduit(): ?Produit
     {
         return $this->idproduit;
     }
 
-    /**
-     * @param \Produit $idproduit
-     */
-    public function setIdproduit(\Produit $idproduit): void
+    public function setIdproduit(?Produit $idproduit): self
     {
         $this->idproduit = $idproduit;
+
+        return $this;
     }
 
-    /**
-     * @return \Individu
-     */
-    public function getIdindividu(): \Individu
+    public function getIdindividu(): ?Individu
     {
         return $this->idindividu;
     }
 
-    /**
-     * @param \Individu $idindividu
-     */
-    public function setIdindividu(\Individu $idindividu): void
+    public function setIdindividu(?Individu $idindividu): self
     {
         $this->idindividu = $idindividu;
+
+        return $this;
     }
 
-    /**
-     * @return \Business
-     */
-    public function getIdbusiness(): \Business
+    public function getIdbusiness(): ?Business
     {
         return $this->idbusiness;
     }
 
-    /**
-     * @param \Business $idbusiness
-     */
-    public function setIdbusiness(\Business $idbusiness): void
+    public function setIdbusiness(?Business $idbusiness): self
     {
         $this->idbusiness = $idbusiness;
+
+        return $this;
     }
 
 

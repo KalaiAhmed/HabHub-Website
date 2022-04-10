@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProduitType extends AbstractType
@@ -17,14 +18,16 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('marque')
             ->add('nbetoiles')
-            ->add('idcategorie')
+            //->add('idcategorie')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Produit::class,
+            'empty_data' => function (FormInterface $form) {
+                return new Produit($form->get('nom')->getData());
+            },
         ]);
     }
 }
