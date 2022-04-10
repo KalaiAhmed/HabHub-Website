@@ -15,6 +15,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BusinessController extends AbstractController
 {
+
+    /**
+     * @Route("/back-office", name="app_business_index_back_office", methods={"GET"})
+     */
+    public function index_back_office(EntityManagerInterface $entityManager): Response
+    {
+        $businesses = $entityManager
+            ->getRepository(Business::class)
+            ->findAll();
+
+        return $this->render('business/index.html.twig', [
+            'businesses' => $businesses,
+        ]);
+    }
     /**
      * @Route("/", name="app_business_index", methods={"GET"})
      */
