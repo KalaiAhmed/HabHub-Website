@@ -16,6 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class ChienController extends AbstractController
 {
     /**
+     * @Route("/back-office", name="app_chien_index_back_office", methods={"GET"})
+     */
+    public function index_back_office(EntityManagerInterface $entityManager): Response
+    {
+        $chiens = $entityManager
+            ->getRepository(Chien::class)
+            ->findAll();
+
+        return $this->render('chien/backOfficeShow.html.twig', [
+            'chiens' => $chiens,
+        ]);
+    }
+    /**
      * @Route("/", name="app_chien_index", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response
@@ -60,6 +73,7 @@ class ChienController extends AbstractController
             'chien' => $chien,
         ]);
     }
+
 
     /**
      * @Route("/{idchien}/edit", name="app_chien_edit", methods={"GET", "POST"})

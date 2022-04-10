@@ -41,6 +41,7 @@
 </head>
 <body>
 <div class="wrapper">
+
 {% block navbar %}
     <div class="sidebar" data-color="white" data-active-color="danger">
         <div class="logo">
@@ -62,18 +63,24 @@
         </div>
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="active">
-                    <a href="./home.html">
+                {% block home %}
+                <li>
+                    <a href="{{ path('app_back_office_home') }}">
                         <i class="fa fa-home" aria-hidden="true"></i>
                         <p>Home</p>
                     </a>
                 </li>
+                {% endblock %}
+                {% block business %}
+
                 <li>
-                    <a href="./businessList.html">
+                    <a href="{{ path('app_business_index_back_office') }}">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
                         <p>Business Partners</p>
                     </a>
                 </li>
+                {% endblock %}
+                {% block store %}
 
                 <li>
                     <a
@@ -108,40 +115,57 @@
                         </ul>
                     </div>
                 </li>
+                {% endblock %}
+                {% block dogs %}
                 <li>
-                    <a href="./dogsList.html">
+                    <a href="{{ path('app_chien_index_back_office') }}">
                         <i class="fa fa-paw" aria-hidden="true"></i>
                         <p>Dogs</p>
                     </a>
                 </li>
+                {% endblock %}
+                {% block adoption %}
+
                 <li>
                     <a href="./adoptionList.html">
                         <i class="fa fa-gift" aria-hidden="true"></i>
                         <p>Adoption</p>
                     </a>
                 </li>
+                {% endblock %}
+                {% block mating %}
+
                 <li>
                     <a href="./matingList.html">
                         <i class="fa fa-heart" aria-hidden="true"></i>
                         <p>Mating</p>
                     </a>
                 </li>
+                {% endblock %}
+                {% block lostDogs %}
+
                 <li>
                     <a href="./lostDogsList.html">
                         <i class="fa fa-hourglass-start" aria-hidden="true"></i>
                         <p>Lost Dogs</p>
                     </a>
                 </li>
+                {% endblock %}
+                {% block user %}
+
                 <li>
                     <a href="./user.html">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <p>Users</p>
                     </a>
                 </li>
+                {% endblock %}
+
             </ul>
         </div>
     </div>
 {% endblock %}
+    <div class="main-panel">
 {% block body %}
 {% endblock %}
 {% block footer %}
