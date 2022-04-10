@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Chien;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,9 +22,8 @@ class ChienType extends AbstractType
             ->add('color')
             ->add('race')
             ->add('groupe')
-            ->add('likenumber')
-            ->add('playwithme')
             //->add('idindividu')
+            ->add('add',SubmitType::class)
         ;
     }
 

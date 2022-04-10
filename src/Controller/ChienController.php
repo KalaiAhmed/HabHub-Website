@@ -47,7 +47,7 @@ class ChienController extends AbstractController
 
         return $this->render('chien/new.html.twig', [
             'chien' => $chien,
-            'form' => $form->createView(),
+            'f' => $form->createView(),
         ]);
     }
 
