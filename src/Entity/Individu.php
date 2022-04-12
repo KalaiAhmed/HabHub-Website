@@ -26,14 +26,14 @@ class Individu
      *
      * @ORM\Column(name="nom", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
-    private $nom = 'NULL';
+    private $nom ;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="prenom", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
-    private $prenom = 'NULL';
+    private $prenom  ;
 
     /**
      * @var \DateTime|null
@@ -219,5 +219,8 @@ class Individu
         return $this;
     }
 
+    public function __toString() {
+        return ($this->prenom.'-'.strval($this->idindividu));
+    }
 
 }
