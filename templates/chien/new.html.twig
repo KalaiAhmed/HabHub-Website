@@ -1,11 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
 {% block title %}New Chien{% endblock %}
 
 {% block body %}
     <h1>Create new Chien</h1>
 
+<div class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="col-md-8">
+
     {{ include('chien/_form.html.twig') }}
 
-    <a href="{{ path('app_chien_index') }}">back to list</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <a href="{{ path('app_chien_index_back_office') }}">back to list</a>
 {% endblock %}

@@ -22,7 +22,7 @@ class ChienType extends AbstractType
             ->add('color')
             ->add('race')
             ->add('groupe')
-            //->add('idindividu')
+            ->add('idindividu')
             ->add('add',SubmitType::class)
         ;
     }
