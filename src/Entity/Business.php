@@ -61,23 +61,23 @@ class Business
      *
      * @ORM\Column(name="type", type="string", length=20, nullable=true, options={"default"="NULL"})
      */
-    private $type = 'NULL';
+    private $type;
 
     /**
      * @var int
      *
      * @ORM\Column(name="experience", type="integer", nullable=false)
      */
-    private $experience = '0';
+    private $experience;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
      */
-    private $image = 'NULL';
+    private $image ;
 
-    /**
+    /** 
      * @var Utilisateur
      *
      * @ORM\ManyToOne(targetEntity="Utilisateur")

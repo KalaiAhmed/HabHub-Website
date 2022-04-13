@@ -1,4 +1,103 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="col-md-8">
+                <div class="card card-user">
+                    <div class="col-md-8">
+                            <div class="card-header">
+                                <h5 class="card-title">Add Business</h5>
+                            </div>
+                            <div class="card-body">
+                                {{ form_start(f,{attr:{novalidate:'novalidate'}}) }}
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="inputText" class="col-sm-4 col-form-label">Username</label>
+
+                                        {{ form_widget(f.idutilisateur,{'attr':{'class':'form-contr0ol'}}) }}
+                                    </div>
+                                    {{ form_errors(f.idutilisateur,{'attr':{'class':'text-danger'}}) }}
+
+
+                                    <div class="form-group">
+                                            <label for="inputText" class="col-sm-4 col-form-label">Title</label>
+
+                                            {{ form_widget(f.titre,{'attr':{'class':'form-contr0ol'}}) }}
+                                            </div>
+                                            {{ form_errors(f.titre,{'attr':{'class':'text-danger'}}) }}
+
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            {{ form_widget(f.description,{'attr':{'class':'form-contr0ol'}}) }}
+
+                                        </div>
+                                        {{ form_errors(f.description,{'attr':{'class':'text-danger'}}) }}
+
+                                    <div class="form-group">
+                                        <label>Opening Hours</label>
+                                        {{ form_widget(f.horaire,{'attr':{'class':'form-contr0ol'}}) }}
+
+                                    </div>
+                                    {{ form_errors(f.horaire,{'attr':{'class':'text-danger'}}) }}
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        {{ form_widget(f.ville,{'attr':{'class':'form-contr0ol'}}) }}
+
+
+                                    </div>
+                                    {{ form_errors(f.ville,{'attr':{'class':'text-danger'}}) }}
+
+                                    <div class="form-group">
+                                        <label>Location</label>
+                                        {{ form_widget(f.localisation,{'attr':{'class':'form-contr0ol'}}) }}
+
+                                    </div>
+                                    {{ form_errors(f.localisation,{'attr':{'class':'text-danger'}}) }}
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        {{ form_widget(f.type,{'attr':{'class':'form-contr0ol'}}) }}
+
+                                    </div>
+                                    {{ form_errors(f.type,{'attr':{'class':'text-danger'}}) }}
+                                    <div class="form-group">
+                                        <label>Experience </label>
+                                        {{ form_widget(f.experience,{'attr':{'class':'form-contr0ol'}}) }}
+
+                                    </div>
+                                    {{ form_errors(f.experience,{'attr':{'class':'text-danger'}}) }}
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        {{ form_widget(f.image,{'attr':{'class':'form-contr0ol'}}) }}
+
+                                    </div>
+                                    {{ form_errors(f.image,{'attr':{'class':'text-danger'}}) }}
+
+
+
+
+
+                                </div>
+
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="update ml-auto mr-auto">
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+                                    </div>
+                                </div>
+
+
+{{ form_end(f) }}
+
+
+
+
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+</div>
+</div>

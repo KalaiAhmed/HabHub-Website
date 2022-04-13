@@ -102,5 +102,7 @@ class Utilisateur
         return $this;
     }
 
-
+    public function __toString() {
+        return ($this->email.'-'.strval($this->idutilisateur));
+    }
 }

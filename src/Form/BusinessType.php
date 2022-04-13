@@ -19,6 +19,7 @@ class BusinessType extends AbstractType
             ->add('localisation')
             ->add('type')
             ->add('experience')
+            ->add('image')
             ->add('idutilisateur')
         ;
     }

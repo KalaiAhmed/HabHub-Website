@@ -38,10 +38,34 @@ class BusinessController extends AbstractController
             ->getRepository(Business::class)
             ->findAll();
 
-        return $this->render('business/index.html.twig', [
+        return $this->render('business/frontOfficeIndex.html.twig', [
             'businesses' => $businesses,
         ]);
     }
+
+    /**
+     * @Route("/new-back-office", name="app_business_new_back_office", methods={"GET", "POST"})
+     */
+    public function new_back_office(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $business = new Business();
+        $form = $this->createForm(BusinessType::class, $business);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($business);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_business_index_back_office', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('business/backOfficeNew.html.twig', [
+            'business' => $business,
+            'f' => $form->createView(),
+        ]);
+    }
+
+
 
     /**
      * @Route("/new", name="app_business_new", methods={"GET", "POST"})
@@ -76,6 +100,26 @@ class BusinessController extends AbstractController
     }
 
     /**
+     * @Route("/{idbusiness}/edit-back-office", name="app_business_edit_back_office", methods={"GET", "POST"})
+     */
+    public function edit_back_office(Request $request, Business $business, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(BusinessType::class, $business);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_business_index_back_office', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('business/edit.html.twig', [
+            'business' => $business,
+            'f' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/{idbusiness}/edit", name="app_business_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Business $business, EntityManagerInterface $entityManager): Response
@@ -105,6 +149,6 @@ class BusinessController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_business_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_business_index_back_office', [], Response::HTTP_SEE_OTHER);
     }
 }
