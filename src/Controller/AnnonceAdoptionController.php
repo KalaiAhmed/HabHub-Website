@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnnonceAdoptionController extends AbstractController
 {
     /**
-     * @Route("/", name="app_annonce_adoption_index", methods={"GET"})
+     * @Route("/back-office", name="app_annonce_adoption_index_back_office", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -24,8 +24,8 @@ class AnnonceAdoptionController extends AbstractController
             ->getRepository(AnnonceAdoption::class)
             ->findAll();
 
-        return $this->render('annonce_adoption/index.html.twig', [
-            'annonce_adoptions' => $annonceAdoptions,
+        return $this->render('annonce_adoption/backOfficeShow.html.twig', [
+            'annonceAdoptions' => $annonceAdoptions,
         ]);
     }
 
@@ -42,7 +42,7 @@ class AnnonceAdoptionController extends AbstractController
             $entityManager->persist($annonceAdoption);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_annonce_adoption_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonce_adoption_index_back_office', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('annonce_adoption/new.html.twig', [
@@ -72,7 +72,7 @@ class AnnonceAdoptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_annonce_adoption_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonce_adoption_index_back_office', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('annonce_adoption/edit.html.twig', [
@@ -91,6 +91,6 @@ class AnnonceAdoptionController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_annonce_adoption_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_annonce_adoption_index_back_office', [], Response::HTTP_SEE_OTHER);
     }
 }

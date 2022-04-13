@@ -219,5 +219,9 @@ class Individu
         return $this;
     }
 
+    public function __toString() {
+        return (strval($this->idindividu).'-'.$this->prenom);
+    }
+
 
 }

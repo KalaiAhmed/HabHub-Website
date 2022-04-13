@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AnnonceAdoption
@@ -23,28 +24,37 @@ class AnnonceAdoption
 
     /**
      * @var \DateTime
-     *
+     *@Assert\NotBlank(message=" titre doit etre non vide")
      * @ORM\Column(name="datePublication", type="date", nullable=false)
      */
     private $datepublication;
 
     /**
      * @var string|null
+     * @Assert\Length(
+     *      min = 5,
+     *      minMessage=" au moin 5 caractéres"
      *
+     *     )
      * @ORM\Column(name="description", type="string", length=200, nullable=true, options={"default"="NULL"})
+     * 
      */
-    private $description = 'NULL';
+    private $description ;
 
     /**
      * @var string|null
+     *@Assert\Length(
+     *      min = 5,
+     *      minMessage=" au moin 5 caractéres"
      *
+     *     )
      * @ORM\Column(name="localisation", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
-    private $localisation = 'NULL';
+    private $localisation ;
 
     /**
      * @var \Individu
-     *
+     *@Assert\NotBlank(message=" champ obligatoire")
      * @ORM\ManyToOne(targetEntity="Individu")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idIndividu", referencedColumnName="idIndividu")
@@ -54,7 +64,7 @@ class AnnonceAdoption
 
     /**
      * @var \Chien
-     *
+     *@Assert\NotBlank(message=" champ obligatoire")
      * @ORM\ManyToOne(targetEntity="Chien")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idChien", referencedColumnName="idChien")

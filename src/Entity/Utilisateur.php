@@ -101,6 +101,5 @@ class Utilisateur
 
         return $this;
     }
-
-
+    
 }
