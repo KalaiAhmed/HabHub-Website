@@ -18,7 +18,12 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('marque')
             ->add('nbetoiles')
-            //->add('idcategorie')
+            //,
+            // array(
+               // 'attr' => array('min' => 1, 'max' => 5)
+            // )
+           // )
+            ->add('idCategorie')
         ;
     }
 

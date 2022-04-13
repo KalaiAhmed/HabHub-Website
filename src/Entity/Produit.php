@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produit
@@ -23,35 +24,35 @@ class Produit
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" nom doit etre non vide")
      * @ORM\Column(name="nom", type="string", length=20, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" nom doit etre non vide")
      * @ORM\Column(name="description", type="string", length=500, nullable=false)
      */
     private $description;
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank(message=" prix doit etre non vide")
      * @ORM\Column(name="prix", type="integer", nullable=false)
      */
     private $prix;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" marque doit etre non vide")
      * @ORM\Column(name="marque", type="string", length=50, nullable=false)
      */
     private $marque;
 
     /**
      * @var int|null
-     *
+     * @Assert\NotBlank(message=" nbetoiles doit etre non vide")
      * @ORM\Column(name="nbEtoiles", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $nbetoiles = NULL;
@@ -134,6 +135,7 @@ class Produit
     public function setNbetoiles(?int $nbetoiles): self
     {
         $this->nbetoiles = $nbetoiles;
+      
 
         return $this;
     }

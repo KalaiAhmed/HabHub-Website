@@ -52,7 +52,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{idcategorie}", name="app_categorie_show", methods={"GET"})
+     * @Route("/{idCategorie}", name="app_categorie_show", methods={"GET"})
      */
     public function show(Categorie $categorie): Response
     {
@@ -62,7 +62,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{idcategorie}/edit", name="app_categorie_edit", methods={"GET", "POST"})
+     * @Route("/{idCategorie}/edit", name="app_categorie_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
     {
@@ -82,7 +82,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{idcategorie}", name="app_categorie_delete", methods={"POST"})
+     * @Route("/{idCategorie}", name="app_categorie_delete", methods={"POST"})
      */
     public function delete(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
     {

@@ -10,11 +10,28 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
+
+
 /**
  * @Route("/produit")
  */
 class ProduitController extends AbstractController
-{
+
+{/**
+     * @Route("/back-office", name="app_back_office_produit", methods={"GET"})
+     */
+    public function indexbackoffice(EntityManagerInterface $entityManager): Response
+    {
+        $produits = $entityManager
+            ->getRepository(Produit::class)
+            ->findAll();
+
+        return $this->render('produit/index.html.twig', [
+            'produits' => $produits,
+        ]);
+    }
     /**
      * @Route("/", name="app_produit_index", methods={"GET"})
      */
@@ -28,6 +45,8 @@ class ProduitController extends AbstractController
             'produits' => $produits,
         ]);
     }
+
+    
 
     /**
      * @Route("/new", name="app_produit_new", methods={"GET", "POST"})

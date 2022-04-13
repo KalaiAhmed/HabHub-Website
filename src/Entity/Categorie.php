@@ -64,5 +64,11 @@ class Categorie
         return $this;
     }
 
+   
+
+    public function __toString() {
+        return (strval($this->idcategorie).'-'.$this->nom);
+    }
+
 
 }
