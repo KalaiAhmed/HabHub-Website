@@ -220,7 +220,7 @@ class Individu
     }
 
     public function __toString() {
-        return ($this->prenom.'-'.strval($this->idindividu));
+        return (strval($this->idindividu).'-'.$this->prenom);
     }
 
 }

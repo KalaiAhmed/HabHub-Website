@@ -55,7 +55,7 @@ class ChienController extends AbstractController
             $entityManager->persist($chien);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_chien_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_chien_index_back_office', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('chien/new.html.twig', [
@@ -86,12 +86,12 @@ class ChienController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_chien_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_chien_index_back_office', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('chien/edit.html.twig', [
             'chien' => $chien,
-            'form' => $form->createView(),
+            'f' => $form->createView(),
         ]);
     }
 
@@ -105,6 +105,6 @@ class ChienController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_chien_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_chien_index_back_office', [], Response::HTTP_SEE_OTHER);
     }
 }
