@@ -3,7 +3,12 @@
 {% block title %}users{% endblock %}
 
 {% block individu %}
-
+    <li class="active">
+        <a href="{{ path('app_individu_index') }}">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p>Users</p>
+        </a>
+    </li>
 {% endblock %}
 {% block body %}
 <nav
@@ -102,6 +107,7 @@
         <thead>
             <tr>
                 <th>Idindividu</th>
+                <th>Utilisateur</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Datenaissance</th>
@@ -118,6 +124,7 @@
         {% for individu in individus %}
             <tr>
                 <td>{{ individu.idindividu }}</td>
+                <td>{{ individu.idutilisateur.email }}</td>
                 <td>{{ individu.nom }}</td>
                 <td>{{ individu.prenom }}</td>
                 <td>{{ individu.datenaissance ? individu.datenaissance|date('Y-m-d') : '' }}</td>
@@ -128,7 +135,7 @@
                 <td>{{ individu.whatsapp }}</td>
                 <td>{{ individu.proprietairechien ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_individu_show', {'idindividu': individu.idindividu}) }}">show</a>
+                    {{ include('individu/_delete_form.html.twig') }}
                     <a href="{{ path('app_individu_edit', {'idindividu': individu.idindividu}) }}">edit</a>
                 </td>
             </tr>
