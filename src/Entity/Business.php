@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Business
@@ -30,49 +31,52 @@ class Business
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" titre doit etre non vide")
      * @ORM\Column(name="description", type="string", length=500, nullable=false)
      */
     private $description;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" horaire doit etre non vide")
      * @ORM\Column(name="horaire", type="string", length=10, nullable=false)
      */
     private $horaire;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" ville doit etre non vide")
      * @ORM\Column(name="ville", type="string", length=50, nullable=false)
      */
     private $ville;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" localisation doit etre non vide")
      * @ORM\Column(name="localisation", type="string", length=50, nullable=false)
      */
     private $localisation;
 
     /**
      * @var string|null
-     *
+     * @Assert\NotBlank(message=" type doit etre non vide")
+
      * @ORM\Column(name="type", type="string", length=20, nullable=true, options={"default"="NULL"})
      */
     private $type;
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank(message=" experience doit etre non vide")
+
      * @ORM\Column(name="experience", type="integer", nullable=false)
      */
     private $experience;
 
     /**
      * @var string|null
-     *
+     * @Assert\NotBlank(message=" image doit etre non vide")
+
      * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
      */
     private $image ;
