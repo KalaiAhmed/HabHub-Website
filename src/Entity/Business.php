@@ -74,10 +74,10 @@ class Business
     private $experience;
 
     /**
-     * @var string|null
-     * @Assert\NotBlank(message=" image doit etre non vide")
-
-     * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
+     * @var string
+     * @Assert\NotBlank(message=" veuillez insérer une image")
+     * @Assert\File(mimeTypes={"image/jpeg"})
+     * @ORM\Column(name="image", type="string", length=30, nullable=false)
      */
     private $image ;
 
@@ -180,12 +180,12 @@ class Business
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage( $image)
     {
         $this->image = $image;
 

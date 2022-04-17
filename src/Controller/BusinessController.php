@@ -38,7 +38,7 @@ class BusinessController extends AbstractController
             ->getRepository(Business::class)
             ->findAll();
 
-        return $this->render('business/frontOfficeIndex.html.twig', [
+        return $this->render('business/testShow.html.twig', [
             'businesses' => $businesses,
         ]);
     }
@@ -53,6 +53,9 @@ class BusinessController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file= $business->getImage();
+            $fileName= md5(uniqid()).'.'.$file->guessExtension();
+            $business->setImage($fileName);
             $entityManager->persist($business);
             $entityManager->flush();
 

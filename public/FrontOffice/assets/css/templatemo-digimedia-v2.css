@@ -50,6 +50,19 @@ figure, header, nav, section, article, aside, footer, figcaption {
   clear: both;
 }
 
+/*
+---------------------------------------------
+Mariem
+---------------------------------------------
+*/
+.dog-card-1{
+  width: 152px;
+  height: 195.89px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10.7042px rgba(0, 0, 0, 0.15);
+  border-radius: 10.7042px;
+}
+
 /* ---- .grid-item ---- */
 
 .grid-sizer,
@@ -1636,6 +1649,8 @@ Blog
 }
 
 .blog-post .thumb img {
+
+  padding: 5% 5% 5% 5% ;
   border-top-right-radius: 23px;
   border-top-left-radius: 23px;
 }
