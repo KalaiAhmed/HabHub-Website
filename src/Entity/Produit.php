@@ -31,7 +31,11 @@ class Produit
 
     /**
      * @var string
-     * @Assert\NotBlank(message=" nom doit etre non vide")
+     *@Assert\Length(
+     *      min = 3,
+     *      minMessage=" au moin 3 caractéres"
+     *
+     *     )
      * @ORM\Column(name="description", type="string", length=500, nullable=false)
      */
     private $description;
