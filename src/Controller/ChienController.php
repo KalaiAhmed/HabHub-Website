@@ -29,15 +29,29 @@ class ChienController extends AbstractController
         ]);
     }
     /**
-     * @Route("/", name="app_chien_index", methods={"GET"})
+     * @Route("/my-dogs", name="app_chien_index_my_dogs", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index_my_dogs(EntityManagerInterface $entityManager): Response
     {
         $chiens = $entityManager
             ->getRepository(Chien::class)
-            ->findAll();
+            ->findBy(array('idindividu'=>'2'));
 
         return $this->render('chien/index.html.twig', [
+            'chiens' => $chiens,
+        ]);
+    }
+
+    /**
+     * @Route("/dogs-next-door", name="app_chien_index_dogs-next-door", methods={"GET"})
+     */
+    public function index_dogs_next_door(): Response
+    {
+        $chiens = $this->getDoctrine()
+            ->getRepository(Chien::class)
+            ->findDogsNextDoor();
+
+        return $this->render('chien/dogsNextDoor.html.twig', [
             'chiens' => $chiens,
         ]);
     }
@@ -52,6 +66,22 @@ class ChienController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //recuperation des images transmises
+            $image = $form->get('image')->getData();
+
+
+
+            $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+            //On copie le fichier dans le dossier upload
+            $image->move(
+            $this->getParameter('upload_directory'),
+            $fichier
+            );
+            // on stocke l'image dans la bdd (son nom)
+
+            $chien->setImage($fichier);
+
+
             $entityManager->persist($chien);
             $entityManager->flush();
 

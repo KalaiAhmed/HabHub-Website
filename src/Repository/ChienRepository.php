@@ -45,6 +45,14 @@ class ChienRepository extends ServiceEntityRepository
         }
     }
 
+    public function findDogsNextDoor(){
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+                ->createQuery("SELECT c FROM APP\Entity\Chien c JOIN c.idindividu i join i.idutilisateur u where i.adresse= :userlocation and c.idindividu!= :userid")
+                ->setParameters(array('userlocation'=>'Borj Louzir','userid'=>'2'));
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Chien[] Returns an array of Chien objects
     //  */

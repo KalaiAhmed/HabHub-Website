@@ -11,23 +11,38 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/annonce/proprietaire/chien")
+ * @Route("/annonce-proprietaire-chien")
  */
 class AnnonceProprietaireChienController extends AbstractController
 {
     /**
-     * @Route("/", name="app_annonce_proprietaire_chien_index", methods={"GET"})
+     * @Route("/lost", name="app_annonce_proprietaire_chien_index_lost", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function indexLost(EntityManagerInterface $entityManager): Response
     {
         $annonceProprietaireChiens = $entityManager
             ->getRepository(AnnonceProprietaireChien::class)
-            ->findAll();
+            ->findBy(array('type' => 'P'));
 
         return $this->render('annonce_proprietaire_chien/frontOfficeIndex.html.twig', [
             'annonce_proprietaire_chiens' => $annonceProprietaireChiens,
         ]);
     }
+
+    /**
+     * @Route("/mating", name="app_annonce_proprietaire_chien_index_mating", methods={"GET"})
+     */
+    public function indexMating(EntityManagerInterface $entityManager): Response
+    {
+        $annonceProprietaireChiens = $entityManager
+            ->getRepository(AnnonceProprietaireChien::class)
+            ->findBy(array('type' => 'A'));
+
+        return $this->render('annonce_proprietaire_chien/frontOfficeIndex.html.twig', [
+            'annonce_proprietaire_chiens' => $annonceProprietaireChiens,
+        ]);
+    }
+
 
     /**
      * @Route("/new", name="app_annonce_proprietaire_chien_new", methods={"GET", "POST"})

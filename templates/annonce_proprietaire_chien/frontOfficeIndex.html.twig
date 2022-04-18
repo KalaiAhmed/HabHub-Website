@@ -15,11 +15,11 @@
                         <div class="blog-post">
                             <div class="thumb">
 
-                                <a href="#"><img src="{{asset('FrontOffice/assets/images/chien/'~annonce_proprietaire_chien.idchien.image~'.png') }}" alt=""></a>
+                                <a href="#"><img src="{{asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}" alt=""></a>
                             </div>
                             <div class="down-content">
                                 <span class="category">{{ annonce_proprietaire_chien.idchien.sexe }}</span>
-                                
+
                                 <a href="#"><h4>{{ annonce_proprietaire_chien.idchien.nom }}</h4></a>
                                 <p>
                                     {{ annonce_proprietaire_chien.idchien.age }}</p>
