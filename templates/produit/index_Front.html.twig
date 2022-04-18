@@ -1,0 +1,43 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %} 
+    
+    <h1 >Products List</h1>
+
+       <div id="blog" class="blog">
+        <div class="container">
+            <div class="row">
+        {% for produit in produits %}
+          <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+
+                    <div class="blog-post">
+                        <div class="thumb">
+                            <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/kalbi.jpg') }}" alt=""></a>
+                        </div>
+                          <div class="down-content">
+                            
+                              <span class="nom">{{produit.nom}}</span>
+                                <span class="prix" style="text-align: right">{{produit.prix}} DT</span>
+                                <p>{{ produit.description }}</p>
+                                <span class="category">{{produit.idCategorie.nom}}</span>
+                                <span class="marque">{{produit.marque }}</span>
+                                 <div class="border-first-button">Add To Cart</a></div>
+                                
+                            </div>
+                    </div>
+                </div>
+
+
+        {% endfor %}
+      
+
+    </div>
+            </div>
+        </div>
+
+
+{% endblock %}

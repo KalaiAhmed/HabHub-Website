@@ -32,6 +32,22 @@ class ProduitController extends AbstractController
             'produits' => $produits,
         ]);
     }
+
+/**
+     * @Route("/front-office", name="app_front_office_home", methods={"GET"})
+     */
+    public function indexfrontoffice(EntityManagerInterface $entityManager): Response
+    {
+        $produits = $entityManager
+            ->getRepository(Produit::class)
+            ->findAll();
+
+        return $this->render('produit/index_Front.html.twig', [
+            'produits' => $produits,
+        ]);
+    }
+
+
     /**
      * @Route("/", name="app_produit_index", methods={"GET"})
      */
