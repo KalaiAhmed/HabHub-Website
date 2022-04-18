@@ -63,7 +63,7 @@ class Revue
     private $idindividu;
 
     /**
-     * @var \Business
+     * @var \App\Entity\Business
      *
      * @ORM\ManyToOne(targetEntity="Business")
      * @ORM\JoinColumns({
@@ -71,6 +71,22 @@ class Revue
      * })
      */
     private $idbusiness;
+
+    /**
+     * @param int $idrevue
+     * @param int $nbetoiles
+     * @param string $commentaire
+     * @param \DateTime|string|null $datepublication
+     * @param \Individu $idindividu
+     * @param \Business $idbusiness
+     */
+    public function __construct(int $idrevue, int $nbetoiles, string $commentaire,  \App\Entity\Business $idbusiness)
+    {
+        $this->idrevue = $idrevue;
+        $this->nbetoiles = $nbetoiles;
+        $this->commentaire = $commentaire;
+        $this->idbusiness = $idbusiness;
+    }
 
     public function getIdrevue(): ?int
     {

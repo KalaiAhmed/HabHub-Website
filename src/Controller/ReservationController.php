@@ -15,6 +15,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ReservationController extends AbstractController
 {
+
+    /**
+     * @Route("/back-office", name="app_reservation_index_back_office", methods={"GET"})
+     */
+    public function index_back_office(EntityManagerInterface $entityManager): Response
+    {
+        $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            ->findAll();
+
+        return $this->render('reservation/index_back_office.html.twig', [
+            'reservations' => $reservations,
+        ]);
+    }
     /**
      * @Route("/", name="app_reservation_index", methods={"GET"})
      */
@@ -29,6 +43,27 @@ class ReservationController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/new/back-office", name="app_reservation_new_back_office", methods={"GET", "POST"})
+     */
+    public function new_back_office(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $reservation = new Reservation();
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($reservation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_reservation_index_back_office', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('reservation/new_back_office.html.twig', [
+            'reservation' => $reservation,
+            'form' => $form->createView(),
+        ]);
+    }
     /**
      * @Route("/new", name="app_reservation_new", methods={"GET", "POST"})
      */
@@ -50,7 +85,15 @@ class ReservationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    /**
+     * @Route("/{idreservation}/back-office", name="app_reservation_show_back_office", methods={"GET"})
+     */
+    public function show_back_office(Reservation $reservation): Response
+    {
+        return $this->render('reservation/show_back_office.html.twig', [
+            'reservation' => $reservation,
+        ]);
+    }
     /**
      * @Route("/{idreservation}", name="app_reservation_show", methods={"GET"})
      */
@@ -61,6 +104,25 @@ class ReservationController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{idreservation}/edit/back-office", name="app_reservation_edit_back_office", methods={"GET", "POST"})
+     */
+    public function edit_back_office(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_reservation_index_back_office', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('reservation/edit_back_office.html.twig', [
+            'reservation' => $reservation,
+            'form' => $form->createView(),
+        ]);
+    }
     /**
      * @Route("/{idreservation}/edit", name="app_reservation_edit", methods={"GET", "POST"})
      */
@@ -79,6 +141,18 @@ class ReservationController extends AbstractController
             'reservation' => $reservation,
             'form' => $form->createView(),
         ]);
+    }
+    /**
+     * @Route("/{idreservation}/back-office", name="app_reservation_delete_back_office", methods={"POST"})
+     */
+    public function delete_back_office(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$reservation->getIdreservation(), $request->request->get('_token'))) {
+            $entityManager->remove($reservation);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_reservation_index_back_office', [], Response::HTTP_SEE_OTHER);
     }
 
     /**

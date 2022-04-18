@@ -10,8 +10,9 @@
         <div class="container">
             <div class="row">
                 {% for business in businesses %}
-
                 <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+                    <a href="{{ path('app_business_show', {'idbusiness': business.idbusiness}) }}">Show</a>
+
                     <div class="blog-post">
                         <div class="thumb">
                             <a href="#"><img src="{{ asset('FrontOffice/assets/images/business/'~business.image~'.png') }}" alt=""></a>

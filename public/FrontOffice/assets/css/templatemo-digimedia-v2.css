@@ -56,13 +56,35 @@ Mariem
 ---------------------------------------------
 */
 .dog-card-1{
+  margin-right: 2%;
+  margin-left: 2%;
+  margin-top: 2%;
   width: 152px;
   height: 195.89px;
   background: #FFFFFF;
   box-shadow: 0px 0px 10.7042px rgba(0, 0, 0, 0.15);
   border-radius: 10.7042px;
+  display: inline;
+  overflow-wrap: anywhere;
+
+}
+.dog-card-1-img{
+  padding-top: 5%;
+
 }
 
+.dog-card-1-book{
+float: right;
+font-size: medium;
+  color: orangered;
+
+}
+
+/*
+---------------------------------------------
+End Mariem
+---------------------------------------------
+*/
 /* ---- .grid-item ---- */
 
 .grid-sizer,

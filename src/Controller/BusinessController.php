@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Business;
+use App\Entity\Revue;
 use App\Form\BusinessType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +26,7 @@ class BusinessController extends AbstractController
             ->getRepository(Business::class)
             ->findAll();
 
-        return $this->render('business/index.html.twig', [
+        return $this->render('business/index_back_office.html.twig', [
             'businesses' => $businesses,
         ]);
     }
@@ -38,7 +39,59 @@ class BusinessController extends AbstractController
             ->getRepository(Business::class)
             ->findAll();
 
-        return $this->render('business/testShow.html.twig', [
+        return $this->render('business/frontOfficeIndex.html.twig', [
+            'businesses' => $businesses,
+        ]);
+    }
+    /**
+     * @Route("/vets", name="app_business_index_vets", methods={"GET"})
+     */
+
+    public function show_all_vets(EntityManagerInterface $entityManager): Response
+    {
+        $businesses = $entityManager
+            ->getRepository(Business::class)
+            ->findBy(array('type'=>'vet'));
+        return $this->render('business/frontOfficeIndex.html.twig', [
+            'businesses' => $businesses,
+        ]);
+    }
+    /**
+     * @Route("/grooming", name="app_business_index_grooming", methods={"GET"})
+     */
+
+    public function show_all_grooming(EntityManagerInterface $entityManager): Response
+    {
+        $businesses = $entityManager
+            ->getRepository(Business::class)
+            ->findBy(array('type'=>'grooming'));
+        return $this->render('business/frontOfficeIndex.html.twig', [
+            'businesses' => $businesses,
+        ]);
+    }
+    /**
+     * @Route("/dogsitting", name="app_business_index_dogsitting", methods={"GET"})
+     */
+
+    public function show_all_dogsitting(EntityManagerInterface $entityManager): Response
+    {
+        $businesses = $entityManager
+            ->getRepository(Business::class)
+            ->findBy(array('type'=>'dogsitting'));
+        return $this->render('business/frontOfficeIndex.html.twig', [
+            'businesses' => $businesses,
+        ]);
+    }
+    /**
+     * @Route("/parks", name="app_business_index_parks", methods={"GET"})
+     */
+
+    public function show_all_parks(EntityManagerInterface $entityManager): Response
+    {
+        $businesses = $entityManager
+            ->getRepository(Business::class)
+            ->findBy(array('type'=>'parks'));
+        return $this->render('business/frontOfficeIndex.html.twig', [
             'businesses' => $businesses,
         ]);
     }
@@ -97,11 +150,27 @@ class BusinessController extends AbstractController
      */
     public function show(Business $business): Response
     {
+        //$revue= new Revue(130, 5, "hhhhhh", $business);
+        //$revues = array($revue);
+
+        $revues=$this->forward('App\Controller\RevueController::index', [
+        'business'  => $business,
+
+    ]);
         return $this->render('business/show.html.twig', [
+            'business' => $business,
+
+        ]);
+    }
+    /**
+     * @Route("/{idbusiness}/back-office", name="app_business_show_back_office", methods={"GET"})
+     */
+    public function show_back_office(Business $business): Response
+    {
+        return $this->render('business/show_back_office.html.twig', [
             'business' => $business,
         ]);
     }
-
     /**
      * @Route("/{idbusiness}/edit-back-office", name="app_business_edit_back_office", methods={"GET", "POST"})
      */

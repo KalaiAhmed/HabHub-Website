@@ -6,36 +6,33 @@
 
 {% block body %}
 
-    <div id="blog" class="blog">
         <div class="container">
             <div class="row">
-                {% for business in businesses %}
+                <h1>Hello</h1>
+                <h1>Hello</h1>
 
-                    <div class="col-lg-2 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+                <h1>Hello</h1>
 
-                        <div class="blog-post">
-                            <div class="thumb">
-                                <a href="#"><img src="{{ asset('FrontOffice/assets/images/business/'~business.image~'.png') }}" alt=""></a>
-                            </div>
-                            <div class="down-content">
-                                <span class="category">{{ business.ville }}</span>
-                                <span class="date">03 August 2021</span>
-                                <a href="#"><h4>{{ business.titre }}</h4></a>
-                                <p>{{ business.horaire }}
-                                    {{ business.ville }}</p>
-                                <div class="border-first-button"><a href="#">Book Now</a></div>
-                            </div>
-                        </div>
-                  
+                <h1>Hello</h1>
+
+                <div class="dog-card-1">
+                    <img class="dog-card-1-img" src="{{ asset('assets/img/harness.jpg') }}">
+                    <p >djazeaehazjehazjeh</p>
+                    <div class="row">
+                        <h6>Price</h6>                         <h6>50 $</h6>
+
                     </div>
 
+                </div>
+                <div class="dog-card-1">
+                    <img class="dog-card-1-img" src="{{ asset('assets/img/harness.jpg') }}">
+                </div>
+                <div class="dog-card-1">
+                    <img class="dog-card-1-img" src="{{ asset('assets/img/harness.jpg') }}">
+                </div>
 
 
 
-                {% endfor %}
-
-            </div>
-        </div>
     </div>
 
 

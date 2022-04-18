@@ -75,8 +75,7 @@ class Business
 
     /**
      * @var string
-     * @Assert\NotBlank(message=" veuillez insérer une image")
-     * @Assert\File(mimeTypes={"image/jpeg"})
+      * @Assert\File(mimeTypes={"image/jpeg"})
      * @ORM\Column(name="image", type="string", length=30, nullable=false)
      */
     private $image ;

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
 {% block title %}Business{% endblock %}
 
@@ -11,9 +11,7 @@
     </li>
 {% endblock %}
 {% block body %}
-
-<div class="container">
-    <div class="row">
+    <h1>Business</h1>
 
     <table class="table">
         <tbody>
@@ -56,8 +54,5 @@
 
     <a href="{{ path('app_business_edit', {'idbusiness': business.idbusiness}) }}">edit</a>
 
-        {{ render(path('app_revue_index', {'idbusiness': business.idbusiness} )) }}
-
-
-
+    {{ include('business/_delete_form.html.twig') }}
 {% endblock %}
