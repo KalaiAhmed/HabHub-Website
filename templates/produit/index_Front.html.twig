@@ -2,13 +2,67 @@
 {% extends 'base.html.twig' %}
 
 
+
 {% block title %}Produit index{% endblock %}
+
+   {% block navBar %}
+        <!-- ***** Header Area Start ***** -->
+        <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                            <a href="{{ path('app_front_office_home') }}" class="logo">
+                                <img src="{{ asset('FrontOffice/assets/images/logo-v2.png') }}" alt="">
+                            </a>
+                            <!-- ***** Logo End ***** -->
+                            <!-- ***** Menu Start ***** -->
+                            <ul class="nav">
+                                <li class="scroll-to-section"><a href="#top" >Home</a></li>
+                                <li class="scroll-to-section"><a href="{{ path('app_business_index') }}">Services</a></li>
+                                <li class="scroll-to-section"><a href="#services">Adoption</a></li>
+                                <li class="scroll-to-section"><a href="#portfolio">Hub</a></li>
+                                <li class="scroll-to-section"><a href="#blog" class="active">Store</a></li>
+                                <li class="scroll-to-section"><a>Sign in</a></li>
+                                <li class="scroll-to-section"><div class="border-first-button"><a href="#contact">Sign up</a></div></li>
+                            </ul>
+                            <a class='menu-trigger'>
+                                <span>Menu</span>
+                            </a>
+                            <!-- ***** Menu End ***** -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ***** Header Area End ***** -->
+
+    {% endblock %}
 
 {% block body %} 
     
     <h1 >Products List</h1>
+<div>ff</div>
+    <div></div>
+    <div></div><div></div>.
+    <div></div><div></div>
+    <div></div>
+
+
+
+
+
+
+    <div>
+        {{ render (controller (
+            'App\\Controller\\SearchController::searchBar'
+        )) }}
+
+    </div>
 
        <div id="blog" class="blog">
+
         <div class="container">
             <div class="row">
         {% for produit in produits %}
@@ -16,7 +70,8 @@
 
                     <div class="blog-post">
                         <div class="thumb">
-                            <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/kalbi.jpg') }}" alt=""></a>
+                        
+                           <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/'~produit.image~'.jpg') }}" alt=""></a>
                         </div>
                           <div class="down-content">
                             
@@ -25,7 +80,7 @@
                                 <p>{{ produit.description }}</p>
                                 <span class="category">{{produit.idCategorie.nom}}</span>
                                 <span class="marque">{{produit.marque }}</span>
-                                 <div class="border-first-button">Add To Cart</a></div>
+                                 <div class="border-first-button">Add To Cart</div>
                                 
                             </div>
                     </div>
