@@ -45,6 +45,14 @@ class LikesRepository extends ServiceEntityRepository
         }
     }
 
+    public function getNbLikes(int $idchien){
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+            ->createQuery("select count(l) from App\Entity\likes l join l.idchien c where c.idchien=:id")
+            ->setParameter('id', $idchien);
+        return $query->getSingleScalarResult();
+
+    }
     // /**
     //  * @return Likes[] Returns an array of Likes objects
     //  */

@@ -53,6 +53,13 @@ class ChienRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function myDogs(){
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+            ->createQuery("SELECT c FROM APP\Entity\Chien c JOIN c.idindividu i join i.idutilisateur u where c.idindividu=:userid Order by (SELECT count(l) from APP\Entity\Likes l where l.idchien=c.idchien)")
+            ->setParameters(array('userid'=>'2'));
+        return $query->getResult();
+    }
     // /**
     //  * @return Chien[] Returns an array of Chien objects
     //  */

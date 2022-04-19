@@ -29,6 +29,21 @@ class LikesController extends AbstractController
         ]);
     }
 
+
+        /**
+         * @Route("/{idchien}", name="app_nblikes", methods={"GET"})
+         */
+
+    public function getNbLikesByDog(EntityManagerInterface $entityManager,int $idchien)
+    {
+        $nblikes = $entityManager
+            ->getRepository(Likes::class)
+            ->getNbLikes($idchien);
+
+        return $this->render('likes/nblikes.html.twig', [
+            'nblikes' => $nblikes,
+        ]);
+    }
     /**
      * @Route("/new", name="app_likes_new", methods={"GET", "POST"})
      */

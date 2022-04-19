@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Likes
  *
  * @ORM\Table(name="likes", indexes={@ORM\Index(name="idIndividu", columns={"idIndividu"}), @ORM\Index(name="idChien", columns={"idChien"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\LikesRepository")
  */
 class Likes
 {

@@ -35,9 +35,9 @@ class ChienController extends AbstractController
     {
         $chiens = $entityManager
             ->getRepository(Chien::class)
-            ->findBy(array('idindividu'=>'2'));
+            ->myDogs(array('idindividu'=>'2'));
 
-        return $this->render('chien/index.html.twig', [
+        return $this->render('chien/myDogs.html.twig', [
             'chiens' => $chiens,
         ]);
     }
