@@ -49,7 +49,7 @@ class SearchController extends AbstractController
      */
     public function handleSearch(Request $request, ProduitRepository $repo)
     {
-        $query = $request->request->get('form')['query'];
+        $query = $request->request->get('form')['Search'];
         if($query) {
             $produits = $repo->findProduitByName($query);
         }

@@ -81,12 +81,15 @@ class ProduitRepository extends ServiceEntityRepository
      public function findProduitByName(string $query)
      {
          $qb = $this->createQueryBuilder('p');
-         $qb
-             ->where(
+         
+        $qb->innerJoin('App\Entity\Categorie', 'c', 'WITH', 'c.idcategorie = p.idcategorie')
+     
+         ->where(
                  $qb->expr()->andX(
                      $qb->expr()->orX(
+                      
                          $qb->expr()->like('p.nom', ':query'),
-                         $qb->expr()->like('p.idcategorie.nom', ':query'),
+                         $qb->expr()->like('c.nom', ':query'),
                      )
 
                  )
