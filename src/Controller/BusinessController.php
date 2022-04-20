@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Business;
 use App\Entity\Revue;
 use App\Form\BusinessType;
+use App\Form\RevueType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +27,7 @@ class BusinessController extends AbstractController
             ->getRepository(Business::class)
             ->findAll();
 
-        return $this->render('business/index_back_office.html.twig', [
+        return $this->render('business/index.html.twig', [
             'businesses' => $businesses,
         ]);
     }
@@ -106,9 +107,15 @@ class BusinessController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file= $business->getImage();
-            $fileName= md5(uniqid()).'.'.$file->guessExtension();
-            $business->setImage($fileName);
+            $image = $form->get('image')->getData();
+            $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+            $image->move(
+                $this->getParameter('upload_directory'),
+                $fichier
+            );
+            $business->setImage($fichier);
+
+
             $entityManager->persist($business);
             $entityManager->flush();
 
@@ -148,17 +155,16 @@ class BusinessController extends AbstractController
     /**
      * @Route("/{idbusiness}", name="app_business_show", methods={"GET"})
      */
-    public function show(Business $business): Response
+    public function show(Business $business,Request $request, EntityManagerInterface $entityManager): Response
     {
-        //$revue= new Revue(130, 5, "hhhhhh", $business);
-        //$revues = array($revue);
-
         $revues=$this->forward('App\Controller\RevueController::index', [
         'business'  => $business,
 
     ]);
+
         return $this->render('business/show.html.twig', [
             'business' => $business,
+
 
         ]);
     }

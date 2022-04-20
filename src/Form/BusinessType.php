@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class BusinessType extends AbstractType
 {
@@ -22,7 +24,7 @@ class BusinessType extends AbstractType
             ->add('type')
             ->add('experience')
             ->add('image',FileType::class, [
-                'label' => 'Image (file)',
+                'label' => false,
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -33,18 +35,11 @@ class BusinessType extends AbstractType
 
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image document',
-                    ])
-                ],
+
             ])
             ->add('idutilisateur')
+            ->add('add',SubmitType::class)
+
         ;
     }
 

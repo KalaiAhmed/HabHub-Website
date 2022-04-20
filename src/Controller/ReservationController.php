@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +37,7 @@ class ReservationController extends AbstractController
     {
         $reservations = $entityManager
             ->getRepository(Reservation::class)
-            ->findAll();
+            ->findBy(array('idindividu'=>'2'));
 
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservations,

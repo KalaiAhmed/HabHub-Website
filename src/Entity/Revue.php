@@ -80,14 +80,17 @@ class Revue
      * @param \Individu $idindividu
      * @param \Business $idbusiness
      */
-    public function __construct(int $idrevue, int $nbetoiles, string $commentaire,  \App\Entity\Business $idbusiness)
+    /*    public function __construct(int $idrevue, int $nbetoiles, string $commentaire,  \App\Entity\Business $idbusiness)
+
+
+    public function __construct(int $idrevue, int $nbetoiles, string $commentaire,  Business $idbusiness)
     {
         $this->idrevue = $idrevue;
         $this->nbetoiles = $nbetoiles;
         $this->commentaire = $commentaire;
         $this->idbusiness = $idbusiness;
     }
-
+*/
     public function getIdrevue(): ?int
     {
         return $this->idrevue;

@@ -73,8 +73,11 @@
 
 
                                     {{ form_errors(f.image,{'attr':{'class':'text-danger'}}) }}
+                                    <br/>
+                                    <div class="col-sm-10" style="display: flex;align-items: center;justify-content: center">
 
-
+                                        {{ form_widget(f.add,{'attr':{'class':'btn btn-primary'}}) }}
+                                    </div>
 
 
 
@@ -85,7 +88,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="update ml-auto mr-auto">
-    <button class="btn">{{ button_label|default('Save') }}</button>
                                     </div>
                                 </div>
 

@@ -13,8 +13,8 @@ class ReservationType extends AbstractType
     {
         $builder
             ->add('idbusinessservices')
-            ->add('dateheuredebut')
-            ->add('dateheurefin')
+            ->add('datereservation')
+            ->add('heurereservation')
             ->add('idindividu')
         ;
     }

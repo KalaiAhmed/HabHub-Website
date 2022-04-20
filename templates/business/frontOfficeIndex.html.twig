@@ -5,17 +5,32 @@
 
 
 {% block body %}
+    <div class="ahbet">
+        <div class="container">
+        <div class="search-container">
 
+            {{ render (controller (
+                'App\\Controller\\SearchController::searchBarBusiness'
+            )) }}
+        </div>
+        </div>
+
+    <div>
+
+
+    </div>
     <div id="blog" class="blog">
         <div class="container">
+
+
             <div class="row">
+
                 {% for business in businesses %}
                 <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
-                    <a href="{{ path('app_business_show', {'idbusiness': business.idbusiness}) }}">Show</a>
 
                     <div class="blog-post">
                         <div class="thumb">
-                            <a href="#"><img src="{{ asset('FrontOffice/assets/images/business/'~business.image~'.png') }}" alt=""></a>
+                            <a href="{{ path('app_business_show', {'idbusiness': business.idbusiness}) }}"><img src="{{ asset('FrontOffice/assets/images/business/'~business.image) }}" alt=""></a>
                         </div>
                         <div class="down-content">
                             <span class="category">{{ business.ville }}</span>
@@ -39,4 +54,6 @@
 
 
 <a href="{{ path('app_business_new_back_office') }}">Create new</a>
+    </div>
+
 {% endblock %}

@@ -16,14 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class BusinessServicesController extends AbstractController
 {
     /**
-     * @Route("/", name="app_business_services_index", methods={"GET"})
+     * @Route("/{idbusiness}", name="app_business_services_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,int $idbusiness)
     {
         $businessServices = $entityManager
             ->getRepository(BusinessServices::class)
-            ->findAll();
-
+            ->findBy(array('idbusiness'=>$idbusiness));
         return $this->render('business_services/index.html.twig', [
             'business_services' => $businessServices,
         ]);

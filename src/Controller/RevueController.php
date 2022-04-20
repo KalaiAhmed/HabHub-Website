@@ -33,7 +33,7 @@ class RevueController extends AbstractController
     /**
      * @Route("/{idbusiness}", name="app_revue_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager,int $idbusiness)
+    public function index(EntityManagerInterface $entityManager,String $idbusiness)
     {
         $revues = $entityManager
             ->getRepository(Revue::class)
@@ -86,6 +86,7 @@ class RevueController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("/{idrevue}/back_office", name="app_revue_show", methods={"GET"})
      */

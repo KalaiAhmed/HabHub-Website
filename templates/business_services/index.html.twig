@@ -1,4 +1,3 @@
-{% extends 'base.html.twig' %}
 
 {% block title %}BusinessServices index{% endblock %}
 
@@ -8,7 +7,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Idbusinessservices</th>
                 <th>Nomservice</th>
                 <th>Prix</th>
                 <th>actions</th>
@@ -17,7 +15,6 @@
         <tbody>
         {% for business_service in business_services %}
             <tr>
-                <td>{{ business_service.idbusinessservices }}</td>
                 <td>{{ business_service.nomservice }}</td>
                 <td>{{ business_service.prix }}</td>
                 <td>

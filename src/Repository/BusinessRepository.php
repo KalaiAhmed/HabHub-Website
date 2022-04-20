@@ -43,6 +43,47 @@ class BusinessRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }/*
+    public function findBusinessByName(string $query)
+    {
+        $qb = $this->createQueryBuilder('b');
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('b.titre', ':query'),
+                       // $qb->expr()->like('b.idbusiness.idbusinessservices.nomservice', ':query'),
+                     )
+
+                )
+            )
+            ->setParameter('query', '%' . $query . '%')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }*/
+    public function findBusinessByName(string $query)
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        $qb->innerJoin('App\Entity\BusinessServices', 'bs', 'WITH', 'b.idbusiness = bs.idbusiness')
+
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+
+                        $qb->expr()->like('b.titre', ':query'),
+                        $qb->expr()->like('bs.nomservice', ':query'),
+                    )
+
+                )
+            )
+            ->setParameter('query', '%' . $query . '%')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

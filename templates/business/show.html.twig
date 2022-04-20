@@ -11,8 +11,9 @@
     </li>
 {% endblock %}
 {% block body %}
-
+<div class="ahbet">
 <div class="container">
+    <h1>Business Details</h1>
     <div class="row">
 
     <table class="table">
@@ -55,9 +56,19 @@
     <a href="{{ path('app_business_index_back_office') }}">back to list</a>
 
     <a href="{{ path('app_business_edit', {'idbusiness': business.idbusiness}) }}">edit</a>
-
+        {{ render(path('app_business_services_index', {'idbusiness': business.idbusiness} )) }}
         {{ render(path('app_revue_index', {'idbusiness': business.idbusiness} )) }}
+        {{ render(path('app_revue_new')) }}
 
 
+
+
+
+
+
+
+    </div>
+</div>
+</div>
 
 {% endblock %}

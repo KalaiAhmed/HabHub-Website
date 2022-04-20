@@ -55,6 +55,18 @@ figure, header, nav, section, article, aside, footer, figcaption {
 Mariem
 ---------------------------------------------
 */
+.ahbet{
+  padding-top: 10%;
+}
+.search-container{
+  width: 483px;
+  height: 37px;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  background: #F5F5F5;
+  border-radius: 15px;
+}
 .dog-card-1{
   margin-right: 2%;
   margin-left: 2%;
@@ -66,6 +78,10 @@ Mariem
   border-radius: 10.7042px;
   display: inline;
   overflow-wrap: anywhere;
+
+}
+.dog-card-1 a{
+  z-index: 1;
 
 }
 .dog-card-1-img{
