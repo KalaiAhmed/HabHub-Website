@@ -94,6 +94,16 @@ class Individu
      */
     private $idutilisateur;
 
+    /**
+     * @param int $idindividu
+     */
+
+    public function __construct(int $idindividu)
+    {
+        $this->idindividu = $idindividu;
+    }
+
+
     public function getIdindividu(): ?int
     {
         return $this->idindividu;

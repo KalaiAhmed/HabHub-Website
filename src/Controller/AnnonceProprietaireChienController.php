@@ -24,7 +24,7 @@ class AnnonceProprietaireChienController extends AbstractController
             ->getRepository(AnnonceProprietaireChien::class)
             ->findBy(array('type' => 'P'));
 
-        return $this->render('annonce_proprietaire_chien/frontOfficeIndex.html.twig', [
+        return $this->render('annonce_proprietaire_chien/frontOfficeIndexLost.html.twig', [
             'annonce_proprietaire_chiens' => $annonceProprietaireChiens,
         ]);
     }
@@ -108,4 +108,8 @@ class AnnonceProprietaireChienController extends AbstractController
 
         return $this->redirectToRoute('app_annonce_proprietaire_chien_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }
+
+

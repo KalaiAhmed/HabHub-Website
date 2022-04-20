@@ -1,15 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mating Dogs{% endblock %}
+{% block title %}Lost Dogs{% endblock %}
 
 
 
 {% block body %}
 
-    <div style="padding-top:150px;">
-        {{ render (controller ('App\\Controller\\SearchController::searchBarMating')) }}
-    </div>
-
+<div style="padding-top:150px;">
+    {{ render (controller('App\\Controller\\SearchController::searchBarLost')) }}
+</div>
     <div id="blog" class="blog">
         <div class="container">
             <div class="row">

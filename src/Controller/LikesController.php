@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Chien;
+use App\Entity\Individu;
 use App\Entity\Likes;
 use App\Form\LikesType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,6 +45,29 @@ class LikesController extends AbstractController
         return $this->render('likes/nblikes.html.twig', [
             'nblikes' => $nblikes,
         ]);
+    }
+
+    /**
+     * @Route("/addlike/{idchien}", name="app_likes_addlike", methods={"GET"})
+     */
+
+    public function addLike(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+        $loggedinUser = $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => '2'));
+
+        $chien = $entityManager
+            ->getRepository(Chien::class)
+            ->findOneBy(array('idchien' => $idchien));
+        $like=new likes($loggedinUser,$chien);
+        $entityManager->persist($like);
+        $entityManager->flush();
+
+            return $this->redirectToRoute('app_chien_index_dogs-next-door');
+
+
     }
     /**
      * @Route("/new", name="app_likes_new", methods={"GET", "POST"})

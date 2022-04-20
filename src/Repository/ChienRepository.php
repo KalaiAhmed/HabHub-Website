@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Chien;
+use App\Entity\Likes    ;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -56,10 +57,12 @@ class ChienRepository extends ServiceEntityRepository
     public function myDogs(){
         $entityManager=$this->getEntityManager();
         $query= $entityManager
-            ->createQuery("SELECT c FROM APP\Entity\Chien c JOIN c.idindividu i join i.idutilisateur u where c.idindividu=:userid Order by (SELECT count(l) from APP\Entity\Likes l where l.idchien=c.idchien)")
+            ->createQuery("SELECT c.image,c.sexe,c.nom,c.age,c.idchien,(SELECT count(l) FROM App\Entity\Likes l where l.idchien=c.idchien) as nb FROM App\Entity\Chien c JOIN c.idindividu i join i.idutilisateur u where c.idindividu=:userid Order by nb desc")
             ->setParameters(array('userid'=>'2'));
         return $query->getResult();
     }
+
+
     // /**
     //  * @return Chien[] Returns an array of Chien objects
     //  */

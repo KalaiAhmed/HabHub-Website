@@ -45,6 +45,84 @@ class AnnonceProprietaireChienRepository extends ServiceEntityRepository
         }
     }
 
+    /*public function searchLost(string $q)
+    {
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+           // ->createQuery("SELECT a from App\Entity\AnnonceProprietaireChien a join a.idchien c join c.idindividu i where a.type='P' AND c.nom like :query
+             //AND a.localisation like :query")
+           ->createQuery("SELECT a from App\Entity\AnnonceProprietaireChien where a.type='P' AND a.localisation like :query")
+            ->setParameter('query', '%' . $q. '%');
+        return $query->getResult();
+    } */
+    public function searchLost(string $q)
+    {
+    $qb = $this->createQueryBuilder('a');
+
+
+
+    $qb->innerJoin('App\Entity\Chien', 'c', 'WITH', 'c.idchien = a.idchien');
+
+    $qb->innerJoin('App\Entity\Individu', 'i', 'WITH', 'i.idindividu = c.idindividu')
+
+
+
+    ->where(
+
+    $qb->expr()->andX(
+    $qb->expr()->orX(
+
+    $qb->expr()->like('a.localisation', ':query'),
+    $qb->expr()->like('c.nom', ':query'),
+    $qb->expr()->like('i.prenom', ':query')
+)
+
+)
+)
+
+        ->setParameter('query', '%' . $q . '%');
+        $qb->andWhere( 'a.type = \'P\'');
+
+
+
+return $qb->getQuery()->getResult();
+}
+   /* public function searchMating(string $q)
+    {
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+           // ->createQuery("SELECT a from App\Entity\AnnonceProprietaireChien a join a.idchien c join c.idindividu i where c.nom like :query
+   // AND a.localisation like :query")
+           ->createQuery("SELECT a from App\Entity\AnnonceProprietaireChien a  where a.type='P' AND a.localisation like :query")
+            ->setParameter('query', '%' . $q. '%');
+        return $query->getResult();
+    }*/
+    public function searchMating(string $q)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+
+        $qb->innerJoin('App\Entity\Chien', 'c', 'WITH', 'c.idchien = a.idchien');
+        $qb->innerJoin('App\Entity\Individu', 'i', 'WITH', 'i.idindividu = c.idindividu')
+
+
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+
+                        $qb->expr()->like('a.localisation', ':query'),
+                        $qb->expr()->like('c.nom', ':query'),
+                        $qb->expr()->like('i.prenom', ':query')
+                    )
+
+                )
+            )
+
+        ->setParameter('query', '%' . $q . '%');
+        $qb->andWhere( 'a.type = \'A\'');
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return AnnonceProprietaireChien[] Returns an array of AnnonceProprietaireChien objects
     //  */

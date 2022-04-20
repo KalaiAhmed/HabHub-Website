@@ -101,6 +101,14 @@ class Chien
      */
     private $idindividu;
 
+    /**
+     * @param int $idchien
+     */
+    public function __construct(int $idchien)
+    {
+        $this->idchien = $idchien;
+    }
+
     public function getIdchien(): ?int
     {
         return $this->idchien;
