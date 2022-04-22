@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier index{% endblock %}
+
+
+   {% block navBar %}
+        <!-- ***** Header Area Start ***** -->
+        <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                            <a href="{{ path('app_front_office_home') }}" class="logo">
+                                <img src="{{ asset('FrontOffice/assets/images/logo-v2.png') }}" alt="">
+                            </a>
+                            <!-- ***** Logo End ***** -->
+                            <!-- ***** Menu Start ***** -->
+                            <ul class="nav">
+                                <li class="scroll-to-section"><a href="#top" >Home</a></li>
+                                <li class="scroll-to-section"><a href="{{ path('app_business_index') }}">Services</a></li>
+                                <li class="scroll-to-section"><a href="#services">Adoption</a></li>
+                                <li class="scroll-to-section"><a href="#portfolio">Hub</a></li>
+                                <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}" class="active">Store</a></li>
+                                <li class="scroll-to-section"><a>Sign in</a></li>
+                                <li class="scroll-to-section"><div class="border-first-button"><a href="#contact">Sign up</a></div></li>
+                            </ul>
+                            <a class='menu-trigger'>
+                                <span>Menu</span>
+                            </a>
+                            <!-- ***** Menu End ***** -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ***** Header Area End ***** -->
+
+         {% endblock %}
+
+{% block body %}
+    <h1>Panier index</h1>
+      <div class="wrapper" style="padding-top:100px"; >
+
+    {% if items | length > 0  %}
+    <table class="table">
+    <thead>
+        <tr>
+            <th> Produit </th>
+            <th> Prix </th>
+            <th> Quantite </th>
+            <th> Total </th>
+            <th> </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in items  %}
+            <tr>
+                <td>{{item.produit.nom}} </td>
+                <td>{{item.produit.prix}} </td>
+                <td>{{item.quantite}} </td>
+                <td>{{item.produit.prix * item.quantite}} </td>
+                <td>
+                <a href='{{ path('DelProd', {'id':item.produit.idproduit}) }}' class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total: </td>
+                <td>{{total}} </td>
+                <td> </td>
+            </tr>
+        </tfoot>
+
+
+            
+    </table>
+
+    {% else %}
+
+    <p>VOTRE PANIER EST VIDE </p>
+    {% endif %}
+</div>
+
+
+{% endblock %}    

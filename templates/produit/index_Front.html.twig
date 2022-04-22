@@ -82,7 +82,7 @@
                                 <p>{{ produit.description }}</p>
                                 <span class="category">{{produit.idCategorie.nom}}</span>
                                 <span class="marque">{{produit.marque }}</span>
-                                 <a class="butt">Add To Cart</a>
+                                 <a href="{{path('add_prod', {'id':produit.idproduit} )}}" class="butt">Add To Cart</a>
                                 
                             </div>
                     </div>

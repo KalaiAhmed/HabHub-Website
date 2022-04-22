@@ -41,7 +41,7 @@ class Produit
     private $description;
 
     /**
-     * @var int
+     * @var float
      * @Assert\NotBlank(message=" prix doit etre non vide")
      * @ORM\Column(name="prix", type="integer", nullable=false)
      */
@@ -107,12 +107,12 @@ class Produit
         return $this;
     }
 
-    public function getPrix(): ?int
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(int $prix): self
+    public function setPrix(float $prix): self
     {
         $this->prix = $prix;
 
