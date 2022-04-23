@@ -59,7 +59,7 @@
     <tbody>
         {% for item in items  %}
             <tr>
-            <td> <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/'~item.produit.image~'.jpg') }}" alt="" width="60 " height="50 px"></a> </td>
+            <td> <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/'~item.produit.image~'.jpg') }}" alt="" width="20px " height="40px"></a> </td>
                 <td>{{item.produit.nom}} </td>
                 <td>{{item.produit.prix}} </td>
                 <td>{{item.quantite}} </td>
@@ -78,6 +78,7 @@
                 <td style="font-weight: bold;">{{total}} DT</td>
                 <td> </td>
             </tr>
+           
         </tfoot>
 
 
@@ -89,6 +90,8 @@
     <p>VOTRE PANIER EST VIDE </p>
     {% endif %}
 </div>
-
+ <form action="payment/checkout" method="POST" style="text-align:right;padding-right:290px">
+    <button type="submit" class="btn btn-outline-warning" style="background-color:#f46c38;text-color:white;color:white;font-weight: bold">Checkout</button>
+    </form>
 
 {% endblock %}    
