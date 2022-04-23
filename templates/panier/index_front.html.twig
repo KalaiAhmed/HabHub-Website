@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Panier index{% endblock %}
+{% block title %}Cart{% endblock %}
 
 
    {% block navBar %}
@@ -21,7 +21,8 @@
                                 <li class="scroll-to-section"><a href="{{ path('app_business_index') }}">Services</a></li>
                                 <li class="scroll-to-section"><a href="#services">Adoption</a></li>
                                 <li class="scroll-to-section"><a href="#portfolio">Hub</a></li>
-                                <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}" class="active">Store</a></li>
+                                <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}" >Store</a></li>
+                                  <li class="scroll-to-section" > <a  href="{{ path('app_panier_index') }}" class="fa fa-shopping-cart active" style="font-size:30px;color:black"></a> </li>
                                 <li class="scroll-to-section"><a>Sign in</a></li>
                                 <li class="scroll-to-section"><div class="border-first-button"><a href="#contact">Sign up</a></div></li>
                             </ul>
@@ -46,10 +47,11 @@
     <table class="table">
     <thead>
         <tr>
-            <th> Produit </th>
-            <th> Prix </th>
-            <th> Quantite </th>
-            <th> Total </th>
+            <th>  </th>
+            <th> Product </th>
+            <th> Price </th>
+            <th> Quantity </th>
+            <th> Subtotal </th>
             <th> </th>
         </tr>
     </thead>
@@ -57,13 +59,14 @@
     <tbody>
         {% for item in items  %}
             <tr>
+            <td> <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/'~item.produit.image~'.jpg') }}" alt="" width="60 " height="50 px"></a> </td>
                 <td>{{item.produit.nom}} </td>
                 <td>{{item.produit.prix}} </td>
                 <td>{{item.quantite}} </td>
                 <td>{{item.produit.prix * item.quantite}} </td>
                 <td>
-                <a href='{{ path('DelProd', {'id':item.produit.idproduit}) }}' class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash"></i>
+                <a href='{{ path('DelProd', {'id':item.produit.idproduit}) }}' class="btn btn-danger btn-sm" >
+                    <i class="fa fa-trash"></i>
                     </a>
                 </td>
             </tr>
@@ -71,8 +74,8 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-right">Total: </td>
-                <td>{{total}} </td>
+                <td colspan="4" style="text-align:right;font-weight: bold;">Total: </td>
+                <td style="font-weight: bold;">{{total}} DT</td>
                 <td> </td>
             </tr>
         </tfoot>
