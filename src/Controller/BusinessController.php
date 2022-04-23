@@ -19,10 +19,11 @@ class BusinessController extends AbstractController
 {
 
     /**
-     * @Route("/back-office", name="app_business_index_back_office", methods={"GET"})
+     * @Route("/back-office-revue", name="app_business_index_back_office", methods={"GET"})
      */
     public function index_back_office(EntityManagerInterface $entityManager): Response
     {
+
         $businesses = $entityManager
             ->getRepository(Business::class)
             ->findAll();
@@ -31,6 +32,10 @@ class BusinessController extends AbstractController
             'businesses' => $businesses,
         ]);
     }
+    /**
+     * @Route("/location", name="app_business_index_location", methods={"GET"})
+     */
+
     /**
      * @Route("/", name="app_business_index", methods={"GET"})
      */
@@ -157,10 +162,7 @@ class BusinessController extends AbstractController
      */
     public function show(Business $business,Request $request, EntityManagerInterface $entityManager): Response
     {
-        $revues=$this->forward('App\Controller\RevueController::index', [
-        'business'  => $business,
 
-    ]);
 
         return $this->render('business/show.html.twig', [
             'business' => $business,

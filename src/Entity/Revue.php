@@ -38,9 +38,9 @@ class Revue
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="datePublication", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="datePublication", type="date", nullable=true, options={"default"="DATE DEFAULT CURRENT_DATE"})
      */
-    private $datepublication = 'NULL';
+    private $datepublication ;
 
     /**
      * @var \Produit

@@ -15,6 +15,7 @@ class BusinessType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
             ->add('titre')
             ->add('description')
@@ -37,7 +38,10 @@ class BusinessType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
 
             ])
+            ->add('lat')
+            ->add('lng')
             ->add('idutilisateur')
+
             ->add('add',SubmitType::class)
 
         ;

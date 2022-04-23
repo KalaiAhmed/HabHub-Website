@@ -2,14 +2,7 @@
 
 {% block title %}Business{% endblock %}
 
-{% block business %}
-    <li class="active">
-        <a href="{{ path('app_business_index_back_office') }}">
-            <i class="fa fa-briefcase" aria-hidden="true"></i>
-            <p>Business Partners</p>
-        </a>
-    </li>
-{% endblock %}
+
 {% block body %}
 <div class="ahbet">
 <div class="container">
@@ -53,13 +46,13 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_business_index_back_office') }}">back to list</a>
+        {{ include('business/location.html.twig') }}
+
 
     <a href="{{ path('app_business_edit', {'idbusiness': business.idbusiness}) }}">edit</a>
         {{ render(path('app_business_services_index', {'idbusiness': business.idbusiness} )) }}
         {{ render(path('app_revue_index', {'idbusiness': business.idbusiness} )) }}
-        {{ render(path('app_revue_new')) }}
-
+        {{ render(path('app_revue_new_revue', {'idbusiness': business.idbusiness})) }}
 
 
 
@@ -71,4 +64,8 @@
 </div>
 </div>
 
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&callback=initMap&v=weekly"
+            defer
+    ></script>
 {% endblock %}

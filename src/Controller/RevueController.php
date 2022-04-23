@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Business;
+use App\Entity\Individu;
 use App\Entity\Revue;
 use App\Form\RevueType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,7 +57,7 @@ class RevueController extends AbstractController
             $entityManager->persist($revue);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_revue_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_revue_index_back_office', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('revue/new_back_office.html.twig', [
@@ -65,12 +66,20 @@ class RevueController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/new", name="app_revue_new", methods={"GET", "POST"})
+     * @Route("/new/front/{idbusiness}/revue", name="app_revue_new_revue", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $revue = new Revue();
+    public function new_revue_front(Request $request, EntityManagerInterface $entityManager,int $idbusiness): Response
+    {   $revue = new Revue();
+
+        $revue->setIdindividu( $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => '2')));
+
+        $revue->setIdbusiness( $entityManager
+            ->getRepository(Business::class)
+            ->findOneBy(array('idbusiness' => $idbusiness)));
         $form = $this->createForm(RevueType::class, $revue);
         $form->handleRequest($request);
 
@@ -78,7 +87,7 @@ class RevueController extends AbstractController
             $entityManager->persist($revue);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_revue_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_business_show', ['idbusiness' => $idbusiness], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('revue/new.html.twig', [

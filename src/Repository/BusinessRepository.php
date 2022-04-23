@@ -74,6 +74,7 @@ class BusinessRepository extends ServiceEntityRepository
                     $qb->expr()->orX(
 
                         $qb->expr()->like('b.titre', ':query'),
+                        $qb->expr()->like('b.ville', ':query'),
                         $qb->expr()->like('bs.nomservice', ':query'),
                     )
 

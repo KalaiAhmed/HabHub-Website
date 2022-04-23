@@ -58,6 +58,11 @@ Mariem
 .ahbet{
   padding-top: 10%;
 }
+#map {
+
+  height: 50%;
+  width: 50%;
+}
 .search-container{
   width: 483px;
   height: 37px;
