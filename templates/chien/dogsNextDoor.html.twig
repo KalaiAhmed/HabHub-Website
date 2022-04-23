@@ -23,7 +23,11 @@
                                 <a href="#"><h4>{{ chien.nom }}</h4></a>
                                 <p>
                                     {{chien.age }}</p>
-                                <h3> <a href="{{ path('app_likes_addlike', {'idchien': chien.idchien}) }}">Like</a></h3>
+                                {% if chien.liked %}
+                                <a href="{{ path('app_likes_removelike', {'idchien': chien.idchien}) }}"> <img class="chien-icon" src="{{asset('FrontOffice/assets/images/chien/heartIcon.png') }}"> </a>
+                                {% else %}
+                                <a href="{{ path('app_likes_addlike', {'idchien': chien.idchien}) }}"> <img class="chien-icon" src="{{asset('FrontOffice/assets/images/chien/emptyHeartIcon.png') }}"> </a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

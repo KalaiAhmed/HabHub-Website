@@ -1,0 +1,20 @@
+{% if results is defined and results is iterable and results|length >= 1 %}
+{% for result in results %}
+<div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+    <div class="blog-post">
+        <div class="thumb">
+
+           <!-- <a href="#"><img src="../../public/FrontOffice/uploads/{{result.idchien.image}}" alt=""></a> -->
+        </div>
+        <div class="down-content">
+            <span class="category">{{ result.idchien.sexe }}</span>
+
+            <a href="#"><h4>{{ result.idchien.nom }}</h4></a>
+            <p>
+                {{ result.idchien.age }}</p>
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}

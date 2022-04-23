@@ -6,12 +6,23 @@
 
 {% block body %}
 
-<div style="padding-top:150px;">
-    {{ render (controller('App\\Controller\\SearchController::searchBarLost')) }}
+<div class="sidebar-search">
+    <div class="input-group custom-search-form" style="padding-top:7%">
+        <input type="text" id="search" class="form-control" placeholder="Search for a lost dog">
+    </div>
+    <!-- /input-group -->
 </div>
+    <ul class="nav" id="side-menu">
+        <li>
+            <a href="#"> Search Results<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level" >
+            </ul>
+        </li>
+    </ul><br><br><br><br>
+
     <div id="blog" class="blog">
         <div class="container">
-            <div class="row">
+            <div class="row" id="entitiesNav" >
                 {% for annonce_proprietaire_chien in annonce_proprietaire_chiens %}
 
                     <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
@@ -40,6 +51,47 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 0;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('lost_ajax_search') }}",
+                        data: {
+                            'l' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value==$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key == 'annonces') {
+                                            if (id != 'error') {
+                                                entitySelector.append('<li><a href="/daten/'+id+'">'+value+'</a></li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 {% endblock %}
+

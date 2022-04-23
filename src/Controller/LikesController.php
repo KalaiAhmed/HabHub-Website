@@ -70,6 +70,24 @@ class LikesController extends AbstractController
 
     }
     /**
+     * @Route("/addlike/{idchien}", name="app_likes_removelike", methods={"GET"})
+     */
+
+    public function removeLike(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+
+        $like= $entityManager
+            ->getRepository(Likes::class)
+            ->findOneBy(array('idindividu'=>'2','idchien' => $idchien));
+        $entityManager->remove($like);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_chien_index_dogs-next-door');
+
+
+    }
+    /**
      * @Route("/new", name="app_likes_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response

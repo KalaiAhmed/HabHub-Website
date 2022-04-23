@@ -2119,3 +2119,9 @@ responsive
     padding: 30px;
   }
 }
+
+/* Community CSS */
+.chien-icon{
+  max-height: 50px;
+  max-width:50px;
+}

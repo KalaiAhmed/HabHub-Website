@@ -49,7 +49,7 @@ class ChienRepository extends ServiceEntityRepository
     public function findDogsNextDoor(){
         $entityManager=$this->getEntityManager();
         $query= $entityManager
-                ->createQuery("SELECT c FROM APP\Entity\Chien c JOIN c.idindividu i join i.idutilisateur u where i.adresse= :userlocation and c.idindividu!= :userid")
+                ->createQuery("SELECT c.image,c.sexe,c.nom,c.age,c.idchien,(SELECT count(l) FROM App\Entity\Likes l where l.idchien=c.idchien and l.idindividu=:userid) as liked FROM APP\Entity\Chien c JOIN c.idindividu i join i.idutilisateur u where i.adresse= :userlocation and c.idindividu!= :userid")
                 ->setParameters(array('userlocation'=>'Borj Louzir','userid'=>'2'));
         return $query->getResult();
     }

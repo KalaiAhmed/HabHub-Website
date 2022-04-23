@@ -1,167 +1,110 @@
 <?php
 
 namespace App\Controller;
-
-use App\Repository\AnnonceProprietaireChienRepository;
-use App\Repository\BusinessRepository;
+//use Symfony\Bundle\FrameworkBundle\Repository\ProduitRepository;
 use App\Repository\ProduitRepository;
+use App\Repository\AnnonceProprietaireChienRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Produit;
+use App\Entity\AnnonceProprietaireChien;
 
 class SearchController extends AbstractController
 {
-    /**
-     * @Route("/search", name="app_search"  )
-     */
-    public function index(): Response
-    {
-        return $this->render('search/searchBar.html.twig', [
-            'controller_name' => 'SearchController',
-        ]);
-    }
-
-    public function searchBar()
-    {
-        $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('handleSearch'))
-            ->add('Search', TextType::class )
 
 
-
-
-            ->add('recherche', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
-            ->getForm();
-        return $this->render('search/searchBar.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-    public function searchBarBusiness()
-    {
-        $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('handleSearchBusiness'))
-            ->add('Search', TextType::class )
-
-
-
-
-            ->add('recherche', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
-            ->getForm();
-        return $this->render('search/searchBar.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
-    public function searchBarLost()
-    {
-        $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('handleSearchLost'))
-            ->add('Search', TextType::class )
-
-
-
-
-            ->add('recherche', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
-            ->getForm();
-        return $this->render('search/searchBar.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
-    public function searchBarMating()
-    {
-        $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('handleSearchMating'))
-            ->add('Search', TextType::class )
-
-
-
-
-            ->add('recherche', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
-            ->getForm();
-        return $this->render('search/searchBar.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
 
     /**
-     * @Route("/handleSearch", name="handleSearch")
-     * @param Request $request
+     * Creates a new ActionItem entity.
+     *
+     * @Route("/search", name="ajax_search")
+     * methods={"GET"}
      */
-    public function handleSearch(Request $request, ProduitRepository $repo)
+    public function searchAction(Request $request)
     {
-        $query = $request->request->get('form')['Search'];
-        if($query) {
-            $produits = $repo->findProduitByName($query);
+        $em = $this->getDoctrine()->getManager();
+
+        $requestString = $request->get('p');
+
+        $produits =  $em->getRepository('App:Produit')->findEntitiesByString($requestString);
+
+        if(!$produits) {
+            $result['produits']['error'] = "keine EintrÃ¤ge gefunden";
+        } else {
+            $result['produits'] = $this->getRealEntities($produits);
         }
-        return $this->render('produit/index_Front.html.twig', [
-            'produits' => $produits
-        ]);
+
+        return new Response(json_encode($result));
     }
 
     /**
-     * @Route("/handleSearchBusiness", name="handleSearchBusiness")
-     * @param Request $request
+     * Creates a new ActionItem entity.
+     *
+     * @Route("/search-mating", name="mating_ajax_search")
+     * methods={"GET"}
      */
-    public function handleSearchBusiness(Request $request, BusinessRepository $repo)
+    public function matingSearchAction(Request $request)
     {
-        $query = $request->request->get('form')['Search'];
-        if($query) {
-            $businesses = $repo->findBusinessByName($query);
+        $em = $this->getDoctrine()->getManager();
+
+        $requestString = $request->get('m');
+
+        $annonces =  $em->getRepository('App:AnnonceProprietaireChien')->searchMating($requestString);
+
+        if(!$annonces) {
+            $result['annonces']['error'] = "not found";
+        } else {
+            $result['annonces'] = $this->getRealEntitiesAnnoncesProp($annonces);
         }
-        return $this->render('business/frontOfficeIndex.html.twig', [
-            'businesses' => $businesses
-        ]);
+
+        return new Response(json_encode($result));
     }
 
     /**
-     * @Route("/handleSearchLost", name="handleSearchLost")
-     * @param Request $request
-     */
-    public function handleSearchLost(Request $request, AnnonceProprietaireChienRepository $repo)
+ * Creates a new ActionItem entity.
+ *
+ * @Route("/search-lost", name="lost_ajax_search")
+ * methods={"GET"}
+ */
+    public function lostSearchAction(Request $request)
     {
-        $query = $request->request->get('form')['Search'];
-        if($query) {
-            $annonces = $repo->searchLost($query);
+        $em = $this->getDoctrine()->getManager();
+
+        $requestString = $request->get('l');
+
+        $annonces =  $em->getRepository('App:AnnonceProprietaireChien')->searchLost($requestString);
+
+        if(!$annonces) {
+            $result['annonces']['error'] = "not found";
+        } else {
+            $result['annonces'] = $this->getRealEntitiesAnnoncesProp($annonces);
         }
-        return $this->render('annonce_proprietaire_chien/frontOfficeIndexLost.html.twig', [
-            'annonce_proprietaire_chiens' => $annonces
-        ]);
+
+        return new Response(json_encode($result));
     }
 
-    /**
-     * @Route("/handleSearchMating", name="handleSearchMating")
-     * @param Request $request
-     */
-    public function handleSearchMating(Request $request, AnnonceProprietaireChienRepository $repo)
-    {
-        $query = $request->request->get('form')['Search'];
-        if($query) {
-            $annonces = $repo->searchMating($query);
+
+
+    public function getRealEntities($produits){
+
+        foreach ($produits as $produit){
+            $realEntities[$produit->getIdProduit()] = $produit->getNom();
         }
-        return $this->render('annonce_proprietaire_chien/frontOfficeIndex.html.twig', [
-            'annonce_proprietaire_chiens' => $annonces
-        ]);
+
+        return $realEntities;
     }
 
+    public function getRealEntitiesAnnoncesProp($annonces){
+
+        foreach ($annonces as $annonce){
+            $realEntities[$annonce->getIdannonceproprietairechien()] = $annonce->getLocalisation();
+        }
+
+        return $realEntities;
+    }
 
 }
