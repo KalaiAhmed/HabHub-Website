@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Business;
+use App\Entity\Individu;
 use App\Entity\Revue;
 use App\Form\BusinessType;
 use App\Form\RevueType;
@@ -156,16 +157,34 @@ class BusinessController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
     /**
-     * @Route("/{idbusiness}", name="app_business_show", methods={"GET"})
+     * @Route("/{idbusiness}", name="app_business_show", methods={"POST","GET"})
      */
-    public function show(Business $business,Request $request, EntityManagerInterface $entityManager): Response
+    public function show(Business $business, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $revue = new Revue();
 
+        $revue->setIdindividu($entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => '2')));
+
+        $revue->setIdbusiness($entityManager
+            ->getRepository(Business::class)
+            ->findOneBy(array('idbusiness' => $business->getIdbusiness())));
+
+        // $revue->setDatepublication(date('Y/m/d'));
+        $form = $this->createForm(RevueType::class, $revue);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($revue);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_business_show', ['idbusiness' => $business->getIdbusiness()], Response::HTTP_SEE_OTHER);
+        }
 
         return $this->render('business/show.html.twig', [
             'business' => $business,
+            'form' => $form->createView(),
 
 
         ]);
