@@ -20,6 +20,7 @@ use Knp\Snappy\Pdf;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Bundle\SnappyBundle\Snappy;
 use Knp\Bundle\SnappyBundle\DependencyInjection;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/annonce/adoption")
@@ -29,14 +30,34 @@ class AnnonceAdoptionController extends AbstractController
     /**
      * @Route("/", name="app_annonce_adoption_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
+        //on récupère les filtres
+        $filtres=$request->get("individus");
+
+        //on récupère les individus
+        $individus = $entityManager
+            ->getRepository(Individu::class)
+            ->findindiv();
+
+        // on récupère les annonces
         $annonceAdoptions = $entityManager
             ->getRepository(AnnonceAdoption::class)
-            ->findAll();
+            ->getAnnonces($filtres);
+
+        // On vérifie si on a une requête Ajax
+            if($request->get('ajax')){
+                return new JsonResponse([
+                    'content' => $this->renderView('annonce_adoption/_contenu.html.twig',
+                    ['annonceAdoptions' => $annonceAdoptions,])
+                ]);
+            }
+            
+
 
         return $this->render('annonce_adoption/show.html.twig', [
             'annonceAdoptions' => $annonceAdoptions,
+            'individus'=>$individus
         ]);
     }
     /**

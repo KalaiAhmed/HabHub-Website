@@ -29,6 +29,25 @@ class IndividuRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function FiltreIndividu(){
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+            ->createQuery("SELECT DISTINCT i.nom, i.idindividu FROM App\Entity\Individu i join   ");
+        return $query->getResult();
+    }
+
+    public function findindiv()
+    {
+        $qb = $this->createQueryBuilder('i');
+
+       $qb->innerJoin('App\Entity\AnnonceAdoption', 'a', 'WITH', 'a.idindividu = i.idindividu');
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
     /**
      * @throws ORMException
      * @throws OptimisticLockException

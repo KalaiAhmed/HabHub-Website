@@ -9,35 +9,35 @@
     <div style="padding-top:150px;" class="container">
         <div class="row"> {{ render (controller ('App\\Controller\\SearchAdoptionController::searchBar' )) }}   </div>
         <div style="padding-top:25px;"> <a href="{{ path('app_annonce_adoption_new') }}">Create Adoption post</a>   </div>
+        <div class="row">
+            <form id="filters">
+                {% for inv in individus %}
+                    <p class="column"><input type="checkbox" name="individus[]" id="inv{{inv.idindividu}}" value="{{inv.idindividu}}"> 
+                    <label for="inv{{inv.idindividu}}">{{inv.nom}}</label></p>
+                {% endfor %}
+            </form>
+        </div>
 
     
     <div id="blog" class="blog">
         <div class="container">
-            <div class="row">
-                {% for annonceAdoption in annonceAdoptions %}
-                <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
-                    
-                    <div class="blog-post">
-                        <div class="thumb">
-                            <a href="#"><img src="{{ asset('FrontOffice/uploads/'~annonceAdoption.idchien.image) }}" alt="nope"></a>
-                        </div>
-                        <div class="down-content">
-                            <span class="category">{{annonceAdoption.idchien.nom}}</span>
-                            <span class="date">{{annonceAdoption.datepublication|date("m/d/Y")}}</span>
-                            <a href="#"><h4>{{ annonceAdoption.localisation}}</h4></a>
-                            <p>{{ annonceAdoption.idchien.description }}</p>
-                            <div class="border-first-button"><a href="{{ path('app_annonce_adoption_show',{'idannonceadoption': annonceAdoption.idannonceadoption}) }}">More details</a></div>
-                        </div>
-                    </div>
-                </div>
+            <p>Filtrer</p>
+            <div class="row" id="content">
 
-
-
-
-                {% endfor %}
+                {{ include('annonce_adoption/_contenu.html.twig') }}
 
             </div>
                     </div>
                     </div>
                 </div>
+{% endblock %}
+
+{% block javascripts %}
+          <script src="{{ asset('assets/js/filters.js') }}"></script>
+          <script src="{{ asset('FrontOffice/vendor/jquery/jquery.min.js') }}"></script>
+          <script src="{{ asset('FrontOffice/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+          <script src="{{ asset('FrontOffice/assets/js/owl-carousel.js') }}"></script>
+          <script src="{{ asset('FrontOffice/assets/js/animation.js') }}"></script>
+          <script src="{{ asset('FrontOffice/assets/js/imagesloaded.js') }}"></script>
+          <script src="{{ asset('FrontOffice/assets/js/custom.js') }}"></script>
 {% endblock %}

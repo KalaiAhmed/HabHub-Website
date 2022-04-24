@@ -69,6 +69,20 @@ class AnnonceAdoptionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getAnnonces($filters = null){
+        $query = $this->createQueryBuilder('a');
+
+        // On filtre les données
+        if($filters != null){
+            $query->Where('a.idindividu IN(:indiv)')
+                ->setParameter(':indiv', array_values($filters));
+        }
+
+        $query->orderBy('a.datepublication');
+        return $query->getQuery()->getResult();
+    }
+
+
     // /**
     //  * @return AnnonceAdoption[] Returns an array of AnnonceAdoption objects
     //  */
