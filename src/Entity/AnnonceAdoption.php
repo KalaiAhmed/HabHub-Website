@@ -24,7 +24,7 @@ class AnnonceAdoption
 
     /**
      * @var \DateTime
-     *@Assert\NotBlank(message=" titre doit etre non vide")
+     * 
      * @ORM\Column(name="datePublication", type="date", nullable=false)
      */
     private $datepublication;
@@ -36,25 +36,26 @@ class AnnonceAdoption
      *      minMessage=" au moin 5 caractéres"
      *
      *     )
-     * @ORM\Column(name="description", type="string", length=200, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="description", type="string",nullable=true,options={"default"="NULL"}, length=200)
      * 
      */
     private $description ;
 
     /**
-     * @var string|null
+     * @var string
+     *@Assert\NotBlank(message=" champ obligatoire")
      *@Assert\Length(
-     *      min = 5,
-     *      minMessage=" au moin 5 caractéres"
+     *      min = 3,
+     *      minMessage=" au moin 3 caractéres"
      *
      *     )
-     * @ORM\Column(name="localisation", type="string", length=50, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="localisation", type="string", length=50)
      */
     private $localisation ;
 
     /**
      * @var \Individu
-     *@Assert\NotBlank(message=" champ obligatoire")
+     * 
      * @ORM\ManyToOne(targetEntity="Individu")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idIndividu", referencedColumnName="idIndividu")
@@ -64,8 +65,7 @@ class AnnonceAdoption
 
     /**
      * @var \Chien
-     *@Assert\NotBlank(message=" champ obligatoire")
-     * @ORM\ManyToOne(targetEntity="Chien")
+     * @ORM\ManyToOne(targetEntity="Chien",cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idChien", referencedColumnName="idChien")
      * })
@@ -136,6 +136,7 @@ class AnnonceAdoption
 
         return $this;
     }
+    
 
 
 }

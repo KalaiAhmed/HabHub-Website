@@ -45,6 +45,30 @@ class AnnonceAdoptionRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAnnonceByDogName(string $q)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+       $qb->innerJoin('App\Entity\Chien', 'c', 'WITH', 'c.idchien = a.idchien');
+       $qb->innerJoin('App\Entity\Individu', 'i', 'WITH', 'i.idindividu = a.idindividu')
+
+        ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('i.prenom', ':query'),
+                        $qb->expr()->like('a.localisation', ':query'),
+                        $qb->expr()->like('c.nom', ':query'),
+                    )
+
+                )
+            )
+            ->setParameter('query', '%' . $q . '%')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return AnnonceAdoption[] Returns an array of AnnonceAdoption objects
     //  */

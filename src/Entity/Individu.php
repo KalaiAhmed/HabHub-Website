@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Individu
  *
  * @ORM\Table(name="individu", indexes={@ORM\Index(name="fk_individu_utilisateur", columns={"idUtilisateur"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IndividuRepository")
  */
 class Individu
 {
@@ -26,14 +26,14 @@ class Individu
      *
      * @ORM\Column(name="nom", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
-    private $nom = 'NULL';
+    private $nom ;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="prenom", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
-    private $prenom = 'NULL';
+    private $prenom  ;
 
     /**
      * @var \DateTime|null
@@ -220,8 +220,7 @@ class Individu
     }
 
     public function __toString() {
-        return (strval($this->idindividu).'-'.$this->prenom);
+        return ($this->prenom.'-'.strval($this->idindividu));
     }
-
 
 }

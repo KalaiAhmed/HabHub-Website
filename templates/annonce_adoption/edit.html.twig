@@ -1,4 +1,4 @@
-{% extends 'baseBack.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Edit AnnonceAdoption{% endblock %}
 
@@ -11,7 +11,7 @@
                 <div class="card-header">
 
 
-    {{ include('annonce_adoption/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('annonce_adoption/_frontform.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_annonce_adoption_index_back_office') }}">back to list</a>
     </div>

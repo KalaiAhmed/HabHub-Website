@@ -2,13 +2,24 @@
 
 namespace App\Controller;
 
+use App\Entity\Chien;
+use App\Form\ChienType;
 use App\Entity\AnnonceAdoption;
+use App\Entity\Individu;
 use App\Form\AnnonceAdoptionType;
+use App\Form\BackOfficeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+// Include Dompdf required namespaces
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Knp\Snappy\Pdf;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Knp\Bundle\SnappyBundle\Snappy;
+use Knp\Bundle\SnappyBundle\DependencyInjection;
 
 /**
  * @Route("/annonce/adoption")
@@ -16,9 +27,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnnonceAdoptionController extends AbstractController
 {
     /**
-     * @Route("/back-office", name="app_annonce_adoption_index_back_office", methods={"GET"})
+     * @Route("/", name="app_annonce_adoption_index", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response
+    {
+        $annonceAdoptions = $entityManager
+            ->getRepository(AnnonceAdoption::class)
+            ->findAll();
+
+        return $this->render('annonce_adoption/show.html.twig', [
+            'annonceAdoptions' => $annonceAdoptions,
+        ]);
+    }
+    /**
+     * @Route("/back-office", name="app_annonce_adoption_index_back_office", methods={"GET"})
+     */
+    public function index_BackOffice(EntityManagerInterface $entityManager): Response
     {
         $annonceAdoptions = $entityManager
             ->getRepository(AnnonceAdoption::class)
@@ -29,25 +53,83 @@ class AnnonceAdoptionController extends AbstractController
         ]);
     }
 
+
+
+
     /**
      * @Route("/new", name="app_annonce_adoption_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $annonceAdoption = new AnnonceAdoption();
+        $chien = new Chien();
+        $annonceAdoption->setIdchien($chien);
+        //get loggedinUser
+        $loggedinUser = $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => '2'));
+
         $form = $this->createForm(AnnonceAdoptionType::class, $annonceAdoption);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //set foster and date
+           $annonceAdoption->setIdindividu($loggedinUser);
+           $annonceAdoption->setDatepublication(new \DateTime('now'));
+
+            //recuperation des images transmises
+            $image = $form->get('idchien')->get('image')->getData();
+            $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+            //On copie le fichier dans le dossier upload
+            $image->move(
+                $this->getParameter('upload_directory'),
+                $fichier
+                );
+                // on stocke l'image dans la bdd (son nom)
+            //recuperation des descriptions
+            $descs = $form->get('description')->getData();
+            foreach ($descs as $desc){
+                
+            }
+            $chien->setImage($fichier);
+            $entityManager->persist($annonceAdoption);
+            $entityManager->persist($chien);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_annonce_adoption_index', [], Response::HTTP_SEE_OTHER);
+            
+        }
+
+        return $this->render('annonce_adoption/new.html.twig', [
+            'annonce_adoption' => $annonceAdoption,
+            'f' => $form->createView(),
+        ]);
+    }
+
+    
+
+    /**
+     * @Route("/new-back-office", name="app_annonce_adoption_new_back_office", methods={"GET", "POST"})
+     */
+    public function newBackOffice(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $annonceAdoption = new AnnonceAdoption();
+        $form = $this->createForm(BackOfficeType::class, $annonceAdoption);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $annonceAdoption->setDatepublication(new \DateTime('now'));
             $entityManager->persist($annonceAdoption);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_annonce_adoption_index_back_office', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('annonce_adoption/new.html.twig', [
+        return $this->render('annonce_adoption/newBackOffice.html.twig', [
             'annonce_adoption' => $annonceAdoption,
-            'form' => $form->createView(),
+            'f' => $form->createView(),
         ]);
     }
 
@@ -56,9 +138,75 @@ class AnnonceAdoptionController extends AbstractController
      */
     public function show(AnnonceAdoption $annonceAdoption): Response
     {
-        return $this->render('annonce_adoption/show.html.twig', [
-            'annonce_adoption' => $annonceAdoption,
+        return $this->render('annonce_adoption/moreDetails.html.twig', [
+            'annonceAdoption' => $annonceAdoption,
         ]);
+    }
+
+    /**
+     * @Route("/pdf/{idannonceadoption}", name="app_annonce_adoption_pdf", methods={"GET"})
+     */
+    public function pdf(AnnonceAdoption $annonceAdoption): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        //$options->set('isRemoteEnabled', true);
+        $pdfOptions->set('defaultFont', 'Arial','isRemoteEnabled', true);
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        //l'image
+
+        $image = $annonceAdoption->getIdchien()->getImage();
+        $pic = strval($image);
+        //$pic=str_replace("png","jpg",$pic);
+        $dogpic=file_get_contents('FrontOffice/uploads/'.$pic);
+        $logo=file_get_contents('FrontOffice/uploads/278226457_5296483267131938_3636257523128327412_n.png');
+        //$png = file_get_contents('FrontOffice/uploads/'.$pic);
+        $logopngbase64 = base64_encode($logo);
+        $picpngbase64 = base64_encode($dogpic);
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('annonce_adoption/pdf.html.twig', [
+            'annonceAdoption' => $annonceAdoption,
+            "logo"=>$logopngbase64,
+            "dogpic"=>$picpngbase64
+
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+    }
+
+    /**
+     * @Route("/newpdf/{idannonceadoption}", name="app_annonce_adoption_new_pdf", methods={"GET"})
+     */
+    public function newpdf(AnnonceAdoption $annonceAdoption): Response
+    {   
+        $snappy = $this->get('knp_snappy.pdf');
+        
+        $html = $this->renderView('annonce_adoption/pdf.html.twig', [
+            'annonceAdoption' => $annonceAdoption,
+        ]);
+        
+        $filename = 'myFirstSnappyPDF';
+
+        return new PdfResponse(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
+            )
+        );
     }
 
     /**
@@ -72,12 +220,32 @@ class AnnonceAdoptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_annonce_adoption_index_back_office', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonce_adoption_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('annonce_adoption/edit.html.twig', [
             'annonce_adoption' => $annonceAdoption,
-            'form' => $form->createView(),
+            'f' => $form->createView(),
+        ]);
+    }
+
+     /**
+     * @Route("/{idannonceadoption}/edit-back-office", name="app_annonce_adoption_edit_back_office", methods={"GET", "POST"})
+     */
+    public function editBackOffice(Request $request, AnnonceAdoption $annonceAdoption, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(BackOfficeType::class, $annonceAdoption);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_annonce_adoption_index_back_office', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('annonce_adoption/editBackOffice.html.twig', [
+            'annonce_adoption' => $annonceAdoption,
+            'f' => $form->createView(),
         ]);
     }
 
@@ -85,6 +253,18 @@ class AnnonceAdoptionController extends AbstractController
      * @Route("/{idannonceadoption}", name="app_annonce_adoption_delete", methods={"POST"})
      */
     public function delete(Request $request, AnnonceAdoption $annonceAdoption, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$annonceAdoption->getIdannonceadoption(), $request->request->get('_token'))) {
+            $entityManager->remove($annonceAdoption);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_annonce_adoption_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/{idannonceadoption}", name="app_annonce_adoption_delete_back_office", methods={"POST"})
+     */
+    public function deleteBackOffice(Request $request, AnnonceAdoption $annonceAdoption, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$annonceAdoption->getIdannonceadoption(), $request->request->get('_token'))) {
             $entityManager->remove($annonceAdoption);
