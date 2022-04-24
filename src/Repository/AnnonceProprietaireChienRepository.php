@@ -80,7 +80,7 @@ class AnnonceProprietaireChienRepository extends ServiceEntityRepository
 )
 )
 
-        ->setParameter('query', '%' . $q . '%');
+        ->setParameter('query', $q . '%');
         $qb->andWhere( 'a.type = \'P\'');
 
 
@@ -118,7 +118,7 @@ return $qb->getQuery()->getResult();
                 )
             )
 
-        ->setParameter('query', '%' . $q . '%');
+        ->setParameter('query',$q . '%');
         $qb->andWhere( 'a.type = \'A\'');
         return $qb->getQuery()->getResult();
     }

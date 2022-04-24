@@ -77,6 +77,7 @@ class AnnonceProprietaireChienController extends AbstractController
 
 
             print_r($response);
+            dump($response);
         }
         catch(Exception $e) {echo $e;}
 
