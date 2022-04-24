@@ -56,7 +56,7 @@ class LikesController extends AbstractController
 
         $loggedinUser = $entityManager
             ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '2'));
+            ->findOneBy(array('idindividu' => '6'));
 
         $chien = $entityManager
             ->getRepository(Chien::class)
@@ -79,7 +79,7 @@ class LikesController extends AbstractController
 
         $like= $entityManager
             ->getRepository(Likes::class)
-            ->findOneBy(array('idindividu'=>'2','idchien' => $idchien));
+            ->findOneBy(array('idindividu'=>'6','idchien' => $idchien));
         $entityManager->remove($like);
         $entityManager->flush();
 

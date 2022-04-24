@@ -17,6 +17,33 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AnnonceProprietaireChienController extends AbstractController
 {
+
+    /**
+     * @Route("/lost-back", name="app_annonce_proprietaire_chien_index_lost_back", methods={"GET"})
+     */
+    public function indexLostBack(EntityManagerInterface $entityManager): Response
+    {
+        $annonceProprietaireChiens = $entityManager
+            ->getRepository(AnnonceProprietaireChien::class)
+            ->findBy(array('type' => 'P'));
+
+        return $this->render('annonce_proprietaire_chien/index.html.twig', [
+            'annonce_proprietaire_chiens' => $annonceProprietaireChiens,
+        ]);
+    }
+    /**
+     * @Route("/mating-back", name="app_annonce_proprietaire_chien_index_mating_back", methods={"GET"})
+     */
+    public function indexMatingBack(EntityManagerInterface $entityManager): Response
+    {
+        $annonceProprietaireChiens = $entityManager
+            ->getRepository(AnnonceProprietaireChien::class)
+            ->findBy(array('type' => 'A'));
+
+        return $this->render('annonce_proprietaire_chien/index.html.twig', [
+            'annonce_proprietaire_chiens' => $annonceProprietaireChiens,
+        ]);
+    }
     /**
      * @Route("/lost", name="app_annonce_proprietaire_chien_index_lost", methods={"GET"})
      */
@@ -30,6 +57,7 @@ class AnnonceProprietaireChienController extends AbstractController
             'annonce_proprietaire_chiens' => $annonceProprietaireChiens,
         ]);
     }
+
     /**
      * @Route("/lost/notifyowner/{chien}", name="app_annonce_proprietaire_chien_lost_notify_owner", methods={"GET"})
      */
@@ -112,7 +140,7 @@ class AnnonceProprietaireChienController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_annonce_proprietaire_chien_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonce_proprietaire_chien_index_lost_back', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('annonce_proprietaire_chien/edit.html.twig', [
@@ -134,7 +162,99 @@ class AnnonceProprietaireChienController extends AbstractController
         return $this->redirectToRoute('app_annonce_proprietaire_chien_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    /**
+     * @Route("/addlost/{idchien}", name="app_annonce_proprietaire_chien_addlost", methods={"GET"})
+     */
 
+    public function addLostDog(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+
+
+        $chien = $entityManager
+            ->getRepository(Chien::class)
+            ->findOneBy(array('idchien' => $idchien));
+        $annonce=new AnnonceProprietaireChien();
+        $annonce->setIdchien($chien);
+        $annonce->setType('P');
+        $annonce->setDatepublication(new \DateTime());
+        $annonce->setLocalisation($chien->getIdIndividu()->getAdresse());
+        $annonce->setDateperte(new \DateTime());
+        $entityManager->persist($annonce);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_chien_index_my_dogs');
+
+
+    }
+
+    /**
+     * @Route("/removelost/{idchien}", name="app_annonce_proprietaire_chien_removelost", methods={"GET"})
+     */
+
+    public function removeLostDog(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+
+
+        $annonce= $entityManager
+            ->getRepository(AnnonceProprietaireChien::class)
+            ->findOneBy(array('idchien' => $idchien,'type'=>'P'));
+
+        $entityManager->remove($annonce);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_chien_index_my_dogs');
+
+
+    }
+
+    /**
+     * @Route("/addmating/{idchien}", name="app_annonce_proprietaire_chien_addmating", methods={"GET"})
+     */
+
+    public function addMatingDog(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+
+
+        $chien = $entityManager
+            ->getRepository(Chien::class)
+            ->findOneBy(array('idchien' => $idchien));
+        $annonce=new AnnonceProprietaireChien();
+        $annonce->setIdchien($chien);
+        $annonce->setType('A');
+        $annonce->setLocalisation($chien->getIdIndividu()->getAdresse());
+        $annonce->setDatepublication(new \DateTime());
+        $entityManager->persist($annonce);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_chien_index_my_dogs');
+
+
+    }
+
+    /**
+     * @Route("/removemating/{idchien}", name="app_annonce_proprietaire_chien_removemating", methods={"GET"})
+     */
+
+    public function removeMatingDog(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+
+
+
+        $annonce= $entityManager
+            ->getRepository(AnnonceProprietaireChien::class)
+            ->findOneBy(array('idchien' => $idchien,'type'=>'A'));
+
+        $entityManager->remove($annonce);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_chien_index_my_dogs');
+
+
+    }
 }
 
 

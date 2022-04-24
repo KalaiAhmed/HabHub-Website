@@ -35,7 +35,7 @@ class ChienController extends AbstractController
     {
         $chiens = $entityManager
             ->getRepository(Chien::class)
-            ->myDogs(array('idindividu'=>'2'));
+            ->myDogs();
 
         return $this->render('chien/myDogs.html.twig', [
             'chiens' => $chiens,
@@ -136,5 +136,24 @@ class ChienController extends AbstractController
         }
 
         return $this->redirectToRoute('app_chien_index_back_office', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/deleteFront/{idchien}", name="app_chien_delete_front", methods={"GET"})
+     */
+
+    public function removeChien(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+
+        $chien= $entityManager
+            ->getRepository(Chien::class)
+            ->findOneBy(array('idchien' => $idchien));
+        $entityManager->remove($chien);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_chien_index_my_dogs');
+
+
     }
 }

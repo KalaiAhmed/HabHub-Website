@@ -50,15 +50,15 @@ class ChienRepository extends ServiceEntityRepository
         $entityManager=$this->getEntityManager();
         $query= $entityManager
                 ->createQuery("SELECT c.image,c.sexe,c.nom,c.age,c.idchien,c.playwithme,(SELECT count(l) FROM App\Entity\Likes l where l.idchien=c.idchien and l.idindividu=:userid) as liked FROM APP\Entity\Chien c JOIN c.idindividu i join i.idutilisateur u where i.adresse= :userlocation and c.idindividu!= :userid")
-                ->setParameters(array('userlocation'=>'Borj Louzir','userid'=>'2'));
+                ->setParameters(array('userlocation'=>'Borj Louzir','userid'=>'6'));
         return $query->getResult();
     }
 
     public function myDogs(){
         $entityManager=$this->getEntityManager();
         $query= $entityManager
-            ->createQuery("SELECT c.image,c.sexe,c.nom,c.age,c.idchien,(SELECT count(l) FROM App\Entity\Likes l where l.idchien=c.idchien) as nb FROM App\Entity\Chien c JOIN c.idindividu i join i.idutilisateur u where c.idindividu=:userid Order by nb desc")
-            ->setParameters(array('userid'=>'2'));
+            ->createQuery("SELECT c.image,c.sexe,c.nom,c.age,c.idchien,(SELECT count(l) FROM App\Entity\Likes l where l.idchien=c.idchien) as nb,(SELECT count(a) FROM App\Entity\AnnonceProprietaireChien a where a.idchien=c.idchien and a.type='P') as missing,(SELECT count(am) FROM App\Entity\AnnonceProprietaireChien am where am.idchien=c.idchien and am.type='A') as mating FROM App\Entity\Chien c JOIN c.idindividu i join i.idutilisateur u where c.idindividu=:userid Order by nb desc")
+            ->setParameters(array('userid'=>'6'));
         return $query->getResult();
     }
 

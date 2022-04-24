@@ -22,7 +22,7 @@ class AnnonceProprietaireChien
     private $idannonceproprietairechien;
 
     /**
-     * @var \DateTime
+     *
      *
      * @ORM\Column(name="datePublication", type="date", nullable=false)
      */
@@ -43,11 +43,11 @@ class AnnonceProprietaireChien
     private $type;
 
     /**
-     * @var \DateTime|null
+     *
      *
      * @ORM\Column(name="datePerte", type="date", nullable=true, options={"default"="NULL"})
      */
-    private $dateperte = 'NULL';
+    private $dateperte;
 
     /**
      * @var string

@@ -22,7 +22,26 @@
                                 <p>
                                     {{chien.age }}</p>
 
-                                <p> {{ render(path('app_nblikes', {'idchien': chien.idchien})) }}</p>
+
+
+                                <p> {{ render(path('app_nblikes', {'idchien': chien.idchien})) }} <img style="max-width: 30px;max-height: 30px;" src="{{asset('FrontOffice/assets/images/chien/heartIcon.png') }}"></p>
+
+                                {% if chien.missing %}
+                                    <a href="{{ path('app_annonce_proprietaire_chien_removelost', {'idchien': chien.idchien}) }}"> <img  src="{{asset('FrontOffice/assets/images/chien/missingFilled.png') }}"> </a>
+                                {% else %}
+                                    <a href="{{ path('app_annonce_proprietaire_chien_addlost', {'idchien': chien.idchien}) }}"> <img  src="{{asset('FrontOffice/assets/images/chien/missingEmpty.png') }}"> </a>
+                                {% endif %}
+
+                                {% if chien.mating %}
+                                    <a href="{{ path('app_annonce_proprietaire_chien_removemating', {'idchien': chien.idchien}) }}"> <img class="ahbet"  src="{{asset('FrontOffice/assets/images/chien/matingFilled.png') }}"> </a>
+                                {% else %}
+                                    <a href="{{ path('app_annonce_proprietaire_chien_addmating', {'idchien': chien.idchien}) }}"> <img  class="ahbet" src="{{asset('FrontOffice/assets/images/chien/matingEmpty.png') }}"> </a>
+                                {% endif %}
+
+
+
+                                <a href="{{ path('app_chien_delete_front', {'idchien': chien.idchien}) }}"> <img class="ahbet" style="max-height: 70px; max-width:54px;" src="{{asset('FrontOffice/assets/images/chien/deleteDog.png') }}"> </a>
+
 
 
                             </div>

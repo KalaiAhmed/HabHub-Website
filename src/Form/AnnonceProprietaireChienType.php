@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\AnnonceProprietaireChien;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,10 +13,10 @@ class AnnonceProprietaireChienType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('datepublication')
+            ->add('datepublication',DateType::class)
             ->add('description')
             ->add('type')
-            ->add('dateperte')
+            ->add('dateperte',DateType::class)
             ->add('localisation')
             ->add('messagevocal')
             ->add('idchien')
