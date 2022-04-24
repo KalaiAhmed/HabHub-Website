@@ -124,7 +124,7 @@
         {% for individu in individus %}
             <tr>
                 <td>{{ individu.idindividu }}</td>
-                <td>{{ individu.idutilisateur.email }}</td>
+                <td> {{ individu.idUtilisateur.email }}  </td>
                 <td>{{ individu.nom }}</td>
                 <td>{{ individu.prenom }}</td>
                 <td>{{ individu.datenaissance ? individu.datenaissance|date('Y-m-d') : '' }}</td>

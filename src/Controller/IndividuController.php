@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Individu;
+use App\Entity\Utilisateur;
 use App\Form\IndividuType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,9 +24,14 @@ class IndividuController extends AbstractController
         $individus = $entityManager
             ->getRepository(Individu::class)
             ->findAll();
+        $utilisateur = $entityManager
+            ->getRepository(Utilisateur::class)
+            ->findAll();
 
         return $this->render('individu/index.html.twig', [
             'individus' => $individus,
+            'utilisateur' => $utilisateur,
+
         ]);
     }
 
@@ -92,5 +98,24 @@ class IndividuController extends AbstractController
         }
 
         return $this->redirectToRoute('app_individu_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/user", name="displayuser")
+     */
+    public function test(EntityManagerInterface $entityManager): Response
+    {
+        $individus = $entityManager
+            ->getRepository(Individu::class)
+            ->findAll();
+        $utilisateur = $entityManager
+            ->getRepository(Utilisateur::class)
+            ->findAll();
+
+        return $this->render('individu/index.html.twig', [
+            'individus' => $individus,
+            'utilisateur' => $utilisateur,
+
+        ]);
     }
 }

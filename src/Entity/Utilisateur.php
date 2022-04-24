@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Entity;
-
+use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Utilisateur
  *
- * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})})
+ *
  * @ORM\Entity
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @var int
@@ -48,6 +50,7 @@ class Utilisateur
      * @ORM\Column(name="type", type="string", length=15, nullable=false)
      */
     private $type;
+
 
     public function getIdutilisateur(): ?int
     {
@@ -106,4 +109,37 @@ class Utilisateur
   {
      return ($this->idutilisateur.'-'.$this->email);
   }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+
 }
