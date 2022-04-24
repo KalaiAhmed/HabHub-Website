@@ -50,7 +50,7 @@
         jQuery(document).ready(function() {
             var searchRequest = null;
             $("#search").keyup(function() {
-                var minlength = 1;
+                var minlength = 0;
                 var that = this;
                     var value = $(this).val();
                     var entitySelector = $("#entitiesNav").html('');
@@ -72,7 +72,9 @@
                                     $.each(arr, function(id, value) {
                                         if (key == 'annonces') {
                                             if (id != 'error') {
-                                                entitySelector.append('<li><a href="/daten/'+id+'">'+value+'</a></li>');
+                                                entitySelector.append(' <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">' +
+                                                    ' <div class="blog-post"> <div class="thumb"><a><img src="/FrontOffice/uploads/'+value[3]+'" alt=""> </a> </div> <div class="down-content"> <span class="category">'+value[0]+' </span> ' +
+                                                    '<a href="#"><h4>'+ value[2]+'</h4></a> <p>'+value[1]+' </p> </div></div> </div>');
                                             } else {
                                                 entitySelector.append('<li class="errorLi">'+value+'</li>');
                                             }

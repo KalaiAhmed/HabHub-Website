@@ -101,7 +101,7 @@ class SearchController extends AbstractController
     public function getRealEntitiesAnnoncesProp($annonces){
 
         foreach ($annonces as $annonce){
-            $realEntities[$annonce->getIdannonceproprietairechien()] = [$annonce->getIdChien()->getNom(),$annonce->getIdChien()->getAge(),$annonce->getIdChien()->getSexe(),$annonce->getIdChien()->getImage(),$annonce->getLocalisation()];
+            $realEntities[$annonce->getIdannonceproprietairechien()] = [$annonce->getIdChien()->getNom(),$annonce->getIdChien()->getAge(),$annonce->getIdChien()->getSexe(),$annonce->getIdChien()->getImage(),$annonce->getLocalisation(),$annonce->getIdChien()->getIdChien()];
         }
 
         return $realEntities;
