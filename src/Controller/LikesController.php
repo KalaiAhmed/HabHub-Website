@@ -70,7 +70,7 @@ class LikesController extends AbstractController
 
     }
     /**
-     * @Route("/addlike/{idchien}", name="app_likes_removelike", methods={"GET"})
+     * @Route("/removelike/{idchien}", name="app_likes_removelike", methods={"GET"})
      */
 
     public function removeLike(EntityManagerInterface $entityManager,int $idchien): Response

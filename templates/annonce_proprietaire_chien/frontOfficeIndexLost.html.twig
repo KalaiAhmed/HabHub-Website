@@ -34,6 +34,7 @@
                             <div class="down-content">
                                 <span class="category">{{ annonce_proprietaire_chien.idchien.sexe }}</span>
 
+                                <a href="{{ path('app_annonce_proprietaire_chien_lost_notify_owner',{'chien': annonce_proprietaire_chien.idchien}) }}">Notify Owner</a>
                                 <a href="#"><h4>{{ annonce_proprietaire_chien.idchien.nom }}</h4></a>
                                 <p>
                                     {{ annonce_proprietaire_chien.idchien.age }}</p>

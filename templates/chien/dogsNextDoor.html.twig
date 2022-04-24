@@ -28,6 +28,10 @@
                                 {% else %}
                                 <a href="{{ path('app_likes_addlike', {'idchien': chien.idchien}) }}"> <img class="chien-icon" src="{{asset('FrontOffice/assets/images/chien/emptyHeartIcon.png') }}"> </a>
                                 {% endif %}
+                                {% if chien.playwithme %}
+
+                               <img style="margin-top:2%;max-height: 27px;max-width: 102px;" src="{{asset('FrontOffice/assets/images/chien/playWithMe.png') }}">
+                                {% endif %}
                             </div>
                         </div>
                     </div>
