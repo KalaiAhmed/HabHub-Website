@@ -71,7 +71,7 @@ class RevueController extends AbstractController
     /**
      * @Route("/new/front/{idbusiness}/revue", name="app_revue_new_revue", methods={"GET", "POST"})
      */
-    public function new_revue_front(Request $request, EntityManagerInterface $entityManager,int $idbusiness): Response
+    public function new_revue_front(Request $request, EntityManagerInterface $entityManager,Business $business): Response
     {   $revue = new Revue();
 
         $revue->setIdindividu( $entityManager
@@ -80,7 +80,7 @@ class RevueController extends AbstractController
 
         $revue->setIdbusiness( $entityManager
             ->getRepository(Business::class)
-            ->findOneBy(array('idbusiness' => $idbusiness)));
+            ->findOneBy(array('idbusiness' => $business->getIdbusiness())));
 
         $form = $this->createForm(RevueType::class, $revue);
         $form->handleRequest($request);
@@ -89,7 +89,7 @@ class RevueController extends AbstractController
             $entityManager->persist($revue);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_business_show', ['idbusiness' => $idbusiness], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_business_show', ['idbusiness' => $business->getIdbusiness()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('revue/new.html.twig', [

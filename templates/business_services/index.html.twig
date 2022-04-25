@@ -20,6 +20,8 @@
                 <td>
                     <a href="{{ path('app_business_services_show', {'idbusinessservices': business_service.idbusinessservices}) }}">show</a>
                     <a href="{{ path('app_business_services_edit', {'idbusinessservices': business_service.idbusinessservices}) }}">edit</a>
+                    <a href="{{ path('app_reservation_new', {'idbusinessservices': business_service.idbusinessservices}) }}">Book Now</a>
+
                 </td>
             </tr>
         {% else %}

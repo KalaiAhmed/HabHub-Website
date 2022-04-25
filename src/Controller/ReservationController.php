@@ -113,7 +113,7 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_business_show', ['idbusiness' => $reservation->getIdbusinessservices()->getIdBusiness()->getIdBusiness()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('businessservices/index.html.twig', [
+        return $this->render('reservation/new.html.twig', [
             'reservation' => $reservation,
             'formula' => $form->createView(),
         ]);
