@@ -6,6 +6,7 @@ use App\Entity\Business;
 use App\Entity\Individu;
 use App\Entity\Revue;
 use App\Form\RevueType;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -80,6 +81,7 @@ class RevueController extends AbstractController
         $revue->setIdbusiness( $entityManager
             ->getRepository(Business::class)
             ->findOneBy(array('idbusiness' => $idbusiness)));
+
         $form = $this->createForm(RevueType::class, $revue);
         $form->handleRequest($request);
 

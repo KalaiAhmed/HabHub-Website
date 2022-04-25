@@ -9,6 +9,7 @@ use App\Form\BusinessType;
 use App\Form\RevueType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +19,38 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BusinessController extends AbstractController
 {
+
+    /**
+     * Creates a new ActionItem entity.
+     *
+     * @Route("/search-business", name="business_ajax_search")
+     * methods={"GET"}
+     */
+    public function businessSearchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $requestString = $request->get('m');
+
+        $businesses =  $em->getRepository('App:Business')->findBusinessByName($requestString);
+        dump($businesses);
+        if(!$businesses) {
+            $result['businesses']['error'] = "not found";
+        } else {
+            $result['businesses'] = $this->getRealEntitiesBusinesses($businesses);
+        }
+
+        return new Response(json_encode($result));
+    }
+
+    public function getRealEntitiesBusinesses($businesses){
+
+        foreach ($businesses as $business){
+            $realEntities[$business->getIdBusiness()] = [$business->getIdBusiness(),$business->getImage(),$business->getVille(),$business->getTitre(),$business->getHoraire()];
+        }
+
+        return $realEntities;
+    }
 
     /**
      * @Route("/back-office-revue", name="app_business_index_back_office", methods={"GET"})
@@ -38,16 +71,42 @@ class BusinessController extends AbstractController
      */
 
     /**
-     * @Route("/", name="app_business_index", methods={"GET"})
+     * @Route("/", name="app_business_index_n", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+
         $businesses = $entityManager
             ->getRepository(Business::class)
             ->findAll();
 
         return $this->render('business/frontOfficeIndex.html.twig', [
             'businesses' => $businesses,
+        ]);
+    }
+    /**
+     * @Route("/filters", name="app_business_index", methods={"GET"})
+     */
+    public function index_with_filters(EntityManagerInterface $entityManager,Request $request): Response
+    {
+        $filters=$request->get("categories");
+
+        $businesses = $entityManager
+            ->getRepository(Business::class)
+            ->getBusinessWithType($filters);
+
+        if($request->get('ajax')){
+            return new JsonResponse([
+                'content' =>$this->renderView('business/_content.html.twig', [
+                    'businesses' => $businesses,
+                      ])
+                ]);
+        }
+        $businessez = $entityManager
+            ->getRepository(Business::class)
+            ->findAll();
+        return $this->render('business/frontOfficeIndex.html.twig', [
+            'businesses' => $businessez,
         ]);
     }
     /**
@@ -71,9 +130,10 @@ class BusinessController extends AbstractController
     {
         $businesses = $entityManager
             ->getRepository(Business::class)
-            ->findBy(array('type'=>'grooming'));
+            ->findBusinessWithRating('grooming');
         return $this->render('business/frontOfficeIndex.html.twig', [
             'businesses' => $businesses,
+            
         ]);
     }
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\BusinessServices;
+use App\Entity\Individu;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
@@ -86,6 +88,37 @@ class ReservationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/new/{idbusinessservices}", name="app_reservation_new", methods={"GET", "POST"})
+     */
+    public function new_reservation_front(Request $request, EntityManagerInterface $entityManager,int $idbusinessservices): Response
+    {
+        $reservation = new Reservation();
+
+        $reservation->setIdindividu( $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => '2')));
+
+        $reservation->setIdbusinessservices( $entityManager
+            ->getRepository(BusinessServices::class)
+            ->findOneBy(array('idbusinessservices' => $idbusinessservices)));
+
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($reservation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_business_show', ['idbusiness' => $reservation->getIdbusinessservices()->getIdBusiness()->getIdBusiness()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('reservation/new.html.twig', [
+            'reservation' => $reservation,
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/{idreservation}/back-office", name="app_reservation_show_back_office", methods={"GET"})
      */

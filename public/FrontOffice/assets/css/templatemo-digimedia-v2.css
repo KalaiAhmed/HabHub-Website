@@ -55,6 +55,13 @@ figure, header, nav, section, article, aside, footer, figcaption {
 Mariem
 ---------------------------------------------
 */
+.h-filters {
+  display: flex;
+  align-content: center;
+  padding-right: 5px;
+
+}
+
 .ahbet{
   padding-top: 10%;
 }

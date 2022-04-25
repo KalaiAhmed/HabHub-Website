@@ -22,7 +22,7 @@ class Reservation
     private $idreservation;
 
     /**
-     * @var int
+     * @var \BusinessServices
      * @ORM\ManyToOne(targetEntity="BusinessServices")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idBusinessServices", referencedColumnName="idBusinessServices")
@@ -31,7 +31,6 @@ class Reservation
     private $idbusinessservices;
 
     /**
-     * @var \DateTime
      *
      * @ORM\Column(name="dateReservation", type="date", nullable=false)
      */
@@ -64,12 +63,12 @@ class Reservation
         return $this->idbusinessservices;
     }
 
-    /**
-     * @param int $idbusinessservices
-     */
-    public function setIdbusinessservices(int $idbusinessservices): void
+
+    public function setIdbusinessservices(?BusinessServices $idbusinessservices): self
     {
         $this->idbusinessservices = $idbusinessservices;
+        return $this;
+
     }
 
 

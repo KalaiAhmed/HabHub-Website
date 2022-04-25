@@ -49,6 +49,7 @@
         {{ include('business/location.html.twig') }}
 
 
+
     <a href="{{ path('app_business_edit', {'idbusiness': business.idbusiness}) }}">edit</a>
         {{ render(path('app_business_services_index', {'idbusiness': business.idbusiness} )) }}
         {{ render(path('app_revue_index', {'idbusiness': business.idbusiness} )) }}
