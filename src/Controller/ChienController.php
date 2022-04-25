@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Chien;
+use App\Entity\Individu;
 use App\Form\ChienType;
 use App\Form\ChienTypeFrontType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -100,6 +101,9 @@ class ChienController extends AbstractController
      */
     public function newfront(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $loggedinUser = $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => '6'));
         $chien = new Chien();
         $form = $this->createForm(ChienTypeFrontType::class, $chien);
         $form->handleRequest($request);
@@ -119,7 +123,7 @@ class ChienController extends AbstractController
             // on stocke l'image dans la bdd (son nom)
 
             $chien->setImage($fichier);
-
+            $chien->setIdindividu($loggedinUser);
 
             $entityManager->persist($chien);
             $entityManager->flush();
