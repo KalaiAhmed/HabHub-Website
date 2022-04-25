@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Produit
  *
  * @ORM\Table(name="produit", indexes={@ORM\Index(name="idCategorie", columns={"idCategorie"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  */
 class Produit
 {
@@ -17,7 +17,7 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="idProduit", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id 
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idproduit;

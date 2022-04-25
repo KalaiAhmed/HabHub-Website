@@ -48,10 +48,10 @@
     <thead>
         <tr>
             <th>  </th>
-            <th> Product </th>
-            <th> Price </th>
-            <th> Quantity </th>
-            <th> Subtotal </th>
+            <th  style="font-size:19px;"> Product  </th>
+            <th style="font-size:19px;"> Price </th>
+            <th style="font-size:19px;"> Quantity </th>
+            <th style="font-size:19px;"> Subtotal </th>
             <th> </th>
         </tr>
     </thead>
@@ -59,12 +59,12 @@
     <tbody>
         {% for item in items  %}
             <tr>
-            <td> <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/'~item.produit.image~'.jpg') }}" alt="" width="20px " height="40px"></a> </td>
-                <td>{{item.produit.nom}} </td>
-                <td>{{item.produit.prix}} </td>
-                <td>{{item.quantite}} </td>
-                <td>{{item.produit.prix * item.quantite}} </td>
-                <td>
+            <td class="image-box"> <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/'~item.produit.image~'.jpg') }}" alt=""</a> </td>
+                <td style="padding-top:50px;font-size:19px;">{{item.produit.nom }} </td>
+                <td style="padding-top:50px;font-size:19px;">{{item.produit.prix}} </td>
+                <td style="padding-top:50px;font-size:19px;">{{item.quantite}} </td>
+                <td style="padding-top:50px;font-size:19px;">{{item.produit.prix * item.quantite}} </td>
+                <td style="padding-top:50px;font-size:19px;">
                 <a href='{{ path('DelProd', {'id':item.produit.idproduit}) }}' class="btn btn-danger btn-sm" >
                     <i class="fa fa-trash"></i>
                     </a>
@@ -74,8 +74,8 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4" style="text-align:right;font-weight: bold;">Total: </td>
-                <td style="font-weight: bold;">{{total}} DT</td>
+                <td colspan="4" style="text-align:right;font-weight: bold;font-size:19px;">Total: </td>
+                <td style="font-weight: bold;font-size:19px;">{{total}} DT</td>
                 <td> </td>
             </tr>
            
@@ -90,8 +90,17 @@
     <p>VOTRE PANIER EST VIDE </p>
     {% endif %}
 </div>
- <form action="payment/checkout" method="POST" style="text-align:right;padding-right:290px">
+ <form action="/checkout" method="POST" style="text-align:right;padding-right:290px">
     <button type="submit" class="btn btn-outline-warning" style="background-color:#f46c38;text-color:white;color:white;font-weight: bold">Checkout</button>
     </form>
 
+
+
+<style>
+.image-box{
+width: auto;
+min-width: 32px;
+max-width: 50px
+  }
+</style>
 {% endblock %}    

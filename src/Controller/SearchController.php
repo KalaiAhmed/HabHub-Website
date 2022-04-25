@@ -3,60 +3,58 @@
 namespace App\Controller;
 //use Symfony\Bundle\FrameworkBundle\Repository\ProduitRepository;
 use App\Repository\ProduitRepository;
+use App\Repository\AnnonceProprietaireChienRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Produit;
+use App\Entity\AnnonceProprietaireChien;
 
 class SearchController extends AbstractController
 {
+
+
+
     /**
-     * @Route("/search", name="app_search"  )
+     * Creates a new ActionItem entity.
+     *
+     * @Route("/search", name="ajax_search")
+     * methods={"GET"}
      */
-    public function index(): Response
+    public function searchAction(Request $request)
     {
-        return $this->render('search/searchBar.html.twig', [
-            'controller_name' => 'SearchController',
-        ]);
-    }
+        $em = $this->getDoctrine()->getManager();
 
-    public function searchBar()
-    {
-        $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('handleSearch'))
-            ->add('Search', TextType::class )
+        $requestString = $request->get('p');
+        
 
+        $produits =  $em->getRepository('App:Produit')->findEntitiesByString($requestString);
 
-
-
-            ->add('recherche', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
-            ->getForm();
-        return $this->render('search/searchBar.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
-
-      /**
-     * @Route("/handleSearch", name="handleSearch")
-     * @param Request $request
-     */
-    public function handleSearch(Request $request, ProduitRepository $repo)
-    {
-        $query = $request->request->get('form')['Search'];
-        if($query) {
-            $produits = $repo->findProduitByName($query);
+        if(!$produits) {
+            $result['produits']['error'] = "keine EintrÃ¤ge gefunden";
+        } else {
+            $result['produits'] = $this->getRealEntities($produits);
         }
-        return $this->render('produit/index_Front.html.twig', [
-            'produits' => $produits
-        ]);
+
+        return new Response(json_encode($result));
     }
 
+  
+
+
+    public function getRealEntities($produits){
+
+        foreach ($produits as $produit){
+            $realEntities[$produit->getIdproduit()] =[ $produit->getNom(),$produit->getPrix(),$produit->getMarque(),$produit->getDescription(),$produit->getIdcategorie()->getNom(),$produit->getImage(),$produit->getIdproduit()   ];
+
+        }
+
+        return $realEntities;
+    }
+
+   
 
 }
