@@ -67,7 +67,7 @@ class BusinessRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('b');
 
-        $qb->innerJoin('App\Entity\BusinessServices', 'bs', 'WITH', 'b.idbusiness = bs.idbusiness')
+        $qb->leftJoin('App\Entity\BusinessServices', 'bs', 'WITH', 'b.idbusiness = bs.idbusiness')
 
             ->where(
                 $qb->expr()->andX(

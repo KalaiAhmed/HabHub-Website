@@ -51,12 +51,15 @@
 
 
     <a href="{{ path('app_business_edit', {'idbusiness': business.idbusiness}) }}">edit</a>
+        <a href="{{ path('app_reservation_new', {'idbusinessservices': business.idbusiness.idbusinessservices}) }}">Book Now</a>
+
         {{ render(path('app_business_services_index', {'idbusiness': business.idbusiness} )) }}
         {{ render(path('app_revue_index', {'idbusiness': business.idbusiness} )) }}
         <h1>Add New Review</h1>
         {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_end(form) }}
+
 
 
 

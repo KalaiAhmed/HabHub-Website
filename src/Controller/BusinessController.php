@@ -28,16 +28,18 @@ class BusinessController extends AbstractController
      */
     public function businessSearchAction(Request $request)
     {
+        $filters=$request->get("categories");
+
         $em = $this->getDoctrine()->getManager();
 
         $requestString = $request->get('m');
 
+
         $businesses =  $em->getRepository('App:Business')->findBusinessByName($requestString);
-        dump($businesses);
         if(!$businesses) {
-            $result['businesses']['error'] = "not found";
+            $result['business']['error'] = "not found";
         } else {
-            $result['businesses'] = $this->getRealEntitiesBusinesses($businesses);
+            $result['business'] = $this->getRealEntitiesBusinesses($businesses);
         }
 
         return new Response(json_encode($result));
@@ -90,7 +92,6 @@ class BusinessController extends AbstractController
     public function index_with_filters(EntityManagerInterface $entityManager,Request $request): Response
     {
         $filters=$request->get("categories");
-
         $businesses = $entityManager
             ->getRepository(Business::class)
             ->getBusinessWithType($filters);

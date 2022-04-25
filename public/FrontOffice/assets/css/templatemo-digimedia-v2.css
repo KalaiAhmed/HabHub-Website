@@ -61,7 +61,35 @@ Mariem
   padding-right: 5px;
 
 }
+.flexini{
+  display: flex;
+  margin: 0 5px;
+}
 
+.item{
+  margin: 0 5px;
+
+}
+.item-checkbox{
+  margin: 0 25px;
+}
+.item-checkbox p{
+  font-size: 20px;
+}
+.save-button-right{
+  margin-top: 15%;
+  width: 80px;
+  height: 40px;
+  background: #E0642C;
+  border-radius: 10px;
+  border-width: 0;
+  font-family: 'Lato';
+  font-style: normal;
+  font-size: 15.5px;
+  /* identical to box height */
+  color: #FFFFFF;
+
+}
 .ahbet{
   padding-top: 10%;
 }

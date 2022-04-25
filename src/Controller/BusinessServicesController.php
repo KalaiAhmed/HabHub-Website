@@ -23,6 +23,7 @@ class BusinessServicesController extends AbstractController
         $businessServices = $entityManager
             ->getRepository(BusinessServices::class)
             ->findBy(array('idbusiness'=>$idbusiness));
+
         return $this->render('business_services/index.html.twig', [
             'business_services' => $businessServices,
         ]);
