@@ -78,7 +78,9 @@ class ProduitRepository extends ServiceEntityRepository
 
 
      // Find/search articles by title/content
-     public function findEntitiesByString($str){
+    /* public function findEntitiesByString(String $str){
+
+      
         return $this->getEntityManager()
             ->createQuery(
                 'SELECT p
@@ -87,6 +89,31 @@ class ProduitRepository extends ServiceEntityRepository
             )
             ->setParameter('str', '%'.$str.'%')
             ->getResult();
+    }*/
+    public function findEntitiesByString(string $q)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+
+        $qb->innerJoin('App\Entity\Categorie', 'c', 'WITH', 'c.idcategorie = p.idcategorie')
+  
+
+
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+
+                        $qb->expr()->like('p.nom', ':query'),
+                        $qb->expr()->like('c.nom', ':query')
+                     
+                    )
+
+                )
+            )
+
+        ->setParameter('query',$q . '%');
+      
+        return $qb->getQuery()->getResult();
     }
 
 

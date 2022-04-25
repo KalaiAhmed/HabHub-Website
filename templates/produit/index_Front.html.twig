@@ -46,11 +46,7 @@
 {% block body %} 
     
     <h1 >Products List</h1>
-<div>.</div>
-    <div></div>
-    <div></div><div></div>.
-    <div></div><div></div>
-    <div></div>
+
 
 
 
@@ -165,7 +161,7 @@
                 var minlength = 0;
                 var that = this;
                 var value = $(this).val();
-                var entitySelector = $("#entitiesNav").html('');
+                var entitySelector = $("#content").html('');
                 if (value.length >= minlength ) {
                     if (searchRequest != null)
                         searchRequest.abort();

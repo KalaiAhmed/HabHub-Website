@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Produit;
 use App\Entity\AnnonceProprietaireChien;
 
+
 class SearchController extends AbstractController
 {
 
@@ -28,13 +29,14 @@ class SearchController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $requestString = $request->get('p');
+        $requestString = $request->query->get('l');
+       
         
 
         $produits =  $em->getRepository('App:Produit')->findEntitiesByString($requestString);
 
         if(!$produits) {
-            $result['produits']['error'] = "keine EintrÃ¤ge gefunden";
+            $result['produits']['error'] = "Not Found";
         } else {
             $result['produits'] = $this->getRealEntities($produits);
         }
