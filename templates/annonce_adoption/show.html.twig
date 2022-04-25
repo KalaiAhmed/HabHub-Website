@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+
+{% set queryParams = app.request.query.all %}
+
 {% block title %}Adoption index{% endblock %}
 
 
@@ -8,10 +11,17 @@
 
     <div style="padding-top:150px;" class="container">
         <div class="row"> {{ render (controller ('App\\Controller\\SearchAdoptionController::searchBar' )) }}   </div>
-        <div style="padding-top:25px;"> <a href="{{ path('app_annonce_adoption_new') }}">Create Adoption post</a>   </div>
+        <div style="padding-top:25px;"> <a href="{{ path('app_annonce_adoption_new') }}">Create Adoption post</a> </div>
         <div class="row">
             <form id="filters">
                 {% for inv in individus %}
+                {# On vérifie si la catégorie est dans les paramètres #}
+                    {% if queryParams is not empty and queryParams.individus is defined %}
+                        {% set checked = (inv.idindividu in queryParams.individus) ? "checked" : "" %}
+                    {% else %}
+                        {% set checked = "" %}
+                    {% endif %}
+
                     <p class="column"><input type="checkbox" name="individus[]" id="inv{{inv.idindividu}}" value="{{inv.idindividu}}"> 
                     <label for="inv{{inv.idindividu}}">{{inv.nom}}</label></p>
                 {% endfor %}

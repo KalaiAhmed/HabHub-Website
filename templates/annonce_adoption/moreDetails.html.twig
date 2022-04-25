@@ -53,13 +53,26 @@
             </tr>
         </tbody>
     </table>
-    
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+
+                <div class="col-sm-10">
+                    {{ form_row(form.content,{'attr':{'class':'form-control'}}) }}
+                </div>
+                {{ form_errors(form.content,{'attr':{'class':'text-danger'}}) }}
+
+                <div class="col-sm-10" style=" padding-top=15px; display: flex;align-items: center;justify-content: center">
+
+                {#<a href= "{{ path('app_new_comment') }}">Post comment</a>#}
+                </div>
+
+                {{ form_end(form) }}
+
 
     <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
 
     <a href="{{ path('app_annonce_adoption_edit', {'idannonceadoption': annonceAdoption.idannonceadoption}) }}">edit</a>
 
-     <a href="{{ path('app_annonce_adoption_new_pdf', {'idannonceadoption': annonceAdoption.idannonceadoption}) }}">imprimer pdf</a>
+     <a href="{{ path('app_annonce_adoption_pdf', {'idannonceadoption': annonceAdoption.idannonceadoption}) }}">imprimer pdf</a>
 
      <a href="{{path("contact",{'id': annonceAdoption.idindividu.idindividu })}}" class="btn btn-primary">Contacter l'annonceur</a>
 

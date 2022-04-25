@@ -10,7 +10,12 @@
                             <span class="date">{{annonceAdoption.datepublication|date("m/d/Y")}}</span>
                             <a href="#"><h4>{{ annonceAdoption.localisation}}</h4></a>
                             <p>{{ annonceAdoption.idchien.description }}</p>
-                            <div class="border-first-button"><a href="{{ path('app_annonce_adoption_show',{'idannonceadoption': annonceAdoption.idannonceadoption}) }}">More details</a></div>
+                            <div class="border-first-button">
+                            <a href="{{ path('app_annonce_adoption_show',{'idannonceadoption': annonceAdoption.idannonceadoption}) }}">More details</a>
+                            </div>
+                            <div>
+                            <a href="{{ path('app_annonce_adoption_show',{'idannonceadoption': annonceAdoption.idannonceadoption}) }}">Adopt now !</a>
+                            </div>
                         </div>
                     </div>
                 </div>

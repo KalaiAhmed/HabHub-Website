@@ -1,0 +1,58 @@
+{% extends 'base-pdf.html.twig' %}
+
+{% block title %}Announcement infos}{% endblock %}
+{% block body %}
+<h1> Published at {{annonceAdoption.datepublication|date("m/d/Y")}} </h1>
+ <h2>Foster infos</h2>
+    <table border=1>
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Sexe</th>
+                <th scope="col">Birthdate</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{annonceAdoption.idindividu.prenom}}</td>
+                <td>{{annonceAdoption.idindividu.nom}}</td>
+                <td>{{annonceAdoption.idindividu.sexe}}</td>
+                <td>{{annonceAdoption.idindividu.datenaissance|date("m/d/Y")}}</td>
+                <td>{{annonceAdoption.idindividu.idutilisateur.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+ <h2>Dog infos</h2>
+            <table border=1>
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Sexe</th>
+                <th scope="col">Vaccination</th>
+                <th scope="col">Description</th>
+                <th scope="col">Color</th>
+                <th scope="col">Groupe</th>
+                <th scope="col">Race</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{annonceAdoption.idchien.nom}}</td>
+                <td>{{annonceAdoption.idchien.age}}</td>
+                <td>{{annonceAdoption.idchien.sexe}}</td>
+                <td>{{annonceAdoption.idchien.vaccination ? 'Yes' : 'No' }}</td>
+                <td>{{annonceAdoption.description}}</td>
+                <td>{{annonceAdoption.idchien.color}}</td>
+                <td>{{annonceAdoption.idchien.groupe}}</td>
+                <td>{{annonceAdoption.idchien.race}}</td>
+            </tr>
+        </tbody>
+    </table>
+<h2>Dog Image</h2>
+{{ absolute_url(asset('FrontOffice/uploads/'~annonceAdoption.idchien.image)) }}
+
+      
+{% endblock %}

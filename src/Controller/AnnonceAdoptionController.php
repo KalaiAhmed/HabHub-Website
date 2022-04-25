@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Chien;
 use App\Form\ChienType;
+use App\Form\CommentType;
+use App\Entity\Comment;
 use App\Entity\AnnonceAdoption;
 use App\Entity\Individu;
 use App\Form\AnnonceAdoptionType;
@@ -157,12 +159,42 @@ class AnnonceAdoptionController extends AbstractController
     /**
      * @Route("/{idannonceadoption}", name="app_annonce_adoption_show", methods={"GET"})
      */
-    public function show(AnnonceAdoption $annonceAdoption): Response
+    public function show(Request $request,AnnonceAdoption $annonceAdoption,EntityManagerInterface $entityManager ): Response
     {
+        // Partie commentaires
+        $comment = new Comment();
+        $commentForm = $this->createForm(CommentType::class, $comment);
+
+        //get loggedinUser
+        $loggedinUser = $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => '2'));
+
+        $commentForm->handleRequest($request);
+
+        if($commentForm->isSubmitted() && $commentForm->isValid()){
+
+            $comment->setCreatedAt(new \DateTime('now'));
+            $comment->setIdannonceadoption($annonceAdoption);
+            $comment->setIdindividu($loggedinUser);
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            //$this->addFlash('message', 'Votre commentaire a bien été envoyé');
+            /*return $this->redirectToRoute('app_annonce_adoption_show',array(
+                'annonceAdoption' => $annonceAdoption));*/
+        }
+
         return $this->render('annonce_adoption/moreDetails.html.twig', [
             'annonceAdoption' => $annonceAdoption,
+            'form'=>$commentForm->createView(),
         ]);
     }
+
+
+
+    
 
     /**
      * @Route("/pdf/{idannonceadoption}", name="app_annonce_adoption_pdf", methods={"GET"})
@@ -172,10 +204,19 @@ class AnnonceAdoptionController extends AbstractController
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         //$options->set('isRemoteEnabled', true);
-        $pdfOptions->set('defaultFont', 'Arial','isRemoteEnabled', true);
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->setIsRemoteEnabled(TRUE);
         
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => FALSE,
+                'verify_peer_name' => FALSE,
+                'allow_self_signed' => TRUE
+            ]
+        ]);
+        $dompdf->setHttpContext($context);
         //l'image
 
         $image = $annonceAdoption->getIdchien()->getImage();
@@ -186,8 +227,11 @@ class AnnonceAdoptionController extends AbstractController
         //$png = file_get_contents('FrontOffice/uploads/'.$pic);
         $logopngbase64 = base64_encode($logo);
         $picpngbase64 = base64_encode($dogpic);
+
+
+
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('annonce_adoption/pdf.html.twig', [
+        $html = $this->renderView('annonce_adoption/download.html.twig', [
             'annonceAdoption' => $annonceAdoption,
             "logo"=>$logopngbase64,
             "dogpic"=>$picpngbase64
@@ -203,7 +247,7 @@ class AnnonceAdoptionController extends AbstractController
 
         // Output the generated PDF to Browser (inline view)
         $dompdf->stream("mypdf.pdf", [
-            "Attachment" => false
+            "Attachment" => true
         ]);
     }
 
