@@ -104,9 +104,9 @@ class Chien
     /**
      * @param int $idchien
      */
-    public function __construct(int $idchien)
+    public function __construct()
     {
-        $this->idchien = $idchien;
+
     }
 
     public function getIdchien(): ?int

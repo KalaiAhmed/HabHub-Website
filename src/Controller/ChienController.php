@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Chien;
 use App\Form\ChienType;
+use App\Form\ChienTypeFrontType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -89,6 +90,44 @@ class ChienController extends AbstractController
         }
 
         return $this->render('chien/new.html.twig', [
+            'chien' => $chien,
+            'f' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/new-front", name="app_chien_new_front", methods={"GET", "POST"})
+     */
+    public function newfront(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $chien = new Chien();
+        $form = $this->createForm(ChienTypeFrontType::class, $chien);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //recuperation des images transmises
+            $image = $form->get('image')->getData();
+
+
+
+            $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+            //On copie le fichier dans le dossier upload
+            $image->move(
+                $this->getParameter('upload_directory'),
+                $fichier
+            );
+            // on stocke l'image dans la bdd (son nom)
+
+            $chien->setImage($fichier);
+
+
+            $entityManager->persist($chien);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_chien_index_my_dogs', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('chien/newfront.html.twig', [
             'chien' => $chien,
             'f' => $form->createView(),
         ]);

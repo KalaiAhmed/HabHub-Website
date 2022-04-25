@@ -3,10 +3,15 @@
 {% block title %}My Dogs{% endblock %}
 
 {% block body %}
-
+    <div class="ahbet">
+    <a  href="{{ path('app_chien_new_front') }}"><img style="max-width: 300px;max-height: 100px;"src="{{asset('FrontOffice/assets/images/chien/AddDogButton.png') }}"></a>
+    </div>
     <div id="blog" class="blog">
+
         <div class="container">
-            <div class="row">
+
+            <div class="row ahbet">
+
                 {% for chien in chiens %}
 
                     <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
