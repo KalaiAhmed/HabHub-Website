@@ -55,6 +55,38 @@ figure, header, nav, section, article, aside, footer, figcaption {
 Mariem
 ---------------------------------------------
 */
+
+
+.flex-box{
+  display:flex;
+  width: 100%;
+  margin: auto;
+
+}
+.res-box{
+  display:flex;
+  align-content: stretch;
+}
+.left{
+  width:20%;
+}
+.right{
+  width: 60%;
+  word-wrap:break-word;
+  padding-left: 5%;
+}
+.left-sm{
+  width:10%;
+}
+.business-title{
+  color:#E0642C ;
+  font-weight: bolder;
+}
+.business-img-details{
+  width: 200px;
+  height: auto;
+}
+
 .h-filters {
   display: flex;
   align-content: center;
@@ -62,22 +94,80 @@ Mariem
 
 }
 .flexini{
+  width: 500px;
   display: flex;
   margin: 0 5px;
+  justify-content: space-between;
+}
+.space-5{
+  margin-top: 5%;
+
 }
 
-.item{
+.space-2{
+  margin-top: 2%;
+}
+
+.space-1{
+  margin-top: 1%;
+}
+.key{
+  font-size:15px;
+  color:grey;
+}
+.value{
+  width:150px;
+  overflow : scroll;
+  font-size:15px;
+
+}
+
+.key-bigger{
+  font-size:15px;
+  font-weight: bolder;
+}
+.value-bigger{
+  width:150px;
+  overflow : scroll;
+  font-size:15px;
+
+}
+.title-ville{
+  display: flex;
+  justify-content: space-between;
+
+}
+.tag-ville{
+  width: 120px;
+  height: 43px;
+  background: #FFFFFF;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.tag-location{
+  width: 13px;
+  height: 18.2px;
+  margin-right: 5%;
+  margin-bottom: 5%;
+
+}
+.items{
   margin: 0 5px;
 
 }
-.item-checkbox{
+.items-checkbox{
   margin: 0 25px;
 }
-.item-checkbox p{
+.items-checkbox p{
   font-size: 20px;
 }
 .save-button-right{
-  margin-top: 15%;
+  margin-top: 35%;
   width: 80px;
   height: 40px;
   background: #E0642C;

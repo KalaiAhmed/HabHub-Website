@@ -21,10 +21,6 @@
                 <td>{{ revue.nbetoiles }}</td>
                 <td>{{ revue.commentaire }}</td>
                 <td>{{ revue.datepublication ? revue.datepublication|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_revue_show', {'idrevue': revue.idrevue}) }}">show</a>
-                    <a href="{{ path('app_revue_edit', {'idrevue': revue.idrevue}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>

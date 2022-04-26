@@ -1,3 +1,14 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+
+{{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+<div class="flexini">
+    <div class="item">
+        <p>Rating Stars</p>
+        {{ form_widget(form.nbetoiles,{'attr':{'class':'form-contr0ol'}}) }}
+    </div>
+    <div class="item">
+        <p>Explain your Rating</p>
+        {{ form_widget(form.commentaire,{'attr':{'class':'form-contr0ol'}}) }}
+    </div>
+</div>
+
 {{ form_end(form) }}

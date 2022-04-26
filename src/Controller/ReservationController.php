@@ -8,11 +8,12 @@ use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Util\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Twilio\Rest\Client;
 /**
  * @Route("/reservation")
  */
@@ -109,6 +110,7 @@ class ReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($reservation);
             $entityManager->flush();
+            $this->confirmReservation($reservation);
 
             return $this->redirectToRoute('app_business_show', ['idbusiness' => $reservation->getIdbusinessservices()->getIdBusiness()->getIdBusiness()], Response::HTTP_SEE_OTHER);
         }
@@ -201,4 +203,51 @@ class ReservationController extends AbstractController
 
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    public function confirmReservation(Reservation $reservation): Response
+    {
+        $recipient='+216'.strval($reservation->getIdindividu()->getIdutilisateur()->getNumtel());
+        $originator='+21692962405';
+        //$recipient='+21692962405';
+
+        $text='Confirmation de réservation du service "'.$reservation->getIdbusinessservices()->getNomservice().'" sous le nom: "'.$reservation->getIdindividu()->getPrenom().' '.$reservation->getIdindividu()->getNom().'" pour le '.$reservation->getDatereservation()->format('d-m-Y').' '.$reservation->getHeurereservation();
+        $messageBird = new \MessageBird\Client('3jCpdTd7mvp1JPdZrb1hdJbG0'); //test
+        //$messageBird = new \MessageBird\Client('lPUuEHDNz2QeFFW1pWBPoJEZi'); //live_mariem
+        //$messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live_hamidou
+
+
+        $message =  new \MessageBird\Objects\Message();
+        try{
+
+            $message->originator = $originator;
+            $message->recipients = $recipient;
+            $message->body = $text;
+            $response = $messageBird->messages->create($message);
+
+
+            //print_r($response);
+            dump($response);
+        }
+        catch(Exception $e) {echo $e;}
+
+        return $this->redirectToRoute('app_business_show', ['idbusiness' => $reservation->getIdbusinessservices()->getIdBusiness()->getIdBusiness()], Response::HTTP_SEE_OTHER);
+    }
+
+
+
+
+
+
+
+
+
+    public function sendSMS(Reservation $reservation){
+        $twilio = $this->get('twilio.client');
+        $text="Confirmation de réservation du service".$reservation->getIdbusinessservices()." sous le nom:".$reservation->getIdindividu()."date et heure : ".$reservation->getHeurereservation();
+        $twilio->messages->create('+216'.strval($reservation->getIdindividu()->getIdutilisateur()->getNumtel()),[
+            'from'=>'+19403013325',
+            'body'=>$text]
+        );
+    }
+
 }
