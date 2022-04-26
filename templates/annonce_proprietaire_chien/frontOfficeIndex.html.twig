@@ -6,23 +6,24 @@
 
 {% block body %}
 
-<div class="sidebar-search">
-    <div class="input-group custom-search-form" style="padding-top:7%">
-        <input type="text" id="search" class="form-control" placeholder="Search for a mate">
-    </div>
-    <!-- /input-group -->
-</div>
+
 
     <div id="blog" class="blog">
         <div class="container">
-            <div class="row" id="entitiesNav">
+            <div class="sidebar-search">
+                <div class="input-group custom-search-form" style="padding-top:7%">
+                    <input type="text" id="search" class="form-control" placeholder="Search for a mate">
+                </div>
+                <!-- /input-group -->
+            </div>
+            <div class="row ahbet" id="entitiesNav">
                 {% for annonce_proprietaire_chien in annonce_proprietaire_chiens %}
 
                     <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
                         <div class="blog-post">
                             <div class="thumb">
 
-                                <a href="#"><img src="{{asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}" alt=""></a>
+                                <a href="{{ path('app_annonce_proprietaire_chien_show_mating',{'annonceProprietaireChien': annonce_proprietaire_chien.idannonceproprietairechien}) }}"><img src="{{asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}" alt=""></a>
                             </div>
                             <div class="down-content">
                                 <span class="category">{{ annonce_proprietaire_chien.idchien.sexe }}</span>
@@ -75,6 +76,7 @@
                                                 entitySelector.append(' <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">' +
                                                     ' <div class="blog-post"> <div class="thumb"><a><img src="/FrontOffice/uploads/'+value[3]+'" alt=""> </a> </div> <div class="down-content"> <span class="category">'+value[0]+' </span> ' +
                                                     '<a href="#"><h4>'+ value[2]+'</h4></a> <p>'+value[1]+' </p> </div></div> </div>');
+
                                             } else {
                                                 entitySelector.append('<li class="errorLi">'+value+'</li>');
                                             }

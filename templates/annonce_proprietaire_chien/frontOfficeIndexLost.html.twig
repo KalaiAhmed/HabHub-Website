@@ -6,30 +6,25 @@
 
 {% block body %}
 
-<div class="sidebar-search">
-    <div class="input-group custom-search-form" style="padding-top:7%">
-        <input type="text" id="search" class="form-control" placeholder="Search for a lost dog">
-    </div>
-    <!-- /input-group -->
-</div>
-    <ul class="nav" id="side-menu">
-        <li>
-            <a href="#"> Search Results<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level" >
-            </ul>
-        </li>
-    </ul><br><br><br><br>
+
+
 
     <div id="blog" class="blog">
         <div class="container">
-            <div class="row" id="entitiesNav" >
+            <div class="sidebar-search">
+                <div class="input-group custom-search-form" style="padding-top:7%">
+                    <input type="text" id="search" class="form-control" placeholder="Search for a lost dog">
+                </div>
+                <!-- /input-group -->
+            </div>
+            <div class="row ahbet" id="entitiesNav" >
                 {% for annonce_proprietaire_chien in annonce_proprietaire_chiens %}
 
                     <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
                         <div class="blog-post">
                             <div class="thumb">
 
-                                <a href="#"><img src="{{asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}" alt=""></a>
+                                <a href="{{ path('app_annonce_proprietaire_chien_show_lost',{'annonceProprietaireChien': annonce_proprietaire_chien.idannonceproprietairechien}) }}"><img src="{{asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}" alt=""></a>
                             </div>
                             <div class="down-content">
                                 <span class="category">{{ annonce_proprietaire_chien.idchien.sexe }}</span>

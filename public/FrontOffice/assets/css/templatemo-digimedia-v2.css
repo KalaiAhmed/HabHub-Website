@@ -2137,7 +2137,7 @@ display:none;
 {
   display:block;
   position:absolute;
-  background: rgb(255, 255, 255);
+  background: rgb(252, 252, 252);
   /*E0642CFF*/
 
 
@@ -2150,7 +2150,7 @@ display:none;
 
 
 }
-.sub-menu-1 ul li a
+.sub-menu-1 ul li
 {
   color: white;
 }

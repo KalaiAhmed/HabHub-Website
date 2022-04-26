@@ -121,11 +121,21 @@ class AnnonceProprietaireChienController extends AbstractController
     }
 
     /**
-     * @Route("/{idannonceproprietairechien}", name="app_annonce_proprietaire_chien_show", methods={"GET"})
+     * @Route("/lost/{annonceProprietaireChien}", name="app_annonce_proprietaire_chien_show_lost", methods={"GET"})
      */
-    public function show(AnnonceProprietaireChien $annonceProprietaireChien): Response
+    public function showLost(AnnonceProprietaireChien $annonceProprietaireChien): Response
     {
-        return $this->render('annonce_proprietaire_chien/show.html.twig', [
+        return $this->render('annonce_proprietaire_chien/showLost.html.twig', [
+            'annonce_proprietaire_chien' => $annonceProprietaireChien,
+        ]);
+    }
+
+    /**
+     * @Route("/mating/{annonceProprietaireChien}", name="app_annonce_proprietaire_chien_show_mating", methods={"GET"})
+     */
+    public function showMating(AnnonceProprietaireChien $annonceProprietaireChien): Response
+    {
+        return $this->render('annonce_proprietaire_chien/showMating.html.twig', [
             'annonce_proprietaire_chien' => $annonceProprietaireChien,
         ]);
     }

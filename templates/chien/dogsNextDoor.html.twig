@@ -15,7 +15,7 @@
                         <div class="blog-post">
                             <div class="thumb">
 
-                                <a href="#"><img src="{{asset('FrontOffice/uploads/'~chien.image) }}" alt=""></a>
+                                <a href="{{ path('app_chien_show',{'chien': chien.idchien,'liked':chien.liked}) }}"><img src="{{asset('FrontOffice/uploads/'~chien.image) }}" alt=""></a>
                             </div>
                             <div class="down-content">
                                 <span class="category">{{ chien.sexe }}</span>
