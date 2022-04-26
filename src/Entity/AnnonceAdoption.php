@@ -41,6 +41,14 @@ class AnnonceAdoption
      */
     private $description ;
 
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=20, nullable=false)
+     */
+    private $status;
+
     /**
      * @var string
      *@Assert\NotBlank(message=" champ obligatoire")
@@ -113,6 +121,17 @@ class AnnonceAdoption
         return $this;
     }
 
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
     public function getIdindividu(): ?Individu
     {
         return $this->idindividu;

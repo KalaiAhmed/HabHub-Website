@@ -62,19 +62,41 @@ class AnnonceAdoptionRepository extends ServiceEntityRepository
 
                 )
             )
-            ->setParameter('query', '%' . $q . '%')
-        ;
+            ->setParameter('query', '%' . $q . '%');
+            $qb->andWhere( 'a.status = \'P\'');
         return $qb
             ->getQuery()
             ->getResult();
     }
 
-    public function getAnnonces($filters = null){
-        $query = $this->createQueryBuilder('a');
 
+   function findEntitiesByString(string $q)
+    {
+        $qb = $this->createQueryBuilder('u')
+
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+
+                        $qb->expr()->like('u.email', ':query')
+
+                    )
+
+                )
+            );
+
+            $qb->setParameter('query',$q . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getAnnonces($filters = null){
+        $query = $this->createQueryBuilder('a')->
+        Where( 'a.status = \'P\'');
+        
         // On filtre les données
         if($filters != null){
-            $query->Where('a.idindividu IN(:indiv)')
+            $query->andWhere('a.idindividu IN(:indiv)')
                 ->setParameter(':indiv', array_values($filters));
         }
 

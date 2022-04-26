@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Controller;
-//use Symfony\Bundle\FrameworkBundle\Repository\ProduitRepository;
+//use Symfony\Bundle\FrameworkBundle\Repository\annonceRepository;
 use App\Repository\AnnonceAdoptionRepository;
+use App\Entity\AnnonceAdoption;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,55 +16,48 @@ use Symfony\Component\HttpFoundation\Request;
 class SearchAdoptionController extends AbstractController
 {
     /**
-     * @Route("/search", name="app_search"  )
+     * Creates a new ActionItem entity.
+     *
+     * @Route("/search", name="ajax_search")
+     * methods={"GET"}
      */
-    public function index(): Response
+    public function searchBar(Request $request, EntityManagerInterface $entityManager)
     {
-        return $this->render('search/searchBar.html.twig', [
-            'controller_name' => 'SearchController',
-        ]);
-    }
+        
 
-    public function searchBar()
-    {
-        $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('handleSearch'))
-            ->add('Search', TextType::class )
+        $requestString = $request->query->get('l');
+       
+        
 
+        $annonces = $entityManager
+            ->getRepository(AnnonceAdoption::class)
+            ->findAnnonceByDogName($requestString);
 
-
-
-            ->add('recherche', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
-            ->getForm();
-        return $this->render('search/searchBar.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
-
-      /**
-     * @Route("/handleSearch", name="handleSearch")
-     * @param Request $request
-     */
-    public function handleSearch(EntityManagerInterface $entityManager, Request $request, AnnonceAdoptionRepository $repo)
-    {
-        $query = $request->request->get('form')['Search'];
-        if($query) {
-            $annonceAdoption = $repo->findAnnonceByDogName($query);
+        if(!$annonces) {
+            $result['annonces']['error'] = "Not Found";
+        } else {
+            $result['annonces'] = $this->getRealEntities($annonces);
         }
-        $haha = $entityManager
-            ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '2'));
 
-        return $this->render('annonce_adoption/show.html.twig', [
-            'annonceAdoptions' => $annonceAdoption,
-            'individus'=>$haha
-        ]);
+        return new Response(json_encode($result));
     }
+
+  
+
+
+    public function getRealEntities($annonces){
+
+        foreach ($annonces as $annonce){
+            $realEntities[$annonce->getIdannonceadoption()] =[ $annonce->getIdchien()->getNom(),$annonce->getdatePublication(),
+            $annonce->getLocalisation(),$annonce->getDescription(),
+            $annonce->getIdchien()->getImage(),$annonce];
+
+        }
+
+        return $realEntities;
+    }
+
+   
 
 
 }

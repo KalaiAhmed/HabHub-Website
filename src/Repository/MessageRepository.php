@@ -45,25 +45,6 @@ class MessageRepository extends ServiceEntityRepository
             ->setParameters(array('recipient'=>'2'));
         return $query->getResult();
     }
-
-    public function zebiReceivedMessages($recepient)
-    {
-        $qb = $this->createQueryBuilder('a')
-
-        ->where(
-            'a.recipient =:recepient')
-            ->setParameter('recepient',$recepient )
-        ;
-        return $qb
-            ->getQuery()
-            ->getResult();
-    }
-
-
-
-
-
-
     
 
     public function countReceivedMessages($recepient){

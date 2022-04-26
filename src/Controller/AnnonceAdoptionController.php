@@ -97,8 +97,9 @@ class AnnonceAdoptionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //set foster and date
+            //set foster,date and status
            $annonceAdoption->setIdindividu($loggedinUser);
+           $annonceAdoption->setStatus('P');
            $annonceAdoption->setDatepublication(new \DateTime('now'));
 
             //recuperation des images transmises
@@ -111,10 +112,20 @@ class AnnonceAdoptionController extends AbstractController
                 );
                 // on stocke l'image dans la bdd (son nom)
             //recuperation des descriptions
-            $descs = $form->get('description')->getData();
-            foreach ($descs as $desc){
-                
-            }
+            /*$desc = $form->get('description')->getData();
+            //the bad words
+            $desc_to_array= explode(" ",$desc);
+            foreach($desc_to_array as $word)
+                {
+
+                }
+            //replacements
+            $good_words=array('*******************************************************************************************************************************************************************************************************************************************************************************************************************');
+            for($i=0;$i < count($bad_words); $i++){
+
+                $desc=str_replace($bad_words[$i],$good_words,$desc);
+            }*/
+
             $chien->setImage($fichier);
             $entityManager->persist($annonceAdoption);
             $entityManager->persist($chien);
@@ -144,6 +155,7 @@ class AnnonceAdoptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $annonceAdoption->setDatepublication(new \DateTime('now'));
+            $annonceAdoption->setStatus('P');
             $entityManager->persist($annonceAdoption);
             $entityManager->flush();
 
