@@ -55,38 +55,7 @@ class AnnonceProprietaireChienRepository extends ServiceEntityRepository
             ->setParameter('query', '%' . $q. '%');
         return $query->getResult();
     } */
-    public function searchLost(string $q)
-    {
-    $qb = $this->createQueryBuilder('a');
 
-
-
-    $qb->innerJoin('App\Entity\Chien', 'c', 'WITH', 'c.idchien = a.idchien');
-
-    $qb->innerJoin('App\Entity\Individu', 'i', 'WITH', 'i.idindividu = c.idindividu')
-
-
-
-    ->where(
-
-    $qb->expr()->andX(
-    $qb->expr()->orX(
-
-    $qb->expr()->like('a.localisation', ':query'),
-    $qb->expr()->like('c.nom', ':query'),
-    $qb->expr()->like('i.prenom', ':query')
-)
-
-)
-)
-
-        ->setParameter('query', $q . '%');
-        $qb->andWhere( 'a.type = \'P\'');
-
-
-
-return $qb->getQuery()->getResult();
-}
    /* public function searchMating(string $q)
     {
         $entityManager=$this->getEntityManager();
@@ -97,32 +66,34 @@ return $qb->getQuery()->getResult();
             ->setParameter('query', '%' . $q. '%');
         return $query->getResult();
     }*/
-    public function searchMating(string $q)
-    {
-        $qb = $this->createQueryBuilder('a');
 
 
-        $qb->innerJoin('App\Entity\Chien', 'c', 'WITH', 'c.idchien = a.idchien');
-        $qb->innerJoin('App\Entity\Individu', 'i', 'WITH', 'i.idindividu = c.idindividu')
+
+    public function searchFilterPosts($filters=null,$search=null,string $type){
+
+        $query = $this->createQueryBuilder('a');
+
+        $query->innerJoin('App\Entity\Chien', 'c', 'WITH', 'c.idchien = a.idchien');
+        $query->innerJoin('App\Entity\Individu', 'i', 'WITH', 'i.idindividu = c.idindividu');
+        if($filters!=null){
+            $query->where('c.sexe IN(:genders)')
+                ->setParameter(':genders', array_values($filters));
+        }else{
+            $query->where('c.sexe IN(:genders)')
+                ->setParameter(':genders', array('M','F'));
+        }
+        if($search!=null){
+            $query->andWhere('c.nom LIKE :q or c.race LIKE :q or i.prenom LIKE :q or i.nom LIKE :q')
+                  ->setParameter('q', $search.'%');
 
 
-            ->where(
-                $qb->expr()->andX(
-                    $qb->expr()->orX(
+        }
+        $query->andWhere('a.type=:type')
+            ->setParameter(':type', $type);
 
-                        $qb->expr()->like('a.localisation', ':query'),
-                        $qb->expr()->like('c.nom', ':query'),
-                        $qb->expr()->like('i.prenom', ':query')
-                    )
+        return $query->getQuery()->getResult();
 
-                )
-            )
-
-        ->setParameter('query',$q . '%');
-        $qb->andWhere( 'a.type = \'A\'');
-        return $qb->getQuery()->getResult();
     }
-
     // /**
     //  * @return AnnonceProprietaireChien[] Returns an array of AnnonceProprietaireChien objects
     //  */

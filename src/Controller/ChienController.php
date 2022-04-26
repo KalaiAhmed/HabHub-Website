@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * @Route("/chien")
@@ -47,11 +49,24 @@ class ChienController extends AbstractController
     /**
      * @Route("/dogs-next-door", name="app_chien_index_dogs-next-door", methods={"GET"})
      */
-    public function index_dogs_next_door(): Response
+    public function index_dogs_next_door(EntityManagerInterface $entityManager,Request $request): Response
     {
+        $filters=$request->get("categories");
+        $search=$request->get("search");
+        $chiensSearchedFiltered=$this->getDoctrine()
+            ->getRepository(Chien::class)
+            ->searchFilterDogsNextDoor($filters,$search);
+        if($request->get('ajax')){
+            return new JsonResponse([
+                'content' =>$this->renderView('chien/_dogsNextDoorContent.html.twig', [
+                    'chiens' => $chiensSearchedFiltered,
+                ])
+            ]);
+        }
         $chiens = $this->getDoctrine()
             ->getRepository(Chien::class)
             ->findDogsNextDoor();
+
 
         return $this->render('chien/dogsNextDoor.html.twig', [
             'chiens' => $chiens,

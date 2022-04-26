@@ -6,44 +6,44 @@
 
 {% block body %}
 
-    <div id="blog" class="blog">
+    <div class="ahbet">
         <div class="container">
-            <div class="row ahbet">
-                {% for chien in chiens %}
 
-                    <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
-                        <div class="blog-post">
-                            <div class="thumb">
 
-                                <a href="{{ path('app_chien_show',{'chien': chien.idchien,'liked':chien.liked}) }}"><img src="{{asset('FrontOffice/uploads/'~chien.image) }}" alt=""></a>
-                            </div>
-                            <div class="down-content">
-                                <span class="category">{{ chien.sexe }}</span>
 
-                                <a href="#"><h4>{{ chien.nom }}</h4></a>
-                                <p>
-                                    {{chien.age }}</p>
-                                {% if chien.liked %}
-                                <a href="{{ path('app_likes_removelike', {'idchien': chien.idchien}) }}"> <img class="chien-icon" src="{{asset('FrontOffice/assets/images/chien/heartIcon.png') }}"> </a>
-                                {% else %}
-                                <a href="{{ path('app_likes_addlike', {'idchien': chien.idchien}) }}"> <img class="chien-icon" src="{{asset('FrontOffice/assets/images/chien/emptyHeartIcon.png') }}"> </a>
-                                {% endif %}
-                                {% if chien.playwithme %}
+            <div class="sidebar-search">
+                <div class="input-group custom-search-form" style="padding-top:7%">
 
-                               <img style="margin-top:2%;max-height: 27px;max-width: 102px;" src="{{asset('FrontOffice/assets/images/chien/playWithMe.png') }}">
-                                {% endif %}
-                            </div>
+                    <input type="text" id="search" class="form-control" placeholder="Search for a mate">
+
+                </div>
+                <!-- /input-group -->
+            </div>
+            <div class="col-xs1">
+                <p>Filter By</p>
+                <form id="filters">
+                    <div class="flexini">
+                        <div class="item-checkbox">
+                            <p><input type="checkbox" name="categories[]" value="F"><label>Female</label></p>
                         </div>
+                        <div class="item-checkbox">
+                            <p><input type="checkbox" name="categories[]" value="M"><label>Male</label></p>
+                        </div>
+
                     </div>
+                </form>
+            </div>
+            <div class="col-xs1 col-sm4" id="content">
+                {% include ('chien/_dogsNextDoorContent.html.twig') %}
+            </div>
 
-
-
-
-                {% endfor %}
 
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('FrontOffice/assets/js/searchFilters.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
 

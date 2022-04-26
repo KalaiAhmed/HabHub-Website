@@ -8,6 +8,7 @@ use App\Form\AnnonceProprietaireChienType;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Util\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,14 +48,56 @@ class AnnonceProprietaireChienController extends AbstractController
     /**
      * @Route("/lost", name="app_annonce_proprietaire_chien_index_lost", methods={"GET"})
      */
-    public function indexLost(EntityManagerInterface $entityManager): Response
+    public function indexLost(EntityManagerInterface $entityManager,Request $request): Response
     {
-        $annonceProprietaireChiens = $entityManager
+        $filters=$request->get("categories");
+        $search=$request->get("search");
+        dump($search);
+        $annonces = $entityManager
+            ->getRepository(AnnonceProprietaireChien::class)
+            ->searchFilterPosts($filters,$search,'P');
+        dump($annonces);
+
+        if($request->get('ajax')){
+            return new JsonResponse([
+                'content' =>$this->renderView('annonce_proprietaire_chien/_lostContent.html.twig', [
+                    'annonce_proprietaire_chiens' => $annonces,
+                ])
+            ]);
+        }
+        $annonce = $entityManager
             ->getRepository(AnnonceProprietaireChien::class)
             ->findBy(array('type' => 'P'));
-
         return $this->render('annonce_proprietaire_chien/frontOfficeIndexLost.html.twig', [
-            'annonce_proprietaire_chiens' => $annonceProprietaireChiens,
+            'annonce_proprietaire_chiens' => $annonce,
+        ]);
+    }
+
+    /**
+     * @Route("/mating", name="app_annonce_proprietaire_chien_index_mating", methods={"GET"})
+     */
+    public function indexMating(EntityManagerInterface $entityManager,Request $request): Response
+    {
+        $filters=$request->get("categories");
+        $search=$request->get("search");
+        dump($search);
+        $annonces = $entityManager
+            ->getRepository(AnnonceProprietaireChien::class)
+            ->searchFilterPosts($filters,$search,'A');
+        dump($annonces);
+
+        if($request->get('ajax')){
+            return new JsonResponse([
+                'content' =>$this->renderView('annonce_proprietaire_chien/_matingcontent.html.twig', [
+                    'annonce_proprietaire_chiens' => $annonces,
+                ])
+            ]);
+        }
+        $annonce = $entityManager
+            ->getRepository(AnnonceProprietaireChien::class)
+            ->findBy(array('type' => 'A'));
+        return $this->render('annonce_proprietaire_chien/frontOfficeIndex.html.twig', [
+            'annonce_proprietaire_chiens' => $annonce,
         ]);
     }
 
@@ -84,18 +127,36 @@ class AnnonceProprietaireChienController extends AbstractController
         return $this->redirectToRoute('app_annonce_proprietaire_chien_index_lost');
     }
     /**
-     * @Route("/mating", name="app_annonce_proprietaire_chien_index_mating", methods={"GET"})
+     * @Route("/lost/notifyownershow/{chien}", name="app_annonce_proprietaire_chien_lost_notify_owner_show", methods={"GET"})
      */
-    public function indexMating(EntityManagerInterface $entityManager): Response
+    public function notifyOwnerShow(EntityManagerInterface $entityManager, Chien $chien): Response
     {
-        $annonceProprietaireChiens = $entityManager
-            ->getRepository(AnnonceProprietaireChien::class)
-            ->findBy(array('type' => 'A'));
 
-        return $this->render('annonce_proprietaire_chien/frontOfficeIndex.html.twig', [
-            'annonce_proprietaire_chiens' => $annonceProprietaireChiens,
-        ]);
+        $annonceProprietaireChien = $entityManager
+            ->getRepository(AnnonceProprietaireChien::class)
+            ->findOneBy(array('idchien' => $chien->getIdChien()));
+        $recepient='+216'.strval($chien->getIdindividu()->getIdutilisateur()->getNumtel());
+
+        $messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
+        //$messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live
+        $message =  new \MessageBird\Objects\Message();
+        try{
+
+            $message->originator = $recepient;
+            $message->recipients = $recepient;
+            $message->body = 'we found your dog';
+            $response = $messageBird->messages->create($message);
+
+
+            print_r($response);
+            dump($response);
+        }
+        catch(Exception $e) {echo $e;}
+
+        return $this->redirectToRoute('app_annonce_proprietaire_chien_show_lost',['annonceProprietaireChien'=> $annonceProprietaireChien->getIdAnnonceProprietaireChien()]);
     }
+
+
 
 
     /**

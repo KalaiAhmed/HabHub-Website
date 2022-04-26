@@ -1,0 +1,30 @@
+<div id="blog" class="blog">
+    <div class="container">
+        <div class="row" >
+{% for annonce_proprietaire_chien in annonce_proprietaire_chiens %}
+
+    <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+        <div class="blog-post">
+            <div class="thumb">
+
+                <a href="{{ path('app_annonce_proprietaire_chien_show_lost',{'annonceProprietaireChien': annonce_proprietaire_chien.idannonceproprietairechien}) }}"><img src="{{asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}" alt=""></a>
+            </div>
+            <div class="down-content">
+                <span class="category">{{ annonce_proprietaire_chien.idchien.sexe }}</span>
+
+                <a href="{{ path('app_annonce_proprietaire_chien_lost_notify_owner',{'chien': annonce_proprietaire_chien.idchien}) }}">Notify Owner</a>
+                <a href="#"><h4>{{ annonce_proprietaire_chien.idchien.nom }}</h4></a>
+                <p>
+                    {{ annonce_proprietaire_chien.idchien.age }}</p>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endfor %}
+        </div>
+    </div>
+</div>
