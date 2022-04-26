@@ -18,6 +18,25 @@ security:
             anonymous: lazy
             provider: app_user_provider
 
+
+        form_login:
+            # "login" is the name of the route created previously
+
+            guard:
+                authenticators:
+                    - App\Security\UtilisateurAuthenticator
+            logout:
+                path: app_logout
+                target: /login
+
+        secured_area:
+            pattern: ^/
+            form_login:
+                login_path: login
+                check_path: login_check
+                default_target_path: /
+                always_use_default_target_path:
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
@@ -27,5 +46,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/profile, roles: ROLE_USER }
