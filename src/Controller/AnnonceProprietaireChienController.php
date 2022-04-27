@@ -52,11 +52,10 @@ class AnnonceProprietaireChienController extends AbstractController
     {
         $filters=$request->get("categories");
         $search=$request->get("search");
-        dump($search);
+        dump($filters);
         $annonces = $entityManager
             ->getRepository(AnnonceProprietaireChien::class)
             ->searchFilterPosts($filters,$search,'P');
-        dump($annonces);
 
         if($request->get('ajax')){
             return new JsonResponse([
@@ -106,6 +105,7 @@ class AnnonceProprietaireChienController extends AbstractController
      */
     public function notifyOwner(Chien $chien): Response
     {
+
         $recepient='+216'.strval($chien->getIdindividu()->getIdutilisateur()->getNumtel());
 
         $messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
@@ -127,10 +127,11 @@ class AnnonceProprietaireChienController extends AbstractController
         return $this->redirectToRoute('app_annonce_proprietaire_chien_index_lost');
     }
     /**
-     * @Route("/lost/notifyownershow/{chien}", name="app_annonce_proprietaire_chien_lost_notify_owner_show", methods={"GET"})
+     * @Route("/lost/notifyownershow/{chien}/{text}", name="app_annonce_proprietaire_chien_lost_notify_owner_show", methods={"GET"})
      */
-    public function notifyOwnerShow(EntityManagerInterface $entityManager, Chien $chien): Response
+    public function notifyOwnerShow(EntityManagerInterface $entityManager, Chien $chien,string $text,Request $request): Response
     {
+
 
         $annonceProprietaireChien = $entityManager
             ->getRepository(AnnonceProprietaireChien::class)
@@ -144,7 +145,7 @@ class AnnonceProprietaireChienController extends AbstractController
 
             $message->originator = $recepient;
             $message->recipients = $recepient;
-            $message->body = 'we found your dog';
+            $message->body = $text;
             $response = $messageBird->messages->create($message);
 
 

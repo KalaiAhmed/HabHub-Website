@@ -153,11 +153,10 @@ class ChienController extends AbstractController
     }
 
     /**
-     * @Route("/{liked}/{chien}", name="app_chien_show", methods={"GET"})
+     * @Route("/details/{liked}/{chien}", name="app_chien_show", methods={"GET"})
      */
     public function show(Chien $chien,int $liked): Response
     {
-        dump($liked);
         return $this->render('chien/show.html.twig', [
             'chien' => $chien,
             'liked' => $liked,

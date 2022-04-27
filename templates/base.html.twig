@@ -43,7 +43,7 @@
                     <div class="col-12">
                         <nav class="main-nav">
                             <!-- ***** Logo Start ***** -->
-                            <a href="index.html" class="logo">
+                            <a href="{{ path('app_front_office_home') }}" class="logo">
                                 <img src="{{ asset('FrontOffice/assets/images/logo-v2.png') }}" alt="">
                             </a>
                             <!-- ***** Logo End ***** -->
@@ -87,5 +87,7 @@
     {% block Footer %}
 
     {% endblock %}
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbdeCQYrNeFd4ZMsbwrbUffvzW1PTuN2U&libraries=places&callback=initialize"></script>
+
     </body>
 </html>

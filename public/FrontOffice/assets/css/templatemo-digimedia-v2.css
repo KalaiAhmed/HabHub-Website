@@ -2120,7 +2120,7 @@ responsive
   }
 }
 .ahbet{
-  padding-top:7%;
+  padding-top:10%;
 }
 /* Community CSS */
 .chien-icon{
@@ -2153,6 +2153,11 @@ display:none;
 .sub-menu-1 ul li
 {
   color: white;
+}
+
+#map-canvas{
+  height: 700px;
+  width:1000px;
 }
 
 
