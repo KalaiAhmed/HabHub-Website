@@ -18,32 +18,6 @@ use App\Entity\AnnonceProprietaireChien;
 
 class SearchController extends AbstractController
 {
-
-
-    /**
-     * Creates a new ActionItem entity.
-     *
-     * @Route("/search-users", name="individus_search")
-     * methods={"GET"}
-     */
-    public function searchAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $requestString = $request->get('p');
-
-        $individus =  $em->getRepository('App:Individu')->findEntitiesByString($requestString);
-
-        if(!$individus) {
-            $result['Individu']['error'] = "not found";
-        } else {
-            $result['Individu'] = $this->getRealEntitiesIndividu($individus);
-        }
-
-        return new Response(json_encode($result));
-    }
-
-
     /**
      * Creates a new ActionItem entity.
      *
@@ -54,40 +28,32 @@ class SearchController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $requestString = $request->get('p');
+        $requestString = $request->query->get('l');
 
-        $utilisateurs =  $em->getRepository('App:Utilisateur')->findEntitiesByString($requestString);
+        $utilisateurs =  $em->getRepository('App:Utilisateur')->getUser($requestString);
 
         if(!$utilisateurs) {
             $result['Utilisateur']['error'] = "not found";
         } else {
-            $result['Utilisateur'] = $this->getRealEntitiesUtilisateu($utilisateurs);
+            $result['Utilisateur'] = $this->getRealEntitiesUtilisateur($utilisateurs);
         }
 
-        return new Response(json_encode($result));
+
+        return $this->render('utilisateur/index.html.twig', [
+            'utilisateurs' => $utilisateurs,
+        ]);
+
     }
 
 
 
 
 
-    public function getRealEntitiesIndividu($individus){
-
-        foreach ($individus as $individu){
-            $realEntities[$individu->getIdindividu()] = [$individu->getIdutilisateur()->getEmail(),$individu->getNom(),$individu->getPrenom(),$individu->getDatenaissance(),$individu->getSexe(),$individu->getAdresse()
-            ,$individu->getAdresse(),$individu->getAdresse(),$individu->getFacebook(),$individu->getInstagram(),$individu->getWhatsapp(),$individu->getProprietairechien()];
-        }
-
-        return $realEntities;
-    }
 
     public function getRealEntitiesUtilisateur($utilisateurs){
 
         foreach ($utilisateurs as $utilisateur){
-            $realEntities[$utilisateur->getIdutilisateur()] = [$utilisateur->getIdutilisateur(),
-                $utilisateur->getEmail(),$utilisateur->getPassword(),
-                $utilisateur->getNumtel(),
-                $utilisateur->getType()];
+            $realEntities[] = $utilisateur;
         }
 
         return $realEntities;

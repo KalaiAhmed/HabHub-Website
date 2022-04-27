@@ -9,8 +9,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  *
  *
- * @ORM\Entity
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+  @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ *
  */
 class Utilisateur implements UserInterface
 {
@@ -50,7 +51,7 @@ class Utilisateur implements UserInterface
      * @ORM\Column(name="type", type="string", length=15, nullable=false)
      */
     private $type;
-
+    private $roles = [];
 
     public function getIdutilisateur(): ?int
     {
@@ -110,6 +111,9 @@ class Utilisateur implements UserInterface
      return ($this->idutilisateur.'-'.$this->email);
   }
 
+    /**
+     * @see UserInterface
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -126,9 +130,15 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getSalt()
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
     {
-        // TODO: Implement getSalt() method.
+        return 'my-static-salt';
     }
 
     public function getUsername()

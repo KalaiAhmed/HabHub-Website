@@ -1,7 +1,7 @@
 security:
     encoders:
         App\Entity\Utilisateur:
-            algorithm: auto
+            algorithm: sha512
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -17,25 +17,19 @@ security:
         main:
             anonymous: lazy
             provider: app_user_provider
-
-
-        form_login:
-            # "login" is the name of the route created previously
-
             guard:
                 authenticators:
                     - App\Security\UtilisateurAuthenticator
+            form_login:
+                login_path: app_login
+                check_path: /login
+                default_target_path: /login
+                always_use_default_target_path: false
             logout:
                 path: app_logout
-                target: /login
+                target: app_login
 
-        secured_area:
-            pattern: ^/
-            form_login:
-                login_path: login
-                check_path: login_check
-                default_target_path: /
-                always_use_default_target_path:
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -46,5 +40,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-    - { path: ^/admin, roles: ROLE_ADMIN }
-    - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/home/delete, roles: [ROLE_ADMIN] }
+        - { path: '^/home', roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN, ROLE_USER] }
+        # - { path: ^/profile, roles: ROLE_USER }

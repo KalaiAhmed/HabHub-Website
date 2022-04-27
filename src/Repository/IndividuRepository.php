@@ -55,7 +55,7 @@ class IndividuRepository extends ServiceEntityRepository
             ->setParameter('str', '%'.$str.'%')
             ->getResult();
     }*/
-    public function findEntitiesByString(string $q)
+    public function findEntitiesByString1(string $q)
     {
         $qb = $this->createQueryBuilder('p');
 
