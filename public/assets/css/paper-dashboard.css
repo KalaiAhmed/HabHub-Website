@@ -20,6 +20,30 @@ Licensed under the MIT license - http://opensource.org/licenses/MIT
 
 Copyright (c) 2015 Daniel Eden
 */
+
+#newMap{
+  width: 500px;
+  height: 200px;
+}
+
+.flex-box{
+  display:flex;
+  width: 100%;
+  margin: auto;
+
+}
+.res-box{
+  display:flex;
+  align-content: stretch;
+}
+.left{
+  width:20%;
+}
+.right{
+  width: 60%;
+  word-wrap:break-word;
+  padding-left: 5%;
+}
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

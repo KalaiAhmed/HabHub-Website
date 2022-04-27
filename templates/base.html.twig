@@ -27,13 +27,14 @@
               {% endblock %}
 
         {% block javascripts %}
-            <script type="module" src="{{ asset('assets/location.js')}}"></script>
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
             <script src="{{ asset('FrontOffice/vendor/jquery/jquery.min.js') }}"></script>
           <script src="{{ asset('FrontOffice/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/owl-carousel.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/animation.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/imagesloaded.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/custom.js') }}"></script>
+
 {% endblock %}
     </head>
     <body>
@@ -79,8 +80,9 @@
 
 
     {% block body %}
-        
     {% endblock %}
+    <div id="map"></div>
+
     {% block Footer %}
         <footer>
             <div class="container">
@@ -90,5 +92,9 @@
             </div>
         </footer>
     {% endblock %}
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&callback=initMap&v=weekly"
+            defer
+    ></script>
     </body>
 </html>

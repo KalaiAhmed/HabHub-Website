@@ -49,16 +49,17 @@
             <div class="space-5"></div>
             <div class="row">
 
-                {{ include('business/location.html.twig') }}
+
 
 
                 {{ render(path('app_business_services_index', {'idbusiness': business.idbusiness} )) }}
                 <div class="space-5"></div>
                 <div class="space-5"></div>
                 <div class="space-5"></div>
+                {{ render(path('app_business_index_location' )) }}
 
                 {{ render(path('app_revue_index', {'idbusiness': business.idbusiness} )) }}
-                <h1>Add New Review</h1>
+                <h3>Add New Review</h3>
                 {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
                 <div class="flexini">
                     <div class="items">
@@ -86,6 +87,26 @@
             </div>
         </div>
     </div>
+    <script>
+        function initMap() {
+
+            const myLatLng = { lat: {{ business.lat }}, lng: {{ business.lng }}};
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 18,
+                center: myLatLng,
+            });
+
+            new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title: "Hello World!",
+                draggable:true,
+            });
+        }
+
+        window.initMap = initMap;
+
+    </script>
 
     <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&callback=initMap&v=weekly"

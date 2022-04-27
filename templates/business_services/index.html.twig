@@ -3,20 +3,32 @@
 {% block body %}
     <h4>Our Available Services</h4>
 
-    <table class="table">
 
-        <tbody>
+
+
+
+
+
+
+
         {% for business_service in business_services %}
-            <tr>
-                <td>{{ business_service.nomservice }}</td>
-                <td>{{ business_service.prix }}</td>
 
-                <td class="text-right">
+            <table class="table">
+            <tbody>
+            <div class="flex-services ">
+                 <div class="flex-services-items-15 ">
+                     <span>{{ business_service.nomservice }}</span>
+                 </div>
 
+                <div class="flex-services-items-25 ">
+                    <span>{{ business_service.prix }}</span>
+                </div>
+                <div class="flex-services-items ">
                     <a href="{{ path('app_reservation_new', {'idbusinessservices': business_service.idbusinessservices}) }}" >Book Now</a>
-                </td>
+                </div>
 
-            </tr>
+            </div>
+
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>

@@ -27,8 +27,9 @@
         <script src="{{asset('assets/js/core/bootstrap.min.js') }}"></script>
         <script src="{{asset('assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
         <!--  Google Maps Plugin    -->
-        <script type="module" src="{{ asset('assets/location.js')}}"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
         <!-- Chart JS -->
         <script src="{{asset('assets/js/plugins/chartjs.min.js') }}"></script>
         <!--  Notifications Plugin    -->
@@ -206,6 +207,9 @@
 {% endblock %}
 </div>
 </div>
-
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&callback=initMap&v=weekly"
+        defer
+></script>
 </body>
 </html>
