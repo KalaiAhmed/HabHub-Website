@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
      * @Route("/message")
      */
@@ -24,8 +25,9 @@ class MessageController extends AbstractController
      */
     public function index(): Response
     {
+
         return $this->render('message/index.html.twig', [
-            'controller_name' => 'MessageController',
+            
         ]);
     }
 
@@ -44,15 +46,13 @@ class MessageController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $message->setIdindividu($loggedinUser);
+            $message->setSender($loggedinUser);
             $message->setIsRead(FALSE);
             $message->setCreatedat(new \DateTime('now'));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($message);
             $em->flush();
-
-            $this->addFlash("message", "Message envoyé avec succès.");
             return $this->redirectToRoute("message");
         }
 
@@ -98,7 +98,7 @@ class MessageController extends AbstractController
             $em->persist($message);
             $em->flush();
 
-            $this->addFlash("message", "Message envoyé avec succès.");
+            
             return $this->redirectToRoute("message");
         }
 
@@ -115,10 +115,10 @@ class MessageController extends AbstractController
         $receivedMessages = $entityManager
         ->getRepository(Message::class)
         ->receivedMessages(array('recipient'=>'2'));
-        //$nbReceivedMessages = $repo->countReceivedMessages($recepient);
+        $nbrec=count($receivedMessages);
 
         return $this->render('message/received.html.twig', [
-           //"nbReceivedMessages" => $nbReceivedMessages,
+           "nbrec" => $nbrec,
             "receivedMessages" => $receivedMessages
 
         ]);
@@ -134,6 +134,8 @@ class MessageController extends AbstractController
         $myMessages = $entityManager
         ->getRepository(Message::class)
         ->sentMessages(array('sender'=>'2'));
+        $nbsent=count($myMessages);
+        
         
         /*$nbSentMessages = $entityManager
         ->getRepository(Message::class)
@@ -141,7 +143,7 @@ class MessageController extends AbstractController
 
         return $this->render('message/sent.html.twig', [
             "myMessages" => $myMessages,
-            //"nbSentMessages"=> $nbSentMessages
+            "nbsent"=> $nbsent
         ]);
     }
 
@@ -169,6 +171,6 @@ class MessageController extends AbstractController
         $em->remove($message);
         $em->flush();
         $id=2;
-        return $this->redirectToRoute("message");
+        return $this->redirectToRoute('message', [], Response::HTTP_SEE_OTHER);
     }
 }

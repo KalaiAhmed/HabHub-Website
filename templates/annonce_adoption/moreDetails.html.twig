@@ -3,6 +3,7 @@
 {% block title %}Adoption index{% endblock %}
 {% block body %}
 
+
 <div class="container" >
     <div class="row">
 
@@ -53,9 +54,6 @@
             </tr>
         </tbody>
     </table>
-
-    
-
     <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
 
     <a href="{{ path('app_annonce_adoption_edit', {'idannonceadoption': annonceAdoption.idannonceadoption}) }}">edit</a>
@@ -69,3 +67,4 @@
 
 
 {% endblock %}
+

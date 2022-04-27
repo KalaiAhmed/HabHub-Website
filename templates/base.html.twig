@@ -5,10 +5,11 @@
         <title>{% block title %}Front{% endblock %}</title>
 
         {% block stylesheets %}
+        
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+        
 
         <!-- Bootstrap core CSS -->
         <link href="{{ asset('FrontOffice/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -23,12 +24,14 @@
               {% endblock %}
 
         {% block javascripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
             <script src="{{ asset('FrontOffice/vendor/jquery/jquery.min.js') }}"></script>
           <script src="{{ asset('FrontOffice/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/owl-carousel.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/animation.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/imagesloaded.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/custom.js') }}"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 {% endblock %}
     </head>
     <body>
@@ -69,7 +72,6 @@
         <!-- ***** Header Area End ***** -->
 
     {% endblock %}
-
 
     {% block body %}
         

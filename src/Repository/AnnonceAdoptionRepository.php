@@ -104,6 +104,14 @@ class AnnonceAdoptionRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function countByDate(){
+    
+        $query = $this->getEntityManager()->createQuery("
+            SELECT SUBSTRING(a.datepublication, 1, 10) as dateAnnonces, COUNT(a) as count FROM App\Entity\AnnonceAdoption a GROUP BY dateAnnonces
+        ");
+        return $query->getResult();
+    }
+
 
     // /**
     //  * @return AnnonceAdoption[] Returns an array of AnnonceAdoption objects

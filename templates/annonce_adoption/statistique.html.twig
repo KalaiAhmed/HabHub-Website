@@ -1,0 +1,129 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block stylesheets %}
+<!-- Bootstrap core CSS -->
+        <!--     Fonts and icons     -->
+        <link
+                href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
+                rel="stylesheet"
+        />
+        <link
+                href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+                rel="stylesheet"
+        />
+        <!-- CSS Files -->
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/paper-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous">
+{% endblock %}
+
+
+
+
+{% block body %}
+<div class="container" >
+    <h1>Statistiques</h1>
+    <canvas id="offres" width="400" height="100"></canvas>
+    <canvas id="annonces" width="400" height="100"></canvas>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+<script>
+ 
+
+window.onload = function(){
+    let offres = document.getElementById('offres');
+    let offreGraph = new Chart(offres, {
+        type: "pie",
+        data: {
+            labels: {{ offreFoster|raw }},
+            datasets: [{
+                label: "Répartition des catégories",
+                data: {{ offreStatus|raw }},
+                backgroundColor: ["red","blue","yellow"]
+            }]
+        }
+        
+    })
+    }
+    
+</script>
+
+
+
+<script>
+
+    window.onload = function(){
+
+
+    let annonces = document.getElementById('annonces');
+    let annGraph = new Chart(annonces, {
+        type: "line",
+        data: {
+            labels: {{ dates|raw }},
+            datasets: [{
+                label: "Nombre d'annonces",
+                data: {{ annoncesCount|raw }}
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!--   Core JS Files   -->
+        <script src="{{asset('assets/js/core/jquery.min.js') }}"></script>
+        <script src="{{asset('assets/js/core/popper.min.js') }}"></script>
+        <script src="{{asset('assets/js/core/bootstrap.min.js') }}"></script>
+        <script src="{{asset('assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+        <!--  Google Maps Plugin    -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+        <!-- Chart JS -->
+        <script src="{{asset('assets/js/plugins/chartjs.min.js') }}"></script>
+        <!--  Notifications Plugin    -->
+        <script src="{{asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
+        <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+        <script
+                src="{{asset('assets/js/paper-dashboard.min.js?v=2.0.1') }}"
+                type="text/javascript"
+        ></script>
+{% endblock %}

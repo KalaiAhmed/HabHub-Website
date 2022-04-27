@@ -25,15 +25,10 @@ class OffreController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
 
-        //get logged in user
-        $loggedinUser = $entityManager
-        ->getRepository(Individu::class)
-        ->findOneBy(array('idindividu' => '2'));
-
         //get offers 
         $offres = $entityManager
         ->getRepository(Offre::class)
-        ->findBy(array('foster'=> '6','status'=>'P'));
+        ->findBy(array('foster'=> '2','status'=>'P'));
 
         return $this->render('offre/index.html.twig', [
             'offres' => $offres,

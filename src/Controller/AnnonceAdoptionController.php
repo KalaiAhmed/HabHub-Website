@@ -8,6 +8,7 @@ use App\Form\CommentType;
 use App\Entity\Comment;
 use App\Entity\AnnonceAdoption;
 use App\Entity\Individu;
+use App\Entity\Offre;
 use App\Form\AnnonceAdoptionType;
 use App\Form\BackOfficeType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,6 +24,8 @@ use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Bundle\SnappyBundle\Snappy;
 use Knp\Bundle\SnappyBundle\DependencyInjection;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
+
 
 /**
  * @Route("/annonce/adoption")
@@ -75,6 +78,54 @@ class AnnonceAdoptionController extends AbstractController
             'annonceAdoptions' => $annonceAdoptions,
         ]);
     }
+
+
+    /**
+     * @Route("/stats", name="app_annonce_adoption_stats", methods={"GET"})
+     */
+    public function statistiques(Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        $offres = $entityManager
+            ->getRepository(Offre::class)
+            ->findAll();
+           
+
+        $offreStatus = [];
+        $offreFoster = [];
+
+       
+        foreach($offres as $offre){
+
+            $offreStatus[] = $offre->getStatus();
+            $offreFoster[] = $offre->getFoster()->getNom();
+            
+        }
+
+        
+        
+        
+        $annonces = $entityManager
+            ->getRepository(AnnonceAdoption::class)
+            ->countByDate();
+
+        $dates = [];
+        $annoncesCount = [];
+
+        foreach($annonces as $annonce){
+            $dates[] = $annonce['dateAnnonces'];
+            $annoncesCount[] = $annonce['count'];
+        }
+
+        return $this->render('annonce_adoption/statistique.html.twig', [
+            'offreStatus' => json_encode($offreStatus),
+            'offreFoster' => json_encode($offreFoster),
+            'dates' => json_encode($dates),
+            'annoncesCount' => json_encode($annoncesCount),
+            
+        ]);
+    }
+
 
 
 
@@ -350,4 +401,6 @@ class AnnonceAdoptionController extends AbstractController
 
         return $this->redirectToRoute('app_annonce_adoption_index_back_office', [], Response::HTTP_SEE_OTHER);
     }
+
+    
 }

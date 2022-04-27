@@ -12,6 +12,7 @@
         "doctrine/orm": "^2.11",
         "dompdf/dompdf": "^1.2",
         "knplabs/knp-snappy-bundle": "^1.9",
+        "mercuryseries/flashy-bundle": "^5.1",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",
