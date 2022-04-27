@@ -15,20 +15,23 @@
 
             <table class="table">
             <tbody>
-            <div class="flex-services ">
-                 <div class="flex-services-items-15 ">
-                     <span>{{ business_service.nomservice }}</span>
-                 </div>
+            <div class="space-2"></div>
 
-                <div class="flex-services-items-25 ">
+            <div class="flex-services ">
+
+                     <span>{{ business_service.nomservice }}</span>
+
+
                     <span>{{ business_service.prix }}</span>
-                </div>
-                <div class="flex-services-items ">
+                <div class="tag-book">
+
                     <a href="{{ path('app_reservation_new', {'idbusinessservices': business_service.idbusinessservices}) }}" >Book Now</a>
                 </div>
 
             </div>
+            <div class="space-2"></div>
 
+            <hr>
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>

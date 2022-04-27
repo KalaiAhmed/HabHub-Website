@@ -20,10 +20,17 @@ Licensed under the MIT license - http://opensource.org/licenses/MIT
 
 Copyright (c) 2015 Daniel Eden
 */
+.add_business{
+  background-color: black;
+}
+.ahbet{
+  padding-top: 2%;
+}
 
 #newMap{
-  width: 500px;
-  height: 200px;
+
+  width: 1030px;
+  height: 300px;
 }
 
 .flex-box{

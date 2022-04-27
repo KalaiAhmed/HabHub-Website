@@ -114,10 +114,9 @@ Mariem
   margin-top: 2%;
 }
 .flex-services{
-  padding-top: 2%;
   width: 80%;
   display: flex;
-  justify-content:flex-start;
+  justify-content:space-between;
 }
 .flex-services-items{
   margin-right: 5%;
@@ -171,6 +170,24 @@ Mariem
   justify-content: center;
 
 }
+.tag-book{
+  width: 150px;
+  height: 35px;
+  background: #E0642C;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.tag-book a{
+  color: #FFFFFF;
+  text-decoration: none;
+
+}
 .tag-location{
   width: 13px;
   height: 18.2px;
@@ -213,6 +230,7 @@ Mariem
   width: 500px;
   height: 200px;
   overflow: hidden;
+  padding-bottom: 2%;
 }
 .search-container{
   width: 483px;

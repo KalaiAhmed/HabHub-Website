@@ -95,7 +95,7 @@ class BusinessController extends AbstractController
      */
     public function index_with_filters(EntityManagerInterface $entityManager,Request $request): Response
     {
-        $filters=$request->get("catego<ries");
+        $filters=$request->get("categories");
         $businesses = $entityManager
             ->getRepository(Business::class)
             ->getBusinessWithType($filters);

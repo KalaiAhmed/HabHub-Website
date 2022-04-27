@@ -51,9 +51,9 @@ class Business
     private $ville;
 
     /**
-     * @var string
+     * @var string|null
      * @Assert\NotBlank(message=" localisation doit etre non vide")
-     * @ORM\Column(name="localisation", type="string", length=50, nullable=false)
+     * @ORM\Column(name="localisation", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
     private $localisation;
 
@@ -158,7 +158,7 @@ class Business
         return $this->localisation;
     }
 
-    public function setLocalisation(string $localisation): self
+    public function setLocalisation(?string $localisation): self
     {
         $this->localisation = $localisation;
 
