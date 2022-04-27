@@ -42,6 +42,7 @@
 {% block body %}
     <h1>Panier index</h1>
       <div class="wrapper" style="padding-top:100px"; >
+      
 
     {% if items | length > 0  %}
     <table class="table">
@@ -52,11 +53,12 @@
             <th style="font-size:19px;"> Price </th>
             <th style="font-size:19px;"> Quantity </th>
             <th style="font-size:19px;"> Subtotal </th>
-            <th> </th>
+            <th style="font-size:19px;"> Actions </th>
         </tr>
     </thead>
-
+  
     <tbody>
+     
         {% for item in items  %}
             <tr>
             <td class="image-box"> <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/'~item.produit.image~'.jpg') }}" alt=""</a> </td>
@@ -65,9 +67,16 @@
                 <td style="padding-top:50px;font-size:19px;">{{item.quantite}} </td>
                 <td style="padding-top:50px;font-size:19px;">{{item.produit.prix * item.quantite}} </td>
                 <td style="padding-top:50px;font-size:19px;">
+                 <a href="{{path("reduce", {'id': item.produit.idproduit})}}" class="btn btn-danger btn-sm">
+                            <i class="fa fa-minus"></i>
+                        </a>
                 <a href='{{ path('DelProd', {'id':item.produit.idproduit}) }}' class="btn btn-danger btn-sm" >
                     <i class="fa fa-trash"></i>
                     </a>
+                     <a href="{{path("addQ", {'id': item.produit.idproduit})}}" class="btn btn-danger btn-sm">
+                            <i class="fa fa-plus " ></i>
+                        </a>
+                        
                 </td>
             </tr>
         {% endfor %}

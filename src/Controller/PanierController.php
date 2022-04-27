@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
 use App\Entity\Panier;
 use App\Form\PanierType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -147,6 +148,52 @@ class PanierController extends AbstractController
         }
 
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    
+    /**
+     * @Route("/addProd/{id}", name="addQ")
+     */
+    public function addProd(Produit $p, SessionInterface $session)
+    {
+        // On récupère le panier actuel
+        $panier = $session->get("panier", []);
+        $id = $p->getIdproduit();
+
+        if(!empty($panier[$id])){
+            $panier[$id]++;
+        }else{
+            $panier[$id] = 1;
+        }
+
+        // On sauvegarde dans la session
+        $session->set("panier", $panier);
+
+        return $this->redirectToRoute("app_panier_index");
+    }
+
+     /**
+     * @Route("/remove/{id}", name="reduce")
+     */
+    public function remove(Produit $product, SessionInterface $session)
+    {
+        // On récupère le panier actuel
+        $panier = $session->get("panier", []);
+        $id = $product->getIdproduit();
+
+        if(!empty($panier[$id])){
+            if($panier[$id] > 1){
+                $panier[$id]--;
+            }else{
+                unset($panier[$id]);
+            }
+        }
+
+        // On sauvegarde dans la session
+        $session->set("panier", $panier);
+
+        return $this->redirectToRoute("app_panier_index");
     }
 
 

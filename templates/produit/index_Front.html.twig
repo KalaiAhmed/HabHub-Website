@@ -51,31 +51,25 @@
 
 
  {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
+            <div class="alert alert-success" style="padding-top:5%">
                 {{ message }}
             </div>
         {% endfor %}
 <div>
  <div class="sidebar-search">
-    <div class="input-group custom-search-form" style="padding-top:7%">
+    <div class="input-group custom-search-form" style="padding-top:10%">
         <input type="text" id="search" class="form-control" placeholder="Search for a product">
     </div>
     <!-- /input-group -->
 </div>
-    <ul class="nav" id="side-menu">
-        <li>
-            <a href="#"> Search Results<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level" >
-            </ul>
-        </li>
-    </ul><br><br><br><br>
+  
    
  
    <div>
    <div>
-    <p style="padding-left:40px;text-align:left">Sort:</p>
+    <p style="padding-left:25px;text-align:left">Sort:</p>
     <div>
-        <form id="filters" style="padding-left:40px;text-align:left" >
+        <form id="filters" style="padding-left:25px;text-align:left" >
             {% for categorie in categories %}
                 <p> <input type="checkbox" name="categories[]" id="cat{{categorie.idcategorie}}" value=" {{categorie.idcategorie}}"  >
                 <label for="cat {{categorie.idcategorie }}" > {{categorie.nom}} </label> </p>
@@ -84,7 +78,7 @@
         </form>
     </div>
   
-     <div id="blog" class="blog">
+     <div id="blog" class="blog" style="padding-top:20px;">
 
         <div class="container">
             <div class="row" id="content">

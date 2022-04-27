@@ -32,7 +32,7 @@ class PaymentController extends AbstractController
                     'price_data' => [
                         'currency'     => 'usd',
                         'product_data' => [
-                            'name' => 'T-shirt',
+                            'name' => 'Habhub Products',
                         ],
                         'unit_amount'  => 2000,
                     ],
