@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\AnnonceProprietaireChien;
 use App\Entity\Chien;
 use App\Form\AnnonceProprietaireChienType;
+use App\Form\FrontAnnonceProprietaireChienType;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Util\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -100,64 +101,6 @@ class AnnonceProprietaireChienController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/lost/notifyowner/{chien}", name="app_annonce_proprietaire_chien_lost_notify_owner", methods={"GET"})
-     */
-    public function notifyOwner(Chien $chien): Response
-    {
-
-        $recepient='+216'.strval($chien->getIdindividu()->getIdutilisateur()->getNumtel());
-
-        //$messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
-        $messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live
-        $message =  new \MessageBird\Objects\Message();
-        try{
-
-            $message->originator = $recepient;
-            $message->recipients = $recepient;
-            $message->body = 'we found your dog';
-            $response = $messageBird->messages->create($message);
-
-
-            print_r($response);
-            dump($response);
-        }
-        catch(Exception $e) {echo $e;}
-
-        return $this->redirectToRoute('app_annonce_proprietaire_chien_index_lost');
-    }
-    /**
-     * @Route("/lost/notifyownershow/{chien}/{text}", name="app_annonce_proprietaire_chien_lost_notify_owner_show", methods={"GET"})
-     */
-    public function notifyOwnerShow(EntityManagerInterface $entityManager, Chien $chien,string $text,Request $request): Response
-    {
-
-
-        $annonceProprietaireChien = $entityManager
-            ->getRepository(AnnonceProprietaireChien::class)
-            ->findOneBy(array('idchien' => $chien->getIdChien()));
-        $recepient='+216'.strval($chien->getIdindividu()->getIdutilisateur()->getNumtel());
-
-        //$messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
-        $messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live
-        $message =  new \MessageBird\Objects\Message();
-        try{
-
-            $message->originator = $recepient;
-            $message->recipients = $recepient;
-            $message->body = $text;
-            $response = $messageBird->messages->create($message);
-
-
-            print_r($response);
-            dump($response);
-        }
-        catch(Exception $e) {echo $e;}
-
-        return $this->redirectToRoute('app_annonce_proprietaire_chien_show_lost',['annonceProprietaireChien'=> $annonceProprietaireChien->getIdAnnonceProprietaireChien()]);
-    }
-
-
 
 
     /**
@@ -183,12 +126,40 @@ class AnnonceProprietaireChienController extends AbstractController
     }
 
     /**
-     * @Route("/lost/{annonceProprietaireChien}", name="app_annonce_proprietaire_chien_show_lost", methods={"GET"})
+     * @Route("/lost/{annonceProprietaireChien}", name="app_annonce_proprietaire_chien_show_lost", methods={"GET","POST"})
      */
-    public function showLost(AnnonceProprietaireChien $annonceProprietaireChien): Response
+    public function showLost(AnnonceProprietaireChien $annonceProprietaireChien,Request $request , EntityManagerInterface $entityManager): Response
     {
+        $dummyAnnonce = new AnnonceProprietaireChien();
+        $form = $this->createForm(FrontAnnonceProprietaireChienType::class, $dummyAnnonce);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $text = $dummyAnnonce->getDescription();
+            $recepient = '+216' . strval($annonceProprietaireChien->getIdchien()->getIdindividu()->getIdutilisateur()->getNumtel());
+           //$recepient='+21692962405';
+
+            $messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
+           //$messageBird = new \MessageBird\Client('lPUuEHDNz2QeFFW1pWBPoJEZi'); //live_mariem
+            //$messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live_hamidou
+            $message = new \MessageBird\Objects\Message();
+            try {
+
+                $message->originator = $recepient;
+                $message->recipients = $recepient;
+                $message->body = 'Your dog '.$annonceProprietaireChien->getIdchien()->getNom().' has been seen in : ' . $text." :')";
+                $response = $messageBird->messages->create($message);
+
+
+                dump($response);
+            } catch (Exception $e) {
+                echo $e;
+            }
+        }
         return $this->render('annonce_proprietaire_chien/showLost.html.twig', [
             'annonce_proprietaire_chien' => $annonceProprietaireChien,
+            'form'=>$form->createView(),
         ]);
     }
 

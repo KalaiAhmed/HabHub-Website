@@ -3,6 +3,7 @@ function initialize() {
     var mapOptions, map, marker, searchBox, city,
         infoWindow = '',
         addressEl = document.querySelector( '#map-search' );
+        textmessage= document.querySelector("#front_annonce_proprietaire_chien_description")
         latEl = document.querySelector( '.latitude' );
         longEl = document.querySelector( '.longitude' );
         element = document.getElementById( 'map-canvas' );
@@ -65,6 +66,7 @@ function initialize() {
 
         const data = await response.json();
         addressEl.value = data.address.Match_addr;
+        textmessage.value=data.address.Match_addr;
 
     })
 }

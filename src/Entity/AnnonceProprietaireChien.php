@@ -33,7 +33,7 @@ class AnnonceProprietaireChien
      *
      * @ORM\Column(name="description", type="text", length=65535, nullable=true, options={"default"="NULL"})
      */
-    private $description = 'NULL';
+    private $description;
 
     /**
      * @var string

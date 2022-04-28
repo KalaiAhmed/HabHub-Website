@@ -36,12 +36,17 @@
 
 
 
+
     <div  style="z-index: 1">
 
         <label for="">Address: <input id="map-search" class="controls" type="text" placeholder="Search Box" size="104"></label><br>
         <div id="notifyowner"></div>
+        {{ form_start(form) }}
+        {{ form_widget(form.Notify,{'attr':{'class':'btn btn-primary','text':'Notify Owner'}}) }}
 
         <div style="display:none">
+            {{ form_end(form) }}
+
             <label for="">Lat: <div id="idchien">{annonce_proprietaire_chien.idchien.idchien}</div></label>
 
             <label for="">Lat: <input type="text" class="latitude"></label>
