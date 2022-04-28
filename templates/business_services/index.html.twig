@@ -1,30 +1,37 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}BusinessServices index{% endblock %}
 
 {% block body %}
-    <h1>BusinessServices index</h1>
+    <h4>Our Available Services</h4>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Idbusinessservices</th>
-                <th>Nomservice</th>
-                <th>Prix</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+
+
+
+
+
+
+
+
         {% for business_service in business_services %}
-            <tr>
-                <td>{{ business_service.idbusinessservices }}</td>
-                <td>{{ business_service.nomservice }}</td>
-                <td>{{ business_service.prix }}</td>
-                <td>
-                    <a href="{{ path('app_business_services_show', {'idbusinessservices': business_service.idbusinessservices}) }}">show</a>
-                    <a href="{{ path('app_business_services_edit', {'idbusinessservices': business_service.idbusinessservices}) }}">edit</a>
-                </td>
-            </tr>
+
+            <table class="table">
+            <tbody>
+            <div class="space-2"></div>
+
+            <div class="flex-services ">
+
+                     <span>{{ business_service.nomservice }}</span>
+
+
+                    <span>{{ business_service.prix }}</span>
+                <div class="tag-book">
+
+                    <a href="{{ path('app_reservation_new', {'idbusinessservices': business_service.idbusinessservices}) }}" >Book Now</a>
+                </div>
+
+            </div>
+            <div class="space-2"></div>
+
+            <hr>
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
@@ -33,5 +40,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_business_services_new') }}">Create new</a>
+
 {% endblock %}

@@ -45,6 +45,18 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findMyReservations(){
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager
+            ->createQuery("SELECT r,bs,b from APP\Entity\Reservation r JOIN r.idindividu i JOIN r.idbusinessservices bs 
+            join bs.idbusiness b  where r.idindividu= :currentuserid ")
+            ->setParameter('currentuserid','2');
+
+        return $query->getResult();
+
+    }
+
     // /**
     //  * @return Reservation[] Returns an array of Reservation objects
     //  */

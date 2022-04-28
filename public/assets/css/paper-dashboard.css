@@ -21,6 +21,38 @@ Licensed under the MIT license - http://opensource.org/licenses/MIT
 Copyright (c) 2015 Daniel Eden
 */
 
+.add_business{
+  background-color: black;
+}
+.ahbet{
+  padding-top: 2%;
+}
+
+#newMap{
+
+  width: 1030px;
+  height: 300px;
+}
+
+.flex-box{
+  display:flex;
+  width: 100%;
+  margin: auto;
+
+}
+.res-box{
+  display:flex;
+  align-content: stretch;
+}
+.left{
+  width:20%;
+}
+.right{
+  width: 60%;
+  word-wrap:break-word;
+  padding-left: 5%;
+}
+
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

@@ -1,0 +1,35 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}BusinessServices index{% endblock %}
+
+{% block body %}
+    <h1>BusinessServices index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nomservice</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for business_service in business_services %}
+            <tr>
+                <td>{{ business_service.nomservice }}</td>
+                <td>{{ business_service.prix }}</td>
+                <td>
+                    <a href="{{ path('app_business_services_show', {'idbusinessservices': business_service.idbusinessservices}) }}">show</a>
+                    <a href="{{ path('app_business_services_edit', {'idbusinessservices': business_service.idbusinessservices}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_business_services_new') }}">Create new</a>
+{% endblock %}

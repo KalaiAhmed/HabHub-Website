@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Business{% endblock %}
+
+
+
+{% block body %}
+
+        <div class="container">
+            <div class="row">
+                <h1>Hello</h1>
+                <h1>Hello</h1>
+
+                <h1>Hello</h1>
+
+                <h1>Hello</h1>
+
+                <div class="dog-card-1">
+                    <img class="dog-card-1-img" src="{{ asset('assets/img/harness.jpg') }}">
+                    <p >djazeaehazjehazjeh</p>
+                    <div class="row">
+                        <h6>Price</h6>                         <h6>50 $</h6>
+
+                    </div>
+
+                </div>
+                <div class="dog-card-1">
+                    <img class="dog-card-1-img" src="{{ asset('assets/img/harness.jpg') }}">
+                </div>
+                <div class="dog-card-1">
+                    <img class="dog-card-1-img" src="{{ asset('assets/img/harness.jpg') }}">
+                </div>
+
+
+
+    </div>
+
+
+    <a href="{{ path('app_business_new_back_office') }}">Create new</a>
+{% endblock %}

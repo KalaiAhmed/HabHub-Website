@@ -11,6 +11,7 @@
     </li>
 {% endblock %}
 {% block body %}
+
     <nav
             class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent"
     >
@@ -42,6 +43,9 @@
                     class="collapse navbar-collapse justify-content-end"
                     id="navigation"
             >
+
+                <a href="{{ path('app_business_new_back_office') }}">Create new</a>
+
                 <form>
                     <div class="input-group no-border">
                         <input
@@ -108,37 +112,39 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Simple Table</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="text-primary">
                             <th>Titre</th>
-                            <th>Description</th>
+                            <th>Email</th>
                             <th>Horaire</th>
                             <th>Ville</th>
                             <th>Localisation </th>
                             <th>Type</th>
-                            <th class="text-right">Experience</th>
+                            <th >Experience</th>
 
                             </thead>
                             <tbody>
                             {% for business in businesses %}
                                 <tr>
                                     <td>{{ business.titre }}</td>
-                                    <td>{{ business.description  }}</td>
+                                    <td>{{ business.idutilisateur.email }}</td>
                                     <td >{{ business.horaire }}</td>
                                     <td >{{ business.ville }}</td>
                                     <td >{{ business.localisation }}</td>
                                     <td >{{  business.type}}</td>
                                     <td >{{ business.experience }}</td>
+                                    <td >{{ business.lat }}</td>
+                                    <td >{{ business.lng }}</td>
+
 
                                     <td>
                                         <a href="{{ path('app_business_show', {'idbusiness': business.idbusiness}) }}">show</a>
                                         {{ include('business/_delete_form.html.twig') }}
 
-                                        <a href="{{ path('app_business_edit', {'idbusiness': business.idbusiness}) }}">edit</a>
+                                        <a href="{{ path('app_business_edit_back_office', {'idbusiness': business.idbusiness}) }}">edit</a>
                                     </td>
 
                                     <td class="text-right"></td>
@@ -154,5 +160,5 @@
     </div>
 </div>
 
-    <a href="{{ path('app_business_new') }}">Create new</a>
+
 {% endblock %}
