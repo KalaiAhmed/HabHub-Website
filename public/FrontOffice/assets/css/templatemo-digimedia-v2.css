@@ -50,6 +50,7 @@ figure, header, nav, section, article, aside, footer, figcaption {
   clear: both;
 }
 
+
 /*
 ---------------------------------------------
 Mariem
@@ -170,6 +171,26 @@ Mariem
   justify-content: center;
 
 }
+
+
+.tag-box{
+  width: 45px;
+  height: 43px;
+  background: #FFFFFF;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+tag-sexe{
+  width:70%;
+  height: auto;
+
+}
+
 .tag-book{
   width: 150px;
   height: 35px;
@@ -219,9 +240,7 @@ Mariem
   color: #FFFFFF;
 
 }
-.ahbet{
-  padding-top: 10%;
-}
+
 #map{
   width: 1100px;
   height: 400px;
@@ -264,9 +283,10 @@ Mariem
 }
 
 .dog-card-1-book{
+
 float: right;
 font-size: medium;
-  color: orangered;
+color: orangered;
 
 }
 
@@ -275,6 +295,7 @@ font-size: medium;
 End Mariem
 ---------------------------------------------
 */
+
 /* ---- .grid-item ---- */
 
 .grid-sizer,
@@ -2329,4 +2350,44 @@ responsive
   form#contact {
     padding: 30px;
   }
+
+.ahbet{
+  padding-top:10%;
+}
+/* Community CSS */
+.chien-icon{
+  max-height: 50px;
+  max-width:50px;
+}
+.sub-menu-1{
+display:none;
+  z-index: 100000;
+  position:absolute;
+}
+
+.main-nav ul li:hover .sub-menu-1
+{
+  display:block;
+  position:absolute;
+  background: rgb(252, 252, 252);
+  /*E0642CFF*/
+
+
+}
+
+.main-nav ul li:hover .sub-menu-1 ul
+{
+  display:block;
+
+
+
+}
+.sub-menu-1 ul li
+{
+  color: white;
+}
+
+#map-canvas{
+  height: 700px;
+  width:1000px;
 }

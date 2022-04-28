@@ -45,6 +45,55 @@ class AnnonceProprietaireChienRepository extends ServiceEntityRepository
         }
     }
 
+    /*public function searchLost(string $q)
+    {
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+           // ->createQuery("SELECT a from App\Entity\AnnonceProprietaireChien a join a.idchien c join c.idindividu i where a.type='P' AND c.nom like :query
+             //AND a.localisation like :query")
+           ->createQuery("SELECT a from App\Entity\AnnonceProprietaireChien where a.type='P' AND a.localisation like :query")
+            ->setParameter('query', '%' . $q. '%');
+        return $query->getResult();
+    } */
+
+   /* public function searchMating(string $q)
+    {
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+           // ->createQuery("SELECT a from App\Entity\AnnonceProprietaireChien a join a.idchien c join c.idindividu i where c.nom like :query
+   // AND a.localisation like :query")
+           ->createQuery("SELECT a from App\Entity\AnnonceProprietaireChien a  where a.type='P' AND a.localisation like :query")
+            ->setParameter('query', '%' . $q. '%');
+        return $query->getResult();
+    }*/
+
+
+
+    public function searchFilterPosts($filters=null,$search=null,string $type){
+
+        $query = $this->createQueryBuilder('a');
+
+        $query->innerJoin('App\Entity\Chien', 'c', 'WITH', 'c.idchien = a.idchien');
+        $query->innerJoin('App\Entity\Individu', 'i', 'WITH', 'i.idindividu = c.idindividu');
+        if($filters!=null){
+            $query->where('c.sexe IN(:genders)')
+                ->setParameter(':genders', array_values($filters));
+        }else{
+            $query->where('c.sexe IN(:genders)')
+                ->setParameter(':genders', array('M','F'));
+        }
+        if($search!=null){
+            $query->andWhere('c.nom LIKE :q or c.race LIKE :q or i.prenom LIKE :q or i.nom LIKE :q')
+                  ->setParameter('q', $search.'%');
+
+
+        }
+        $query->andWhere('a.type=:type')
+            ->setParameter(':type', $type);
+
+        return $query->getQuery()->getResult();
+
+    }
     // /**
     //  * @return AnnonceProprietaireChien[] Returns an array of AnnonceProprietaireChien objects
     //  */

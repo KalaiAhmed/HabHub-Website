@@ -20,6 +20,7 @@ Licensed under the MIT license - http://opensource.org/licenses/MIT
 
 Copyright (c) 2015 Daniel Eden
 */
+
 .add_business{
   background-color: black;
 }
@@ -51,6 +52,7 @@ Copyright (c) 2015 Daniel Eden
   word-wrap:break-word;
   padding-left: 5%;
 }
+
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
@@ -4247,3 +4249,7 @@ License - nucleoapp.com/license/
     padding: 15px; } }
 
 /*# sourceMappingURL=paper-dashboard.css.map */
+
+.ahbet{
+  padding-top:7%;
+}

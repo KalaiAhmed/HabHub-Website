@@ -26,14 +26,14 @@ class Individu
      *
      * @ORM\Column(name="nom", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
-    private $nom = 'NULL';
+    private $nom ;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="prenom", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
-    private $prenom = 'NULL';
+    private $prenom  ;
 
     /**
      * @var \DateTime|null
@@ -93,6 +93,16 @@ class Individu
      * })
      */
     private $idutilisateur;
+
+    /**
+     * @param int $idindividu
+     */
+
+    public function __construct(int $idindividu)
+    {
+        $this->idindividu = $idindividu;
+    }
+
 
     public function getIdindividu(): ?int
     {
@@ -220,6 +230,7 @@ class Individu
     }
 
     public function __toString() {
-        return ($this->prenom.'-'.strval($this->idindividu));
+        return (strval($this->idindividu).'-'.$this->prenom);
     }
+
 }
