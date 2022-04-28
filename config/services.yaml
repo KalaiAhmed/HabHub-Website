@@ -4,6 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    upload_directory: '%kernel.project_dir%/public/FrontOffice/uploads'
+    twilio_sid: ACe6a7496474a350b50330f24e8215abbe
+    twilio_token: 638fd577147e0d41c4dade415a8db903
+    twilio_number: '+14699330223'
 
 services:
     # default configuration for services in *this* file
@@ -28,3 +32,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    twilio.client:
+        class: Twilio\Rest\Client
+        arguments: [ '%twilio_sid%', '%twilio_token%' ]
+
+        # Add an alias for the twilio.client service
+        #Twilio\Rest\Client: '@twilio.client'

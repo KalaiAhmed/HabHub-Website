@@ -94,6 +94,16 @@ class Individu
      */
     private $idutilisateur;
 
+    /**
+     * @param int $idindividu
+     */
+
+    public function __construct(int $idindividu)
+    {
+        $this->idindividu = $idindividu;
+    }
+
+
     public function getIdindividu(): ?int
     {
         return $this->idindividu;
@@ -220,7 +230,7 @@ class Individu
     }
 
     public function __toString() {
-        return ($this->prenom.'-'.strval($this->idindividu));
+        return (strval($this->idindividu).'-'.$this->prenom);
     }
 
 }

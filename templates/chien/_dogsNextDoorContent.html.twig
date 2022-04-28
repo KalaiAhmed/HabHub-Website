@@ -1,0 +1,37 @@
+<div id="blog" class="blog">
+    <div class="container">
+        <div class="row" >
+{% for chien in chiens %}
+
+    <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+        <div class="blog-post">
+            <div class="thumb">
+
+                <a href="{{ path('app_chien_show',{'chien': chien.idchien,'liked':chien.liked}) }}"><img src="{{asset('FrontOffice/uploads/'~chien.image) }}" alt=""></a>
+            </div>
+            <div class="down-content">
+                <span class="category">{{ chien.sexe }}</span>
+
+                <a href="#"><h4>{{ chien.nom }}</h4></a>
+                <p>
+                    {{chien.age }}</p>
+                {% if chien.liked %}
+                    <a href="{{ path('app_likes_removelike', {'idchien': chien.idchien}) }}"> <img class="chien-icon" src="{{asset('FrontOffice/assets/images/chien/heartIcon.png') }}"> </a>
+                {% else %}
+                    <a href="{{ path('app_likes_addlike', {'idchien': chien.idchien}) }}"> <img class="chien-icon" src="{{asset('FrontOffice/assets/images/chien/emptyHeartIcon.png') }}"> </a>
+                {% endif %}
+                {% if chien.playwithme %}
+
+                    <img style="margin-top:2%;max-height: 27px;max-width: 102px;" src="{{asset('FrontOffice/assets/images/chien/playWithMe.png') }}">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endfor %}
+</div>
+</div>
+</div>

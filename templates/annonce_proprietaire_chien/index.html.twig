@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
 {% block title %}AnnonceProprietaireChien index{% endblock %}
 
 {% block body %}
+    <div class="ahbet">
     <h1>AnnonceProprietaireChien index</h1>
 
     <table class="table">
@@ -42,4 +43,5 @@
     </table>
 
     <a href="{{ path('app_annonce_proprietaire_chien_new') }}">Create new</a>
+    </div>
 {% endblock %}
