@@ -156,6 +156,7 @@ class AnnonceProprietaireChienController extends AbstractController
             } catch (Exception $e) {
                 echo $e;
             }
+            unset ($dummyAnnonce);
         }
         return $this->render('annonce_proprietaire_chien/showLost.html.twig', [
             'annonce_proprietaire_chien' => $annonceProprietaireChien,
