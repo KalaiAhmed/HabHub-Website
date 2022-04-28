@@ -108,8 +108,8 @@ class AnnonceProprietaireChienController extends AbstractController
 
         $recepient='+216'.strval($chien->getIdindividu()->getIdutilisateur()->getNumtel());
 
-        $messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
-        //$messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live
+        //$messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
+        $messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live
         $message =  new \MessageBird\Objects\Message();
         try{
 
@@ -138,8 +138,8 @@ class AnnonceProprietaireChienController extends AbstractController
             ->findOneBy(array('idchien' => $chien->getIdChien()));
         $recepient='+216'.strval($chien->getIdindividu()->getIdutilisateur()->getNumtel());
 
-        $messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
-        //$messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live
+        //$messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
+        $messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live
         $message =  new \MessageBird\Objects\Message();
         try{
 
