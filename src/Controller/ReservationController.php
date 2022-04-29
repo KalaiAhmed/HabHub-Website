@@ -206,9 +206,9 @@ class ReservationController extends AbstractController
 
     public function confirmReservation(Reservation $reservation): Response
     {
-        $recipient='+216'.strval($reservation->getIdindividu()->getIdutilisateur()->getNumtel());
+        //$recipient='+216'.strval($reservation->getIdindividu()->getIdutilisateur()->getNumtel());
         $originator='+21692962405';
-        //$recipient='+21692962405';
+        $recipient='+21692962405';
 
         $text='Confirmation de réservation du service "'.$reservation->getIdbusinessservices()->getNomservice().'" sous le nom: "'.$reservation->getIdindividu()->getPrenom().' '.$reservation->getIdindividu()->getNom().'" pour le '.$reservation->getDatereservation()->format('d-m-Y').' '.$reservation->getHeurereservation();
         $messageBird = new \MessageBird\Client('3jCpdTd7mvp1JPdZrb1hdJbG0'); //test
