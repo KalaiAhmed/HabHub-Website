@@ -1,0 +1,18 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New Business{% endblock %}
+
+{% block business %}
+    <li class="active">
+        <a href="{{ path('app_business_index_back_office') }}">
+            <i class="fa fa-briefcase" aria-hidden="true"></i>
+            <p>Business Partners</p>
+        </a>
+    </li>
+{% endblock %}
+{% block body %}
+
+    {{ include('business/_form.html.twig') }}
+
+    <a href="{{ path('app_business_index') }}">back to list</a>
+{% endblock %}
