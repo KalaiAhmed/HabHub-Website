@@ -73,4 +73,61 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+
+
+     // Find/search articles by title/content
+    /* public function findEntitiesByString(String $str){
+
+      
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM App:Produit p join App:Categorie c 
+                WHERE p.nom LIKE :str or c.nom LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }*/
+    public function findEntitiesByString(string $q)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+
+        $qb->innerJoin('App\Entity\Categorie', 'c', 'WITH', 'c.idcategorie = p.idcategorie')
+  
+
+
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+
+                        $qb->expr()->like('p.nom', ':query'),
+                        $qb->expr()->like('c.nom', ':query')
+                     
+                    )
+
+                )
+            )
+
+        ->setParameter('query',$q . '%');
+      
+        return $qb->getQuery()->getResult();
+    }
+
+
+
+    public function getTotalProduits($filter = null){
+        $query = $this->createQueryBuilder('p');
+           
+          
+        // On filtre les données
+        if($filter != null){
+            $query->andWhere('p.idcategorie IN(:cats)')
+                ->setParameter(':cats', array_values($filter));
+        }
+
+        return $query->getQuery()->getResult();
+    }
 }
