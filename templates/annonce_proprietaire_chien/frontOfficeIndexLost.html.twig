@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lost Dogs{% endblock %}
+
+
+
+{% block body %}
+    <div class="ahbet">
+    <div class="container">
+
+
+
+        <div class="sidebar-search">
+            <div class="input-group custom-search-form" style="padding-top:7%">
+
+                <input type="text" id="search" class="form-control" placeholder="Search for a mate">
+
+            </div>
+            <!-- /input-group -->
+        </div>
+        <div class="col-xs1">
+            <p>Filter By</p>
+            <form id="filters">
+                <div class="flexini">
+                    <div class="item-checkbox">
+                        <p><input type="checkbox" name="categories[]" value="F"><label>Female</label></p>
+                    </div>
+                    <div class="item-checkbox">
+                        <p><input type="checkbox" name="categories[]" value="M"><label>Male</label></p>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="col-xs1 col-sm4" id="content">
+            {% include ('annonce_proprietaire_chien/_lostContent.html.twig') %}
+        </div>
+    </div>
+
+
+    <script src="{{ asset('FrontOffice/assets/js/searchFilters.js') }}"></script>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+{% endblock %}

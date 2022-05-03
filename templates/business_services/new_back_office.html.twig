@@ -1,0 +1,11 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New BusinessServices{% endblock %}
+
+{% block body %}
+    <h1>Create new BusinessServices</h1>
+
+    {{ include('business_services/_form.html.twig') }}
+
+    <a href="{{ path('app_business_services_index') }}">back to list</a>
+{% endblock %}

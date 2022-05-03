@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Revue{% endblock %}
+
+{% block body %}
+    <h1>Back Office</h1>
+
+    <h1>Create new Revue</h1>
+
+    {{ include('revue/_form.html.twig') }}
+
+    <a href="{{ path('app_revue_index') }}">back to list</a>
+{% endblock %}

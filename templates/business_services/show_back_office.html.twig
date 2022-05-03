@@ -1,0 +1,30 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}BusinessServices{% endblock %}
+
+{% block body %}
+    <h1>BusinessServices</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idbusinessservices</th>
+                <td>{{ business_service.idbusinessservices }}</td>
+            </tr>
+            <tr>
+                <th>Nomservice</th>
+                <td>{{ business_service.nomservice }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ business_service.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_business_services_index') }}">back to list</a>
+
+    <a href="{{ path('app_business_services_edit', {'idbusinessservices': business_service.idbusinessservices}) }}">edit</a>
+
+    {{ include('business_services/_delete_form.html.twig') }}
+{% endblock %}

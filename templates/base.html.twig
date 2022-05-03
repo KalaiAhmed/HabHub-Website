@@ -10,6 +10,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 
+        <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+        <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              rel="stylesheet" integrity="sha384-Gn5384xqU1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6Xm"
+        crossorigin="anonymous"
+        >
+
+
+
         <!-- Bootstrap core CSS -->
         <link href="{{ asset('FrontOffice/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -23,13 +31,20 @@
               {% endblock %}
 
         {% block javascripts %}
+
+
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
             <script src="{{ asset('FrontOffice/vendor/jquery/jquery.min.js') }}"></script>
           <script src="{{ asset('FrontOffice/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/owl-carousel.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/animation.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/imagesloaded.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/custom.js') }}"></script>
-{% endblock %}
+
+
+        {% endblock %}
+
     </head>
     <body>
     <!-- ***** Preloader Start ***** -->
@@ -37,6 +52,9 @@
 
     {% block navBar %}
         <!-- ***** Header Area Start ***** -->
+
+
+        <meta name="pinterest" content="nopin" />
         <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
             <div class="container">
                 <div class="row">
@@ -49,12 +67,26 @@
                             <!-- ***** Logo End ***** -->
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
-                                <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+
+
+                                <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}">Home</a></li>
                                 <li class="scroll-to-section"><a href="{{ path('app_business_index') }}">Services</a></li>
                                 <li class="scroll-to-section"><a href="#services">Adoption</a></li>
-                                <li class="scroll-to-section"><a href="#portfolio">Hub</a></li>
-                                <li class="scroll-to-section"><a href="#blog">Store</a></li>
-                                 <li class="scroll-to-section" > <a  href="{{ path('app_panier_index') }}" class="fa fa-shopping-cart" style="font-size:30px;color:black"></a> </li>
+                                <li class="scroll-to-section"><a href="#">Hub</a>
+                                    <div class="sub-menu-1">
+                                        <ul>
+                                            <li> <a href="{{ path('app_chien_index_my_dogs') }}">My Dogs</a></li>
+                                            <li> <a href="{{ path('app_chien_index_dogs-next-door') }}">Dogs Next Door</a></li>
+                                            <li> <a href="{{ path('app_annonce_proprietaire_chien_index_lost') }}">Lost Dogs</a></li>
+                                            <li> <a href="{{ path('app_annonce_proprietaire_chien_index_mating') }}">Mating</a></li>
+                                            <li></li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}">Store</a></li>
+                                <li class="scroll-to-section" > <a  href="{{ path('app_panier_index') }}" class="fa fa-shopping-cart" style="font-size:30px;color:black"></a> </li>
+
                                 <li class="scroll-to-section"><a>Sign in</a></li>
                                 <li class="scroll-to-section"><div class="border-first-button"><a href="#contact">Sign up</a></div></li>
                             </ul>
@@ -73,8 +105,10 @@
 
 
     {% block body %}
-        
+
     {% endblock %}
+
+
     {% block Footer %}
         <footer>
             <div class="container">
@@ -84,5 +118,13 @@
             </div>
         </footer>
     {% endblock %}
+
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&callback=initMap&v=weekly"
+            defer
+    ></script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&libraries=places&callback=initialize"></script>
+
     </body>
 </html>

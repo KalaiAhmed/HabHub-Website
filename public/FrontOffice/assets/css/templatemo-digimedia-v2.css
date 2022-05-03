@@ -50,18 +50,254 @@ figure, header, nav, section, article, aside, footer, figcaption {
   clear: both;
 }
 
+
 /*
 ---------------------------------------------
 Mariem
 ---------------------------------------------
 */
+
+
+
+.flex-box{
+  display:flex;
+  width: 100%;
+  margin: auto;
+
+}
+.res-box{
+  display:flex;
+  align-content: stretch;
+}
+.left{
+  width:20%;
+}
+.right{
+  width: 60%;
+  word-wrap:break-word;
+  padding-left: 5%;
+}
+.left-sm{
+  width:10%;
+}
+.business-title{
+  color:#E0642C ;
+  font-weight: bolder;
+}
+.business-img-details{
+  width: 200px;
+  height: auto;
+}
+.overf{
+  overflow: hidden;
+}
+
+.h-filters {
+  display: flex;
+  align-content: center;
+  padding-right: 5px;
+
+}
+.map-container{
+  justify-content: center;
+}
+.flexini{
+  width: 500px;
+  display: flex;
+  margin: 0 5px;
+  justify-content: space-between;
+}
+.space-5{
+  margin-top: 5%;
+
+}
+
+.space-2{
+  margin-top: 2%;
+}
+.flex-services{
+  width: 80%;
+  display: flex;
+  justify-content:space-between;
+}
+.flex-services-items{
+  margin-right: 5%;
+}
+.flex-services-items-15{
+  margin-right: 15%;
+}
+.flex-services-items-25{
+  margin-right: 25%;
+}
+
+.space-1{
+
+  margin-top: 1%;
+}
+.key{
+  font-size:15px;
+  color:grey;
+}
+.value{
+  width:150px;
+  overflow : scroll;
+  font-size:15px;
+
+}
+
+.key-bigger{
+  font-size:15px;
+  font-weight: bolder;
+}
+.value-bigger{
+  width:150px;
+  overflow : scroll;
+  font-size:15px;
+
+}
+.title-ville{
+  display: flex;
+  justify-content: space-between;
+
+}
+.tag-ville{
+  width: 120px;
+  height: 43px;
+  background: #FFFFFF;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.tag-box{
+  width: 45px;
+  height: 43px;
+  background: #FFFFFF;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+tag-sexe{
+  width:70%;
+  height: auto;
+
+}
+
+.tag-book{
+  width: 150px;
+  height: 35px;
+  background: #E0642C;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.tag-book a{
+  color: #FFFFFF;
+  text-decoration: none;
+
+}
+.tag-location{
+  width: 13px;
+  height: 18.2px;
+  margin-right: 5%;
+  margin-bottom: 5%;
+
+}
+.items{
+  margin: 0 5px;
+
+}
+.items-checkbox{
+  margin: 0 25px;
+}
+.items-checkbox p{
+  font-size: 20px;
+}
+.save-button-right{
+  margin-top: 35%;
+  width: 80px;
+  height: 40px;
+  background: #E0642C;
+  border-radius: 10px;
+  border-width: 0;
+  font-family: 'Lato';
+  font-style: normal;
+  font-size: 15.5px;
+  /* identical to box height */
+  color: #FFFFFF;
+
+}
+
+#map{
+  width: 1100px;
+  height: 400px;
+}
+#newMap{
+  width: 500px;
+  height: 200px;
+  overflow: hidden;
+  padding-bottom: 2%;
+}
+.search-container{
+  width: 483px;
+  height: 37px;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  background: #F5F5F5;
+  border-radius: 15px;
+}
 .dog-card-1{
+  margin-right: 2%;
+  margin-left: 2%;
+  margin-top: 2%;
   width: 152px;
   height: 195.89px;
   background: #FFFFFF;
   box-shadow: 0px 0px 10.7042px rgba(0, 0, 0, 0.15);
   border-radius: 10.7042px;
+
+  display: inline;
+  overflow-wrap: anywhere;
+
 }
+.dog-card-1 a{
+  z-index: 1;
+
+}
+.dog-card-1-img{
+  padding-top: 5%;
+
+}
+
+.dog-card-1-book{
+
+float: right;
+font-size: medium;
+color: orangered;
+
+}
+
+/*
+---------------------------------------------
+End Mariem
+---------------------------------------------
+*/
+
 
 /* ---- .grid-item ---- */
 
@@ -1056,8 +1292,9 @@ About Style
   border-top-right-radius: 75px;
   border-bottom-right-radius: 75px;
   border-left: 0;
-  -webkit-transform-origin: center left;
-  transform-origin: center left;
+
+  -webkit-transform-origin: center;
+  transform-origin: center ;
 }
 .progress .progress-right {
   right: 0;
@@ -1067,8 +1304,9 @@ About Style
   border-top-left-radius: 75px;
   border-bottom-left-radius: 75px;
   border-right: 0;
-  -webkit-transform-origin: center right;
-  transform-origin: center right;
+
+  -webkit-transform-origin: center ;
+  transform-origin: center ;
 }
 .progress .progress-value {
   text-align: center;
@@ -1173,7 +1411,8 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(36);
+
+    -webkit-transform: rotate(36deg);
     transform: rotate(36deg);
   }
 }
@@ -1183,7 +1422,8 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(72);
+
+    -webkit-transform: rotate(72deg);
     transform: rotate(72deg);
   }
 }
@@ -1193,7 +1433,8 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(108);
+
+    -webkit-transform: rotate(108deg);
     transform: rotate(108deg);
   }
 }
@@ -1203,7 +1444,8 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(144);
+
+    -webkit-transform: rotate(144deg);
     transform: rotate(144deg);
   }
 }
@@ -1213,7 +1455,8 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(180);
+
+    -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
   }
 }
@@ -2042,40 +2285,53 @@ responsive
   .header-area .main-nav .logo h4 {
     font-size: 30px;
   }
+
   .header-area .main-nav .logo h4 img {
     max-width: 30px;
     margin-left: 5px;
   }
+
+
   .main-banner .info-stat {
     margin-bottom: 15px;
   }
+
   .service-item {
     text-align: center;
     padding: 30px;
   }
+
   .service-item .icon {
     float: none;
     margin-right: 0px;
     margin-bottom: 15px;
   }
+
+
   .service-item .right-content {
     display: inline-block;
   }
+
   .services .naccs .menu div .thumb {
     padding: 5px;
   }
+
   .services .icon img {
     margin: 0px;
   }
+
   .services ul.nacc li.active {
     padding: 45px;
   }
-  .services .naccs .menu div  {
+
+  .services .naccs .menu div {
     font-size: 0px;
   }
+
   .services ul.nacc li .right-image img {
     float: none;
   }
+
   .our-portfolio .section-heading,
   .about-us .section-heading,
   .about-us .about-item,
@@ -2083,39 +2339,92 @@ responsive
   .about-us .main-green-button {
     text-align: center;
   }
+
+
   .our-portfolio .section-heading .line-dec {
     margin: 0 auto;
   }
+
   .our-services .section-heading {
     margin-left: 15px;
     margin-right: 15px;
   }
+
   .free-quote form input {
     margin-left: 0px;
     padding: 0px 30px;
   }
+
   .free-quote form button {
     margin-left: 0px;
     border-bottom-left-radius: 40px;
     border-top-right-radius: 0px;
   }
+
   .blog-posts {
     margin-left: 0px;
     margin-top: 30px;
   }
+
+
   .post-item {
     margin-bottom: 30px;
   }
+
   .post-item .thumb img {
     max-width: 140px;
   }
+
   .post-item .right-content p {
     display: none;
   }
+
   .about-us .about-item {
     margin-top: 15px;
   }
+
   form#contact {
     padding: 30px;
   }
+}
+
+.ahbet{
+  padding-top:10%;
+}
+/* Community CSS */
+.chien-icon{
+  max-height: 50px;
+  max-width:50px;
+}
+.sub-menu-1{
+display:none;
+  z-index: 100000;
+  position:absolute;
+}
+
+.main-nav ul li:hover .sub-menu-1
+{
+  display:block;
+  position:absolute;
+  background: rgb(252, 252, 252);
+  /*E0642CFF*/
+
+
+}
+
+.main-nav ul li:hover .sub-menu-1 ul
+{
+  display:block;
+
+
+
+}
+.sub-menu-1 ul li
+{
+  color: white;
+}
+
+#map-canvas{
+  height: 700px;
+  width:1000px;
 }

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Chien;
+use App\Entity\Individu;
 use App\Entity\Likes;
 use App\Form\LikesType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,6 +31,105 @@ class LikesController extends AbstractController
         ]);
     }
 
+
+        /**
+         * @Route("/{idchien}", name="app_nblikes", methods={"GET"})
+         */
+
+    public function getNbLikesByDog(EntityManagerInterface $entityManager,int $idchien)
+    {
+        $nblikes = $entityManager
+            ->getRepository(Likes::class)
+            ->getNbLikes($idchien);
+
+        return $this->render('likes/nblikes.html.twig', [
+            'nblikes' => $nblikes,
+        ]);
+    }
+
+    /**
+     * @Route("/addlike/{idchien}", name="app_likes_addlike", methods={"GET"})
+     */
+
+    public function addLike(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+        $loggedinUser = $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => '6'));
+
+        $chien = $entityManager
+            ->getRepository(Chien::class)
+            ->findOneBy(array('idchien' => $idchien));
+        $like=new likes($loggedinUser,$chien);
+        $entityManager->persist($like);
+        $entityManager->flush();
+
+            return $this->redirectToRoute('app_chien_index_dogs-next-door');
+
+
+    }
+
+    /**
+     * @Route("/addlikeshow/{idchien}", name="app_likes_addlike_show", methods={"GET"})
+     */
+
+    public function addLikeShow(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+
+
+        $loggedinUser = $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => '6'));
+
+        $chien = $entityManager
+            ->getRepository(Chien::class)
+            ->findOneBy(array('idchien' => $idchien));
+        $like=new likes($loggedinUser,$chien);
+        $entityManager->persist($like);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_chien_show',['chien'=>$idchien,'liked'=>1]);
+
+
+    }
+    /**
+     * @Route("/removelike/{idchien}", name="app_likes_removelike", methods={"GET"})
+     */
+
+    public function removeLike(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+
+        $like= $entityManager
+            ->getRepository(Likes::class)
+            ->findOneBy(array('idindividu'=>'6','idchien' => $idchien));
+        $entityManager->remove($like);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_chien_index_dogs-next-door');
+
+
+    }
+
+    /**
+     * @Route("/removelikeshow/{idchien}", name="app_likes_removelike_show", methods={"GET"})
+     */
+
+    public function removeLikeShow(EntityManagerInterface $entityManager,int $idchien): Response
+    {
+
+
+        $like= $entityManager
+            ->getRepository(Likes::class)
+            ->findOneBy(array('idindividu'=>'6','idchien' => $idchien));
+        $entityManager->remove($like);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_chien_show',['chien'=>$idchien,'liked'=>0]);
+
+    }
     /**
      * @Route("/new", name="app_likes_new", methods={"GET", "POST"})
      */
