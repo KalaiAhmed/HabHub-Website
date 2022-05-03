@@ -10,7 +10,7 @@ class FrontOfficeHomeController extends AbstractController
 {
     /**
 
-     * @Route("/front-office/home", name="app_front_office_home")
+     * @Route("/front-office/home", name="app_home")
 
      */
     public function index(): Response

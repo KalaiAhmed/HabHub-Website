@@ -224,6 +224,7 @@
     },
     "stripe/stripe-php": {
         "version": "v7.125.0"
+    },
 
     "symfony/apache-pack": {
         "version": "1.0",
