@@ -1,0 +1,30 @@
+
+
+        {% for produit in produits %}
+          <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+
+                    <div class="blog-post">
+                        <div class="thumb">
+                        
+                           <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/'~produit.image~'.jpg') }}" alt=""></a>
+                        </div>
+                          <div class="down-content">
+                            
+                              <span class="nom">{{produit.nom}}</span>
+                                <span class="s" style="padding-left:50px;font-weight: bold;color:#f46c38">{{produit.prix }} DT</span>
+                                <p>{{ produit.description }}</p>
+                                <span class="category">{{produit.idCategorie.nom}}</span>
+                                <span class="marque" style="padding-left:50px" >{{produit.marque }}</span>
+                                 <a href="{{path('add_prod', {'id':produit.idproduit} )}}" class="butt">Add To Cart</a>
+                                
+                            </div>
+                    </div>
+                </div>
+
+
+        {% endfor %}
+      
+
+  
+
+

@@ -81,6 +81,7 @@
                 </li>
                 {% endblock %}
                 {% block store %}
+                
 
                 <li>
                     <a
@@ -99,18 +100,18 @@
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="./ordersList.html">
+                                <a class="nav-link" href="{{ path('app_back_office_categorie') }}">
                                     <i class="fa fa-shopping-baske" aria-hidden="true"> </i>
-                                    Manage Orders</a
+                                    Manage Categories</a
                                 >
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./productsList.html"
+                                <a class="nav-link" href="{{ path('app_back_office_produit') }}"
                                 >Manage Products</a
                                 >
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./addProduct.html">Add Product</a>
+                                <a class="nav-link" href="{{ path('app_produit_new') }}">Add Product</a>
                             </li>
                         </ul>
                     </div>
