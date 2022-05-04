@@ -59,9 +59,9 @@ class Chien
 
     /**
      * @var string|null
-     * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="image", type="string", length=250, nullable=true, options={"default"="17.png"})
      */
-    private $image;
+    private $image='17.png';
 
     /**
      * @var string
