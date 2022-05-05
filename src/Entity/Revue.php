@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Revue
  *
  * @ORM\Table(name="revue", indexes={@ORM\Index(name="idIndividu", columns={"idIndividu"}), @ORM\Index(name="idProduit", columns={"idProduit"}), @ORM\Index(name="idBusiness", columns={"idBusiness"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\RevueRepository")
  */
 class Revue
 {
@@ -38,9 +38,9 @@ class Revue
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="datePublication", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="datePublication", type="date", nullable=true, options={"default"="DATE DEFAULT CURRENT_DATE"})
      */
-    private $datepublication = 'NULL';
+    private $datepublication ;
 
     /**
      * @var \Produit
@@ -63,7 +63,7 @@ class Revue
     private $idindividu;
 
     /**
-     * @var \Business
+     * @var \App\Entity\Business
      *
      * @ORM\ManyToOne(targetEntity="Business")
      * @ORM\JoinColumns({
@@ -72,6 +72,25 @@ class Revue
      */
     private $idbusiness;
 
+    /**
+     * @param int $idrevue
+     * @param int $nbetoiles
+     * @param string $commentaire
+     * @param \DateTime|string|null $datepublication
+     * @param \Individu $idindividu
+     * @param \Business $idbusiness
+     */
+    /*    public function __construct(int $idrevue, int $nbetoiles, string $commentaire,  \App\Entity\Business $idbusiness)
+
+
+    public function __construct(int $idrevue, int $nbetoiles, string $commentaire,  Business $idbusiness)
+    {
+        $this->idrevue = $idrevue;
+        $this->nbetoiles = $nbetoiles;
+        $this->commentaire = $commentaire;
+        $this->idbusiness = $idbusiness;
+    }
+*/
     public function getIdrevue(): ?int
     {
         return $this->idrevue;

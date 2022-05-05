@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategorieController extends AbstractController
 {
     /**
-     * @Route("/", name="app_categorie_index", methods={"GET"})
+     * @Route("/back-office", name="app_back_office_categorie", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -42,7 +42,7 @@ class CategorieController extends AbstractController
             $entityManager->persist($categorie);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_office_categorie', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('categorie/new.html.twig', [
@@ -52,7 +52,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{idcategorie}", name="app_categorie_show", methods={"GET"})
+     * @Route("/{idCategorie}", name="app_categorie_show", methods={"GET"})
      */
     public function show(Categorie $categorie): Response
     {
@@ -62,7 +62,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{idcategorie}/edit", name="app_categorie_edit", methods={"GET", "POST"})
+     * @Route("/{idCategorie}/edit", name="app_categorie_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
     {
@@ -82,7 +82,9 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{idcategorie}", name="app_categorie_delete", methods={"POST"})
+     * @Route("/{idCategorie}", name="app_categorie_delete", methods={"POST"})
+  
+   
      */
     public function delete(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
     {
@@ -91,6 +93,6 @@ class CategorieController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_back_office_categorie', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
-{% block title %}New AnnonceProprietaireChien{% endblock %}
+{% block title %} New Lost Dog{% endblock %}
 
 {% block body %}
-    <h1>Create new AnnonceProprietaireChien</h1>
+    <h1>Create new Lost Dog Post</h1>
 
     {{ include('annonce_proprietaire_chien/_form.html.twig') }}
 
-    <a href="{{ path('app_annonce_proprietaire_chien_index') }}">back to list</a>
+    <a href="{{ path('app_annonce_proprietaire_chien_index_lost_back') }}">back to list</a>
 {% endblock %}

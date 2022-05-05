@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Business{% endblock %}
+
+
+{% block body %}
+    <div class="ahbet">
+        <div class="container">
+
+
+            <div class="sidebar-search">
+                <div class="input-group custom-search-form" style="padding-top:7%">
+                    <input type="text" id="search" class="form-control" placeholder="Search">
+                </div>
+                <!-- /input-group -->
+            </div>
+
+            <div class="col-xs1">
+                <p>Filter By</p>
+                <form id="filters">
+                    <div class="flexini">
+                        <div class="item-checkbox">
+                        <p><input type="checkbox" name="categories[]" value="vet"><label>Veterinary</label></p>
+                        </div>
+                        <div class="item-checkbox">
+                        <p><input type="checkbox" name="categories[]" value="park"><label>Parks</label></p>
+                        </div>
+                        <div class="item-checkbox">
+                            <p><input type="checkbox" name="categories[]" value="grooming"><label>Grooming</label></p>
+                        </div>
+                        <div class="item-checkbox">
+                    <p><input type="checkbox" name="categories[]" value="dogsitting"><label>DogSitting</label></p>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs1 col-sm4" id="content">
+            {% include('business/_content.html.twig')  %}
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+    <script src="{{ asset('FrontOffice/assets/js/filters.js') }}"></script>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 0;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('business_ajax_search') }}",
+                        data: {
+                            'm' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value==$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key == 'business') {
+                                            if (id != 'error') {
+
+                                                entitySelector.append('<div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s"><div class="blog-post">' +
+                                                    '<div class="thumb"><a href="/business/'+value[0] +'">'+
+                                                    '<img src="/FrontOffice/assets/images/business/'+value[1]+'" alt=""></a> </div>' +
+                                                '<div class="down-content"><span class="category">'+value[2]+'</span><span class="date">03 August 2021</span>'+
+                                                   ' <a href="#"><h4>'+value[3]+'</h4></a>' +
+                                                    '<p>'+value[4]+'</p>' +
+                                                    '  <div class="border-first-button"><a href="#">Book Now</a></div>' +
+                                                    ' </div>' +
+                                                    '  </div>' +
+                                                    '</div>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}

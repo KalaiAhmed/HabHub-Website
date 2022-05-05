@@ -90,6 +90,11 @@
     },
     "evenement/evenement": {
         "version": "v3.0.1"
+        },
+
+    "firebase/php-jwt": {
+        "version": "v5.5.1"
+
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
@@ -114,6 +119,10 @@
     },
     "mercuryseries/flashy-bundle": {
         "version": "v5.1.0"
+        },
+
+    "messagebird/php-rest-api": {
+        "version": "v3.0.0"
     },
     "monolog/monolog": {
         "version": "1.27.0"
@@ -281,6 +290,21 @@
     },
     "spatie/macroable": {
         "version": "1.0.1"
+        },
+
+    "stripe/stripe-php": {
+        "version": "v7.125.0"
+    },
+
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "9d254a22efca7264203eea98b866f16f944b2f09"
+        }
+
     },
     "symfony/asset": {
         "version": "v4.4.40"
@@ -650,6 +674,9 @@
     },
     "twig/twig": {
         "version": "v3.3.9"
+    },
+    "twilio/sdk": {
+        "version": "6.36.1"
     },
     "webmozart/assert": {
         "version": "1.10.0"

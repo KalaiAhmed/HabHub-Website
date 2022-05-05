@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Reservation
  *
  * @ORM\Table(name="reservation", indexes={@ORM\Index(name="fk_reservation_businessServices", columns={"idBusinessServices"}), @ORM\Index(name="fk_reservation_individu", columns={"idIndividu"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
  */
 class Reservation
 {
@@ -22,14 +22,15 @@ class Reservation
     private $idreservation;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idBusinessServices", type="integer", nullable=false)
+     * @var \BusinessServices
+     * @ORM\ManyToOne(targetEntity="BusinessServices")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idBusinessServices", referencedColumnName="idBusinessServices")
+     * })
      */
     private $idbusinessservices;
 
     /**
-     * @var \DateTime
      *
      * @ORM\Column(name="dateReservation", type="date", nullable=false)
      */
@@ -57,17 +58,19 @@ class Reservation
         return $this->idreservation;
     }
 
-    public function getIdbusinessservices(): ?int
+    public function getIdbusinessservices(): ?BusinessServices
     {
         return $this->idbusinessservices;
     }
 
-    public function setIdbusinessservices(int $idbusinessservices): self
+
+    public function setIdbusinessservices(?BusinessServices $idbusinessservices): self
     {
         $this->idbusinessservices = $idbusinessservices;
-
         return $this;
+
     }
+
 
     public function getDatereservation(): ?\DateTimeInterface
     {

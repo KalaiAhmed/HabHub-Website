@@ -1,0 +1,13 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit BusinessServices{% endblock %}
+
+{% block body %}
+    <h1>Edit BusinessServices</h1>
+
+    {{ include('business_services/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_business_services_index') }}">back to list</a>
+
+    {{ include('business_services/_delete_form.html.twig') }}
+{% endblock %}
