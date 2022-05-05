@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9651cbf1754810f1b94a7363741bd74",
+    "content-hash": "b46c7688c2d58473fbab23f1a6f633a6",
     "packages": [
         {
             "name": "botman/botman",
@@ -1625,8 +1625,7 @@
             },
             "time": "2017-07-23T21:35:13+00:00"
         },
-
-{
+        {
             "name": "firebase/php-jwt",
             "version": "v5.5.1",
             "source": {
@@ -1653,7 +1652,6 @@
             "autoload": {
                 "psr-4": {
                     "Firebase\\JWT\\": "src"
-
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1859,7 +1857,7 @@
             "autoload": {
                 "psr-4": {
                     "MercurySeries\\FlashyBundle\\": "src/"
-                      }
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1878,8 +1876,8 @@
             },
             "time": "2022-03-27T04:24:03+00:00"
         },
-      {
-          "name": "messagebird/php-rest-api",
+        {
+            "name": "messagebird/php-rest-api",
             "version": "v3.0.0",
             "source": {
                 "type": "git",
@@ -1906,7 +1904,6 @@
             "autoload": {
                 "psr-4": {
                     "MessageBird\\": "src/MessageBird/"
-
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3292,7 +3289,7 @@
             "autoload": {
                 "psr-4": {
                     "Spatie\\Macroable\\": "src"
-                        }
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3317,10 +3314,9 @@
                 "source": "https://github.com/spatie/macroable/tree/1.0.1"
             },
             "time": "2020-11-03T10:15:05+00:00"
-          },
-
-          {
-           "name": "stripe/stripe-php",
+        },
+        {
+            "name": "stripe/stripe-php",
             "version": "v7.125.0",
             "source": {
                 "type": "git",
@@ -3414,7 +3410,6 @@
             "autoload": {
                 "psr-4": {
                     "Stripe\\": "lib/"
-
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -11014,5 +11009,5 @@
         "ext-iconv": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
