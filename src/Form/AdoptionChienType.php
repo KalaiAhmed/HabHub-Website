@@ -4,10 +4,11 @@ namespace App\Form;
 
 use App\Entity\Chien;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class ChienType extends AbstractType
 {
@@ -28,8 +29,6 @@ class ChienType extends AbstractType
             ->add('color')
             ->add('race')
             ->add('groupe')
-            ->add('idindividu')
-            ->add('add',SubmitType::class)
         ;
     }
 

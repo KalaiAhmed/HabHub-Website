@@ -60,33 +60,7 @@ window.onload = function(){
 
 
 
-<script>
 
-    window.onload = function(){
-
-
-    let annonces = document.getElementById('annonces');
-    let annGraph = new Chart(annonces, {
-        type: "line",
-        data: {
-            labels: {{ dates|raw }},
-            datasets: [{
-                label: "Nombre d'annonces",
-                data: {{ annoncesCount|raw }}
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    })
-    }
-</script>
 
 
 
