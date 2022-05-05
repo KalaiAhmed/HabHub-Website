@@ -45,6 +45,74 @@ class AnnonceAdoptionRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAnnonceByDogName(string $q)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+       $qb->innerJoin('App\Entity\Chien', 'c', 'WITH', 'c.idchien = a.idchien');
+       $qb->innerJoin('App\Entity\Individu', 'i', 'WITH', 'i.idindividu = a.idindividu')
+
+        ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('i.prenom', ':query'),
+                        $qb->expr()->like('a.localisation', ':query'),
+                        $qb->expr()->like('c.nom', ':query'),
+                    )
+
+                )
+            )
+            ->setParameter('query', '%' . $q . '%');
+            $qb->andWhere( 'a.status = \'P\'');
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+
+   function findEntitiesByString(string $q)
+    {
+        $qb = $this->createQueryBuilder('u')
+
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+
+                        $qb->expr()->like('u.email', ':query')
+
+                    )
+
+                )
+            );
+
+            $qb->setParameter('query',$q . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getAnnonces($filters = null){
+        $query = $this->createQueryBuilder('a')->
+        Where( 'a.status = \'P\'');
+        
+        // On filtre les données
+        if($filters != null){
+            $query->andWhere('a.idindividu IN(:indiv)')
+                ->setParameter(':indiv', array_values($filters));
+        }
+
+        $query->orderBy('a.datepublication');
+        return $query->getQuery()->getResult();
+    }
+
+    public function countByDate(){
+    
+        $query = $this->getEntityManager()->createQuery("
+            SELECT SUBSTRING(a.datepublication, 1, 10) as dateAnnonces, COUNT(a) as count FROM App\Entity\AnnonceAdoption a GROUP BY dateAnnonces
+        ");
+        return $query->getResult();
+    }
+
+
     // /**
     //  * @return AnnonceAdoption[] Returns an array of AnnonceAdoption objects
     //  */

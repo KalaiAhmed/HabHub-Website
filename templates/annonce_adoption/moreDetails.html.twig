@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adoption index{% endblock %}
+{% block body %}
+
+
+<div class="container" >
+    <div class="row">
+
+    <table class="table" style="margin-top:100px;">
+        <tbody>
+        <tr>
+                <th>Image</th>
+                <div class="row">
+                <td><img src="{{ asset('FrontOffice/uploads/'~annonceAdoption.idchien.image) }}" 
+                style="width:150px;height:100px;object-fit:fill;" alt=""></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Foster Name</th>
+                <td>{{ annonceAdoption.idindividu.nom ~' '~ annonceAdoption.idindividu.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{annonceAdoption.idchien.nom}}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ annonceAdoption.idchien.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ annonceAdoption.idchien.age }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ annonceAdoption.description }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ annonceAdoption.idchien.color}}</td>
+            </tr>
+            <tr>
+                <th>Race</th>
+                <td>{{annonceAdoption.idchien.race}}</td>
+            </tr>
+            <tr>
+                <th>groupe</th>
+                <td>{{ annonceAdoption.idchien.groupe}}</td>
+            </tr>
+            <tr>
+                <th>Vaccination</th>
+                <td>{{ annonceAdoption.idchien.vaccination ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
+
+    <a href="{{ path('app_annonce_adoption_edit', {'idannonceadoption': annonceAdoption.idannonceadoption}) }}">edit</a>
+
+     <a href="{{ path('app_annonce_adoption_pdf', {'idannonceadoption': annonceAdoption.idannonceadoption}) }}">imprimer pdf</a>
+
+     <a  href="{{path("contact",{'id': annonceAdoption.idindividu.idindividu })}}" class="btn btn-primary">Contacter l'annonceur</a>
+
+      
+
+
+
+{% endblock %}
+

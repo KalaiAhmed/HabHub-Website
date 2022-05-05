@@ -1,0 +1,11 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New AnnonceAdoption{% endblock %}
+
+{% block body %}
+    <h1 style="margin-left:50px;">Create new AnnonceAdoption</h1>
+    <div style="margin-left:350px;">
+    {{ include('annonce_adoption/_backForm.html.twig') }}
+    <a href="{{ path('app_annonce_adoption_index_back_office') }}">back to list</a>
+    </div>
+{% endblock %}
