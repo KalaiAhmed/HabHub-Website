@@ -28,7 +28,7 @@ class OffreController extends AbstractController
         //get offers 
         $offres = $entityManager
         ->getRepository(Offre::class)
-        ->findBy(array('foster'=> '2','status'=>'P'));
+        ->findBy(array('foster'=> '3','status'=>'P'));
 
         return $this->render('offre/index.html.twig', [
             'offres' => $offres,

@@ -279,7 +279,6 @@ public function allDogsNextDoor(Request $request)
      *
      */
 
-    //test with : http://127.0.0.1:8000/reservation/new-reservation/mobile?idbusinessservices=5&datereservation=2022-05-16&heurereservation=9AM-10AM&idindividu=3
     public function addDog(Request $request, EntityManagerInterface $entityManager)
     {
         $chien = new Chien();

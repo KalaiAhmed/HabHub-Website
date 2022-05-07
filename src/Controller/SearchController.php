@@ -14,7 +14,7 @@ use App\Entity\Produit;
 use App\Entity\AnnonceProprietaireChien;
 
 
-class SearchController extends AbstractController
+class   SearchController extends AbstractController
 {
 
 
