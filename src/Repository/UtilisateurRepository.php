@@ -22,6 +22,17 @@ class UtilisateurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Utilisateur::class);
     }
+
+
+    public function getUserByIndividu(int $id){
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+            ->createQuery("SELECT u FROM App\Entity\Utilisateur u JOIN u.idutilisateur i where i.idutilisateur=:idutilisateur")
+            ->setParameters(array('idutilisateur',$id));
+        return $query->getResult();
+    }
+
+
     /**
      * @throws ORMException
      * @throws OptimisticLockException

@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('app_offre_decline', {'idoffre': offre.idoffre}) }}"
+ onsubmit="return confirm('Are you sure you want to decline this offer?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('decline' ~ offre.idoffre) }}">
+    <button class="btn">Decline</button>
+</form>

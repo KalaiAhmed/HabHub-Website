@@ -1,14 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
-{% block title %}Categorie index{% endblock %}
+{% block store %}
+                
+
+                <li class="active">
+                    <a
+                            class="nav-link"
+                            data-toggle="collapse"
+                            href="#ui-basic"
+                            aria-expanded="false"
+                            aria-controls="ui-basic"
+                    >
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+
+                        <!--<i class="nc-icon nc-pin-3"></i> -->
+                        <span class="menu-title">Store</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="active">
+                                <a class="" href="./ordersList.html">
+                                    <i class="fa fa-shopping-baske" aria-hidden="true"> </i>
+                                    Manage Categories</a
+                                >
+                            </li>
+                            <li class="nav-link">
+                                <a class="nav-link" href="{{ path('app_back_office_produit') }}"
+                                >Manage Products</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_produit_new') }}">Add Product</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                {% endblock %}
+
+{% block title %}Categories{% endblock %}
 
 {% block body %}
-    <h1>Categorie index</h1>
+    <h1>Categories</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Idcategorie</th>
+                <th>IdCategorie</th>
                 <th>Nom</th>
                 <th>Description</th>
                 <th>actions</th>
@@ -17,12 +55,12 @@
         <tbody>
         {% for categorie in categories %}
             <tr>
-                <td>{{ categorie.idcategorie }}</td>
+                <td>{{ categorie.IdCategorie }}</td>
                 <td>{{ categorie.nom }}</td>
                 <td>{{ categorie.description }}</td>
                 <td>
-                    <a href="{{ path('app_categorie_show', {'idcategorie': categorie.idcategorie}) }}">show</a>
-                    <a href="{{ path('app_categorie_edit', {'idcategorie': categorie.idcategorie}) }}">edit</a>
+                   {{ include('categorie/_delete_form.html.twig') }}
+                  <a href="{{ path('app_categorie_edit', {'idCategorie': categorie.idCategorie}) }}">edit</a> 
                 </td>
             </tr>
         {% else %}

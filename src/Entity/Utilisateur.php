@@ -8,9 +8,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  *
- *
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
-  @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  *
  */
 class Utilisateur implements UserInterface
@@ -53,6 +52,13 @@ class Utilisateur implements UserInterface
     private $type;
 
     private $roles = [];
+
+
+    public function __construct(int $idutilisateur)
+    {
+        $this->idutilisateur = $idutilisateur;
+    }
+
 
     public function getIdutilisateur(): ?int
     {
@@ -153,4 +159,7 @@ class Utilisateur implements UserInterface
     }
 
 
+    public function __toString() {
+        return ($this->email.'-'.strval($this->idutilisateur));
+    }
 }

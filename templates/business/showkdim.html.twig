@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Business{% endblock %}
+
+
+{% block body %}
+    <div class="ahbet">
+        <div class="container">
+            <h1>Business Details</h1>
+            <div class="row">
+
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Idbusiness</th>
+                        <td>{{ business.idbusiness }}</td>
+                    </tr>
+                    <tr>
+                        <th>Titre</th>
+                        <td>{{ business.titre }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ business.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Horaire</th>
+                        <td>{{ business.horaire }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ville</th>
+                        <td>{{ business.ville }}</td>
+                    </tr>
+                    <tr>
+                        <th>Localisation</th>
+                        <td>{{ business.localisation }}</td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>{{ business.type }}</td>
+                    </tr>
+                    <tr>
+                        <th>Experience</th>
+                        <td>{{ business.experience }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                {{ include('business/location.html.twig') }}
+
+
+
+                <a href="{{ path('app_business_edit', {'idbusiness': business.idbusiness}) }}">edit</a>
+
+
+                {{ render(path('app_business_services_index', {'idbusiness': business.idbusiness} )) }}
+                {{ render(path('app_revue_index', {'idbusiness': business.idbusiness} )) }}
+                <h1>Add New Review</h1>
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                <div class="flexini">
+                    <div class="item">
+                        <p>Rating Stars</p>
+                        {{ form_widget(form.nbetoiles,{'attr':{'class':'form-contr0ol'}}) }}
+                    </div>
+                    <div class="item">
+                        <p>Explain your Rating</p>
+                        {{ form_widget(form.commentaire,{'attr':{'class':'form-contr0ol'}}) }}
+                    </div>
+                    <div class="item">
+
+                        {{ form_widget(form.Save,{'attr':{'class':'form-contr0ol save-button-right '}}) }}
+                    </div>
+
+                </div>
+                {{ form_end(form) }}
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&callback=initMap&v=weekly"
+            defer
+    ></script>
+{% endblock %}

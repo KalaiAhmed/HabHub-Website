@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+
+   {% block navBar %}
+        <!-- ***** Header Area Start ***** -->
+        <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                            <a href="{{ path('app_front_office_home') }}" class="logo">
+                                <img src="{{ asset('FrontOffice/assets/images/logo-v2.png') }}" alt="">
+                            </a>
+                            <!-- ***** Logo End ***** -->
+                            <!-- ***** Menu Start ***** -->
+                            <ul class="nav">
+                                <li class="scroll-to-section"><a href="#top" >Home</a></li>
+                                <li class="scroll-to-section"><a href="{{ path('app_business_index') }}">Services</a></li>
+                                <li class="scroll-to-section"><a href="#services">Adoption</a></li>
+                                <li class="scroll-to-section"><a href="#portfolio">Hub</a></li>
+                                <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}" >Store</a></li>
+                                  <li class="scroll-to-section" > <a  href="{{ path('app_panier_index') }}" class="fa fa-shopping-cart active" style="font-size:30px;color:black"></a> </li>
+                                <li class="scroll-to-section"><a>Sign in</a></li>
+                                <li class="scroll-to-section"><div class="border-first-button"><a href="#contact">Sign up</a></div></li>
+                            </ul>
+                            <a class='menu-trigger'>
+                                <span>Menu</span>
+                            </a>
+                            <!-- ***** Menu End ***** -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ***** Header Area End ***** -->
+
+         {% endblock %}
+
+{% block body %}
+    <h1>Panier index</h1>
+      <div class="wrapper" style="padding-top:100px"; >
+      
+
+    {% if items | length > 0  %}
+    <table class="table">
+    <thead>
+        <tr>
+            <th>  </th>
+            <th  style="font-size:19px;"> Product  </th>
+            <th style="font-size:19px;"> Price </th>
+            <th style="font-size:19px;"> Quantity </th>
+            <th style="font-size:19px;"> Subtotal </th>
+            <th style="font-size:19px;"> Actions </th>
+        </tr>
+    </thead>
+  
+    <tbody>
+     
+        {% for item in items  %}
+            <tr>
+            <td class="image-box"> <a href="#"><img src="{{ asset('FrontOffice/assets/images/store/'~item.produit.image~'.jpg') }}" alt=""</a> </td>
+                <td style="padding-top:50px;font-size:19px;">{{item.produit.nom }} </td>
+                <td style="padding-top:50px;font-size:19px;">{{item.produit.prix}} </td>
+                <td style="padding-top:50px;font-size:19px;">{{item.quantite}} </td>
+                <td style="padding-top:50px;font-size:19px;">{{item.produit.prix * item.quantite}} </td>
+                <td style="padding-top:50px;font-size:19px;">
+                 <a href="{{path("reduce", {'id': item.produit.idproduit})}}" class="btn btn-danger btn-sm">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                <a href='{{ path('DelProd', {'id':item.produit.idproduit}) }}' class="btn btn-danger btn-sm" >
+                    <i class="fa fa-trash"></i>
+                    </a>
+                     <a href="{{path("addQ", {'id': item.produit.idproduit})}}" class="btn btn-danger btn-sm">
+                            <i class="fa fa-plus " ></i>
+                        </a>
+                        
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="text-align:right;font-weight: bold;font-size:19px;">Total: </td>
+                <td style="font-weight: bold;font-size:19px;">{{total}} DT</td>
+                <td> </td>
+            </tr>
+           
+        </tfoot>
+
+
+            
+    </table>
+
+    {% else %}
+
+    <p>VOTRE PANIER EST VIDE </p>
+    {% endif %}
+</div>
+ <form action="/checkout" method="POST" style="text-align:right;padding-right:290px">
+    <button type="submit" class="btn btn-outline-warning" style="background-color:#f46c38;text-color:white;color:white;font-weight: bold">Checkout</button>
+    </form>
+
+
+
+<style>
+.image-box{
+width: auto;
+min-width: 32px;
+max-width: 50px
+  }
+</style>
+{% endblock %}    

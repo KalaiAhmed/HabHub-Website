@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Business
@@ -30,54 +31,56 @@ class Business
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" titre doit etre non vide")
      * @ORM\Column(name="description", type="string", length=500, nullable=false)
      */
     private $description;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" horaire doit etre non vide")
      * @ORM\Column(name="horaire", type="string", length=10, nullable=false)
      */
     private $horaire;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" ville doit etre non vide")
      * @ORM\Column(name="ville", type="string", length=50, nullable=false)
      */
     private $ville;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="localisation", type="string", length=50, nullable=false)
+     * @var string|null
+     * @Assert\NotBlank(message=" localisation doit etre non vide")
+     * @ORM\Column(name="localisation", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
     private $localisation;
 
     /**
      * @var string|null
-     *
+     * @Assert\NotBlank(message=" type doit etre non vide")
+
      * @ORM\Column(name="type", type="string", length=20, nullable=true, options={"default"="NULL"})
      */
-    private $type = 'NULL';
+    private $type;
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank(message=" experience doit etre non vide")
+
      * @ORM\Column(name="experience", type="integer", nullable=false)
      */
-    private $experience = '0';
+    private $experience;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
+     * @var string
+      * @Assert\File(mimeTypes={"image/jpeg"})
+     * @ORM\Column(name="image", type="string", length=30, nullable=false)
      */
-    private $image = 'NULL';
+    private $image ;
 
-    /**
+    /** 
      * @var Utilisateur
      *
      * @ORM\ManyToOne(targetEntity="Utilisateur")
@@ -86,6 +89,16 @@ class Business
      * })
      */
     private $idutilisateur;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lng;
 
     public function getIdbusiness(): ?int
     {
@@ -145,7 +158,7 @@ class Business
         return $this->localisation;
     }
 
-    public function setLocalisation(string $localisation): self
+    public function setLocalisation(?string $localisation): self
     {
         $this->localisation = $localisation;
 
@@ -176,12 +189,12 @@ class Business
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage( $image)
     {
         $this->image = $image;
 
@@ -200,5 +213,31 @@ class Business
         return $this;
     }
 
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(?float $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+    public function __toString(){
+        return (strval($this->idbusiness)."-".$this->titre);
+}
 
 }

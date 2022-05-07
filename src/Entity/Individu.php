@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Individu
  *
  * @ORM\Table(name="individu", indexes={@ORM\Index(name="fk_individu_utilisateur", columns={"idUtilisateur"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IndividuRepository")
  */
 class Individu
 {
@@ -36,7 +36,9 @@ class Individu
      *
      * @ORM\Column(name="prenom", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
-    private $prenom ;
+
+    private $prenom  ;
+
 
     /**
      * @var \DateTime|null
@@ -98,6 +100,16 @@ class Individu
      * })
      */
     private $idutilisateur;
+
+    /**
+     * @param int $idindividu
+     */
+
+    public function __construct(int $idindividu)
+    {
+        $this->idindividu = $idindividu;
+    }
+
 
     public function getIdindividu(): ?int
     {
@@ -224,5 +236,8 @@ class Individu
         return $this;
     }
 
+    public function __toString() {
+        return (strval($this->idindividu).'-'.$this->prenom);
+    }
 
 }

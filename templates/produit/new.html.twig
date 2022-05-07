@@ -1,11 +1,67 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
-{% block title %}New Produit{% endblock %}
+{% block store %}
+                
+
+                <li class="active">
+                    <a
+                            class="nav-link"
+                            data-toggle="collapse"
+                            href="#ui-basic"
+                            aria-expanded="false"
+                            aria-controls="ui-basic"
+                    >
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+
+                        <!--<i class="nc-icon nc-pin-3"></i> -->
+                        <span class="menu-title">Store</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="./ordersList.html">
+                                    <i class="fa fa-shopping-baske" aria-hidden="true"> </i>
+                                    Manage Orders</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_back_office_produit') }}"
+                                >Manage Products</a
+                                >
+                            </li>
+                            <li class="active">
+                                <a class="nav-link" href="{{ path('app_produit_new') }}">Add Product</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                {% endblock %}
+
+{% block title %}New Product{% endblock %}
 
 {% block body %}
-    <h1>Create new Produit</h1>
+ <h1>Create New Product</h1>
+<div style="display: flex;align-items: center;justify-content: center">
+   
+      <div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
 
     {{ include('produit/_form.html.twig') }}
+   
+</div>
+     </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
     <a href="{{ path('app_produit_index') }}">back to list</a>
+    
 {% endblock %}

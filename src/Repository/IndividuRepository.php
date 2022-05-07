@@ -21,6 +21,33 @@ class IndividuRepository extends ServiceEntityRepository
         parent::__construct($registry, Individu::class);
     }
 
+    public function getIndividu(int $id){
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+            ->createQuery("SELECT i FROM App\Entity\Individu i JOIN i.idutilisateur u where u.idutilisateur=:idutilisateur")
+            ->setParameters(array('idutilisateur',$id));
+        return $query->getResult();
+    }
+
+    public function FiltreIndividu(){
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+            ->createQuery("SELECT DISTINCT i.nom, i.idindividu FROM App\Entity\Individu i join   ");
+        return $query->getResult();
+    }
+
+    public function findindiv()
+    {
+        $qb = $this->createQueryBuilder('i');
+
+       $qb->innerJoin('App\Entity\AnnonceAdoption', 'a', 'WITH', 'a.idindividu = i.idindividu');
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
     /**
      * @throws ORMException
      * @throws OptimisticLockException

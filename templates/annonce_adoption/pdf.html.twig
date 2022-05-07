@@ -1,0 +1,55 @@
+{% block body %}
+<div style='padding-left: 270px;'>
+                <div class="row">
+                <p><img src="{{ asset('assets/img/278226457_5296483267131938_3636257523128327412_n.png') }}" alt="nope"></p>
+                </div>
+            </div>
+<div class="container" >
+    <div class="row">
+    
+    
+        <div>
+                <strong>Image</strong>
+                <div class="row">
+                <p><img src="{{ asset('FrontOffice/uploads/'~annonceAdoption.idchien.image) }}" alt="nope"></p>
+                </div>
+            </div>
+
+            <div>
+                <strong>Foster Name</strong>
+                <p>{{ annonceAdoption.idindividu.nom ~' '~ annonceAdoption.idindividu.prenom }}</p>
+            </div>
+            <div>
+                <strong>Dog Name</strong>
+                <p>{{annonceAdoption.idchien.nom}}</p>
+            </div>
+            <div>
+                <strong>Sexe</strong>
+                <p>{{ annonceAdoption.idchien.sexe }}</p>
+            </div>
+            <div>
+                <strong>Age</strong>
+                <p>{{ annonceAdoption.idchien.age }}</p>
+            </div>
+            <div>
+                <strong>Description</strong>
+                <p>{{ annonceAdoption.description }}</p>
+            </div>
+            <div>
+                <strong>Color</strong>
+                <p>{{ annonceAdoption.idchien.color}}</p>
+            </div>
+            <div>
+                <strong>Race</strong>
+                <p>{{annonceAdoption.idchien.race}}</p>
+            </div>
+            <div>
+                <strong>groupe</strong>
+                <p>{{ annonceAdoption.idchien.groupe}}</p>
+            </div>
+            <div>
+                <strong>Vaccination</strong>
+                <p>{{ annonceAdoption.idchien.vaccination ? 'Yes' : 'No' }}</p>
+            </div>
+        
+{% endblock %}

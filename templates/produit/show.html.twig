@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Produit{% endblock %}
 
 {% block body %}
@@ -12,7 +13,7 @@
                 <td>{{ produit.idproduit }}</td>
             </tr>
             <tr>
-                <th>Nom</th>
+                <th>Name</th>
                 <td>{{ produit.nom }}</td>
             </tr>
             <tr>
@@ -20,15 +21,15 @@
                 <td>{{ produit.description }}</td>
             </tr>
             <tr>
-                <th>Prix</th>
+                <th>Price</th>
                 <td>{{ produit.prix }}</td>
             </tr>
             <tr>
-                <th>Marque</th>
+                <th>Brand</th>
                 <td>{{ produit.marque }}</td>
             </tr>
             <tr>
-                <th>Nbetoiles</th>
+                <th>Evaluation</th>
                 <td>{{ produit.nbetoiles }}</td>
             </tr>
         </tbody>

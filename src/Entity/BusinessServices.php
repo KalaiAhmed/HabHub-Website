@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * BusinessServices
  *
  * @ORM\Table(name="business_services", indexes={@ORM\Index(name="idBusiness", columns={"idBusiness"})})
- * @ORM\Entity(repositoryClass="App\Repository\MyClassRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\BusinessServicesRepository")
  */
 class BusinessServices
 {
@@ -85,6 +85,10 @@ class BusinessServices
 
         return $this;
     }
+public function __toString()
+{
+    return (strval($this->idbusinessservices));
 
+}
 
 }

@@ -1,13 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
 {% block title %}Edit Chien{% endblock %}
-
+{% block dogs %}
+    <li class="active">
+        <a href="{{ path('app_chien_index_back_office') }}">
+            <i class="fa fa-paw" aria-hidden="true"></i>
+            <p>Dogs</p>
+        </a>
+    </li>
+{% endblock %}
 {% block body %}
-    <h1>Edit Chien</h1>
+
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-md-8">
 
     {{ include('chien/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_chien_index') }}">back to list</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{ include('chien/_delete_form.html.twig') }}
 {% endblock %}
