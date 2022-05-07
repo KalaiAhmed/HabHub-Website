@@ -51,6 +51,7 @@ class Utilisateur implements UserInterface
      * @ORM\Column(name="type", type="string", length=15, nullable=false)
      */
     private $type;
+
     private $roles = [];
 
     public function getIdutilisateur(): ?int

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Entity\Individu;
+
 use App\Form\UtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,12 +36,22 @@ class UtilisateurController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+
         $utilisateur = new Utilisateur();
+        $individu = new Individu();
+
+
+
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $individu->setIdutilisateur($utilisateur);
+
             $entityManager->persist($utilisateur);
+            $entityManager->persist($individu);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
