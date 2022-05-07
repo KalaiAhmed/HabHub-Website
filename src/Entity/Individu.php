@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Individu
@@ -31,51 +32,57 @@ class Individu
     /**
      * @var string|null
      *
+     * @Assert\NotBlank(message=" nom ne doit etre non vide")
+     *
      * @ORM\Column(name="prenom", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
+
     private $prenom  ;
+
 
     /**
      * @var \DateTime|null
      *
+     *
      * @ORM\Column(name="dateNaissance", type="date", nullable=true, options={"default"="NULL"})
      */
-    private $datenaissance = 'NULL';
+    private $datenaissance;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="sexe", type="string", length=1, nullable=true, options={"default"="NULL"})
      */
-    private $sexe = 'NULL';
+    private $sexe ;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="adresse", type="string", length=300, nullable=true, options={"default"="NULL"})
      */
-    private $adresse = 'NULL';
+    private $adresse ;
 
     /**
      * @var string|null
      *
+     *
      * @ORM\Column(name="facebook", type="string", length=300, nullable=true, options={"default"="NULL"})
      */
-    private $facebook = 'NULL';
+    private $facebook;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="instagram", type="string", length=300, nullable=true, options={"default"="NULL"})
      */
-    private $instagram = 'NULL';
+    private $instagram;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="whatsapp", type="string", length=300, nullable=true, options={"default"="NULL"})
      */
-    private $whatsapp = 'NULL';
+    private $whatsapp ;
 
     /**
      * @var bool

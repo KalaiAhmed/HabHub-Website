@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Entity;
-
+use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Utilisateur
  *
- * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})})
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ *
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @var int
@@ -48,6 +50,8 @@ class Utilisateur
      * @ORM\Column(name="type", type="string", length=15, nullable=false)
      */
     private $type;
+
+    private $roles = [];
 
 
     public function __construct(int $idutilisateur)
@@ -107,6 +111,51 @@ class Utilisateur
         $this->type = $type;
 
         return $this;
+    }
+
+  public function __toString()
+  {
+     return ($this->idutilisateur.'-'.$this->email);
+  }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return 'my-static-salt';
+    }
+
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 
 

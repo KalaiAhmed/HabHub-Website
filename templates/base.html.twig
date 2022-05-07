@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Front{% endblock %}</title>
@@ -9,6 +10,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
 
 
         <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
@@ -29,6 +32,7 @@
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/templatemo-digimedia-v2.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/animated.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/owl.css') }}">
+
 
               {% endblock %}
 
@@ -89,8 +93,10 @@
                                 <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}">Store</a></li>
                                 <li class="scroll-to-section" > <a  href="{{ path('app_panier_index') }}" class="fa fa-shopping-cart" style="font-size:30px;color:black"></a> </li>
 
-                                <li class="scroll-to-section"><a>Sign in</a></li>
-                                <li class="scroll-to-section"><div class="border-first-button"><a href="#contact">Sign up</a></div></li>
+                                   <li class="scroll-to-section"><a  href="{{ path ('app_login') }}">sign in</a></li>
+                            <li class="scroll-to-section"><a  href="{{ path ('app_editprofile') }}">mon profil</a></li>
+
+                            <li class="scroll-to-section"><div class="border-first-button"><a href="{{ path ('registration') }}">Sign up</a></div></li>
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>
