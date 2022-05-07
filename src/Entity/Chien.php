@@ -48,7 +48,7 @@ class Chien
      * @Assert\NotBlank(message=" vaccination doit etre non vide")
      * @ORM\Column(name="vaccination", type="boolean", nullable=true, options={"default"="NULL"})
      */
-    private $vaccination = 'NULL';
+    private $vaccination = 0;
 
     /**
      * @var string

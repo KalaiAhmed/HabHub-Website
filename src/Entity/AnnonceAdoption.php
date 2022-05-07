@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AnnonceAdoption
@@ -23,28 +24,46 @@ class AnnonceAdoption
 
     /**
      * @var \DateTime
-     *
+     * 
      * @ORM\Column(name="datePublication", type="date", nullable=false)
      */
     private $datepublication;
 
     /**
      * @var string|null
+     * @Assert\Length(
+     *      min = 5,
+     *      minMessage=" au moin 5 caractéres"
      *
-     * @ORM\Column(name="description", type="string", length=200, nullable=true, options={"default"="NULL"})
+     *     )
+     * @ORM\Column(name="description", type="string",nullable=true,options={"default"="NULL"}, length=200)
+     * 
      */
-    private $description = 'NULL';
+    private $description ;
+
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=20, nullable=false)
+     */
+    private $status;
 
     /**
-     * @var string|null
+     * @var string
+     *@Assert\NotBlank(message=" champ obligatoire")
+     *@Assert\Length(
+     *      min = 3,
+     *      minMessage=" au moin 3 caractéres"
      *
-     * @ORM\Column(name="localisation", type="string", length=50, nullable=true, options={"default"="NULL"})
+     *     )
+     * @ORM\Column(name="localisation", type="string", length=50)
      */
-    private $localisation = 'NULL';
+    private $localisation ;
 
     /**
      * @var \Individu
-     *
+     * 
      * @ORM\ManyToOne(targetEntity="Individu")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idIndividu", referencedColumnName="idIndividu")
@@ -54,8 +73,7 @@ class AnnonceAdoption
 
     /**
      * @var \Chien
-     *
-     * @ORM\ManyToOne(targetEntity="Chien")
+     * @ORM\ManyToOne(targetEntity="Chien",cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idChien", referencedColumnName="idChien")
      * })
@@ -103,6 +121,17 @@ class AnnonceAdoption
         return $this;
     }
 
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
     public function getIdindividu(): ?Individu
     {
         return $this->idindividu;
@@ -126,6 +155,7 @@ class AnnonceAdoption
 
         return $this;
     }
+    
 
 
 }

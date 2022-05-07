@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('app_offre_accept', {'idoffre': offre.idoffre}) }}"
+ onsubmit="return confirm('Are you sure you want to accept this offer?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('accept' ~ offre.idoffre) }}">
+    <button class="btn">Accept</button>
+</form>

@@ -1,0 +1,11 @@
+<!-- General Form Elements -->
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+
+                
+                    {{ form_row(form.sujet,{'attr':{'class':'form-control'}}) }}
+
+                    {{ form_errors(form.sujet,{'attr':{'class':'text-danger'}}) }}
+
+                    {{ form_widget(form.add,{'attr':{'class':'btn btn-primary'}}) }}
+                
+                {{ form_end(form) }}

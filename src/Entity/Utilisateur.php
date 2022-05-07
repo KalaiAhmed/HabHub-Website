@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Utilisateur
  *
  * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  */
 class Utilisateur
 {
@@ -48,6 +48,13 @@ class Utilisateur
      * @ORM\Column(name="type", type="string", length=15, nullable=false)
      */
     private $type;
+
+
+    public function __construct(int $idutilisateur)
+    {
+        $this->idutilisateur = $idutilisateur;
+    }
+
 
     public function getIdutilisateur(): ?int
     {
@@ -101,6 +108,7 @@ class Utilisateur
 
         return $this;
     }
+
 
     public function __toString() {
         return ($this->email.'-'.strval($this->idutilisateur));

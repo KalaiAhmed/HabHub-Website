@@ -1,34 +1,127 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}AnnonceAdoption{% endblock %}
+
+{% set queryParams = app.request.query.all %}
+
+{% block title %}Adoption index{% endblock %}
+
+
 
 {% block body %}
-    <h1>AnnonceAdoption</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Idannonceadoption</th>
-                <td>{{ annonce_adoption.idannonceadoption }}</td>
-            </tr>
-            <tr>
-                <th>Datepublication</th>
-                <td>{{ annonce_adoption.datepublication ? annonce_adoption.datepublication|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ annonce_adoption.description }}</td>
-            </tr>
-            <tr>
-                <th>Localisation</th>
-                <td>{{ annonce_adoption.localisation }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="sidebar-search">
+    <div class="input-group custom-search-form" style="padding-top:7%">
+        <input type="text" id="search" class="form-control" placeholder="Search for an adoption post!">
+    </div>
+    <!-- /input-group -->
+    </div>
+    <ul class="nav" id="side-menu">
+        <li>
+            <div style="padding-top:7px;"> <a href="{{ path('app_annonce_adoption_new') }}">Create Adoption post</a> </div>
+            <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2F127.0.0.1%3A8000%2Fannonce%2Fadoption%2F&layout=button&size=large&width=93&height=28&appId" width="93" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            <ul class="nav nav-second-level" >
+            <h6> Sort by Foster  :  </h6>
+            
+        <div class="row">
+            <form id="filters">
+                {% for inv in individus %}
+                    <p class="column"><input type="checkbox" name="individus[]" id="inv{{inv.idindividu}}" value="{{inv.idindividu}}"> 
+                    <label for="inv{{inv.idindividu}}">{{inv.nom}}</label></p>
+                {% endfor %}
+            </form>
+        </div>
+            </ul>
+        </li>
+    </ul><br><br><br><br>
+    
+    <div id="blog" class="blog">
+        <div class="container">
+            <p>Filtrer</p>
+            <div class="row" id="content">
 
-    <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
+                {{ include('annonce_adoption/_contenu.html.twig') }}
 
-    <a href="{{ path('app_annonce_adoption_edit', {'idannonceadoption': annonce_adoption.idannonceadoption}) }}">edit</a>
+            </div>
+            
+                    </div>
+                    </div>
+                </div>
+        
+{% endblock %}
 
-    {{ include('annonce_adoption/_delete_form.html.twig') }}
+{% block javascripts %}
+          <script src="{{ asset('assets/js/filters.js') }}"></script>
+          <script src="{{ asset('FrontOffice/vendor/jquery/jquery.min.js') }}"></script>
+          <script src="{{ asset('FrontOffice/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+          <script src="{{ asset('FrontOffice/assets/js/owl-carousel.js') }}"></script>
+          <script src="{{ asset('FrontOffice/assets/js/animation.js') }}"></script>
+          <script src="{{ asset('FrontOffice/assets/js/imagesloaded.js') }}"></script>
+          <script src="{{ asset('FrontOffice/assets/js/custom.js') }}"></script>
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null ;
+            $("#search").keyup(function() {
+                var minlength = 0;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#content").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_search_adoption') }}",
+                        data: {
+                            'l' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value==$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key == 'annonces') {
+                                            if (id != 'error') {
+                                               entitySelector.append('<div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">'+
+                    
+                    '<div class="blog-post">'+
+                        '<div class="thumb">'+
+                            '<a href="#"><img src="/FrontOffice/uploads/'+value[4]+'" alt="nope"></a>'+
+                        '</div>'+
+                        '<div class="down-content">'+
+                            '<span class="category">'+value[0]+'</span>'+
+                            '<span class="date">'+value[1]+'</span>'+
+                            '<a href="#"><h4>'+value[2]+'</h4></a>'+
+                            '<p>'+value[3]+'</p>'+
+                            '<div class="border-first-button">'+
+                             '<a href="/annonce/adoption/'+value[5]+'">More details</a>'+
+                            '</div>'+
+                            '<div>'+
+                            '<a href="/offre/new/'+value[5]+'">Adopt now !</a>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>');
+                            
+                            
+                    
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        
+    </script>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0" nonce="9OBtc4wV"></script>
 {% endblock %}

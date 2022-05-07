@@ -1,11 +1,13 @@
 window.onload = () => {
     const FiltersForm = document.querySelector("#filters");
+
    
     // On boucle sur les input
     document.querySelectorAll("#filters input").forEach(input => {
        
         input.addEventListener("change", () => {
             
+
             // Ici on intercepte les clics
             // On récupère les données du formulaire
             const Form = new FormData(FiltersForm);
@@ -14,13 +16,13 @@ window.onload = () => {
             const Params = new URLSearchParams();
 
             Form.forEach((value, key) => {
-                
+
                 Params.append(key, value);
             });
 
             // On récupère l'url active
             const Url = new URL(window.location.href);
-            
+
             // On lance la requête ajax
             fetch(Url.pathname + "?" + Params.toString() + "&ajax=1", {
                 headers: {
@@ -31,10 +33,10 @@ window.onload = () => {
             ).then(data => {
                 // On va chercher la zone de contenu
                 const content = document.querySelector("#content");
-                
+
                 // On remplace le contenu
                 content.innerHTML = data.content;
-                console.log(data.content);
+
                 
             }).catch(e => alert(e));
 
