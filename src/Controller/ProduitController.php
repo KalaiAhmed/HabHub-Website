@@ -162,4 +162,38 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
+    /**
+     * @Route("/addProd", name="add_Prod",methods={"GET","POST"})
+     *
+     */
+
+    public function addDProdMobile(Request $request, EntityManagerInterface $entityManager)
+    {
+        $produit = new Produit();
+        $nom = $request->query->get("nom");
+        $description = $request->query->get("description");
+        $prix = $request->query->get("prix");
+        $marque = $request->query->get("marque");
+        $idCategorie = $request->query->get("idCategorie");
+
+        $produit->setIdCategorie( $entityManager
+            ->getRepository(Categorie::class)
+            ->findOneBy(array('idCategorie' => $idCategorie)));
+
+        $produit->setNom($nom);
+        $produit->setDescription($description);
+        $produit->setPrix($prix);
+        $produit->setMarque($marque);
+        
+
+
+        $entityManager->persist($produit);
+        $entityManager->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produit);
+        return new JsonResponse($formatted);
+    }
 }
