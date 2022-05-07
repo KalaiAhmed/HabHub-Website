@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
-    "content-hash": "b46c7688c2d58473fbab23f1a6f633a6",
+    "content-hash": "539dafc587722f1d9f3a7c276a58fd50",
     "packages": [
         {
             "name": "botman/botman",
@@ -8408,7 +8407,6 @@
             "time": "2022-01-24T20:11:01+00:00"
         },
         {
-
             "name": "symfonycasts/verify-email-bundle",
             "version": "v1.10.0",
             "source": {
@@ -8488,7 +8486,7 @@
                 ],
                 "psr-4": {
                     "Tightenco\\Collect\\": "src/Collect"
-                       }
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [

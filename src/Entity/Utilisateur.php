@@ -54,10 +54,7 @@ class Utilisateur implements UserInterface
     private $roles = [];
 
 
-    public function __construct(int $idutilisateur)
-    {
-        $this->idutilisateur = $idutilisateur;
-    }
+
 
 
     public function getIdutilisateur(): ?int
@@ -113,10 +110,6 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-  public function __toString()
-  {
-     return ($this->idutilisateur.'-'.$this->email);
-  }
 
     /**
      * @see UserInterface
@@ -150,7 +143,7 @@ class Utilisateur implements UserInterface
 
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return (int)$this->getIdUtilisateur();
     }
 
     public function eraseCredentials()

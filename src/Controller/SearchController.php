@@ -6,7 +6,6 @@ namespace App\Controller;
 use App\Repository\IndividuRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\UtilisateurRepository;
-use App\Repository\ProduitRepository;
 use App\Repository\AnnonceProprietaireChienRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
