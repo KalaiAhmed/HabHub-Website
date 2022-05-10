@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offre{% endblock %}
+
+{% block body %}
+    <h1>Offre</h1>
+    <section class="container" style="padding-top:55px;">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Status</th>
+                <td>{{ offre.status }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ offre.createdAt ? offre.createdAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Sujet</th>
+                <td>{{ offre.sujet }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('app_offre_index') }}">back to list</a>
+    </section>
+
+    
+{% endblock %}

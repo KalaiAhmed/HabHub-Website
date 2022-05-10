@@ -7,18 +7,25 @@ use App\Entity\Individu;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Util\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Twilio\Rest\Client;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Validator\Constraints\Json;
 /**
  * @Route("/reservation")
  */
 class ReservationController extends AbstractController
 {
+
+
 
     /**
      * @Route("/back-office", name="app_reservation_index_back_office", methods={"GET"})
@@ -38,9 +45,13 @@ class ReservationController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
+
         $reservations = $entityManager
             ->getRepository(Reservation::class)
-            ->findBy(array('idindividu'=>'2'));
+            ->findBy(array('idindividu'=>$id));
 
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservations,
@@ -95,10 +106,13 @@ class ReservationController extends AbstractController
     public function new_reservation_front(Request $request, EntityManagerInterface $entityManager,int $idbusinessservices): Response
     {
         $reservation = new Reservation();
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
 
         $reservation->setIdindividu( $entityManager
             ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '2')));
+            ->findOneBy(array('idindividu' => $id)));
 
         $reservation->setIdbusinessservices( $entityManager
             ->getRepository(BusinessServices::class)
@@ -179,7 +193,7 @@ class ReservationController extends AbstractController
         ]);
     }
     /**
-     * @Route("/{idreservation}/back-office", name="app_reservation_delete_back_office", methods={"POST"})
+     * @Route("/{idreservation}/back-office", name="app_reservation_delete_back_office", methods={"GET"})
      */
     public function delete_back_office(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
     {
@@ -192,7 +206,7 @@ class ReservationController extends AbstractController
     }
 
     /**
-     * @Route("/{idreservation}", name="app_reservation_delete", methods={"POST"})
+     * @Route("/{idreservation}", name="app_reservation_delete", methods={"GET"})
      */
     public function delete(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
     {
@@ -233,14 +247,6 @@ class ReservationController extends AbstractController
         return $this->redirectToRoute('app_business_show', ['idbusiness' => $reservation->getIdbusinessservices()->getIdBusiness()->getIdBusiness()], Response::HTTP_SEE_OTHER);
     }
 
-
-
-
-
-
-
-
-
     public function sendSMS(Reservation $reservation){
         $twilio = $this->get('twilio.client');
         $text="Confirmation de réservation du service".$reservation->getIdbusinessservices()." sous le nom:".$reservation->getIdindividu()."date et heure : ".$reservation->getHeurereservation();
@@ -249,5 +255,126 @@ class ReservationController extends AbstractController
             'body'=>$text]
         );
     }
+
+/***********************************JSON METHODS***********************************/
+
+    /**
+     * @Route("/mobile/index", name="app_reservation_index_mobile", methods={"GET"})
+     */
+    public function index_mobile(EntityManagerInterface $entityManager)
+    {
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
+        $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            ->findBy(array('idindividu'=>$id));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reservations);
+
+        return new JsonResponse($formatted);
+
+    }
+
+    /**
+     * @Route("/mobile/new-reservation", name="app_reservation_new_mobile", methods={"GET", "POST"})
+     *
+     */
+    //test with : http://127.0.0.1:8000/reservation/new-reservation/mobile?idbusinessservices=5&datereservation=2022-05-16&heurereservation=9AM-10AM&idindividu=3
+    public function new_mobile(Request $request, EntityManagerInterface $entityManager)
+    {
+        $reservation = new Reservation();
+        $idbusinessservices = $request->query->get("idbusinessservices");
+        $datereservation = $request->query->get("datereservation");
+        $heurereservation = $request->query->get("heurereservation");
+        $idindividu = $request->query->get("idindividu");
+
+        $reservation->setIdindividu( $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => $idindividu)));
+
+        $reservation->setIdbusinessservices( $entityManager
+            ->getRepository(BusinessServices::class)
+            ->findOneBy(array('idbusinessservices' => $idbusinessservices)));
+
+        $date=new \DateTime($datereservation); //2022-05-16
+        $reservation->setDatereservation($date);
+        $reservation->setHeurereservation($heurereservation);
+
+        $entityManager->persist($reservation);
+        $entityManager->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reservation);
+        return new JsonResponse($formatted);
+    }
+    /**
+     * @Route("/mobile/edit-reservation", name="app_reservation_edit_mobile", methods={"GET", "POST"})
+     */
+    public function edit_mobile(Request $request)
+    {   $em = $this->getDoctrine()->getManager();
+        $idreservation=$request->query->get("idreservation");
+        $datereservation = $request->query->get("datereservation");
+        $heurereservation = $request->query->get("heurereservation");
+        $reservation =$em->getRepository(Reservation::class)
+            ->findOneBy(array('idreservation' => $idreservation));
+
+        $date=new \DateTime($datereservation); //2022-05-16
+        $reservation->setDatereservation($date);
+        $reservation->setHeurereservation($heurereservation);
+        $em->persist($reservation);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reservation);
+        return new JsonResponse("Reservation a ete modifiée avec success.");
+
+    }
+
+
+
+
+    /**
+     * @Route("/mobile/delete", name="app_reservation_delete_mobile", methods={"GET"})
+     */
+    public function delete_mobile(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idreservation=$request->query->get("idreservation");
+        $reservation =$em->getRepository(Reservation::class)
+            ->findOneBy(array('idreservation' => $idreservation));
+        if($reservation!=null ) {
+            $em->remove($reservation);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("Reservation a ete supprimee avec success.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id reclamation invalide.");
+
+
+    }
+
+
+    /**
+     * @Route("/mobile/show", name="app_reservation_show_mobile", methods={"GET"})
+     */
+    public function show_mobile(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idreservation=$request->query->get("idreservation");
+        $reservation =$em->getRepository(Reservation::class)
+            ->findOneBy(array('idreservation' => $idreservation));
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getHeureReservation();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($reservation );
+        return new JsonResponse($formatted);
+    }
+    /***********************************END JSON METHODS***********************************/
 
 }

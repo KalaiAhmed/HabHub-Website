@@ -1,0 +1,29 @@
+
+
+                <!-- General Form Elements -->
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+
+                
+                    {{ form_row(form.title,{'attr':{'class':'form-control'}}) }}
+
+                    {{ form_errors(form.title,{'attr':{'class':'text-danger'}}) }}
+
+                
+                    {{ form_row(form.message,{'attr':{'class':'form-control'}}) }}
+
+             
+                    {{ form_errors(form.message,{'attr':{'class':'text-danger'}}) }}
+
+
+                    {{ form_row(form.recipient,{'attr':{'class':'form-control'}}) }}
+
+                    {{ form_errors(form.recipient,{'attr':{'class':'text-danger'}}) }}
+
+               
+                
+
+                    {{ form_widget(form.envoyer,{'attr':{'class':'btn btn-primary'}}) }}
+                
+                {{ form_end(form) }}
+
+            

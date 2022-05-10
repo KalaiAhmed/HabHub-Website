@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Offre{% endblock %}
+
+{% block body %}
+    <section class='container' style='padding-top:150px;'>
+    <h1>Create new Offre</h1>
+
+    {{ include('offre/_form.html.twig') }}
+
+    <a href="{{ path('app_offre_index') }}">back to list</a>
+    </section>
+{% endblock %}

@@ -50,9 +50,10 @@
     <div class="sidebar" data-color="white" data-active-color="danger">
         <div class="logo">
             <a class="simple-text logo-mini">
-
                 <div class="logo-image-small">
-                    <img src="../assets/img/icons/Logo ai.png" />
+
+                    <img src="{{asset('assets/img/icons/logo.png')}}" />
+
                 </div>
                 <!-- <p>CT</p> -->
             </a>
@@ -128,7 +129,7 @@
                 {% block adoption %}
 
                 <li>
-                    <a href="./adoptionList.html">
+                    <a href="{{ path('app_annonce_adoption_index_back_office') }}">
                         <i class="fa fa-gift" aria-hidden="true"></i>
                         <p>Adoption</p>
                     </a>
@@ -155,7 +156,7 @@
                 {% block user %}
 
                 <li>
-                    <a href="./user.html">
+                    <a href="{{ path('app_individu_index') }}">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <p>Users</p>
                     </a>
