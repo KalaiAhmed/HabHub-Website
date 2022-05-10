@@ -104,6 +104,22 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $form->get('image')->getData();
+
+
+
+            $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+            //On copie le fichier dans le dossier upload
+            $image->move(
+            $this->getParameter('upload_directory'),
+            $fichier
+            );
+            // on stocke l'image dans la bdd (son nom)
+
+            $produit->setImage($fichier);
+
+
             $entityManager->persist($produit);
             $entityManager->flush();
 

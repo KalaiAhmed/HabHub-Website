@@ -73,7 +73,7 @@
                 <td>{{ produit.prix }}</td>
                 <td>{{ produit.marque }}</td>
                 <td>{{ produit.nbetoiles }}</td>
-                <td> {{ produit.idCategorie.nom }} </td>
+                <td> {{ produit.idcategorie.nom }} </td>
                 <td>
                    {{ include('produit/_delete_form.html.twig') }}
                     <a href="{{ path('app_produit_edit', {'idproduit': produit.idproduit}) }}">edit</a>

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 /**
  * @Route("/categorie")
  */
@@ -62,7 +64,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{idCategorie}/edit", name="app_categorie_edit", methods={"GET", "POST"})
+     * @Route("/{idcategorie}/edit", name="app_categorie_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
     {
@@ -72,7 +74,7 @@ class CategorieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_office_categorie', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('categorie/edit.html.twig', [
@@ -82,8 +84,8 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{idCategorie}", name="app_categorie_delete", methods={"POST"})
-  
+     * @Route("/{idcategorie}", name="app_categorie_delete", methods={"POST"})
+ 
    
      */
     public function delete(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
