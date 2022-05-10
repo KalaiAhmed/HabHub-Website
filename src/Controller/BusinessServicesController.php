@@ -2,13 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Business;
 use App\Entity\BusinessServices;
 use App\Form\BusinessServicesType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * @Route("/business/services")
@@ -93,4 +98,23 @@ class BusinessServicesController extends AbstractController
 
         return $this->redirectToRoute('app_business_services_index', [], Response::HTTP_SEE_OTHER);
     }
+    /***********************************JSON METHODS***********************************/
+    /**
+     * @Route("/mobile/index", name="app_businesssevices_index_mobile", methods={"GET"})
+     */
+    public function index_mobile(Request $request)
+    {
+
+        $idbusiness = $request->query->get("idbusiness");
+        $bservices = $this->getDoctrine()->getManager()
+            ->getRepository(BusinessServices::class)
+            ->findBy(array('idbusiness'=>$idbusiness));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($bservices);
+
+        return new JsonResponse($formatted);
+    }
+
+    /************************************END JSON METHODS***********************************/
+
 }
