@@ -45,9 +45,13 @@ class ReservationController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
+
         $reservations = $entityManager
             ->getRepository(Reservation::class)
-            ->findBy(array('idindividu'=>'2'));
+            ->findBy(array('idindividu'=>$id));
 
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservations,
@@ -102,10 +106,13 @@ class ReservationController extends AbstractController
     public function new_reservation_front(Request $request, EntityManagerInterface $entityManager,int $idbusinessservices): Response
     {
         $reservation = new Reservation();
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
 
         $reservation->setIdindividu( $entityManager
             ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '2')));
+            ->findOneBy(array('idindividu' => $id)));
 
         $reservation->setIdbusinessservices( $entityManager
             ->getRepository(BusinessServices::class)
@@ -256,9 +263,12 @@ class ReservationController extends AbstractController
      */
     public function index_mobile(EntityManagerInterface $entityManager)
     {
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
         $reservations = $entityManager
             ->getRepository(Reservation::class)
-            ->findBy(array('idindividu'=>'2'));
+            ->findBy(array('idindividu'=>$id));
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($reservations);
 
