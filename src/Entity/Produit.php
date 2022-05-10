@@ -56,17 +56,17 @@ class Produit
 
     /**
      * @var int|null
-     * @Assert\NotBlank(message=" nbetoiles doit etre non vide")
+     
      * @ORM\Column(name="nbEtoiles", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $nbetoiles = NULL;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
+   /**
+     * @var string
+      * @Assert\File(mimeTypes={"image/jpg"})
+     * @ORM\Column(name="image", type="string", length=250, nullable=false)
      */
-    private $image = 'NULL';
+    private $image ;
 
     /**
      * @var \Categorie

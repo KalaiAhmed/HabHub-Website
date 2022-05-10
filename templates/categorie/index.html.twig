@@ -55,12 +55,12 @@
         <tbody>
         {% for categorie in categories %}
             <tr>
-                <td>{{ categorie.IdCategorie }}</td>
+                <td>{{ categorie.idcategorie }}</td>
                 <td>{{ categorie.nom }}</td>
                 <td>{{ categorie.description }}</td>
                 <td>
                    {{ include('categorie/_delete_form.html.twig') }}
-                  <a href="{{ path('app_categorie_edit', {'idCategorie': categorie.idCategorie}) }}">edit</a> 
+                  <a href="{{ path('app_categorie_edit', {'idcategorie': categorie.idcategorie}) }}">edit</a> 
                 </td>
             </tr>
         {% else %}

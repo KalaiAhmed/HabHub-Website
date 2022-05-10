@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
 {% block title %}Edit Categorie{% endblock %}
 
@@ -7,7 +7,7 @@
 
     {{ include('categorie/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_categorie_index') }}">back to list</a>
+    <a href="{{ path('app_back_office_categorie') }}">back to list</a>
 
-    {{ include('categorie/_delete_form.html.twig') }}
+   
 {% endblock %}
