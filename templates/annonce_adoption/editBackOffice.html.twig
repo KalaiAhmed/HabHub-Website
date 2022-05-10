@@ -1,0 +1,23 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit AnnonceAdoption{% endblock %}
+
+{% block body %}
+    <h1>Edit AnnonceAdoption</h1>
+    <div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+
+
+    {{ include('annonce_adoption/_backForm.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_annonce_adoption_index_back_office') }}">back to list</a>
+    </div>
+     </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

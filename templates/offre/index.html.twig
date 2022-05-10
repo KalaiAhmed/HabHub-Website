@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offre index{% endblock %}
+
+{% block body %}
+    <h1>Offre index</h1>
+    <section class="container" style="padding-top:55px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>CreatedAt</th>
+                <th>Sujet</th>
+                <th>actions</th>
+                <th>see more ...</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.status }}</td>
+                <td>{{ offre.createdAt ? offre.createdAt|date('Y-m-d') : '' }}</td>
+                <td>{{ offre.sujet }}</td>
+                <td>
+                    <a href="{{ path('app_offre_accept', {'idoffre': offre.idoffre}) }}">accept</a>
+                    <a href="{{ path('app_offre_decline', {'idoffre': offre.idoffre}) }}">decline</a>
+                </td>
+                <td>
+                    <button class="btn"><a href="{{ path('app_offre_show', {'idoffre': offre.idoffre}) }}">show details</a>
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </section>
+{% endblock %}

@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Entity;
-
+use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Utilisateur
  *
- * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})})
- * @ORM\Entity
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ *
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @var int
@@ -48,6 +50,12 @@ class Utilisateur
      * @ORM\Column(name="type", type="string", length=15, nullable=false)
      */
     private $type;
+
+    private $roles = [];
+
+
+
+
 
     public function getIdutilisateur(): ?int
     {
@@ -101,6 +109,41 @@ class Utilisateur
 
         return $this;
     }
+
+
+
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return 'my-static-salt';
+    }
+
+    public function getUsername()
+    {
+      return (int)$this->getIdUtilisateur();
+
+    }
+    public function getRoles(): array
+    {
+        switch ($this->getType()) {
+            case 'A':
+                return ['ROLE_ADMIN'];
+            default:
+                return ['ROLE_USER'];
+
+        }
+    }
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
 
     public function __toString() {
         return ($this->email.'-'.strval($this->idutilisateur));

@@ -1,4 +1,7 @@
 {
+    "botman/botman": {
+        "version": "2.6.1"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -79,8 +82,14 @@
     "doctrine/sql-formatter": {
         "version": "1.1.2"
     },
+    "dompdf/dompdf": {
+        "version": "v1.2.1"
+    },
     "egulias/email-validator": {
         "version": "3.1.2"
+    },
+    "evenement/evenement": {
+        "version": "v3.0.1"
     },
     "firebase/php-jwt": {
         "version": "v5.5.1"
@@ -91,11 +100,17 @@
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+    },
     "messagebird/php-rest-api": {
         "version": "v3.0.0"
     },
     "monolog/monolog": {
         "version": "1.27.0"
+    },
+    "mpociot/pipeline": {
+        "version": "1.0.2"
     },
     "myclabs/deep-copy": {
         "version": "1.11.0"
@@ -103,11 +118,20 @@
     "nikic/php-parser": {
         "version": "v4.13.2"
     },
+    "opis/closure": {
+        "version": "3.6.3"
+    },
     "phar-io/manifest": {
         "version": "2.0.3"
     },
     "phar-io/version": {
         "version": "3.2.1"
+    },
+    "phenx/php-font-lib": {
+        "version": "0.5.4"
+    },
+    "phenx/php-svg-lib": {
+        "version": "0.4.1"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -161,6 +185,30 @@
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "react/cache": {
+        "version": "v1.1.1"
+    },
+    "react/dns": {
+        "version": "v1.9.0"
+    },
+    "react/event-loop": {
+        "version": "v1.3.0"
+    },
+    "react/promise": {
+        "version": "v2.9.0"
+    },
+    "react/promise-timer": {
+        "version": "v1.8.0"
+    },
+    "react/socket": {
+        "version": "v1.11.0"
+    },
+    "react/stream": {
+        "version": "v1.2.0"
+    },
+    "sabberworm/php-css-parser": {
+        "version": "8.4.0"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
@@ -221,6 +269,12 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "spatie/macroable": {
+        "version": "1.0.1"
+    },
+    "stripe/stripe-php": {
+        "version": "v7.125.0"
     },
     "symfony/apache-pack": {
         "version": "1.0",
@@ -588,8 +642,14 @@
     "symfony/yaml": {
         "version": "v4.4.37"
     },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.10.0"
+    },
     "theseer/tokenizer": {
         "version": "1.2.1"
+    },
+    "tightenco/collect": {
+        "version": "v8.83.8"
     },
     "twig/extra-bundle": {
         "version": "v3.3.8"

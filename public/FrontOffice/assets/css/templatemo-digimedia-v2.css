@@ -58,6 +58,9 @@ Mariem
 */
 
 
+
+
+
 .flex-box{
   display:flex;
   width: 100%;
@@ -269,6 +272,9 @@ tag-sexe{
   background: #FFFFFF;
   box-shadow: 0px 0px 10.7042px rgba(0, 0, 0, 0.15);
   border-radius: 10.7042px;
+
+
+
   display: inline;
   overflow-wrap: anywhere;
 
@@ -295,6 +301,7 @@ color: orangered;
 End Mariem
 ---------------------------------------------
 */
+
 
 /* ---- .grid-item ---- */
 .card-img-top {
@@ -1294,6 +1301,7 @@ About Style
   border-top-right-radius: 75px;
   border-bottom-right-radius: 75px;
   border-left: 0;
+
   -webkit-transform-origin: center;
   transform-origin: center ;
 }
@@ -1305,6 +1313,9 @@ About Style
   border-top-left-radius: 75px;
   border-bottom-left-radius: 75px;
   border-right: 0;
+
+
+
   -webkit-transform-origin: center ;
   transform-origin: center ;
 }
@@ -1411,6 +1422,7 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
+
     -webkit-transform: rotate(36deg);
     transform: rotate(36deg);
   }
@@ -1421,6 +1433,7 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
+
     -webkit-transform: rotate(72deg);
     transform: rotate(72deg);
   }
@@ -1431,6 +1444,7 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
+
     -webkit-transform: rotate(108deg);
     transform: rotate(108deg);
   }
@@ -1441,6 +1455,8 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
+
+
     -webkit-transform: rotate(144deg);
     transform: rotate(144deg);
   }
@@ -1451,6 +1467,8 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
+
+
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
   }
@@ -1712,6 +1730,7 @@ Free Quote
   font-size: 15px;
   color: #fff;
 }
+
 
 /* 
 ---------------------------------------------
@@ -2331,6 +2350,8 @@ responsive
   .about-us .main-green-button {
     text-align: center;
   }
+
+
 
   .our-portfolio .section-heading .line-dec {
     margin: 0 auto;

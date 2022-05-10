@@ -21,7 +21,7 @@ class IndividuType extends AbstractType
             ->add('instagram')
             ->add('whatsapp')
             ->add('proprietairechien')
-            //->add('idutilisateur')
+            ->add('idutilisateur')
         ;
     }
 

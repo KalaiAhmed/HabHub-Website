@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produit
  *
  * @ORM\Table(name="produit", indexes={@ORM\Index(name="idCategorie", columns={"idCategorie"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  */
 class Produit
 {
@@ -16,42 +17,46 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="idProduit", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id 
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idproduit;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" nom doit etre non vide")
      * @ORM\Column(name="nom", type="string", length=20, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
+     *@Assert\Length(
+     *      min = 3,
+     *      minMessage=" au moin 3 caractéres"
      *
+     *     )
      * @ORM\Column(name="description", type="string", length=500, nullable=false)
      */
     private $description;
 
     /**
-     * @var int
-     *
+     * @var float
+     * @Assert\NotBlank(message=" prix doit etre non vide")
      * @ORM\Column(name="prix", type="integer", nullable=false)
      */
     private $prix;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message=" marque doit etre non vide")
      * @ORM\Column(name="marque", type="string", length=50, nullable=false)
      */
     private $marque;
 
     /**
      * @var int|null
-     *
+     * @Assert\NotBlank(message=" nbetoiles doit etre non vide")
      * @ORM\Column(name="nbEtoiles", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $nbetoiles = NULL;
@@ -102,12 +107,12 @@ class Produit
         return $this;
     }
 
-    public function getPrix(): ?int
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(int $prix): self
+    public function setPrix(float $prix): self
     {
         $this->prix = $prix;
 
@@ -134,6 +139,7 @@ class Produit
     public function setNbetoiles(?int $nbetoiles): self
     {
         $this->nbetoiles = $nbetoiles;
+      
 
         return $this;
     }

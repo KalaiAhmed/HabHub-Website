@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
 use App\Entity\Panier;
 use App\Form\PanierType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -9,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\ProduitRepository;
 
 /**
  * @Route("/panier")
@@ -16,18 +19,71 @@ use Symfony\Component\Routing\Annotation\Route;
 class PanierController extends AbstractController
 {
     /**
-     * @Route("/", name="app_panier_index", methods={"GET"})
+     * @Route("/front-office", name="app_panier_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(SessionInterface $session , ProduitRepository $ProduitRepository)
     {
-        $paniers = $entityManager
-            ->getRepository(Panier::class)
-            ->findAll();
+        $panier = $session->get('panier', []);
+    
+        $panierwithdata = [];
 
-        return $this->render('panier/index.html.twig', [
-            'paniers' => $paniers,
+        foreach($panier as $id => $quantite){
+            $panierwithdata[] =[
+                'produit' => $ProduitRepository->find($id),
+                'quantite' => $quantite
+            ];
+            
+        }
+
+        $total=0;
+
+        foreach($panierwithdata as $item){
+            $totalitem = $item['produit']->getPrix() *$item['quantite'];
+            $total+=$totalitem;
+        }
+        
+
+        return $this->render('panier/index_front.html.twig', [
+            'items' => $panierwithdata,
+            'total' => $total,
         ]);
     }
+
+     /**
+     * @Route("/add/{id}", name="add_prod", )
+     */
+    public function add($id, SessionInterface $session): Response
+    {
+        $panier = $session->get('panier', []);
+        if(!empty($panier[$id])){
+            $panier[$id]++;
+        }
+        else{
+            $panier[$id]=1;
+        }
+        $session->set('panier',$panier);
+
+         $this->addFlash('success', 'Product Added Successfully To Your Cart');
+         return $this->redirectToRoute("app_front_office_home");
+
+    }
+
+
+     /**
+     * @Route("/delete/{id}", name="DelProd", )
+     */
+
+    public function RemoveProd($id, SessionInterface $session ){
+        $panier = $session->get('panier', []);
+
+        if( !empty($panier[$id] ) ){
+            unset($panier[$id]);
+    }
+    $session->set('panier',$panier);
+    return $this->redirectToRoute("app_panier_index");
+
+}
+
 
     /**
      * @Route("/new", name="app_panier_new", methods={"GET", "POST"})
@@ -93,4 +149,54 @@ class PanierController extends AbstractController
 
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    
+    /**
+     * @Route("/addProd/{id}", name="addQ")
+     */
+    public function addProd(Produit $p, SessionInterface $session)
+    {
+        // On récupère le panier actuel
+        $panier = $session->get("panier", []);
+        $id = $p->getIdproduit();
+
+        if(!empty($panier[$id])){
+            $panier[$id]++;
+        }else{
+            $panier[$id] = 1;
+        }
+
+        // On sauvegarde dans la session
+        $session->set("panier", $panier);
+
+        return $this->redirectToRoute("app_panier_index");
+    }
+
+     /**
+     * @Route("/remove/{id}", name="reduce")
+     */
+    public function remove(Produit $product, SessionInterface $session)
+    {
+        // On récupère le panier actuel
+        $panier = $session->get("panier", []);
+        $id = $product->getIdproduit();
+
+        if(!empty($panier[$id])){
+            if($panier[$id] > 1){
+                $panier[$id]--;
+            }else{
+                unset($panier[$id]);
+            }
+        }
+
+        // On sauvegarde dans la session
+        $session->set("panier", $panier);
+
+        return $this->redirectToRoute("app_panier_index");
+    }
+
+
+
+
 }

@@ -1,19 +1,66 @@
-{% extends 'base.html.twig' %}
+
+{% extends 'baseBack.html.twig' %}
+
+{% block store %}
+                
+
+                <li class="active">
+                    <a
+                            class="nav-link"
+                            data-toggle="collapse"
+                            href="#ui-basic"
+                            aria-expanded="false"
+                            aria-controls="ui-basic"
+                    >
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+
+                        <!--<i class="nc-icon nc-pin-3"></i> -->
+                        <span class="menu-title">Store</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_back_office_categorie') }}">
+                                    <i class="fa fa-shopping-baske" aria-hidden="true"> </i>
+                                    Manage Categories</a
+                                >
+                            </li>
+                            <li class="active">
+                                <a class="nav-link" href="{{ path('app_back_office_produit') }}"
+                                >Manage Products</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_produit_new') }}">Add Product</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                {% endblock %}
 
 {% block title %}Produit index{% endblock %}
 
-{% block body %}
-    <h1>Produit index</h1>
+{% block body %} 
+    
+    <h1 >Products List</h1>
+
+    <div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
 
     <table class="table">
         <thead>
             <tr>
-                <th>Idproduit</th>
-                <th>Nom</th>
+                <th>Idproduct</th>
+                <th>Name</th>
                 <th>Description</th>
-                <th>Prix</th>
-                <th>Marque</th>
-                <th>Nbetoiles</th>
+                <th>Price</th>
+                <th>Brand</th>
+                <th>Evaluation</th>
+             <th>Categorie</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,8 +73,9 @@
                 <td>{{ produit.prix }}</td>
                 <td>{{ produit.marque }}</td>
                 <td>{{ produit.nbetoiles }}</td>
+                <td> {{ produit.idCategorie.nom }} </td>
                 <td>
-                    <a href="{{ path('app_produit_show', {'idproduit': produit.idproduit}) }}">show</a>
+                   {{ include('produit/_delete_form.html.twig') }}
                     <a href="{{ path('app_produit_edit', {'idproduit': produit.idproduit}) }}">edit</a>
                 </td>
             </tr>
@@ -38,6 +86,11 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <a href="{{ path('app_produit_new') }}">Create new</a>
 {% endblock %}

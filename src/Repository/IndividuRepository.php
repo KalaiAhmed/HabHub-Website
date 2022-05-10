@@ -21,6 +21,40 @@ class IndividuRepository extends ServiceEntityRepository
         parent::__construct($registry, Individu::class);
     }
 
+    public function getIndividuByUser(int $id):individu{
+        $entityManager=$this->getEntityManager();
+        $individu=$this->findOneBy(array('idutilisateur' => $id));
+
+        return $individu;
+    }
+
+    public function getIndividu(int $id){
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+            ->createQuery("SELECT i FROM App\Entity\Individu i JOIN i.idutilisateur u where u.idutilisateur=:idutilisateur")
+            ->setParameters(array('idutilisateur',$id));
+        return $query->getResult();
+    }
+
+    public function FiltreIndividu(){
+        $entityManager=$this->getEntityManager();
+        $query= $entityManager
+            ->createQuery("SELECT DISTINCT i.nom, i.idindividu FROM App\Entity\Individu i join   ");
+        return $query->getResult();
+    }
+
+    public function findindiv()
+    {
+        $qb = $this->createQueryBuilder('i');
+
+       $qb->innerJoin('App\Entity\AnnonceAdoption', 'a', 'WITH', 'a.idindividu = i.idindividu');
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
     /**
      * @throws ORMException
      * @throws OptimisticLockException
@@ -44,7 +78,56 @@ class IndividuRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+    /*
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT e
+                FROM AppBundle:Entity e
+                WHERE e.foo LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }*/
+    public function findEntitiesByString1(string $q)
+    {
+        $qb = $this->createQueryBuilder('p');
 
+
+        $qb->innerJoin('App\Entity\Individu', 'c', 'WITH', 'c.idIndividu = p.idIndividu')
+
+
+
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+
+                        $qb->expr()->like('p.nom', ':query'),
+                        $qb->expr()->like('c.nom', ':query')
+
+                    )
+
+                )
+            )
+
+            ->setParameter('query',$q . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+    public function getTotalProduits($filter = null){
+        $query = $this->createQueryBuilder('p');
+
+
+        // On filtre les données
+        if($filter != null){
+            $query->andWhere('p.idIndividu IN(:cats)')
+                ->setParameter(':cats', array_values($filter));
+        }
+
+        return $query->getQuery()->getResult();
+    }
     // /**
     //  * @return Individu[] Returns an array of Individu objects
     //  */

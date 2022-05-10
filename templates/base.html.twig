@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Front{% endblock %}</title>
 
         {% block stylesheets %}
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+
 
         <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
         <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               rel="stylesheet" integrity="sha384-Gn5384xqU1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6Xm"
         crossorigin="anonymous"
         >
+
+
 
 
         <!-- Bootstrap core CSS -->
@@ -26,11 +33,16 @@
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/animated.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/owl.css') }}">
 
+
               {% endblock %}
 
         {% block javascripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
 
             <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
 
             <script src="{{ asset('FrontOffice/vendor/jquery/jquery.min.js') }}"></script>
           <script src="{{ asset('FrontOffice/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -38,8 +50,8 @@
           <script src="{{ asset('FrontOffice/assets/js/animation.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/imagesloaded.js') }}"></script>
           <script src="{{ asset('FrontOffice/assets/js/custom.js') }}"></script>
-
-        {% endblock %}
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+{% endblock %}
 
     </head>
     <body>
@@ -63,24 +75,43 @@
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
 
-                                <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}">Home</a></li>
+
+                                <li class="scroll-to-section"><a href="{{ path('app_home') }}">Home</a></li>
                                 <li class="scroll-to-section"><a href="{{ path('app_business_index') }}">Services</a></li>
-                                <li class="scroll-to-section"><a href="#services">Adoption</a></li>
+                                <li class="scroll-to-section"><a href="{{ path('app_annonce_adoption_index') }}">Adoption</a></li>
                                 <li class="scroll-to-section"><a href="#">Hub</a>
                                     <div class="sub-menu-1">
                                         <ul>
-                                            <li> <a href="{{ path('app_chien_index_my_dogs') }}">My Dogs</a></li>
-                                            <li> <a href="{{ path('app_chien_index_dogs-next-door') }}">Dogs Next Door</a></li>
+                                            {% if not( is_granted('ROLE_USER'))%}
+                                                <li> <a>My Dogs</a></li>
+                                            {% endif %}
+                                            {% if ( is_granted('ROLE_USER'))%}
+                                                <li> <a href="{{ path('app_chien_index_my_dogs') }}">My Dogs</a></li>
+                                            {% endif %}
+                                            {% if not( is_granted('ROLE_USER'))%}
+                                                <li> <a>Dogs Next Door</a></li>
+                                            {% endif %}
+                                            {% if ( is_granted('ROLE_USER'))%}
+                                                <li> <a href="{{ path('app_chien_index_dogs-next-door') }}">Dogs Next Door</a></li>
+                                            {% endif %}
                                             <li> <a href="{{ path('app_annonce_proprietaire_chien_index_lost') }}">Lost Dogs</a></li>
                                             <li> <a href="{{ path('app_annonce_proprietaire_chien_index_mating') }}">Mating</a></li>
                                             <li></li>
                                         </ul>
                                     </div>
                                 </li>
+                                <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}">Store</a></li>
+                                <li class="scroll-to-section" > <a  href="{{ path('app_panier_index') }}" class="fa fa-shopping-cart" style="font-size:30px;color:black"></a> </li>
+                                {% if not( is_granted('ROLE_USER'))%}
+                                    <li class="scroll-to-section"><a  href="{{ path ('app_login') }}">sign in</a></li>
+                                {% endif %}
+                                {% if ( is_granted('ROLE_USER'))%}
+                                    <li class="scroll-to-section"><a  href="{{ path ('app_editprofile') }}">mon profil</a></li>
+                                {% endif %}
 
-                                <li class="scroll-to-section"><a href="#blog">Store</a></li>
-                                <li class="scroll-to-section"><a>Sign in</a></li>
-                                <li class="scroll-to-section"><div class="border-first-button"><a href="#contact">Sign up</a></div></li>
+                                {% if not ( is_granted('ROLE_USER'))%}
+                                    <li class="scroll-to-section"><div class="border-first-button"><a href="{{ path ('registration') }}">Sign up</a></div></li>
+                                {% endif %}
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>
@@ -97,6 +128,7 @@
 
 
     {% block body %}
+
     {% endblock %}
 
 
@@ -109,7 +141,6 @@
             </div>
         </footer>
     {% endblock %}
-
 
 
     </body>
