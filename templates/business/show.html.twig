@@ -2,49 +2,115 @@
 
 {% block title %}Business{% endblock %}
 
+
 {% block body %}
-    <h1>Business</h1>
+    <div class="ahbet">
+        <div class="container">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Idbusiness</th>
-                <td>{{ business.idbusiness }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ business.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ business.description }}</td>
-            </tr>
-            <tr>
-                <th>Horaire</th>
-                <td>{{ business.horaire }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ business.ville }}</td>
-            </tr>
-            <tr>
-                <th>Localisation</th>
-                <td>{{ business.localisation }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ business.type }}</td>
-            </tr>
-            <tr>
-                <th>Experience</th>
-                <td>{{ business.experience }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="flex-box">
+        <div class="left">
+            <div class="big-img">
+                <img src="{{asset('FrontOffice/uploads/'~business.image) }}" alt="">
+            </div>
+        </div>
+        <div class="right">
+            <div class="title-ville">
+                <h3 class="business-title">{{ business.titre }}</h3>
+                <div class="tag-ville">
+                    <div class="tag-location">
+                        <img src="{{ asset('FrontOffice/assets/images/vector.png') }}" alt="">
+                    </div>
 
-    <a href="{{ path('app_business_index') }}">back to list</a>
+                    {{ business.ville }}
+                </div>
 
-    <a href="{{ path('app_business_edit', {'idbusiness': business.idbusiness}) }}">edit</a>
+            </div>
+            <div class="element">
+                <div class="space-5"></div>
+                <label class="key">Description</label>
+                <br/>
+                <span class="value">{{ business.description }}</span>
 
-    {{ include('business/_delete_form.html.twig') }}
+            </div>
+            <div class="element">
+                <div class="space-5"></div>
+                <label class="key-bigger">Opening Hours: </label>
+                <span class="value-bigger">{{ business.horaire }}</span>
+            </div>
+            <div class="element">
+                <div class="space-2"></div>
+                <label class="key-bigger">Years of Experience: </label>
+                <span class="value-bigger">{{ business.experience }}</span>
+            </div>
+        </div>
+    </div>
+
+
+            <div class="space-5"></div>
+            <div class="row">
+
+
+
+
+                {{ render(path('app_business_services_index', {'idbusiness': business.idbusiness} )) }}
+                <div class="space-5"></div>
+                <div class="space-5"></div>
+                <div class="space-5"></div>
+                {{ render(path('app_business_index_location' )) }}
+
+                {{ render(path('app_revue_index', {'idbusiness': business.idbusiness} )) }}
+                <h3>Add New Review</h3>
+                {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                <div class="flexini">
+                    <div class="items">
+                        <p>Rating Stars</p>
+                        {{ form_widget(form.nbetoiles,{'attr':{'class':'form-contr0ol'}}) }}
+                    </div>
+                    <div class="items">
+                        <p>Explain your Rating</p>
+                        {{ form_widget(form.commentaire,{'attr':{'class':'form-contr0ol'}}) }}
+                    </div>
+                    <div class="items">
+
+                        {{ form_widget(form.Save,{'attr':{'class':'form-contr0ol save-button-right '}}) }}
+                    </div>
+
+                </div>
+                {{ form_end(form) }}
+
+
+            </div>
+        </div>
+    </div>
+
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&callback=initMap&v=weekly"
+            defer
+    ></script>
+
+    <script>
+        function initMap() {
+
+            const myLatLng = { lat: {{ business.lat }}, lng: {{ business.lng }}};
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 18,
+                center: myLatLng,
+            });
+
+            new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title: "Hello World!",
+                draggable:true,
+            });
+        }
+
+        window.initMap = initMap;
+
+    </script>
+
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&callback=initMap&v=weekly"
+            defer
+    ></script>
 {% endblock %}

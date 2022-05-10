@@ -1,0 +1,30 @@
+
+
+{% block title %}Modification du profil de {{ app.user.firstname }} {{ app.user.name }}{% endblock %}
+
+{% block body %}
+    <div class="grix xs4 container">
+        <div class="col-xs4">
+            <h1>Modification du profil de {{ app.user.firstname }} {{ app.user.name }}</h1>
+            {{ form(form) }}
+        </div>
+
+    </div>
+
+    <div id="example-sidenav" class="sidenav large fixed white">
+        <div class="sidenav-header">
+            <button data-target="example-sidenav" class="sidenav-trigger">
+                <i class="fas fa-times"></i>
+            </button>
+            <img class="logo dropshadow-1" src="your_img_path" alt="Logo"/>
+        </div>
+        <a href="#" class="sidenav-link active">Mon profil</a>
+        <a href="#" class="sidenav-link">Mes annonces</a>
+    </div>
+    <main>
+        <button data-target="example-sidenav" class="btn press amaranth dark-1 sidenav-trigger hide-md-up">
+            Open sidenav
+        </button>
+        {% block body %}{% endblock %}
+    </main>
+{% endblock %}

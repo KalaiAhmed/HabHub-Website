@@ -1,0 +1,245 @@
+
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Store{% endblock %}
+
+   {% block navBar %}
+       <!-- ***** Header Area Start ***** -->
+
+
+       <meta name="pinterest" content="nopin" />
+       <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+           <div class="container">
+               <div class="row">
+                   <div class="col-12">
+                       <nav class="main-nav">
+                           <!-- ***** Logo Start ***** -->
+                           <a href="{{ path('app_front_office_home') }}" class="logo">
+                               <img src="{{ asset('FrontOffice/assets/images/logo-v2.png') }}" alt="">
+                           </a>
+                           <!-- ***** Logo End ***** -->
+                           <!-- ***** Menu Start ***** -->
+                           <ul class="nav">
+
+
+                               <li class="scroll-to-section"><a href="{{ path('app_home') }}">Home</a></li>
+                               <li class="scroll-to-section"><a href="{{ path('app_business_index') }}">Services</a></li>
+                               <li class="scroll-to-section"><a href="{{ path('app_annonce_adoption_index') }}">Adoption</a></li>
+                               <li class="scroll-to-section"><a href="#">Hub</a>
+                                   <div class="sub-menu-1">
+                                       <ul>
+                                           {% if not( is_granted('ROLE_USER'))%}
+                                               <li> <a href="">My Dogs</a></li>
+                                           {% endif %}
+                                           {% if ( is_granted('ROLE_USER'))%}
+                                               <li> <a href="{{ path('app_chien_index_my_dogs') }}">My Dogs</a></li>
+                                           {% endif %}
+                                           {% if not( is_granted('ROLE_USER'))%}
+                                               <li> <a href="{{ path('app_chien_index_dogs-next-door') }}">Dogs Next Door</a></li>
+                                           {% endif %}
+                                           {% if ( is_granted('ROLE_USER'))%}
+                                               <li> <a href="{{ path('app_chien_index_dogs-next-door') }}">Dogs Next Door</a></li>
+                                           {% endif %}
+                                           <li> <a href="{{ path('app_annonce_proprietaire_chien_index_lost') }}">Lost Dogs</a></li>
+                                           <li> <a href="{{ path('app_annonce_proprietaire_chien_index_mating') }}">Mating</a></li>
+                                           <li></li>
+                                       </ul>
+                                   </div>
+                               </li>
+                               <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}" class="active">Store</a></li>
+                               <li class="scroll-to-section" > <a  href="{{ path('app_panier_index') }}" class="fa fa-shopping-cart" style="font-size:30px;color:black"></a> </li>
+
+                               {% if not( is_granted('ROLE_USER'))%}
+                                   <li class="scroll-to-section"><a  href="{{ path ('app_login') }}">sign in</a></li>
+                               {% endif %}
+                               {% if ( is_granted('ROLE_USER'))%}
+                                   <li class="scroll-to-section"><a  href="{{ path ('app_editprofile') }}">mon profil</a></li>
+                               {% endif %}
+
+                               {% if not ( is_granted('ROLE_USER'))%}
+                                   <li class="scroll-to-section"><div class="border-first-button"><a href="{{ path ('registration') }}">Sign up</a></div></li>
+                               {% endif %}
+                           </ul>
+                           <a class='menu-trigger'>
+                               <span>Menu</span>
+                           </a>
+                           <!-- ***** Menu End ***** -->
+                       </nav>
+                   </div>
+               </div>
+           </div>
+       </header>
+       <!-- ***** Header Area End ***** -->
+
+    {% endblock %}
+
+{% block body %} 
+    
+    <h1 >Products List</h1>
+
+
+
+
+ {% for message in app.flashes('success') %}
+            <div class="alert alert-success" style="padding-top:5%">
+                {{ message }}
+            </div>
+        {% endfor %}
+<div>
+ <div class="sidebar-search">
+    <div class="input-group custom-search-form" style="padding-top:10%">
+        <input type="text" id="search" class="form-control" placeholder="Search for a product">
+    </div>
+    <!-- /input-group -->
+</div>
+  
+   
+ 
+   <div>
+   <div>
+    <p style="padding-left:25px;text-align:left">Sort:</p>
+    <div>
+        <form id="filters" style="padding-left:25px;text-align:left" >
+            {% for categorie in categories %}
+                <p> <input type="checkbox" name="categories[]" id="cat{{categorie.idcategorie}}" value=" {{categorie.idcategorie}}"  >
+                <label for="cat {{categorie.idcategorie }}" > {{categorie.nom}} </label> </p>
+  
+            {% endfor %}
+        </form>
+    </div>
+  
+     <div id="blog" class="blog" style="padding-top:20px;">
+
+        <div class="container">
+            <div class="row" id="content">
+        {% include "produit/_content.html.twig" %}
+
+        </div>
+        </div>
+        </div>
+
+  </div>
+          
+   
+
+        
+    <style>
+ 
+/* CSS */
+.wrapper {
+    position: center;
+    display: flex;
+    min-width: 100px;
+  }
+
+/* CSS */
+.butt {
+  
+  
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.butt:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.butt:active {
+  transform: scale(0.95);
+}
+</style>
+
+       {% endblock %}
+
+ 
+
+{% block javascripts %}
+   
+
+   <script src="{{ asset('assets/js/filters.js') }}" type="text/javascript"></script>
+
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null ;
+            $("#search").keyup(function() {
+                var minlength = 0;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#content").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_search') }}",
+                        data: {
+                            'l' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value==$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key == 'produits') {
+                                            if (id != 'error') {
+
+
+
+                                               entitySelector.append('  <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" > '+
+
+                            '<div class="blog-post">'+
+                                '<div class="thumb">'+
+                        
+                           ' <a href="#"><img src="/FrontOffice/assets/images/store/'+value[5]+'.jpg" alt=""></a>'+
+                                '</div>'+
+                             '<div class="down-content">'+
+                            
+                             ' <span class="nom">'+value[0]+'</span>'+
+                                '<span class="s" style="padding-left:50px;font-weight: bold;color:#f46c38">'+value[1]+' DT</span>'+
+                                '<p>'+value[3]+'}</p>'+
+                               ' <span class="category">'+value[4]+'</span>'+
+                               ' <span class="marque" style="padding-left:50px" >'+value[2]+'</span>'+
+                                ' <a href="/panier/add/'+value[6]+'" class="butt">Add To Cart</a>'+
+                                
+                           ' </div> ');
+                            
+                            
+                    
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}   

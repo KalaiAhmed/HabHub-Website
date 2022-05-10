@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Revue index{% endblock %}
+
+{% block body %}
+    <h1>Back Office</h1>
+
+    <h1>Revue index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idrevue</th>
+                <th>Nbetoiles</th>
+                <th>Commentaire</th>
+                <th>Datepublication</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for revue in revues %}
+            <tr>
+                <td>{{ revue.idrevue }}</td>
+                <td>{{ revue.nbetoiles }}</td>
+                <td>{{ revue.commentaire }}</td>
+                <td>{{ revue.datepublication ? revue.datepublication|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_revue_show', {'idrevue': revue.idrevue}) }}">show</a>
+                    <a href="{{ path('app_revue_edit', {'idrevue': revue.idrevue}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_revue_new') }}">Create new</a>
+{% endblock %}

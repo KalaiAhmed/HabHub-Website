@@ -1,0 +1,36 @@
+<div id="blog" class="blog">
+    <div class="container">
+
+
+        <div class="row" id="entitiesNav">
+
+            {% for business in businesses %}
+                <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+
+                    <div class="blog-post">
+                        <div class="thumb">
+                            <a href="{{ path('app_business_show', {'idbusiness': business.idbusiness}) }}"><img src="{{asset('FrontOffice/uploads/'~business.image) }}" class="card-img-top" alt=""></a>
+                        </div>
+                        <div class="down-content">
+
+
+                            <span class="category">{{ business.ville }}</span>
+                            <span class="date">03 August 2021</span>
+                            <a href="#"><h4>{{ business.titre }}</h4></a>
+                            <p>{{ business.horaire }}
+                                {{ business.ville }}</p>
+                            <div class="border-first-button"><a href="#">Book Now</a></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+</div>

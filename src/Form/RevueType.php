@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Revue;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,11 +15,11 @@ class RevueType extends AbstractType
     {
         $builder
             ->add('nbetoiles')
-            ->add('commentaire')
-            ->add('datepublication')
-            ->add('idproduit')
-            ->add('idindividu')
-            ->add('idbusiness')
+            ->add('commentaire',TextareaType::class)
+            //->add('idproduit')
+            //->add('idindividu')
+            //->add('idbusiness')
+            ->add('Save',SubmitType::class)
         ;
     }
 

@@ -1,4 +1,20 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+
+
+{{ form_start(formula,{attr:{novalidate:'novalidate'}}) }}
+
+<div class="flexini">
+    <div class="item">
+        <p>Choose Date</p>
+{{ form_widget(formula.datereservation,{'attr':{'class':'form-contr0ol'}}) }}
+    </div>
+    <div class="item">
+        <p>Choose Time of Appointment</p>
+    {{ form_widget(formula.heurereservation,{'attr':{'class':'form-contr0ol'}}) }}
+    </div>
+    <div class="item">
+    {{ form_widget(formula.Book,{'attr':{'class':'form-contr0ol save-button-right '}}) }}
+
+    </div>
+</div>
+
+{{ form_end(formula) }}

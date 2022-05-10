@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Chien
  *
  * @ORM\Table(name="chien", indexes={@ORM\Index(name="idIndividu", columns={"idIndividu"})})
- * @ORM\Entity
+@ORM\Entity(repositoryClass="App\Repository\ChienRepository")
  */
 class Chien
 {
@@ -48,7 +48,7 @@ class Chien
      * @Assert\NotBlank(message=" vaccination doit etre non vide")
      * @ORM\Column(name="vaccination", type="boolean", nullable=true, options={"default"="NULL"})
      */
-    private $vaccination = 'NULL';
+    private $vaccination = 0;
 
     /**
      * @var string
@@ -59,10 +59,9 @@ class Chien
 
     /**
      * @var string|null
-     *  @Assert\NotBlank(message=" image doit etre non vide")
-     * @ORM\Column(name="image", type="string", length=30, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="image", type="string", length=250, nullable=true, options={"default"="17.png"})
      */
-    private $image;
+    private $image='17.png';
 
     /**
      * @var string
@@ -101,6 +100,14 @@ class Chien
      * })
      */
     private $idindividu;
+
+    /**
+     * @param int $idchien
+     */
+    public function __construct()
+    {
+
+    }
 
     public function getIdchien(): ?int
     {
@@ -240,5 +247,7 @@ class Chien
         return $this;
     }
 
-
+    public function __toString() {
+        return (strval($this->idchien));
+    }
 }

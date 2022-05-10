@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Likes
  *
  * @ORM\Table(name="likes", indexes={@ORM\Index(name="idIndividu", columns={"idIndividu"}), @ORM\Index(name="idChien", columns={"idChien"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\LikesRepository")
  */
 class Likes
 {
@@ -22,7 +22,7 @@ class Likes
     private $idlike;
 
     /**
-     * @var \Individu
+     * @var \App\Entity\Individu
      *
      * @ORM\ManyToOne(targetEntity="Individu")
      * @ORM\JoinColumns({
@@ -32,7 +32,7 @@ class Likes
     private $idindividu;
 
     /**
-     * @var \Chien
+     * @var \App\Entity\Chien
      *
      * @ORM\ManyToOne(targetEntity="Chien")
      * @ORM\JoinColumns({
@@ -40,6 +40,18 @@ class Likes
      * })
      */
     private $idchien;
+
+    /**
+     * @param \Individu $idindividu
+     * @param \Chien $idchien
+     */
+    public function __construct(\App\Entity\Individu $idindividu, \App\Entity\Chien $idchien)
+    {
+        $this->idindividu = $idindividu;
+        $this->idchien = $idchien;
+    }
+
+
 
     public function getIdlike(): ?int
     {

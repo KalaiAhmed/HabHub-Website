@@ -16,12 +16,18 @@ use Symfony\Component\HttpFoundation\Request;
  * @Route("/search")
  */
 
+/**
+ * @Route("/searchAdoption")
+ */
 class SearchAdoptionController extends AbstractController
 {
     /**
      * Creates a new ActionItem entity.
      *
-     * @Route("/adoption", name="ajax_search_adoption")
+
+
+     * @Route("/search", name="ajax_search_adoption")
+
      * methods={"GET"}
      */
     public function searchBar(Request $request, EntityManagerInterface $entityManager)

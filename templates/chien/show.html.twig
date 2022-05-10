@@ -1,62 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Chien{% endblock %}
+{% block title %}Dog{% endblock %}
 
 {% block body %}
-    <h1>Chien</h1>
+<div class="ahbet">
+    <div class="container">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Idchien</th>
-                <td>{{ chien.idchien }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ chien.nom }}</td>
-            </tr>
-            <tr>
-                <th>Sexe</th>
-                <td>{{ chien.sexe }}</td>
-            </tr>
-            <tr>
-                <th>Age</th>
-                <td>{{ chien.age }}</td>
-            </tr>
-            <tr>
-                <th>Vaccination</th>
-                <td>{{ chien.vaccination ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ chien.description }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ chien.image }}</td>
-            </tr>
-            <tr>
-                <th>Color</th>
-                <td>{{ chien.color }}</td>
-            </tr>
-            <tr>
-                <th>Race</th>
-                <td>{{ chien.race }}</td>
-            </tr>
-            <tr>
-                <th>Groupe</th>
-                <td>{{ chien.groupe }}</td>
-            </tr>
-            <tr>
-                <th>Playwithme</th>
-                <td>{{ chien.playwithme ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="flex-box">
+            <div class="left">
+                <div class="big-img">
 
-    <a href="{{ path('app_chien_index') }}">back to list</a>
+                    <a href="#"><img src="{{asset('FrontOffice/uploads/'~chien.image) }}" alt=""></a>
+                </div>
+            </div>
+            <div class="right">
+                <div class="title-ville">
+                    <div>
+                    <h3 class="business-title">{{ chien.nom }}</h3>
+                        <div class="space-2"></div>
 
-    <a href="{{ path('app_chien_edit', {'idchien': chien.idchien}) }}">edit</a>
+                        <div class="tag-box">
+                        <div class="tag-sexe">
+                            {% if chien.sexe=='M' %}
+                                <img src="{{ asset('FrontOffice/assets/images/chien/male.png') }}" alt="">
+                            {% else %}
+                                <img src="{{ asset('FrontOffice/assets/images/chien/female.png') }}" alt="">
+                            {% endif %}
+                        </div>
 
-    {{ include('chien/_delete_form.html.twig') }}
-{% endblock %}
+                        </div>
+                    </div>
+                    {% if liked %}
+                        <a href="{{ path('app_likes_removelike_show', {'idchien': chien.idchien,'liked':liked}) }}"> <img class="chien-icon" src="{{asset('FrontOffice/assets/images/chien/heartIcon.png') }}"> </a>
+                    {% else %}
+                        <a href="{{ path('app_likes_addlike_show', {'idchien': chien.idchien,'liked':liked}) }}"> <img class="chien-icon" src="{{asset('FrontOffice/assets/images/chien/emptyHeartIcon.png') }}"> </a>
+                    {% endif %}
+
+
+                </div>
+                {% if chien.playwithme %}
+
+                    <img style="margin-top:2%;max-height: 27px;max-width: 102px;" src="{{asset('FrontOffice/assets/images/chien/playWithMe.png') }}">
+                {% endif %}
+
+                <div class="element">
+                    <div class="space-5"></div>
+                    <label class="key">Description</label>
+                    <br/>
+                    <span class="value">{{chien.description }}</span>
+
+                </div>
+                <div class="element">
+                    <div class="space-2"></div>
+                    <label class="key-bigger">Age: </label>
+                    <span class="value-bigger">{{chien.age }}</span>
+                </div>
+                <div class="element">
+                    <div class="space-2"></div>
+                    <label class="key-bigger">Address: </label>
+                    <span class="value-bigger"> {{ chien.idindividu.adresse }}</span>
+                </div>
+                <div class="space-5"></div>
+
+
+                <div class="element">
+                    <div class="space-2"></div>
+                    <label class="key-bigger"> </label>
+                    <span class="value-bigger"></span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        {% endblock %}

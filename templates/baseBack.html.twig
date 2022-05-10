@@ -27,7 +27,9 @@
         <script src="{{asset('assets/js/core/bootstrap.min.js') }}"></script>
         <script src="{{asset('assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
         <!--  Google Maps Plugin    -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
         <!-- Chart JS -->
         <script src="{{asset('assets/js/plugins/chartjs.min.js') }}"></script>
         <!--  Notifications Plugin    -->
@@ -43,11 +45,15 @@
 <div class="wrapper">
 
 {% block navbar %}
+    <meta name="pinterest" content="nopin" />
+
     <div class="sidebar" data-color="white" data-active-color="danger">
         <div class="logo">
             <a class="simple-text logo-mini">
                 <div class="logo-image-small">
+
                     <img src="{{asset('assets/img/icons/logo.png')}}" />
+
                 </div>
                 <!-- <p>CT</p> -->
             </a>
@@ -76,6 +82,7 @@
                 </li>
                 {% endblock %}
                 {% block store %}
+                
 
                 <li>
                     <a
@@ -94,18 +101,18 @@
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="./ordersList.html">
+                                <a class="nav-link" href="{{ path('app_back_office_categorie') }}">
                                     <i class="fa fa-shopping-baske" aria-hidden="true"> </i>
-                                    Manage Orders</a
+                                    Manage Categories</a
                                 >
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./productsList.html"
+                                <a class="nav-link" href="{{ path('app_back_office_produit') }}"
                                 >Manage Products</a
                                 >
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./addProduct.html">Add Product</a>
+                                <a class="nav-link" href="{{ path('app_produit_new') }}">Add Product</a>
                             </li>
                         </ul>
                     </div>
@@ -149,7 +156,7 @@
                 {% block user %}
 
                 <li>
-                    <a href="./user.html">
+                    <a href="{{ path('app_individu_index') }}">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <p>Users</p>
                     </a>
@@ -203,6 +210,9 @@
 {% endblock %}
 </div>
 </div>
-
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG1HwsLk_Q_l3KL6Ki1z83gXvppk_xVpY&callback=initMap&v=weekly"
+        defer
+></script>
 </body>
 </html>

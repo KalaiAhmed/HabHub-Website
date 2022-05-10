@@ -37,9 +37,36 @@
 
 
 {% block javascripts %}
+    <script>
+
+        window.onload = function(){
+
+
+            let annonces = document.getElementById('annonces');
+            let annGraph = new Chart(annonces, {
+                type: "line",
+                data: {
+                    labels: {{ dates|raw }},
+                    datasets: [{
+                        label: "Nombre d'annonces",
+                        data: {{ annoncesCount|raw }}
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            })
+        }
+    </script>
 <script>
  
-
+/*
 window.onload = function(){
     let offres = document.getElementById('offres');
     let offreGraph = new Chart(offres, {
@@ -55,8 +82,9 @@ window.onload = function(){
         
     })
     }
-    
+    */
 </script>
+
 
 
 
