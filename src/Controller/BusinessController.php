@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * @Route("/business")
@@ -237,11 +240,12 @@ class BusinessController extends AbstractController
             ->getRepository(Business::class)
             ->findOneBy(array('idbusiness' => $business->getIdbusiness())));
 
-        // $revue->setDatepublication(date('Y/m/d'));
         $form = $this->createForm(RevueType::class, $revue);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $datepublication = new \DateTime('now');
+            $revue->setDatepublication($datepublication);
             $entityManager->persist($revue);
             $entityManager->flush();
             return $this->redirectToRoute('app_business_show', ['idbusiness' => $business->getIdbusiness()], Response::HTTP_SEE_OTHER);
@@ -315,4 +319,45 @@ class BusinessController extends AbstractController
 
         return $this->redirectToRoute('app_business_index_back_office', [], Response::HTTP_SEE_OTHER);
     }
+
+    /***********************************JSON METHODS***********************************/
+    /**
+     * @Route("/mobile/index", name="app_business_index_mobile", methods={"GET"})
+     */
+    public function index_mobile(EntityManagerInterface $entityManager)
+    {
+
+        $businesses = $entityManager
+            ->getRepository(Business::class)
+            ->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($businesses);
+
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/show-mobile/show", name="app_business_show_mobile", methods={"POST","GET"})
+     */
+    public function show_mobile(Request $request)
+    {
+        $idbusiness = $request->get("idbusiness");
+        $em = $this->getDoctrine()->getManager();
+        $business =$em->getRepository(Business::class)
+            ->findOneBy(array('idbusiness' => $idbusiness));
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getIdbusiness();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($business );
+        return new JsonResponse($formatted);
+    }
+
+
+
+    /************************************END JSON METHODS***********************************/
+
+
 }

@@ -304,6 +304,11 @@ End Mariem
 
 
 /* ---- .grid-item ---- */
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
 
 .grid-sizer,
 .grid-item {
