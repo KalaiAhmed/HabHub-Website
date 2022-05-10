@@ -77,10 +77,13 @@ class RevueController extends AbstractController
      */
     public function new_revue_front(Request $request, EntityManagerInterface $entityManager,Business $business): Response
     {   $revue = new Revue();
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
 
         $revue->setIdindividu( $entityManager
             ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '3')));
+            ->findOneBy(array('idindividu' => $id)));
 
         $revue->setIdbusiness( $entityManager
             ->getRepository(Business::class)

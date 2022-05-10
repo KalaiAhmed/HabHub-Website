@@ -231,10 +231,11 @@ class BusinessController extends AbstractController
     public function show(Business $business, Request $request, EntityManagerInterface $entityManager): Response
     {
         $revue = new Revue();
-
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
         $revue->setIdindividu($entityManager
             ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '2')));
+            ->findOneBy(array('idindividu' => $id)));
 
         $revue->setIdbusiness($entityManager
             ->getRepository(Business::class)
