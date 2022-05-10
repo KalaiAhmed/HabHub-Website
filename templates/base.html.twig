@@ -82,8 +82,18 @@
                                 <li class="scroll-to-section"><a href="#">Hub</a>
                                     <div class="sub-menu-1">
                                         <ul>
-                                            <li> <a href="{{ path('app_chien_index_my_dogs') }}">My Dogs</a></li>
-                                            <li> <a href="{{ path('app_chien_index_dogs-next-door') }}">Dogs Next Door</a></li>
+                                            {% if not( is_granted('ROLE_USER'))%}
+                                                <li> <a>My Dogs</a></li>
+                                            {% endif %}
+                                            {% if ( is_granted('ROLE_USER'))%}
+                                                <li> <a href="{{ path('app_chien_index_my_dogs') }}">My Dogs</a></li>
+                                            {% endif %}
+                                            {% if not( is_granted('ROLE_USER'))%}
+                                                <li> <a>Dogs Next Door</a></li>
+                                            {% endif %}
+                                            {% if ( is_granted('ROLE_USER'))%}
+                                                <li> <a href="{{ path('app_chien_index_dogs-next-door') }}">Dogs Next Door</a></li>
+                                            {% endif %}
                                             <li> <a href="{{ path('app_annonce_proprietaire_chien_index_lost') }}">Lost Dogs</a></li>
                                             <li> <a href="{{ path('app_annonce_proprietaire_chien_index_mating') }}">Mating</a></li>
                                             <li></li>
@@ -92,11 +102,16 @@
                                 </li>
                                 <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}">Store</a></li>
                                 <li class="scroll-to-section" > <a  href="{{ path('app_panier_index') }}" class="fa fa-shopping-cart" style="font-size:30px;color:black"></a> </li>
+                                {% if not( is_granted('ROLE_USER'))%}
+                                    <li class="scroll-to-section"><a  href="{{ path ('app_login') }}">sign in</a></li>
+                                {% endif %}
+                                {% if ( is_granted('ROLE_USER'))%}
+                                    <li class="scroll-to-section"><a  href="{{ path ('app_editprofile') }}">mon profil</a></li>
+                                {% endif %}
 
-                                   <li class="scroll-to-section"><a  href="{{ path ('app_login') }}">sign in</a></li>
-                            <li class="scroll-to-section"><a  href="{{ path ('app_editprofile') }}">mon profil</a></li>
-
-                            <li class="scroll-to-section"><div class="border-first-button"><a href="{{ path ('registration') }}">Sign up</a></div></li>
+                                {% if not ( is_granted('ROLE_USER'))%}
+                                    <li class="scroll-to-section"><div class="border-first-button"><a href="{{ path ('registration') }}">Sign up</a></div></li>
+                                {% endif %}
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>

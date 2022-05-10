@@ -111,24 +111,7 @@ class Utilisateur implements UserInterface
     }
 
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
 
     /**
      * Returning a salt is only needed, if you are not using a modern
@@ -143,9 +126,19 @@ class Utilisateur implements UserInterface
 
     public function getUsername()
     {
-        return (int)$this->getIdUtilisateur();
-    }
+      return (int)$this->getIdUtilisateur();
 
+    }
+    public function getRoles(): array
+    {
+        switch ($this->getType()) {
+            case 'A':
+                return ['ROLE_ADMIN'];
+            default:
+                return ['ROLE_USER'];
+
+        }
+    }
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.

@@ -21,6 +21,13 @@ class IndividuRepository extends ServiceEntityRepository
         parent::__construct($registry, Individu::class);
     }
 
+    public function getIndividuByUser(int $id):individu{
+        $entityManager=$this->getEntityManager();
+        $individu=$this->findOneBy(array('idutilisateur' => $id));
+
+        return $individu;
+    }
+
     public function getIndividu(int $id){
         $entityManager=$this->getEntityManager();
         $query= $entityManager

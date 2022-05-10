@@ -59,12 +59,12 @@ class   SearchController extends AbstractController
     }
 
 
- /**
-     * Creates a new ActionItem entity.
-     *
-     * @Route("/search_users", name="utilisateurs_search")
-     * methods={"GET"}
-     */
+     /**
+         * Creates a new ActionItem entity.
+         *
+         * @Route("/search_users", name="utilisateurs_search")
+         * methods={"GET"}
+         */
     public function searchUtilisateur(Request $request)
    {
         $em = $this->getDoctrine()->getManager();

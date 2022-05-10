@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Individu;
 use App\Entity\Utilisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -31,6 +32,8 @@ class UtilisateurRepository extends ServiceEntityRepository
             ->setParameters(array('idutilisateur',$id));
         return $query->getResult();
     }
+
+
 
 
     /**
