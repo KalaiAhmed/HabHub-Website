@@ -60,6 +60,7 @@ Mariem
 
 
 
+
 .flex-box{
   display:flex;
   width: 100%;
@@ -272,6 +273,8 @@ tag-sexe{
   box-shadow: 0px 0px 10.7042px rgba(0, 0, 0, 0.15);
   border-radius: 10.7042px;
 
+
+
   display: inline;
   overflow-wrap: anywhere;
 
@@ -301,6 +304,11 @@ End Mariem
 
 
 /* ---- .grid-item ---- */
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
 
 .grid-sizer,
 .grid-item {
@@ -1307,6 +1315,7 @@ About Style
   border-right: 0;
 
 
+
   -webkit-transform-origin: center ;
   transform-origin: center ;
 }
@@ -1425,7 +1434,6 @@ Due to the split circle of progress-left and progress right, we must use the ani
   }
   100% {
 
-
     -webkit-transform: rotate(72deg);
     transform: rotate(72deg);
   }
@@ -1447,6 +1455,7 @@ Due to the split circle of progress-left and progress right, we must use the ani
     transform: rotate(0deg);
   }
   100% {
+
 
     -webkit-transform: rotate(144deg);
     transform: rotate(144deg);
@@ -2343,6 +2352,7 @@ responsive
   }
 
 
+
   .our-portfolio .section-heading .line-dec {
     margin: 0 auto;
   }
@@ -2367,7 +2377,6 @@ responsive
     margin-left: 0px;
     margin-top: 30px;
   }
-
 
   .post-item {
     margin-bottom: 30px;

@@ -41,9 +41,11 @@ class ChienController extends AbstractController
      */
     public function index_my_dogs(EntityManagerInterface $entityManager): Response
     {
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
         $chiens = $entityManager
             ->getRepository(Chien::class)
-            ->myDogs();
+            ->myDogs($id);
 
         return $this->render('chien/myDogs.html.twig', [
             'chiens' => $chiens,
@@ -55,11 +57,18 @@ class ChienController extends AbstractController
      */
     public function index_dogs_next_door(EntityManagerInterface $entityManager,Request $request): Response
     {
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+        $adresse=$individu->getAdresse();
+        dump('test');
+        dump($id);
+        dump($adresse);
+        dump('test');
         $filters=$request->get("categories");
         $search=$request->get("search");
         $chiensSearchedFiltered=$this->getDoctrine()
             ->getRepository(Chien::class)
-            ->searchFilterDogsNextDoor($filters,$search);
+            ->searchFilterDogsNextDoor($filters,$search,$id,$adresse);
         if($request->get('ajax')){
             return new JsonResponse([
                 'content' =>$this->renderView('chien/_dogsNextDoorContent.html.twig', [
@@ -69,7 +78,7 @@ class ChienController extends AbstractController
         }
         $chiens = $this->getDoctrine()
             ->getRepository(Chien::class)
-            ->findDogsNextDoor();
+            ->findDogsNextDoor($id,$adresse);
 
 
         return $this->render('chien/dogsNextDoor.html.twig', [

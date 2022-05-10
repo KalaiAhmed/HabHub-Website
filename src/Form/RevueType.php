@@ -16,7 +16,6 @@ class RevueType extends AbstractType
         $builder
             ->add('nbetoiles')
             ->add('commentaire',TextareaType::class)
-            //->add('datepublication')
             //->add('idproduit')
             //->add('idindividu')
             //->add('idbusiness')

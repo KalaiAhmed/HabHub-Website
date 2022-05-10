@@ -51,6 +51,7 @@
         <div class="logo">
             <a class="simple-text logo-mini">
                 <div class="logo-image-small">
+
                     <img src="{{asset('assets/img/icons/logo.png')}}" />
 
                 </div>
@@ -155,7 +156,7 @@
                 {% block user %}
 
                 <li>
-                    <a href="./user.html">
+                    <a href="{{ path('app_individu_index') }}">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <p>Users</p>
                     </a>

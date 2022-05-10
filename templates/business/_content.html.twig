@@ -9,7 +9,7 @@
 
                     <div class="blog-post">
                         <div class="thumb">
-                            <a href="{{ path('app_business_show', {'idbusiness': business.idbusiness}) }}"><img src="{{asset('FrontOffice/uploads/'~business.image) }}" alt=""></a>
+                            <a href="{{ path('app_business_show', {'idbusiness': business.idbusiness}) }}"><img src="{{asset('FrontOffice/uploads/'~business.image) }}" class="card-img-top" alt=""></a>
                         </div>
                         <div class="down-content">
 
@@ -32,5 +32,5 @@
         </div>
     </div>
 
-    <a href="{{ path('app_business_new_back_office') }}">Create new</a>
+
 </div>

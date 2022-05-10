@@ -10,10 +10,14 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Validator\Constraints\Json;
 /**
  * @Route("/revue")
  */
@@ -73,10 +77,13 @@ class RevueController extends AbstractController
      */
     public function new_revue_front(Request $request, EntityManagerInterface $entityManager,Business $business): Response
     {   $revue = new Revue();
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
 
         $revue->setIdindividu( $entityManager
             ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '2')));
+            ->findOneBy(array('idindividu' => $id)));
 
         $revue->setIdbusiness( $entityManager
             ->getRepository(Business::class)
@@ -86,6 +93,8 @@ class RevueController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $datepublication = new \DateTime('now');
+            $revue->setDatepublication($datepublication);
             $entityManager->persist($revue);
             $entityManager->flush();
 
@@ -185,4 +194,75 @@ class RevueController extends AbstractController
 
         return $this->redirectToRoute('app_revue_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /***********************************JSON METHODS***********************************/
+    /**
+     * @Route("/mobile/index", name="app_revue_index_mobile", methods={"GET"})
+     */
+    public function index_mobile(Request $request)
+    {   $idbusiness = $request->query->get("idbusiness");
+        $revues = $this->getDoctrine()->getManager()
+            ->getRepository(Revue::class)
+            ->findBy(array('idbusiness'=>$idbusiness));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($revues);
+
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/new/mobile-revue", name="app_revue_new_mobile", methods={"GET", "POST"})
+     */
+    public function new_revue_mobile(Request $request, EntityManagerInterface $entityManager)
+    {   $revue = new Revue();
+        $nbetoiles=$request->query->get("nbetoiles");
+        $commentaire=$request->query->get("commentaire");
+        $idindividu=$request->query->get("idindividu");
+        $idbusiness=$request->query->get("idbusiness");
+        $datepublication = new \DateTime('now');
+        $revue->setIdindividu( $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => $idindividu)));
+
+        $revue->setIdbusiness( $entityManager
+            ->getRepository(Business::class)
+            ->findOneBy(array('idbusiness' =>$idbusiness )));
+        $revue->setCommentaire($commentaire);
+        $revue->setNbetoiles($nbetoiles);
+        $revue->setDatepublication($datepublication);
+            $entityManager->persist($revue);
+            $entityManager->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($revue);
+        return new JsonResponse($formatted);
+
+    }
+
+    /**
+     * @Route("/mobile/delete", name="app_revue_delete", methods={"POST"})
+     */
+    public function delete_mobile(Request $request): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $idrevue=$request->query->get("idrevue");
+        $revue =$em->getRepository(Revue::class)
+            ->findOneBy(array('idrevue' => $idrevue));
+        if($revue!=null ) {
+            $em->remove($revue);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("Revue a ete supprimee avec success.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id revue invalide.");
+
+    }
+
+
+
+    /***********************************END JSON METHODS***********************************/
+
+
 }
