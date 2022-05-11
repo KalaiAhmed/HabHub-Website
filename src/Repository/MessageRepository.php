@@ -30,20 +30,28 @@ class MessageRepository extends ServiceEntityRepository
         return $query->getSingleScalarResult();
     }
 
-    public function sentMessages(){
-        $entityManager=$this->getEntityManager();
-        $query= $entityManager
-            ->createQuery("SELECT m FROM App\Entity\Message m JOIN m.sender u where u.idutilisateur=:sender")
-            ->setParameters(array('sender'=>'2'));
-        return $query->getResult();
+    public function sentMessages(int $id){
+        $query = $this->createQueryBuilder('m')->
+        Where( 'm.sender =:id')
+                ->setParameter('id',$id );
+        
+        $query->orderBy('m.createdAt');
+        
+        
+        return $query->getQuery()->getResult();
     }
 
-    public function receivedMessages(){
-        $entityManager=$this->getEntityManager();
-        $query= $entityManager
-            ->createQuery("SELECT m FROM App\Entity\Message m JOIN m.recipient u where u.idutilisateur=:recipient")
-            ->setParameters(array('recipient'=>'2'));
-        return $query->getResult();
+    public function receivedMessages(int $id){
+        $query = $this->createQueryBuilder('m')->
+        Where( 'm.recipient =:id')
+                ->setParameter('id',$id );
+        
+        $query->orderBy('m.createdAt');
+        
+        
+
+        
+        return $query->getQuery()->getResult();
     }
     
 

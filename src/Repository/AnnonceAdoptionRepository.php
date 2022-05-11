@@ -113,6 +113,21 @@ class AnnonceAdoptionRepository extends ServiceEntityRepository
     }
 
 
+    public function myAnnounces(int $id){
+        $query = $this->createQueryBuilder('a')->
+        Where( 'a.status = \'P\'')
+        ->andWhere('a.idindividu =:id')
+                ->setParameter('id',$id );
+        
+        $query->orderBy('a.datepublication');
+        
+        
+
+        
+        return $query->getQuery()->getResult();
+    }
+
+
     // /**
     //  * @return AnnonceAdoption[] Returns an array of AnnonceAdoption objects
     //  */
