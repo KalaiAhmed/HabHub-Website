@@ -4,69 +4,74 @@
 {% block body %}
 
 
-<div class="container" >
-    <div class="row">
+<div class="ahbet">
+    <div class="container">
 
-    <table class="table" style="margin-top:100px;">
-        <tbody>
-        <tr>
-                <th>Image</th>
-                <div class="row">
-                <td><img src="{{ asset('FrontOffice/uploads/'~annonceAdoption.idchien.image) }}" 
-                style="width:150px;height:100px;object-fit:fill;" alt=""></td>
+        <div class="flex-box">
+            <div class="left">
+                <div class="big-img">
+
+                    <a href="#"><img src="{{asset('FrontOffice/uploads/'~annonceAdoption.idchien.image) }}" alt=""></a>
                 </div>
-            </tr>
-            <tr>
-                <th>Foster Name</th>
-                <td>{{ annonceAdoption.idindividu.nom ~' '~ annonceAdoption.idindividu.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{annonceAdoption.idchien.nom}}</td>
-            </tr>
-            <tr>
-                <th>Sexe</th>
-                <td>{{ annonceAdoption.idchien.sexe }}</td>
-            </tr>
-            <tr>
-                <th>Age</th>
-                <td>{{ annonceAdoption.idchien.age }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ annonceAdoption.description }}</td>
-            </tr>
-            <tr>
-                <th>Color</th>
-                <td>{{ annonceAdoption.idchien.color}}</td>
-            </tr>
-            <tr>
-                <th>Race</th>
-                <td>{{annonceAdoption.idchien.race}}</td>
-            </tr>
-            <tr>
-                <th>groupe</th>
-                <td>{{ annonceAdoption.idchien.groupe}}</td>
-            </tr>
-            <tr>
-                <th>Vaccination</th>
-                <td>{{ annonceAdoption.idchien.vaccination ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+            </div>
+            <div class="right">
+                <div class="title-ville">
+                    <div>
+                    <h3 class="business-title">{{ annonceAdoption.idchien.nom }}</h3>
+                        <div class="space-2"></div>
+
+                        <div class="tag-box">
+                        <div class="tag-sexe">
+                            {% if annonceAdoption.idchien.sexe=='M' %}
+                                <img src="{{ asset('FrontOffice/assets/images/chien/male.png') }}" alt="">
+                            {% else %}
+                                <img src="{{ asset('FrontOffice/assets/images/chien/female.png') }}" alt="">
+                            {% endif %}
+                        </div>
+
+                        </div>
+                    </div>
+                    <a href="{{ path('app_annonce_adoption_pdf', {'idannonceadoption': annonceAdoption.idannonceadoption}) }} "
+                    {% if annonceAdoption.idindividu.idindividu == id %} style="visibility:hidden;" {% endif %}>
+                     <img class="ahbet"  src="{{asset('FrontOffice/assets/images/file_download_pdf_icon_153420.png') }}"></a>
+                    <a  href="{{path("contact",{'id': annonceAdoption.idindividu.idindividu })}}"
+                    {% if annonceAdoption.idindividu.idindividu == id %} style="visibility:hidden;" {% endif %}>
+                    <img class="ahbet" title="contacter l'annonceur"  src="{{asset('FrontOffice/assets/images/1499345621-contact_85338.png') }}">
+                    </a>
+
+
+                </div>
+
+
+                <div class="element">
+                    <div class="space-5"></div>
+                    <label class="key">Description</label>
+                    <br/>
+                    <span class="value">{{annonceAdoption.idchien.description }}</span>
+
+                </div>
+                <div class="element">
+                    <div class="space-2"></div>
+                    <label class="key-bigger">Age: </label>
+                    <span class="value-bigger">{{annonceAdoption.idchien.age }}</span>
+                </div>
+                <div class="element">
+                    <div class="space-2"></div>
+                    <label class="key-bigger">Address: </label>
+                    <span class="value-bigger"> {{ annonceAdoption.idchien.idindividu.adresse }}</span>
+                </div>
+                <div class="space-5"></div>
+
+
+                <div class="element">
+                    <div class="space-2"></div>
+                    <label class="key-bigger"> </label>
+                    <span class="value-bigger"></span>
+                </div>
+            </div>
+        </div>
+
     <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
-
-     <a href="{{ path('app_annonce_adoption_pdf', {'idannonceadoption': annonceAdoption.idannonceadoption}) }} "
-     {% if annonceAdoption.idindividu.idindividu == id %} style="visibility:hidden;" {% endif %}>
-     imprimer pdf</a>
-
-     <a  href="{{path("contact",{'id': annonceAdoption.idindividu.idindividu })}}" class="btn btn-primary"
-     {% if annonceAdoption.idindividu.idindividu == id %} style="visibility:hidden;" {% endif %}>
-     Contacter l'annonceur</a>
-
-      
-
-
 
 {% endblock %}
 

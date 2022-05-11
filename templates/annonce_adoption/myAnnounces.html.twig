@@ -11,7 +11,14 @@
     
     <div id="blog" class="blog">
         <div class="container">
+        
             <div class="row" id="content">
+
+            
+        <div class="ahbet" style="padding-top:7px;">
+            <a  href="{{ path('app_annonce_adoption_new') }}"><img style="max-width: 300px;max-height: 100px;"src="{{asset('FrontOffice/assets/images/AddRequestButton.png') }}"></a>
+            </div>
+            
 
                 {% for annonceAdoption in annonceAdoptions %}
                 <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
