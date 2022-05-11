@@ -1,66 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>
-        {% block title %}Welcome!
-        {% endblock %}
-    </title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/css/axentix.min.css"> {% block stylesheets %}{% endblock %}
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-</head>
-<body class="layout with-sidenav">
-<header>
-    <nav class="navbar primary">
-        <div class="navbar-menu ml-auto">
-            <a class="navbar-link" href="#">Accueil</a>
-
-        </div>
-    </nav>
-</header>
-<div id="example-sidenav" class="sidenav large fixed white">
-    <div class="sidenav-header">
-        <button data-target="example-sidenav" class="sidenav-trigger">
-            <i class="fas fa-times"></i>
-        </button>
+    <div class="ahbet">
+        <a href="#" >Mon profil</a>
+        <a href="{{ path('message') }}" >Mes messages </a>
+        <a href="{{ path('app_offre_index') }}">Mes offres</a>
     </div>
-    <a href="#" class="sidenav-link active">Mon profil</a>
-    <a href="{{ path('message') }}" class="sidenav-link active">Mes messages </a>
-    <a href="{{ path('app_offre_index') }}"class="sidenav-link active">Mes offres</a>
-</div>
-<main>
-    <button data-target="example-sidenav" class="btn press amaranth dark-1 sidenav-trigger hide-md-up">
-        Open sidenav
-    </button>
-    {% block body %}
-<div class = "gris xs2">
+{%  endblock %}
 
-
-    <div> Nom :</div>
-
-
-    <div> Prenom :</div>
-
-    <div> type :</div>
-
-    <div> Nom :</div>
-
-
-
-</div>
-    {% endblock %}
-</main>
-
-<footer class="footer primary">
-</footer>
-
-
-{% block javascripts %}{% endblock %}
-<script>
-    var sidenav = new Sidenav('#example-sidenav');
-</script>
-<script src="{{ asset('js/scripts.js') }}"></script>
-</body>
-</html>
