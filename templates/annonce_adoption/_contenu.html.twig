@@ -14,7 +14,9 @@
                             <a href="{{ path('app_annonce_adoption_show',{'idannonceadoption': annonceAdoption.idannonceadoption}) }}">More details</a>
                             </div>
                             <div>
-                            <a href="{{ path('app_offre_new',{'annonce': annonceAdoption.idannonceadoption}) }}">Adopt now !</a>
+                            <a href="{{ path('app_offre_new',{'annonce': annonceAdoption.idannonceadoption}) }}"
+                            {% if annonceAdoption.idindividu.idindividu == id %} style="visibility:hidden;" {% endif %}>
+                            Adopt now !</a>
                             </div>
                         </div>
                     </div>

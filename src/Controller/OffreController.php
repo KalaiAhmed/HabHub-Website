@@ -24,11 +24,13 @@ class OffreController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
-
+        //logged in 
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $foster=$individu->getIdIndividu();
         //get offers 
         $offres = $entityManager
         ->getRepository(Offre::class)
-        ->findBy(array('foster'=> '3','status'=>'P'));
+        ->findBy(array('foster'=> $foster,'status'=>'P'));
 
         return $this->render('offre/index.html.twig', [
             'offres' => $offres,
@@ -41,9 +43,8 @@ class OffreController extends AbstractController
     public function new(AnnonceAdoption $annonce,Request $request, EntityManagerInterface $entityManager): Response
     {
          //get logged in user
-         $loggedinUser = $entityManager
-         ->getRepository(Individu::class)
-         ->findOneBy(array('idindividu' => '2'));
+         $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        
 
          //get foster
          $foster=$annonce->getIdindividu();
@@ -59,7 +60,7 @@ class OffreController extends AbstractController
             //remplir l'offre
     
             $offre->setFoster($foster);
-            $offre->setAdopter($loggedinUser);
+            $offre->setAdopter($individu);
             $offre->setCreatedat(new \DateTime('now'));
             $offre->setAnnounce($annonce);
             $offre->setStatus('P');

@@ -38,15 +38,14 @@ class MessageController extends AbstractController
     {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
-        $loggedinUser = $entityManager
-            ->getRepository(Utilisateur::class)
-            ->findOneBy(array('idutilisateur' => '2'));
+        //logged in
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $message->setSender($loggedinUser);
+            $message->setSender($individu);
             $message->setIsRead(FALSE);
             $message->setCreatedat(new \DateTime('now'));
 
@@ -81,9 +80,11 @@ class MessageController extends AbstractController
         $form = $this->createForm(ContactMessageType::class, $message);
         
         //utlisateur sender
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
         $loggedinUser = $entityManager
             ->getRepository(Utilisateur::class)
-            ->findOneBy(array('idutilisateur' => '2'));
+            ->findOneBy(array('idutilisateur' => $id));
 
         $form->handleRequest($request);
 
@@ -111,10 +112,13 @@ class MessageController extends AbstractController
      */
     public function received(EntityManagerInterface $entityManager,int $id): Response
     {
-   
+        //logged in
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+        
         $receivedMessages = $entityManager
         ->getRepository(Message::class)
-        ->receivedMessages(array('recipient'=>'2'));
+        ->receivedMessages($id);
         $nbrec=count($receivedMessages);
 
         return $this->render('message/received.html.twig', [
@@ -130,10 +134,13 @@ class MessageController extends AbstractController
      */
     public function sent(EntityManagerInterface $entityManager,int $id ): Response
     {
-       
+        //logged in
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
         $myMessages = $entityManager
         ->getRepository(Message::class)
-        ->sentMessages(array('sender'=>'2'));
+        ->sentMessages($id);
         $nbsent=count($myMessages);
         
         

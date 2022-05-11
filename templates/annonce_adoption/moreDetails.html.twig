@@ -56,11 +56,13 @@
     </table>
     <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
 
-    <a href="{{ path('app_annonce_adoption_edit', {'idannonceadoption': annonceAdoption.idannonceadoption}) }}">edit</a>
+     <a href="{{ path('app_annonce_adoption_pdf', {'idannonceadoption': annonceAdoption.idannonceadoption}) }} "
+     {% if annonceAdoption.idindividu.idindividu == id %} style="visibility:hidden;" {% endif %}>
+     imprimer pdf</a>
 
-     <a href="{{ path('app_annonce_adoption_pdf', {'idannonceadoption': annonceAdoption.idannonceadoption}) }}">imprimer pdf</a>
-
-     <a  href="{{path("contact",{'id': annonceAdoption.idindividu.idindividu })}}" class="btn btn-primary">Contacter l'annonceur</a>
+     <a  href="{{path("contact",{'id': annonceAdoption.idindividu.idindividu })}}" class="btn btn-primary"
+     {% if annonceAdoption.idindividu.idindividu == id %} style="visibility:hidden;" {% endif %}>
+     Contacter l'annonceur</a>
 
       
 

@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Validator\Constraints\File;
 
 class AdoptionChienType extends AbstractType
@@ -18,7 +19,7 @@ class AdoptionChienType extends AbstractType
             ->add('nom')
             ->add('sexe')
             ->add('age')
-            ->add('vaccination')
+            ->add('vaccination',RadioType::class)
             ->add('description')
             ->add('image', FileType::class, [
                 'label' => false,

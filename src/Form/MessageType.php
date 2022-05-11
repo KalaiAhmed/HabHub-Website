@@ -24,7 +24,8 @@ class MessageType extends AbstractType
             ])
             ->add('message', TextareaType::class, [
                 "attr" => [
-                    "class" => "form-control"
+                    "class" => "form-control",
+                    "placeholder"=>"enter your message"
                 ]
             ])
             ->add('recipient', EntityType::class, [
