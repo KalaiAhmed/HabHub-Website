@@ -56,10 +56,124 @@ figure, header, nav, section, article, aside, footer, figcaption {
 Mariem
 ---------------------------------------------
 */
+/*  Adoption Ads*/
+.ad-name{
+  font-size: 1rem;
+  color: #252525;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.ad-box{
+  width:50px;
+  box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+  background-color: #ffffff;
 
 
 
+}
+.ad-img{
+  width: 5%;
+}
 
+
+/* End Adoption Ads */
+
+/*Rating*/
+#testimonials{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  width:100%;
+
+}
+.testimonial-heading {
+  letter-spacing: 1px;
+  margin : 30px 0px;
+  padding : 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+.testimonial-heading h1 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  background-color: #202020;
+  color: #ffffff;
+  padding: 10px 20px;
+}
+.testimonial-heading span {
+  font-size: 1.3rem;
+  color: #252525;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.testimonial-box-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width:100%;
+}
+
+.testimonial-box{
+  width:400px;
+  box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 15px;
+  cursor:pointer;
+  border-radius: 10px;
+
+}
+
+.profile-img{
+  width:50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow:hidden;
+  margin-right:10px;
+}
+.profile-img img{
+  width : 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.profile{
+  display:flex;
+  flex-direction:column;
+}
+.name-user{
+  display:flex;
+  flex-direction:column;
+}
+.name-user strong{
+  color:#3d3d3d;
+  font-size:1.1rem;
+  letter-spacing:0.5px;
+}
+.name-user span{
+  color:#979797;
+  font-size:0.8rem;
+}
+.reviews{
+  color:#f9d71c;
+}
+.box-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+.client-comment p{
+  font-size: 0.9rem;
+  color: #4b4b4b;
+}
+/*End Rating*/
 
 .flex-box{
   display:flex;
@@ -73,6 +187,12 @@ Mariem
 }
 .left{
   width:20%;
+}
+.further-right{
+  padding-left: 5%;
+  width:20%;
+  word-wrap:break-word;
+
 }
 .right{
   width: 60%;
@@ -246,6 +366,10 @@ tag-sexe{
 
 
 #map{
+  width: 1300px;
+  height: 400px;
+}
+#business-map-show{
   width: 1100px;
   height: 400px;
 }
@@ -428,6 +552,10 @@ body {
   }
   .mobile-bottom-fix-big {
     margin-bottom: 60px;
+  }
+  #map{
+    width: 800px;
+    height: 400px;
   }
 }
 
@@ -1022,6 +1150,10 @@ header
   }
   .header-area .main-nav .nav li.submenu:hover ul, .header-area .main-nav .nav li.submenu:focus ul {
     height: 0px;
+  }
+  #business-map-show{
+    width: 500px;
+    height: 400px;
   }
 }
 
