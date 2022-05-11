@@ -7,6 +7,14 @@
     <section class="container" style="padding-top:55px;">
     <table class="table">
         <tbody>
+        <tr>
+                <th>Candidate Name</th>
+                <td>{{ offre.adopter.nom ~' '~ offre.adopter.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Candidate Birthdate</th>
+                <td>{{ offre.adopter.datenaissance|date('Y-m-d') }}</td>
+            </tr>
             <tr>
                 <th>Status</th>
                 <td>{{ offre.status }}</td>
@@ -19,6 +27,7 @@
                 <th>Sujet</th>
                 <td>{{ offre.sujet }}</td>
             </tr>
+           
         </tbody>
     </table>
     <a href="{{ path('app_offre_index') }}">back to list</a>

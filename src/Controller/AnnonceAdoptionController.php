@@ -37,6 +37,9 @@ class AnnonceAdoptionController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
+        //get loggedinUser
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
         //on récupère les filtres
         $filtres=$request->get("individus");
 
@@ -62,9 +65,30 @@ class AnnonceAdoptionController extends AbstractController
 
         return $this->render('annonce_adoption/show.html.twig', [
             'annonceAdoptions' => $annonceAdoptions,
-            'individus'=>$individus
+            'individus'=>$individus,
+            'id'=>$id
         ]);
     }
+
+
+    /**
+     * @Route("/my-announces", name="app_annonce_adoption_my_index", methods={"GET"})
+     */
+    public function index_my_announces(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
+
+        // on récupère les annonces
+        $annonceAdoptions = $entityManager
+            ->getRepository(AnnonceAdoption::class)
+            ->myAnnounces($id);
+
+        return $this->render('annonce_adoption/myAnnounces.html.twig', [
+            'annonceAdoptions' => $annonceAdoptions,
+        ]);
+    }
+
     /**
      * @Route("/back-office", name="app_annonce_adoption_index_back_office", methods={"GET"})
      */
@@ -139,9 +163,8 @@ class AnnonceAdoptionController extends AbstractController
         $chien = new Chien();
         $annonceAdoption->setIdchien($chien);
         //get loggedinUser
-        $loggedinUser = $entityManager
-            ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '2'));
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
 
         $form = $this->createForm(AnnonceAdoptionType::class, $annonceAdoption);
         $form->handleRequest($request);
@@ -149,7 +172,7 @@ class AnnonceAdoptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             //set foster,date and status
-           $annonceAdoption->setIdindividu($loggedinUser);
+           $annonceAdoption->setIdindividu($individu);
            $annonceAdoption->setStatus('P');
            $annonceAdoption->setDatepublication(new \DateTime('now'));
 
@@ -189,6 +212,7 @@ class AnnonceAdoptionController extends AbstractController
         return $this->render('annonce_adoption/new.html.twig', [
             'annonce_adoption' => $annonceAdoption,
             'f' => $form->createView(),
+            'id'=>$id
         ]);
     }
 
@@ -229,9 +253,8 @@ class AnnonceAdoptionController extends AbstractController
         $commentForm = $this->createForm(CommentType::class, $comment);
 
         //get loggedinUser
-        $loggedinUser = $entityManager
-            ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '2'));
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+        $id=$individu->getIdIndividu();
 
         $commentForm->handleRequest($request);
 
@@ -239,7 +262,7 @@ class AnnonceAdoptionController extends AbstractController
 
             $comment->setCreatedAt(new \DateTime('now'));
             $comment->setIdannonceadoption($annonceAdoption);
-            $comment->setIdindividu($loggedinUser);
+            $comment->setIdindividu($individu);
 
             $entityManager->persist($comment);
             $entityManager->flush();
@@ -252,6 +275,7 @@ class AnnonceAdoptionController extends AbstractController
         return $this->render('annonce_adoption/moreDetails.html.twig', [
             'annonceAdoption' => $annonceAdoption,
             'form'=>$commentForm->createView(),
+            'id'=>$id,
         ]);
     }
 
@@ -378,16 +402,17 @@ class AnnonceAdoptionController extends AbstractController
     }
 
     /**
-     * @Route("/{idannonceadoption}", name="app_annonce_adoption_delete", methods={"POST"})
+     * @Route("/delete/{idannonceadoption}", name="app_annonce_adoption_delete", methods={"POST", "GET"})
      */
-    public function delete(Request $request, AnnonceAdoption $annonceAdoption, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, int $idannonceadoption, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$annonceAdoption->getIdannonceadoption(), $request->request->get('_token'))) {
-            $entityManager->remove($annonceAdoption);
-            $entityManager->flush();
-        }
+        $annonce= $entityManager
+            ->getRepository(AnnonceAdoption::class)
+            ->findOneBy(array('idannonceadoption' => $idannonceadoption));
+        $entityManager->remove($annonce);
+        $entityManager->flush();
 
-        return $this->redirectToRoute('app_annonce_adoption_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_annonce_adoption_my_index', [], Response::HTTP_SEE_OTHER);
     }
     /**
      * @Route("/{idannonceadoption}", name="app_annonce_adoption_delete_back_office", methods={"POST"})
