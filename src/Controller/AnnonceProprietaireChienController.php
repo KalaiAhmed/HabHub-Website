@@ -151,7 +151,7 @@ class AnnonceProprietaireChienController extends AbstractController
 
                 $message->originator = $recepient;
                 $message->recipients = $recepient;
-                $message->body = 'Your dog '.$annonceProprietaireChien->getIdchien()->getNom().' has been seen in : ' . $text." :')";
+                $message->body = 'Your dog '.$annonceProprietaireChien->getIdchien()->getNom().' has been seen in : ' . $text." ";
                 $response = $messageBird->messages->create($message);
 
 

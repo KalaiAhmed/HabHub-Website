@@ -3,66 +3,77 @@
 {% block title %}Mating Partner{% endblock %}
 {% block body %}
 
-    <div class="container" >
-    <div class="row">
+            <div class="ahbet">
+                <div class="container">
 
-    <table class="table" style="margin-top:100px;">
-        <tbody>
-        <tr>
-            <th></th>
-            <div class="row">
-                <td><img src="{{ asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}"
-                         style="width:150px;height:100px;object-fit:fill;" alt=""></td>
-            </div>
-        </tr>
-        <tr>
-            <th>Owner</th>
-            <td>{{ annonce_proprietaire_chien.idchien.idindividu.nom ~' '~ annonce_proprietaire_chien.idchien.idindividu.prenom }}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{annonce_proprietaire_chien.idchien.nom}}</td>
-        </tr>
-        <tr>
-            <th>Sexe</th>
-            <td>{{annonce_proprietaire_chien.idchien.sexe }}</td>
-        </tr>
-        <tr>
-            <th>Age</th>
-            <td>{{ annonce_proprietaire_chien.idchien.age }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ annonce_proprietaire_chien.description }}</td>
-        </tr>
-        <tr>
-            <th>Color</th>
-            <td>{{ annonce_proprietaire_chien.idchien.color}}</td>
-        </tr>
-        <tr>
-            <th>Race</th>
-            <td>{{annonce_proprietaire_chien.idchien.race}}</td>
-        </tr>
-        <tr>
-            <th>groupe</th>
-            <td>{{ annonce_proprietaire_chien.idchien.groupe}}</td>
-        </tr>
-        <tr>
-            <th>Vaccination</th>
-            <td>{{ annonce_proprietaire_chien.idchien.vaccination ? 'Yes' : 'No' }}</td>
-        </tr>
-        </tbody>
-    </table>
+                    <div class="flex-box">
+                        <div class="left">
+                            <div class="big-img">
 
+                                <a href="#"><img src="{{asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="title-ville">
+                                <div>
+                                    <h3 class="business-title">{{ annonce_proprietaire_chien.idchien.nom }}</h3>
+                                    <div class="space-2"></div>
 
-    <a href="{{ path('app_annonce_proprietaire_chien_index_mating') }}">back to list</a>
+                                    <div class="tag-box">
+                                        <div class="tag-sexe">
+                                            {% if annonce_proprietaire_chien.idchien.sexe=='M' %}
+                                                <img src="{{ asset('FrontOffice/assets/images/chien/male.png') }}" alt="">
+                                            {% else %}
+                                                <img src="{{ asset('FrontOffice/assets/images/chien/female.png') }}" alt="">
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 >{{ annonce_proprietaire_chien.idchien.idindividu.nom ~' '~ annonce_proprietaire_chien.idchien.idindividu.prenom }}</h4>
+                                    <div class="space-2"></div>
+                                </div>
 
 
 
+                            </div>
+
+                            <div class="element">
+                                <div class="space-5"></div>
+                                <label class="key">Description</label>
+                                <br/>
+                                <span class="value">{{annonce_proprietaire_chien.idchien.description }}</span>
+
+                            </div>
+                            <div class="element">
+                                <div class="space-2"></div>
+                                <label class="key-bigger">Age: </label>
+                                <span class="value-bigger">{{annonce_proprietaire_chien.idchien.age }}</span>
+                            </div>
+                            <div class="element">
+                                <div class="space-2"></div>
+                                <label class="key-bigger">Address: </label>
+                                <span class="value-bigger"> {{ annonce_proprietaire_chien.idchien.idindividu.adresse }}</span>
+                            </div>
+                            <div class="space-2"></div>
 
 
+                            <div class="element">
+                                <div class="space-2"></div>
+                                <label class="key-bigger"> Date de publication: </label>
+                                <span class="value-bigger">{{ annonce_proprietaire_chien.datepublication ? annonce_proprietaire_chien.datepublication |date('Y-m-d') : '' }}</span>
+                            </div>
 
+                                <div class="element">
+                                    <div class="space-2"></div>
+                                    <label class="key-bigger"> Vaccinated : </label>
+                                    <span class="value-bigger">{{ annonce_proprietaire_chien.idchien.vaccination ? 'Yes' : 'No' }}</span>
+                                </div>
+                        </div>
 
+                    </div>
 
 
 {% endblock %}
