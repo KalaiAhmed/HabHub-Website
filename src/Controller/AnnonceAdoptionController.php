@@ -57,7 +57,8 @@ class AnnonceAdoptionController extends AbstractController
             if($request->get('ajax')){
                 return new JsonResponse([
                     'content' => $this->renderView('annonce_adoption/_contenu.html.twig',
-                    ['annonceAdoptions' => $annonceAdoptions,])
+                    ['annonceAdoptions' => $annonceAdoptions,
+                    'id'=>$id])
                 ]);
             }
             
