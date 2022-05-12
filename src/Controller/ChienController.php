@@ -129,9 +129,9 @@ class ChienController extends AbstractController
      */
     public function newfront(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $loggedinUser = $entityManager
-            ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '6'));
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+
+
         $chien = new Chien();
         $form = $this->createForm(ChienTypeFrontType::class, $chien);
         $form->handleRequest($request);
@@ -151,7 +151,7 @@ class ChienController extends AbstractController
             // on stocke l'image dans la bdd (son nom)
 
             $chien->setImage($fichier);
-            $chien->setIdindividu($loggedinUser);
+            $chien->setIdindividu($individu);
 
             $entityManager->persist($chien);
             $entityManager->flush();
@@ -231,7 +231,7 @@ class ChienController extends AbstractController
 
     /*----------------Webservice Json----------------*/
     /**
-     * @Route("/displayMyDogs", name="display_my_dogs",methods={"GET"})
+     * @Route("/displayMyDogs", name="display_my_dogs")
      *
      */
     public function allMyDogs(Request $request)
@@ -246,7 +246,7 @@ class ChienController extends AbstractController
     }
 
 /**
- * @Route("/displayDogsNextDoor", name="display_dogs_next_door",methods={"GET"})
+ * @Route("/displayDogsNextDoor", name="display_dogs_next_door")
  *
  */
 public function allDogsNextDoor(Request $request)
@@ -261,7 +261,7 @@ public function allDogsNextDoor(Request $request)
 }
 
     /**
-     * @Route("/deleteDog", name="app_chien_delete", methods={"GET"})
+     * @Route("/deleteDog", name="app_chien_delete")
      */
 
     public function removeDog(EntityManagerInterface $entityManager,Request $request): Response

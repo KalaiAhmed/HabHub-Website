@@ -323,7 +323,7 @@ class BusinessController extends AbstractController
 
     /***********************************JSON METHODS***********************************/
     /**
-     * @Route("/mobile/index", name="app_business_index_mobile", methods={"GET"})
+     * @Route("/mobile/index", name="app_business_index_mobile")
      */
     public function index_mobile(EntityManagerInterface $entityManager)
     {

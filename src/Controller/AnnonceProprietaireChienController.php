@@ -304,7 +304,7 @@ class AnnonceProprietaireChienController extends AbstractController
 
     /**************************JSON******************************/
     /**
-     * @Route("/displayLost", name="app_annonce_proprietaire_chien_mobile_display_lost", methods={"GET"})
+     * @Route("/displayLost", name="app_annonce_proprietaire_chien_mobile_display_lost")
      */
     public function displayLost(EntityManagerInterface $entityManager): Response
     {
@@ -317,7 +317,7 @@ class AnnonceProprietaireChienController extends AbstractController
         return new JsonResponse($formatted);
     }
     /**
-     * @Route("/displayMating", name="app_annonce_proprietaire_chien_mobile_display_mating", methods={"GET"})
+     * @Route("/displayMating", name="app_annonce_proprietaire_chien_mobile_display_mating")
      */
     public function displayMating(EntityManagerInterface $entityManager): Response
     {
