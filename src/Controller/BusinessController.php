@@ -323,7 +323,7 @@ class BusinessController extends AbstractController
 
     /***********************************JSON METHODS***********************************/
     /**
-     * @Route("/mobile/index", name="app_business_index_mobile", methods={"GET"})
+     * @Route("/mobile/index", name="app_business_index_mobile")
      */
     public function index_mobile(EntityManagerInterface $entityManager)
     {
@@ -338,7 +338,7 @@ class BusinessController extends AbstractController
     }
 
     /**
-     * @Route("/show-mobile/show", name="app_business_show_mobile", methods={"POST","GET"})
+     * @Route("/show-mobile/show", name="app_business_show_mobile")
      */
     public function show_mobile(Request $request)
     {
@@ -356,7 +356,137 @@ class BusinessController extends AbstractController
         return new JsonResponse($formatted);
     }
 
+    /**
+     * @Route("/mobile/add", name="add_business_mobile")
+     *
+     */
 
+    public function addBusiness_mobile(Request $request)
+    {   $em = $this->getDoctrine()->getManager();
+        $iduser =$em->getRepository(Business::class)
+            ->findOneBy(array('idbusiness' => '10'))->getIdutilisateur();
+        $business = new Business();
+        $titre = $request->query->get("titre");
+        $description = $request->query->get("description");
+        $horaire = $request->query->get("horaire");
+        $ville = $request->query->get("ville");
+        $type= $request->query->get("type");
+
+        $image= $request->query->get("image");
+        $lat= $request->query->get("lat");
+        $lng= $request->query->get("lng");
+
+
+        $em = $this->getDoctrine()->getManager();
+        $date = new \DateTime('now');
+        $business->setTitre($titre);
+        $business->setDescription($description);
+        $business->setHoraire($horaire);
+        $business->setVille($ville);
+        $business->setLocalisation("NotFound");
+        $business->setIdutilisateur($iduser);
+        $business->setType($type);
+        $business->setImage($image);
+        $business->setExperience("0");
+        $business->setLat($lat);
+        $business->setLng($lng);
+
+        $em->persist($business);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($business);
+        return new JsonResponse($formatted);
+
+    }
+    /**
+     * @Route("/delete/mobile", name="delete_business" )
+     *
+     */
+
+    public function delete_mobile(Request $request) {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $business = $em->getRepository(Business::class)
+            ->findOneBy(array('idbusiness' => $id));;
+        if($business!=null ) {
+            $em->remove($business);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("business a ete supprimé avec success.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id business invalide.");
+
+
+    }
+    /**
+     * @Route("/update/mobile", name="update_business")
+     *
+     */
+    public function update_mobile(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $business = $this->getDoctrine()->getManager()
+            ->getRepository(Business::class)
+            ->find($request->get("id"));
+        $titre = $request->query->get("titre");
+        $description = $request->query->get("description");
+        $horaire = $request->query->get("horaire");
+        $ville = $request->query->get("ville");
+        $type= $request->query->get("type");
+
+        $image= $request->query->get("image");
+        $lat= $request->query->get("lat");
+        $lng= $request->query->get("lng");
+
+
+        $em = $this->getDoctrine()->getManager();
+        $date = new \DateTime('now');
+        $business->setTitre($titre);
+        $business->setDescription($description);
+        $business->setHoraire($horaire);
+        $business->setVille($ville);
+        //$business->setLocalisation("NotFound");
+        //$business->setIdutilisateur($iduser);
+        $business->setType($type);
+        $business->setImage($image);
+        //$business->setExperience("0");
+        $business->setLat($lat);
+        $business->setLng($lng);
+
+
+        $em->persist($business);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($business);
+        return new JsonResponse("Reclamation a ete modifiee avec success.");
+
+    }
+
+
+    /**
+     * @Route("/details", name="detail_business")
+     *
+     */
+
+
+    public function detailsBusiness(Request $request)
+    {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $business = $this->getDoctrine()->getManager()->getRepository(Business::class)->find($id);
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getDescription();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($business);
+        return new JsonResponse($formatted);
+    }
 
     /************************************END JSON METHODS***********************************/
 

@@ -228,6 +228,8 @@ Mariem
   display: flex;
   margin: 0 5px;
   justify-content: space-between;
+  align-content: center;
+
 }
 .space-5{
   margin-top: 5%;

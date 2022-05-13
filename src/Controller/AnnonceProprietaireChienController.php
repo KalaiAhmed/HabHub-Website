@@ -143,9 +143,9 @@ class AnnonceProprietaireChienController extends AbstractController
             $recepient = '+216' . strval($annonceProprietaireChien->getIdchien()->getIdindividu()->getIdutilisateur()->getNumtel());
            //$recepient='+21692962405';
 
-            $messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
+            //$messageBird = new \MessageBird\Client('PMEGViucdqQMf9rgq9Z0YEu5Z'); //test
            //$messageBird = new \MessageBird\Client('lPUuEHDNz2QeFFW1pWBPoJEZi'); //live_mariem
-            //$messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live_hamidou
+            $messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live_hamidou
             $message = new \MessageBird\Objects\Message();
             try {
 

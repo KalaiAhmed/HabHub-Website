@@ -231,7 +231,7 @@ class ChienController extends AbstractController
 
     /*----------------Webservice Json----------------*/
     /**
-     * @Route("/displayMyDogs", name="display_my_dogs",methods={"GET"})
+     * @Route("/displayMyDogs", name="display_my_dogs")
      *
      */
     public function allMyDogs(Request $request)
@@ -246,7 +246,7 @@ class ChienController extends AbstractController
     }
 
 /**
- * @Route("/displayDogsNextDoor", name="display_dogs_next_door",methods={"GET"})
+ * @Route("/displayDogsNextDoor", name="display_dogs_next_door")
  *
  */
 public function allDogsNextDoor(Request $request)
@@ -261,7 +261,7 @@ public function allDogsNextDoor(Request $request)
 }
 
     /**
-     * @Route("/deleteDog", name="app_chien_delete", methods={"GET"})
+     * @Route("/deleteDog", name="app_chien_delete")
      */
 
     public function removeDog(EntityManagerInterface $entityManager,Request $request): Response
@@ -284,7 +284,7 @@ public function allDogsNextDoor(Request $request)
     }
 
     /**
-     * @Route("/addDog", name="add_dog",methods={"GET","POST"})
+     * @Route("/addDog", name="add_dog")
      *
      */
 
@@ -324,7 +324,7 @@ public function allDogsNextDoor(Request $request)
     }
 
     /**
-     * @Route("/detaildog", name="detail_dog",methods={"GET"})
+     * @Route("/detaildog", name="detail_dog")
      *
      */
 

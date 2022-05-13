@@ -225,8 +225,8 @@ class ReservationController extends AbstractController
         $recipient='+21692962405';
 
         $text='Confirmation de réservation du service "'.$reservation->getIdbusinessservices()->getNomservice().'" sous le nom: "'.$reservation->getIdindividu()->getPrenom().' '.$reservation->getIdindividu()->getNom().'" pour le '.$reservation->getDatereservation()->format('d-m-Y').' '.$reservation->getHeurereservation();
-        $messageBird = new \MessageBird\Client('3jCpdTd7mvp1JPdZrb1hdJbG0'); //test
-        //$messageBird = new \MessageBird\Client('lPUuEHDNz2QeFFW1pWBPoJEZi'); //live_mariem
+        //$messageBird = new \MessageBird\Client('3jCpdTd7mvp1JPdZrb1hdJbG0'); //test
+        $messageBird = new \MessageBird\Client('lPUuEHDNz2QeFFW1pWBPoJEZi'); //live_mariem
         //$messageBird = new \MessageBird\Client('lwXWiTInBuKkCX5zbweIA1JhY'); //live_hamidou
 
 
