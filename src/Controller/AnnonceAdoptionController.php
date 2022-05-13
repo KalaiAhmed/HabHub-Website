@@ -432,7 +432,7 @@ class AnnonceAdoptionController extends AbstractController
 
   
     /**
-     * @Route("/displayMobileAdoption", name="hentita")
+     * @Route("/mobile/displayMobileAdoption", name="hentita")
      *
      */
     public function allAdoption(Request $request)
@@ -447,7 +447,7 @@ class AnnonceAdoptionController extends AbstractController
     }
 
     /**
-     * @Route("/deleteAdoption", name="app_adoption_delete")
+     * @Route("/mobile/deleteAdoption", name="app_adoption_delete")
      */
 
     public function removeAdoption(EntityManagerInterface $entityManager,Request $request): Response
@@ -470,7 +470,7 @@ class AnnonceAdoptionController extends AbstractController
     }
 
     /**
-     * @Route("/addAdoption", name="add_Adoption",methods={"GET","POST"})
+     * @Route("/mobile/addAdoption", name="add_Adoption",methods={"GET","POST"})
      *
      */
 
@@ -519,7 +519,7 @@ class AnnonceAdoptionController extends AbstractController
     }
 
     /**
-     * @Route("/updateMobileAdoption", name="update_Adoption")
+     * @Route("/mobile/updateMobileAdoption", name="update_Adoption")
      *
      */
 
@@ -547,7 +547,7 @@ class AnnonceAdoptionController extends AbstractController
     }
 
     /**
-     * @Route("/detailadoption", name="detail_adoption",methods={"GET"})
+     * @Route("/mobile/detailadoption", name="detail_adoption",methods={"GET"})
      *
      */
 
