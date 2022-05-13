@@ -303,23 +303,24 @@ class AnnonceProprietaireChienController extends AbstractController
     }
 
     /**************************JSON******************************/
+
+
     /**
-     * @Route("/displayLost", name="app_annonce_proprietaire_chien_mobile_display_lost", methods={"GET"})
+     * @Route("/displayLost/mobile", name="app_annonce_proprietaire_chien_mobile_display_lost")
      */
-    public function displayLost(EntityManagerInterface $entityManager): Response
+    public function displayLost()
     {
-        $annonceProprietaireChiens = $entityManager
-            ->getRepository(AnnonceProprietaireChien::class)
-            ->findBy(array('type' => 'P'));
+        $annonceProprietaireChiens =$this->getDoctrine()->getManager()->getRepository(AnnonceProprietaireChien::class)->findBy(array('type' => 'P'));
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($annonceProprietaireChiens);
 
         return new JsonResponse($formatted);
     }
+
     /**
-     * @Route("/displayMating", name="app_annonce_proprietaire_chien_mobile_display_mating", methods={"GET"})
+     * @Route("/displayMating/mobile", name="app_annonce_proprietaire_chien_mobile_display_mating")
      */
-    public function displayMating(EntityManagerInterface $entityManager): Response
+    public function displayMating(EntityManagerInterface $entityManager)
     {
         $annonceProprietaireChiens = $entityManager
             ->getRepository(AnnonceProprietaireChien::class)
@@ -330,10 +331,10 @@ class AnnonceProprietaireChienController extends AbstractController
         return new JsonResponse($formatted);
     }
     /**
-     * @Route("/addlostdog", name="app_annonce_proprietaire_chien_addlost_mobile", methods={"GET"})
+     * @Route("/addlostdog/mobile", name="app_annonce_proprietaire_chien_addlost_mobile")
      */
 
-    public function addLostDogMobile(EntityManagerInterface $entityManager,Request $request): Response
+    public function addLostDogMobile(EntityManagerInterface $entityManager,Request $request)
     {
         $id = $request->get("id");
         $chien = $entityManager
@@ -356,10 +357,10 @@ class AnnonceProprietaireChienController extends AbstractController
     }
 
     /**
-     * @Route("/removelostdog", name="app_annonce_proprietaire_chien_removelost_mobile", methods={"GET"})
+     * @Route("/removelostdog/mobile", name="app_annonce_proprietaire_chien_removelost_mobile")
      */
 
-    public function removeLostDogMobile(EntityManagerInterface $entityManager,Request $request): Response
+    public function removeLostDogMobile(EntityManagerInterface $entityManager,Request $request)
     {
 
         $id = $request->get("id");
@@ -381,10 +382,10 @@ class AnnonceProprietaireChienController extends AbstractController
     }
 
     /**
-     * @Route("/addmatingdog", name="app_annonce_proprietaire_chien_addmating_mobile", methods={"GET"})
+     * @Route("/addmatingdog/mobile", name="app_annonce_proprietaire_chien_addmating_mobile")
      */
 
-    public function addMatingDogMobile(EntityManagerInterface $entityManager,Request $request): Response
+    public function addMatingDogMobile(EntityManagerInterface $entityManager,Request $request)
     {
 
         $id = $request->get("id");
@@ -408,10 +409,10 @@ class AnnonceProprietaireChienController extends AbstractController
     }
 
     /**
-     * @Route("/removematingdog", name="app_annonce_proprietaire_chien_removemating_mobile", methods={"GET"})
+     * @Route("/removematingdog/mobile", name="app_annonce_proprietaire_chien_removemating_mobile")
      */
 
-    public function removeMatingDogMobile(EntityManagerInterface $entityManager,Request $request): Response
+    public function removeMatingDogMobile(EntityManagerInterface $entityManager,Request $request)
     {
         $id = $request->get("id");
         $annonce= $entityManager
@@ -430,7 +431,7 @@ class AnnonceProprietaireChienController extends AbstractController
     }
 
     /**
-     * @Route("/detaillost", name="detail_annonce_lost",methods={"GET"})
+     * @Route("/detaillost/mobile", name="detail_annonce_lost",methods={"GET"})
      *
      */
 
@@ -451,7 +452,7 @@ class AnnonceProprietaireChienController extends AbstractController
     }
 
     /**
-     * @Route("/detailmating", name="detail_annonce_mating",methods={"GET"})
+     * @Route("/detailmating/mobile", name="detail_annonce_mating",methods={"GET"})
      *
      */
 

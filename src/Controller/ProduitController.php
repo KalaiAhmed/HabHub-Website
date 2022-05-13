@@ -12,9 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Repository\CategorieRepository;
-
-
-
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 /**
@@ -211,5 +210,20 @@ class ProduitController extends AbstractController
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($produit);
         return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/mobile/index", name="app_prod_mobile")
+     *
+     */
+    public function allProds()
+    {
+
+        $produits = $this->getDoctrine()->getManager()->getRepository(Produit::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($produits);
+
+        return new JsonResponse($formatted);
+
     }
 }

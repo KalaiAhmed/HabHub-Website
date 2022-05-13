@@ -129,9 +129,9 @@ class ChienController extends AbstractController
      */
     public function newfront(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $loggedinUser = $entityManager
-            ->getRepository(Individu::class)
-            ->findOneBy(array('idindividu' => '6'));
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
+
+
         $chien = new Chien();
         $form = $this->createForm(ChienTypeFrontType::class, $chien);
         $form->handleRequest($request);
@@ -151,7 +151,7 @@ class ChienController extends AbstractController
             // on stocke l'image dans la bdd (son nom)
 
             $chien->setImage($fichier);
-            $chien->setIdindividu($loggedinUser);
+            $chien->setIdindividu($individu);
 
             $entityManager->persist($chien);
             $entityManager->flush();

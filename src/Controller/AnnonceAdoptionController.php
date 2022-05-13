@@ -24,7 +24,9 @@ use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Bundle\SnappyBundle\Snappy;
 use Knp\Bundle\SnappyBundle\DependencyInjection;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 /**
@@ -427,6 +429,145 @@ class AnnonceAdoptionController extends AbstractController
 
         return $this->redirectToRoute('app_annonce_adoption_index_back_office', [], Response::HTTP_SEE_OTHER);
     }
+
+  
+    /**
+     * @Route("/mobile/displayMobileAdoption", name="hentita")
+     *
+     */
+    public function allAdoption(Request $request)
+    {
+        $id = $request->get("id");
+        $annonceAdoptions = $this->getDoctrine()->getManager()->getRepository(AnnonceAdoption::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($annonceAdoptions);
+
+        return new JsonResponse($formatted);
+
+    }
+
+    /**
+     * @Route("/mobile/deleteAdoption", name="app_adoption_delete")
+     */
+
+    public function removeAdoption(EntityManagerInterface $entityManager,Request $request): Response
+    {
+
+        $id = $request->get("id");
+        $annonce= $entityManager
+            ->getRepository(AnnonceAdoption::class)
+            ->findOneBy(array('idannonceadoption' => $id));
+        if($annonce!=null ) {
+            $entityManager->remove($annonce);
+            $entityManager->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("annonce a ete supprime avec success.");
+            return new JsonResponse($formatted);
+        }
+        return new JsonResponse("id annonce invalide");
+
+    }
+
+    /**
+     * @Route("/mobile/addAdoption", name="add_Adoption",methods={"GET","POST"})
+     *
+     */
+
+    public function addAdoption(Request $request, EntityManagerInterface $entityManager)
+    {
+
+        $annonceAdoption= new AnnonceAdoption();
+        $chien=new Chien();
+        //get
+        $nom = $request->query->get("nom");
+        $age = $request->query->get("age");
+        $sexe = $request->query->get("sexe");
+        $vaccination = $request->query->get("vaccination");
+        $description = $request->query->get("description");
+        $color = $request->query->get("color");
+        $race = $request->query->get("race");
+        $groupe = $request->query->get("groupe");
+        $idindividu = $request->query->get("idindividu");
+        $localisation = $request->query->get("localisation");
+
+        //set chien
+        $chien->setNom($nom);
+        $chien->setAge($age);
+        $chien->setSexe($sexe);
+        $chien->setVaccination($vaccination);
+        $chien->setDescription($description);
+        $chien->setColor($color);
+        $chien->setRace($race);
+        $chien->setGroupe($groupe);
+        //set annonce
+        $annonceAdoption->setStatus('P');
+        $annonceAdoption->setDatepublication(new \DateTime('now'));
+        $annonceAdoption->setIdindividu( $entityManager
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => $idindividu)));
+        $annonceAdoption->setDescription($description);
+        $annonceAdoption->setIdchien($chien);
+
+        $entityManager->persist($chien);
+        $entityManager->persist($annonceAdoption);
+        $entityManager->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($chien);
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/mobile/updateMobileAdoption", name="update_Adoption")
+     *
+     */
+
+    public function updateAdoption(Request $request, EntityManagerInterface $entityManager)
+    {
+
+
+        //get
+        $id = $request->get("id");
+        $annonceAdoption= $entityManager
+            ->getRepository(AnnonceAdoption::class)
+            ->findOneBy(array('idannonceadoption' => $id));
+        $description = $request->query->get("description");
+        $localisation = $request->query->get("localisation");
+
+
+        //set annonce
+        $annonceAdoption->setDescription($description);
+        $annonceAdoption->setLocalisation($localisation);
+        $entityManager->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($annonceAdoption);
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/mobile/detailadoption", name="detail_adoption",methods={"GET"})
+     *
+     */
+
+    public function detailAdoption(EntityManagerInterface $entityManager,Request $request)
+    {
+        $id = $request->get("id");
+        $annonce= $entityManager
+            ->getRepository(Chien::class)
+            ->findOneBy(array('idannonceadoption' => $id));
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getDescription();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($annonce);
+        return new JsonResponse($formatted);
+    }
+
+
 
     
 }
