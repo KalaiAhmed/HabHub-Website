@@ -8,9 +8,12 @@ use App\Entity\Likes;
 use App\Form\LikesType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * @Route("/likes")
@@ -194,4 +197,65 @@ class LikesController extends AbstractController
 
         return $this->redirectToRoute('app_likes_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    /*************************JSON*************************/
+
+    /**
+     * @Route("/mobile/addlikemobile/mobile", name="add_like_mobile")
+     *
+     */
+
+    public function addlikemobile(EntityManagerInterface $em,Request $request)
+    {
+
+        $idchien = $request->get("idchien");
+        $idindividu = $request->get("idindividu");
+        $chien = $em
+            ->getRepository(Chien::class)
+            ->findOneBy(array('idchien' => $idchien));
+        $individu = $em
+            ->getRepository(Individu::class)
+            ->findOneBy(array('idindividu' => $idindividu));
+
+
+        $like = new Likes($individu,$chien);
+
+        $em->persist($like);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($like);
+        return new JsonResponse($formatted);
+
+    }
+
+    /**
+     * @Route("/mobile/removelikemobile", name="remove_like_mobile")
+     *
+     */
+
+    public function removelikemobile(Request $request)
+    {
+        $idchien = $request->get("idchien");
+        $idindividu = $request->get("idindividu");
+
+        $em = $this->getDoctrine()->getManager();
+
+        $like = $em
+            ->getRepository(Likes::class)
+            ->findOneBy(array('idindividu' => $idindividu,'idchien'=>$idchien));
+
+        if($like!=null ) {
+            $em->remove($like);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("like a ete supprime avec success.");
+            return new JsonResponse($formatted);
+        }
+        return new JsonResponse("id like invalide");
+
+    }
+
+
 }
