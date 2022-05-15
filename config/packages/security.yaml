@@ -2,14 +2,16 @@ security:
     encoders:
         App\Entity\Utilisateur:
             algorithm: sha512
-
+            encode_as_base64: false
+            iterations: 1
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+
     providers:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\Utilisateur
-                property: email
+                class: 'App\Entity\Utilisateur'
+                property: 'GID'
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

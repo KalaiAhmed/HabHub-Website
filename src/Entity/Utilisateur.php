@@ -121,7 +121,7 @@ class Utilisateur implements UserInterface
      */
     public function getSalt(): ?string
     {
-        return 'my-static-salt';
+        return null;
     }
 
     public function getUsername()

@@ -21,17 +21,14 @@
                                 <a href="#"><img src="{{asset('FrontOffice/uploads/'~chien.image) }}" alt=""></a>
                             </div>
                             <div class="down-content">
-                                <div class="flexini">
                                 {% if chien.sexe=="M" %}
                                 <span class="category">Male</span>
                                 {% else %}
                                 <span class="category">Female</span>
                                 {% endif %}
-                                    <p>{{chien.age }}</p>
-
-                                </div>
-                                <a href="#"><h4>{{ chien.nom }}</h4></a>
                                 <p>{{chien.age }}</p>
+
+                                <a href="#"><h4>{{ chien.nom }}</h4></a>
 
 
 
