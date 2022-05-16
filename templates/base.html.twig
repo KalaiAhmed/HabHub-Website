@@ -16,7 +16,8 @@
         <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               rel="stylesheet" integrity="sha384-Gn5384xqU1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6Xm"
         crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
 
 
@@ -31,6 +32,8 @@
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/templatemo-digimedia-v2.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/animated.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/owl.css') }}">
+        <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/footer.css') }}">
+
         {% block locallink %}
         {% endblock %}
 
@@ -55,7 +58,9 @@
             <script src="{{ asset('FrontOffice/assets/js/emojionearea.min.js') }}"></script>
             <script src="{{ asset('FrontOffice/assets/js/emoji.js') }}"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
-{% endblock %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+        {% endblock %}
 
     </head>
     <body>
@@ -166,7 +171,47 @@
     {% endblock %}
 
     {% block footer %}
+        <div class="footer-dark">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Services</h3>
+                            <ul>
+                                <li><a href="{{ path('app_front_office_home') }}">PetStore </a></li>
+                                <li><a href="{{ path('app_business_index') }}">Grooming</a></li>
+                                <li><a href="{{ path('app_business_index') }}">Dog Sitting</a></li>
+                                <li><a href="{{ path('app_business_index') }}">Veterinary</a></li>
 
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Community</h3>
+                            <ul>
+                                <li><a href="{{ path('app_annonce_adoption_index') }}">Adopt a dog</a></li>
+                                <li><a href="{{ path('app_chien_index_dogs-next-door') }}">Dogs Next Door</a></li>
+                                <li><a href="{{ path('app_annonce_proprietaire_chien_index_lost') }}">Find Lost Dogs</a></li>
+                                <li><a href="{{ path('app_annonce_proprietaire_chien_index_mating') }}">Find a breeding mate</a></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 item text">
+                            <h3>HabHub</h3>
+                            <p>A friend-owned business serving the pet community in the heart of Tunisia.</p>
+                            <br>
+
+                            <h3><a href="{{ path ('registration') }}">Sign up</a></h3>
+                            <h3><a  href="{{ path ('app_login') }}">Sign in</a></h3>
+                            <br>
+
+                        </div>
+                        <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                    </div>
+                    <p class="copyright">Copyright © 2022 Los Hentitos Hermanos Co., Ltd. All Rights Reserved.</p>
+                </div>
+            </footer>
+        </div>
     {% endblock %}
 
 
