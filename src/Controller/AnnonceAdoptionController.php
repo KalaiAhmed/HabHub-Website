@@ -39,6 +39,9 @@ class AnnonceAdoptionController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
+        if ($this->getUser()==null){
+        return $this->redirectToRoute('app_login');
+    }
         //get loggedinUser
         $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
         $id=$individu->getIdIndividu();
@@ -79,6 +82,10 @@ class AnnonceAdoptionController extends AbstractController
      */
     public function index_my_announces(EntityManagerInterface $entityManager, Request $request): Response
     {
+        if ($this->getUser()==null){
+            return $this->redirectToRoute('app_login');
+
+        }
         $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
         $id=$individu->getIdIndividu();
 

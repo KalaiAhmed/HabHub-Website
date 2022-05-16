@@ -1,7 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Mating Dogs{% endblock %}
+{% block hub %}
+    <li class="scroll-to-section"><a href="#" class="active">Hub</a>
+        <div class="sub-menu-1">
+            <ul>
 
+
+                <li> <a href="{{ path('app_chien_index_my_dogs') }}">My Dogs</a></li>
+
+                <li> <a href="{{ path('app_chien_index_dogs-next-door') }}">Dogs Next Door</a></li>
+
+                <li> <a href="{{ path('app_annonce_proprietaire_chien_index_lost') }}">Lost Dogs</a></li>
+                <li> <a href="{{ path('app_annonce_proprietaire_chien_index_mating') }}">Mating</a></li>
+                <li></li>
+            </ul>
+        </div>
+    </li>
+{% endblock %}
 
 
 {% block body %}

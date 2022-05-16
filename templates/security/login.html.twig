@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
+{% block locallink %}
+    <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/style-user.css') }}">
 
+{% endblock %}
 {% block body %}
-<div style="padding-top:7%">
-<form method="post">
+    {% block navBarInside %}{% endblock %}
+
+    <div class="ahbet" >
+
+        <div class="form-position">
+            <div class="wrapper" >
+
+            <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
 
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
+    <h1 class="h3 mb-3 font-weight-normal" >Log in</h1>
+                <div class="space-10"></div>
+
+                <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                <div class="space-10"></div>
     <label for="inputPassword">Password</label>
+
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
@@ -36,5 +49,9 @@
         Sign in
     </button>
 </form>
+
+            </div>
+        </div>
 </div>
+
 {% endblock %}

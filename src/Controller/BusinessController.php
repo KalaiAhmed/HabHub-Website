@@ -231,6 +231,10 @@ class BusinessController extends AbstractController
     public function show(Business $business, Request $request, EntityManagerInterface $entityManager): Response
     {
         $revue = new Revue();
+        if ($this->getUser()==null){
+            return $this->redirectToRoute('app_login');
+
+        }
         $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
         $id=$individu->getIdIndividu();
         $revue->setIdindividu($entityManager

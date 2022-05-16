@@ -2,7 +2,9 @@
 
 
 {% block title %}Produit{% endblock %}
-
+{% block store %}
+    <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}" class="active">Store</a></li>
+{% endblock %}
 {% block body %}
     <h1>Produit</h1>
 

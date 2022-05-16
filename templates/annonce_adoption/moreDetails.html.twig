@@ -1,6 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Adoption index{% endblock %}
+ {% block adoption %}
+     <li class="scroll-to-section"><a href="#" class="active">Adoption</a>
+         <div class="sub-menu-1">
+             <ul>
+                 <li> <a href="{{ path('app_annonce_adoption_my_index') }}">My Posts</a></li>
+
+                 <li> <a href="{{ path('app_annonce_adoption_index') }}">All Posts</a></li>
+
+                 <li></li>
+             </ul>
+         </div>
+     </li>
+ {% endblock %}
 {% block body %}
 
 
