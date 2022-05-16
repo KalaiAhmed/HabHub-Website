@@ -12,13 +12,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 
-
-
         <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
         <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               rel="stylesheet" integrity="sha384-Gn5384xqU1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6Xm"
-        crossorigin="anonymous"
-        >
+        crossorigin="anonymous">
 
 
 
@@ -28,13 +25,14 @@
 
 
         <!-- Additional CSS Files -->
-            <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/emojionearea.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/emojionearea.min.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/fontawesome.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/emojionearea.min.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/templatemo-digimedia-v2.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/animated.css') }}">
         <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/owl.css') }}">
-
+        {% block locallink %}
+        {% endblock %}
 
               {% endblock %}
 
@@ -81,7 +79,7 @@
                             <!-- ***** Menu Start ***** -->
                             <ul class="nav">
 
-
+                                {% block navBarInside %}
                                 <li class="scroll-to-section"><a href="{{ path('app_home') }}">Home</a></li>
                                 <li class="scroll-to-section"><a href="{{ path('app_business_index') }}">Services</a></li>
                                 <li class="scroll-to-section"><a href="#">Adoption</a>
@@ -122,6 +120,8 @@
                                 </li>
                                 <li class="scroll-to-section"><a href="{{ path('app_front_office_home') }}">Store</a></li>
                                 <li class="scroll-to-section" > <a  href="{{ path('app_panier_index') }}" class="fa fa-shopping-cart" style="font-size:30px;color:black"></a> </li>
+                                {% endblock %}
+
                                 {% if not( is_granted('ROLE_USER'))%}
                                     <li class="scroll-to-section"><a  href="{{ path ('app_login') }}">sign in</a></li>
                                 {% endif %}
@@ -132,7 +132,14 @@
                                 {% if not ( is_granted('ROLE_USER'))%}
                                     <li class="scroll-to-section"><div class="border-first-button"><a href="{{ path ('registration') }}">Sign up</a></div></li>
                                 {% endif %}
+
+                                {% if ( is_granted('ROLE_USER'))%}
+                                    <li class="scroll-to-section"><a  href="{{ path ('app_logout') }}">Log out</a></li>
+                                {% endif %}
+
+                                {% if ( is_granted('ROLE_USER'))%}
                                 <li></li>
+                                {% endif %}
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>

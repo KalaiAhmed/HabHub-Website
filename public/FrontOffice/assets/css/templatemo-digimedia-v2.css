@@ -235,7 +235,10 @@ Mariem
   margin-top: 5%;
 
 }
+.space-10{
+  margin-top: 10%;
 
+}
 .space-2{
   margin-top: 2%;
 }
@@ -2221,7 +2224,7 @@ form#contact #newmap iframe {
 }
 
 .fill-form {
-  padding: 80px 60px 80px 30px;
+  padding: 80px 60px 80px 60px;
 }
 
 .fill-form .info-post {
