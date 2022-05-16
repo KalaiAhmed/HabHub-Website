@@ -41,6 +41,10 @@ class ChienController extends AbstractController
      */
     public function index_my_dogs(EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser()==null){
+            return $this->redirectToRoute('app_login');
+
+        }
         $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
         $id=$individu->getIdIndividu();
         $chiens = $entityManager
@@ -57,6 +61,10 @@ class ChienController extends AbstractController
      */
     public function index_dogs_next_door(EntityManagerInterface $entityManager,Request $request): Response
     {
+        if ($this->getUser()==null){
+        return $this->redirectToRoute('app_login');
+
+    }
         $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
         $id=$individu->getIdIndividu();
         $adresse=$individu->getAdresse();
