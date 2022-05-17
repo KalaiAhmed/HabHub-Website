@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mating Partner{% endblock %}
+{% block title %}My Profile{% endblock %}
 {% block body %}
 
     <div class="ahbet">
@@ -73,6 +73,9 @@
             <span class="value-bigger">{{individu.proprietairechien ? 'Yes' : 'No' }}</span>
         </div>
 
+        <a href="{{ path('message') }}" >Mes messages </a>
+        <br>
+        <a href="{{ path('app_offre_index') }}">Mes offres</a>
     </div>
 
 
