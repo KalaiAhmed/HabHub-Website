@@ -17,11 +17,16 @@ class Utilisateur implements UserInterface
     /**
      * @var int
      *
+     *
+     *
+     *
      * @ORM\Column(name="idUtilisateur", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idutilisateur;
+
+
 
     /**
      * @var string

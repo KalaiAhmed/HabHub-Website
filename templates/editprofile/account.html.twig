@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mating Partner{% endblock %}
+{% block body %}
+
+    <div class="ahbet">
+        <div class="container">
+
+            <div class="flex-box">
+                <div class="left">
+                    <div class="big-img">
+                        {% if individu.sexe=='F' %}
+                        <a href="#"><img src="https://d1bvpoagx8hqbg.cloudfront.net/originals/default_female_12.jpg" title="" alt=""></a>            </div>
+                    {% else %}
+                    <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="" alt=""></a>            </div>
+                {% endif %}
+            </div>
+
+
+            <div class="right">
+                <div class="title-ville">
+                    <div>
+                        <h3 class="business-title">{{individu.nom ~' '~ individu.prenom }}</h3>
+                        <div class="space-2"></div>
+
+                        <div class="tag-box">
+                            <div class="tag-sexe">
+                                {% if individu.sexe=='F' %}
+                                    <img src="{{ asset('FrontOffice/assets/images/chien/female.png') }}" alt="">
+                                {% else %}
+                                    <img src="{{ asset('FrontOffice/assets/images/chien/male.png') }}" alt="">
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                <div>
+                    <h4 >{{ individu.idutilisateur.email  }}</h4>
+                    <div class="space-2"></div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="element">
+            <div class="space-2"></div>
+            <label class="key-bigger"> numéro de telephone :</label>
+            <span class="value-bigger">{{ individu.idutilisateur.numtel }}</span>
+        </div>
+
+
+        <div class="element">
+            <div class="space-2"></div>
+            <label class="key-bigger"> facebook :</label>
+            <span class="value-bigger">{{ individu.facebook }}</span>
+        </div>
+
+        <div class="element">
+            <div class="space-2"></div>
+            <label class="key-bigger"> instagram :</label>
+            <span class="value-bigger">{{ individu.instagram }}</span>
+        </div>
+        <div class="element">
+            <div class="space-2"></div>
+            <label class="key-bigger"> whatsapp :</label>
+            <span class="value-bigger">{{ individu.whatsapp }}</span>
+        </div>
+
+        <div class="element">
+            <div class="space-2"></div>
+            <label class="key-bigger"> proprietairechien : </label>
+            <span class="value-bigger">{{individu.proprietairechien ? 'Yes' : 'No' }}</span>
+        </div>
+
+    </div>
+
+
+{% endblock %}
