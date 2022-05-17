@@ -21,7 +21,9 @@
 
 {% block body %}
     <div class="ahbet" style="padding-top:10%;">
-        <a  href="{{ path('app_annonce_adoption_new') }}"><img style="max-width: 300px;max-height: 100px;"src="{{asset('FrontOffice/assets/images/AddRequestButton.png') }}"></a>
+    <div class="container">
+        <a  href="{{ path('app_annonce_adoption_new') }}"><img style="max-width: 200px;max-height: 100px; z-index: 5"src="{{asset('FrontOffice/assets/images/AddRequestButton.png') }}"></a>
+    </div>
     </div>
     <div id="blog" class="blog">
 
@@ -37,9 +39,9 @@
                             <a href="#"><img src="{{ asset('FrontOffice/uploads/'~annonceAdoption.idchien.image) }}" alt="nope"></a>
                         </div>
                         <div class="down-content">
-                            <span class="category">{{annonceAdoption.idchien.nom}}</span>
+                            <span class="category">{{ annonceAdoption.localisation}}</span>
                             <span class="date">{{annonceAdoption.datepublication|date("m/d/Y")}}</span>
-                            <a href="#"><h4>{{ annonceAdoption.localisation}}</h4></a>
+                            <a href="#"><h4>{{annonceAdoption.idchien.nom}}</h4></a>
                             <p>{{ annonceAdoption.idchien.description }}</p>
                             <div class="border-first-button">
                            <a href="{{ path('app_annonce_adoption_edit', {'idannonceadoption': annonceAdoption.idannonceadoption}) }}">edit</a>
