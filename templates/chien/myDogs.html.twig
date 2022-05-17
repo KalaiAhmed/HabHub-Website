@@ -23,32 +23,37 @@
     <a  href="{{ path('app_chien_new_front') }}"><img style="max-width: 300px;max-height: 100px;"src="{{asset('FrontOffice/assets/images/chien/AddDogButton.png') }}"></a>
     </div>
     <div id="blog" class="blog">
-
         <div class="container">
 
-            <div class="row ahbet">
+
+            <div class="row">
 
                 {% for chien in chiens %}
-
                     <div class="col-lg-3 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+
                         <div class="blog-post">
                             <div class="thumb">
-
-                                <a href="#"><img src="{{asset('FrontOffice/uploads/'~chien.image) }}" alt=""></a>
+                                <a><img src="{{asset('FrontOffice/uploads/'~chien.image) }}" class="card-img-top" alt=""></a>
                             </div>
                             <div class="down-content">
-                                {% if chien.sexe=="M" %}
-                                <span class="category">Male</span>
-                                {% else %}
-                                <span class="category">Female</span>
-                                {% endif %}
-                                <p>{{chien.age }}</p>
+                                <span class="dog-name"><h4>{{ chien.nom }}</h4></span>
+                                <span class="gender">
+                                    {% if chien.sexe=='M' %}
+                                        <img class="gender-icon" src="{{ asset('FrontOffice/assets/images/chien/male.png') }}" alt="">
+                                    {% else %}
+                                        <img class="gender-icon" src="{{ asset('FrontOffice/assets/images/chien/female.png') }}" alt="">
+                                    {% endif %}
+                                    </span>
 
-                                <a href="#"><h4>{{ chien.nom }}</h4></a>
 
 
 
-                                <p> {{ render(path('app_nblikes', {'idchien': chien.idchien})) }} <img style="max-width: 30px;max-height: 30px;" src="{{asset('FrontOffice/assets/images/chien/heartIcon.png') }}"></p>
+
+                                <span class="likes">
+                                    <p> {{ render(path('app_nblikes', {'idchien': chien.idchien})) }} <img style="max-width: 30px;max-height: 30px;" src="{{asset('FrontOffice/assets/images/chien/heartIcon.png') }}"></p>
+                                </span>
+
+                                <span class="miss-mate-buttons">
 
                                 {% if chien.missing %}
                                     <a href="{{ path('app_annonce_proprietaire_chien_removelost', {'idchien': chien.idchien}) }}"> <img class="declare-buttons" src="{{asset('FrontOffice/assets/images/chien/missingFilled.png') }}"> </a>
@@ -61,10 +66,10 @@
                                 {% else %}
                                     <a href="{{ path('app_annonce_proprietaire_chien_addmating', {'idchien': chien.idchien}) }}"> <img class="declare-buttons"   src="{{asset('FrontOffice/assets/images/chien/matingEmpty.png') }}"> </a>
                                 {% endif %}
+                                </span>
 
 
-
-                                <a href="{{ path('app_chien_delete_front', {'idchien': chien.idchien}) }}"> <img class="ahbet" style="max-height: 70px; max-width:54px;" src="{{asset('FrontOffice/assets/images/chien/deleteDog.png') }}"> </a>
+                                <a href="{{ path('app_chien_delete_front', {'idchien': chien.idchien}) }}"> <img class="ahbet delete-dog"  src="{{asset('FrontOffice/assets/images/chien/deleteDog.png') }}"> </a>
 
 
 
