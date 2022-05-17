@@ -7,14 +7,20 @@
         <div class="blog-post">
             <div class="thumb">
 
-                <a href="{{ path('app_annonce_proprietaire_chien_show_mating',{'annonceProprietaireChien': annonce_proprietaire_chien.idannonceproprietairechien}) }}"><img src="{{asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}" alt=""></a>
+                <a href="{{ path('app_annonce_proprietaire_chien_show_mating',{'annonceProprietaireChien': annonce_proprietaire_chien.idannonceproprietairechien}) }}"><img src="{{asset('FrontOffice/uploads/'~annonce_proprietaire_chien.idchien.image) }}" class="card-img-top" alt=""></a>
             </div>
             <div class="down-content">
-                <span class="category">{{ annonce_proprietaire_chien.idchien.sexe }}</span>
-
-                <a href="#"><h4>{{ annonce_proprietaire_chien.idchien.nom }}</h4></a>
-                <p>
-                    {{ annonce_proprietaire_chien.idchien.age }}</p>
+                <span class="category">{{ annonce_proprietaire_chien.idchien.idindividu.adresse }}</span>
+                <span class="date">{{ annonce_proprietaire_chien.datepublication|date("d/m/y") }}</span>
+                <br>
+                <span class="dog-name"><h4>{{ annonce_proprietaire_chien.idchien.nom }}</h4></span>
+                <span class="gender">
+                                    {% if annonce_proprietaire_chien.idchien.sexe=='M' %}
+                                        <img class="gender-icon" src="{{ asset('FrontOffice/assets/images/chien/male.png') }}" alt="">
+                                    {% else %}
+                                        <img class="gender-icon" src="{{ asset('FrontOffice/assets/images/chien/female.png') }}" alt="">
+                                    {% endif %}
+                                    </span>
 
             </div>
         </div>
