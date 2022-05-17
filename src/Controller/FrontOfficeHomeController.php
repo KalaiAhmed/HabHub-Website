@@ -16,6 +16,10 @@ class FrontOfficeHomeController extends AbstractController
      */
     public function index(): Response
     {
+        if ($this->getUser()->getRoles()==['ROLE_ADMIN'])
+        {
+            return $this->redirectToRoute('app_back_office_home', [], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('front_office_home/index.html.twig', [
             'controller_name' => 'FrontOfficeHomeController',
         ]);
