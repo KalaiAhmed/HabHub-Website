@@ -1,22 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New AnnonceAdoption{% endblock %}
- {% block adoption %}
-     <li class="scroll-to-section"><a href="#" class="active">Adoption</a>
-         <div class="sub-menu-1">
-             <ul>
-                 <li> <a href="{{ path('app_annonce_adoption_my_index') }}">My Posts</a></li>
+{% block title %}Add Adoption Post{% endblock %}
+{% block locallink %}
+    <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/style-user.css') }}">
 
-                 <li> <a href="{{ path('app_annonce_adoption_index') }}">All Posts</a></li>
-
-                 <li></li>
-             </ul>
-         </div>
-     </li>
- {% endblock %}
-{% block body %}
-    <div style="margin-left:350px;">
-    {{ include('annonce_adoption/_frontForm.html.twig') }}
-    <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
-    </div>
 {% endblock %}
+
+{% block body %}
+
+    <div class="ahbet" >
+
+        <div class="form-position">
+            <div class="wrapper" >
+                {{ form_start(f,{attr:{novalidate:'novalidate'}}) }}
+
+
+                   <!-- <button class="btn btn-lg btn-primary" type="submit">
+                       Add Dog
+                    </button>-->
+                {{ form_end(f) }}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+    {% block footer %}
+
+    {% endblock %}
+

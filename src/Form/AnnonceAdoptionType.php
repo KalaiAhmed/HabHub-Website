@@ -32,7 +32,7 @@ class AnnonceAdoptionType extends AbstractType
         ])
             ->add('idchien',AdoptionChienType::class)
             ->add('add',SubmitType::class)
-        ;
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
