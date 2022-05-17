@@ -2578,3 +2578,10 @@ responsive
   height: 700px;
   width: 1000px;
 }
+
+/***********************HUB***********************/
+
+.declare-buttons{
+  max-width: 115px;
+  max-height: 50px;
+}
