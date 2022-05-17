@@ -20,18 +20,10 @@ class AnnonceAdoptionType extends AbstractType
     {
         $builder
             
-        ->add('description', TextareaType::class, [
-            "attr" => [
-                "class" => "form-control"
-            ]
-        ])
-        ->add('localisation', TextType::class, [
-            "attr" => [
-                "class" => "form-control"
-            ]
-        ])
-            ->add('idchien',AdoptionChienType::class)
-            ->add('add',SubmitType::class)
+        ->add('description', TextareaType::class)
+        ->add('localisation', TextType::class)
+        ->add('idchien',AdoptionChienType::class)
+        ->add('add',SubmitType::class)
         ;
     }
 

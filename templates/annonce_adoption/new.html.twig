@@ -1,22 +1,112 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New AnnonceAdoption{% endblock %}
- {% block adoption %}
-     <li class="scroll-to-section"><a href="#" class="active">Adoption</a>
-         <div class="sub-menu-1">
-             <ul>
-                 <li> <a href="{{ path('app_annonce_adoption_my_index') }}">My Posts</a></li>
+{% block title %}Add Adoption Post{% endblock %}
+{% block locallink %}
+    <link rel="stylesheet" href="{{ asset('FrontOffice/assets/css/style-user.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/paper-dashboard.css') }}">
 
-                 <li> <a href="{{ path('app_annonce_adoption_index') }}">All Posts</a></li>
+{% endblock %}
 
-                 <li></li>
-             </ul>
-         </div>
-     </li>
- {% endblock %}
 {% block body %}
-    <div style="margin-left:350px;">
-    {{ include('annonce_adoption/_frontForm.html.twig') }}
-    <a href="{{ path('app_annonce_adoption_index') }}">back to list</a>
+<div class="ahbet" style="margin-left: 13%">
+    <div class="container">
+
+    <div class="col-md-10">
+        <div class="card card-user">
+            <div class="card-header">
+                <h5 class="card-title">Add a New Adoption Post</h5>
+            </div>
+            <div class="card-body">
+                {{ form_start(f,{attr:{novalidate:'novalidate'}}) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_row(f.description,{'attr':{'class':'form-control'}}) }}
+
+                        {{ form_errors(f.description,{'attr':{'class':'text-danger'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_row(f.localisation,{'attr':{'class':'form-control'}}) }}
+
+                        {{ form_errors(f.localisation,{'attr':{'class':'text-danger'}}) }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-5 pr-1">
+                        <div class="form-group">
+                            {{ form_row(f.idchien.nom,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                        {{ form_errors(f.idchien.nom,{'attr':{'class':'text-danger'}}) }}
+                    </div>
+                    <div class="col-md-3 px-1">
+                        <div class="form-group">
+                            {{ form_row(f.idchien.sexe,{'attr':{'class':'form-control'}}) }}                        </div>
+                        {{ form_errors(f.idchien.sexe,{'attr':{'class':'text-danger'}}) }}
+
+                    </div>
+                    <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                            {{ form_row(f.idchien.age,{'attr':{'class':'form-control'}}) }}
+                            {{ form_errors(f.idchien.age,{'attr':{'class':'text-danger'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {{ form_row(f.idchien.description,{'attr':{'class':'form-control'}}) }}                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 pr-1">
+                        <div class="form-group">
+                            {{ form_row(f.idchien.color,{'attr':{'class':'form-control'}}) }}                        </div>
+                        {{ form_errors(f.idchien.color,{'attr':{'class':'text-danger'}}) }}
+                    </div>
+                    <div class="col-md-3 px-1">
+                        <div class="form-group">
+                            {{ form_row(f.idchien.race,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                        {{ form_errors(f.idchien.race,{'attr':{'class':'text-danger'}}) }}
+
+                    </div>
+                    <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                            {{ form_row(f.idchien.groupe,{'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        {{ form_errors(f.idchien.groupe,{'attr':{'class':'text-danger'}}) }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Image</label>
+                            {{ form_widget(f.idchien.image,{'attr':{'class':'form-control'}}) }}
+
+                            {{ form_errors(f.idchien.image,{'attr':{'class':'text-danger'}}) }}
+                        </div>
+                    </div>
+                    <div class="space-5">
+                </div>
+                   <!-- <button class="btn btn-lg btn-primary" type="submit">
+                       Add Dog
+                    </button>-->
+                {{ form_end(f) }}
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
     </div>
 {% endblock %}
+
+
+    {% block footer %}
+
+    {% endblock %}
+
