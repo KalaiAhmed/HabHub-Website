@@ -18,52 +18,20 @@ class AdoptionChienType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
-            ])
-            ->add('sexe', TextType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
-            ])
-            ->add('age', TextType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
-            ])
-            ->add('vaccination',RadioType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
-            ])
-            ->add('description', TextareaType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
-            ])
+            ->add('nom', TextType::class)
+            ->add('sexe', TextType::class)
+            ->add('age', TextType::class)
+            //->add('vaccination',RadioType::class)
+            ->add('description', TextareaType::class)
             ->add('image', FileType::class, [
                 'label' => false,
                 'multiple' => false,
                 'mapped'=> false,
                 'required' =>false
             ])
-            ->add('color', TextType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
-            ])
-            ->add('race', TextType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
-            ])
-            ->add('groupe', TextType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
-            ])
+            ->add('color')
+            ->add('race')
+            ->add('groupe')
         ;
     }
 

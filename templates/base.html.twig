@@ -175,16 +175,7 @@
             <footer>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-6 col-md-3 item">
-                            <h3>Services</h3>
-                            <ul>
-                                <li><a href="{{ path('app_front_office_home') }}">PetStore </a></li>
-                                <li><a href="{{ path('app_business_index') }}">Grooming</a></li>
-                                <li><a href="{{ path('app_business_index') }}">Dog Sitting</a></li>
-                                <li><a href="{{ path('app_business_index') }}">Veterinary</a></li>
 
-                            </ul>
-                        </div>
                         <div class="col-sm-6 col-md-3 item">
                             <h3>Community</h3>
                             <ul>
@@ -200,9 +191,13 @@
                             <h3>HabHub</h3>
                             <p>A friend-owned business serving the pet community in the heart of Tunisia.</p>
                             <br>
+                            {% if not( is_granted('ROLE_USER'))%}
+                                <h3><a  href="{{ path ('app_login') }}">Sign in</a></h3>
+                            {% endif %}
+                            {% if not ( is_granted('ROLE_USER'))%}
+                                <h3><a href="{{ path ('registration') }}">Sign up</a></h3>
+                            {% endif %}
 
-                            <h3><a href="{{ path ('registration') }}">Sign up</a></h3>
-                            <h3><a  href="{{ path ('app_login') }}">Sign in</a></h3>
                             <br>
 
                         </div>
