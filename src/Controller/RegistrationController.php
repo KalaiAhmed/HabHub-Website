@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Individu;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,6 +26,7 @@ class RegistrationController extends AbstractController
     public function index(Request $request)
     {
         $user = new Utilisateur();
+        $individu= new Individu();
 
         $form = $this->createForm(UtilisateurType::class, $user);
 
@@ -40,6 +42,8 @@ class RegistrationController extends AbstractController
             // Save
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
+            $individu->setIdutilisateur($user);
+            $em->persist($individu);
             $em->flush();
 
             return $this->redirectToRoute('app_login');

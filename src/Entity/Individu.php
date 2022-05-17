@@ -105,9 +105,9 @@ class Individu
      * @param int $idindividu
      */
 
-    public function __construct(int $idindividu)
+    public function __construct()
     {
-        $this->idindividu = $idindividu;
+
     }
 
 

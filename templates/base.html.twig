@@ -136,7 +136,7 @@
                                     <li class="scroll-to-section"><a  href="{{ path ('app_login') }}">sign in</a></li>
                                 {% endif %}
                                 {% if ( is_granted('ROLE_USER'))%}
-                                    <li class="scroll-to-section"><a  href="{{ path ('app_editprofile') }}">My Profile</a></li>
+                                    <li class="scroll-to-section"><a  href="{{ path ('app_account_profile') }}">My Profile</a></li>
                                 {% endif %}
 
                                 {% if not ( is_granted('ROLE_USER'))%}

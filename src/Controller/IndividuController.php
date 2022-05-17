@@ -120,15 +120,15 @@ class IndividuController extends AbstractController
     }
 
     /**
-     * @Route("/editprofile/{idutilisateur}", name="puppyy", methods={"GET"})
+     * @Route("/account/myprofile", name="app_account_profile", methods={"GET"})
      */
-    public function displayuser(Request $request,Individu $id): Response
+    public function displayuser(EntityManagerInterface $entityManager,Request $request): Response
     {
 
 
-        $individu = $this->getDoctrine()->getManager()->getRepository(Individu::class)->find($id);
+        $individu = $entityManager->getRepository(Individu::class)->getIndividuByUser($this->getUser()->getUsername());
 
-        $utilisateur = $this->getDoctrine()->getManager()->getRepository(Utilisateur::class)->find($id);
+        $utilisateur = $this->getDoctrine()->getManager()->getRepository(Utilisateur::class)->find($this->getUser()->getUsername());
 
         return $this->render('editprofile/account.html.twig', [
             'individu' => $individu,'utilisateur' => $utilisateur
