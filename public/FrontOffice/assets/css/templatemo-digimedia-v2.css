@@ -454,7 +454,7 @@ End Mariem
 /* ---- .grid-item ---- */
 .card-img-top {
   width: 100%;
-  height: auto;
+  height: 15vw;
   object-fit: cover;
 }
 
@@ -2047,7 +2047,7 @@ Blog
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   border-radius: 25px;
   padding-bottom: 50px;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .show-up {
@@ -2560,6 +2560,9 @@ responsive
   z-index: 100000;
   position: absolute;
 }
+add-dog{
+
+}
 
 .main-nav ul li:hover .sub-menu-1 {
   display: block;
@@ -2592,8 +2595,7 @@ responsive
   max-height: 20px;
 }
 .delete-dog{
-  max-width: 40px;
-  max-height: 70px;
+  max-width: 25px;
   float:right;
 }
 
