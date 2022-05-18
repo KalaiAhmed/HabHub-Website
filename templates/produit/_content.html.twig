@@ -10,15 +10,19 @@
                             <a><img src="{{asset('FrontOffice/uploads/'~produit.image) }}" alt="" class="card-img-top"></a>
                         </div>
                           <div class="down-content">
-                            
-                              <span class="nom">{{produit.nom}}</span>
-                                <span class="s" style="padding-left:50px;font-weight: bold;color:#f46c38">{{produit.prix }} DT</span>
+                              <span class="category">{{produit.idCategorie.nom}}</span>
+                              <span style="display: flex">
+                              <span class="nom"><h4>{{produit.nom}}</h4></span>
+                                <span class="s" style="padding-left:100px ;padding-top:15px ;font-weight: bold;color:#f46c38">{{produit.prix }} DT</span>
+                                  </span>
                                 <p>{{ produit.description }}</p>
-                                <span class="category">{{produit.idCategorie.nom}}</span>
-                                <span class="marque" style="padding-left:50px" >{{produit.marque }}</span>
-                                 <a href="{{path('add_prod', {'id':produit.idproduit} )}}" class="butt">Add To Cart</a>
-                                
-                            </div>
+                                <span class="marque" >{{produit.marque }}</span>
+                              <div class="space-10">
+                              <div class="border-first-button">
+                              <a href="{{path('add_prod', {'id':produit.idproduit} )}}" >Add To Cart</a>
+                              </div>
+                              </div>
+                          </div>
                     </div>
                 </div>
 
